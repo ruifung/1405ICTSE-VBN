@@ -211,8 +211,8 @@ Public Class DB
             cmd.CommandText = [String].Format("SELECT * FROM `{0}` WHERE `{1}`=?", obj.table.Name, field)
             cmd.Parameters.Add(obj.AsParam(field))
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
-            Dim success As Boolean
-            If InlineAssignHelper(success, reader.Read()) Then
+            Dim success As Boolean = reader.Read()
+            If success Then
                 Dim keys As List(Of String) = obj.table.Fields.Keys.ToList()
                 For i As Integer = 0 To keys.Count - 1
                     obj(keys(i)) = reader(i)
@@ -327,10 +327,6 @@ Public Class DB
             p.Value = Me(field)
             p.Size = table.Fields(field).Size
             Return p
-        End Function
-        Private Shared Function InlineAssignHelper(Of T)(ByRef target As T, value As T) As T
-            target = value
-            Return value
         End Function
 #End Region
     End Class

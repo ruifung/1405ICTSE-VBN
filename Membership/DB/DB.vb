@@ -11,7 +11,7 @@ Public Class DB
         If Not File.Exists(path) Then
             Dim cat As New ADOX.Catalog()
             cat.Create(constr)
-            CType(cat.ActiveConnection, ADODB.Connection).Close()
+            DirectCast(cat.ActiveConnection, ADODB.Connection).Close()
             self = New OleDbConnection(constr)
             For Each t As Table In tables
                 t.Create()
@@ -110,21 +110,21 @@ Public Class DB
             End If
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
             While reader.Read()
-                Dim obj As DBObject = CType(Activator.CreateInstance(GetType(T)), DBObject)
+                Dim obj As DBObject = DirectCast(Activator.CreateInstance(GetType(T)), DBObject)
                 Dim keys As List(Of String) = obj.table.Fields.Keys.ToList()
                 For i As Integer = 0 To keys.Count - 1
                     obj(keys(i)) = reader(i)
                 Next
-                list.Add(CType(obj, T))
+                list.Add(DirectCast(obj, T))
             End While
             reader.Close()
             self.Close()
-            Return CType(list, DBList(Of T))
+            Return DirectCast(list, DBList(Of T))
         End Function
         Public Shared Function RowsCount(Optional criteria As String = Nothing) As Integer
             Dim result As Integer = 0
             self.Open()
-            Dim table As Table = CType(Activator.CreateInstance(Of T)(), DBObject).table
+            Dim table As Table = DirectCast(Activator.CreateInstance(Of T)(), DBObject).table
             Dim cmd As New OleDbCommand([String].Format("SELECT count(*) FROM `{0}`", table.Name), self)
             If criteria IsNot Nothing Then
                 cmd.CommandText += Convert.ToString(" WHERE ") & criteria
@@ -139,7 +139,7 @@ Public Class DB
         End Function
 #End Region
 #Region "Instance"
-        Private table As Table = CType(Activator.CreateInstance(Of T)(), DBObject).table
+        Private table As Table = DirectCast(Activator.CreateInstance(Of T)(), DBObject).table
         Public Sub Refresh()
             For Each obj As DBObject In Me
                 obj.Refresh()
@@ -152,7 +152,7 @@ Public Class DB
         End Sub
         Public Sub Update(field As String, value As Object)
             self.Open()
-            Dim temp As DBObject = CType(Activator.CreateInstance(Of T)(), DBObject)
+            Dim temp As DBObject = DirectCast(Activator.CreateInstance(Of T)(), DBObject)
             If Me.Count = 0 Then
                 Return
             End If
@@ -200,11 +200,11 @@ Public Class DB
     Public Class DBObject
 #Region "Static"
         Public Shared Function Find(Of T As DBObject)(pkey As Object) As T
-            Dim obj As DBObject = CType(Activator.CreateInstance(GetType(T)), DBObject)
+            Dim obj As DBObject = DirectCast(Activator.CreateInstance(GetType(T)), DBObject)
             Return Find(Of T)(obj.table.PrimaryKey, pkey)
         End Function
         Public Shared Function Find(Of T As DBObject)(field As String, value As Object) As T
-            Dim obj As DBObject = CType(Activator.CreateInstance(GetType(T)), DBObject)
+            Dim obj As DBObject = DirectCast(Activator.CreateInstance(GetType(T)), DBObject)
             obj(field) = value
             self.Open()
             Dim cmd As New OleDbCommand("", self)
@@ -221,7 +221,7 @@ Public Class DB
             reader.Close()
             self.Close()
             If success Then
-                Return CType(obj, T)
+                Return DirectCast(obj, T)
             End If
             Return Nothing
         End Function

@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DB\DB.vb" />
+    <Compile Include="DB\Users.vb" />
     <Compile Include="UI\LoginForm.vb">
       <SubType>Form</SubType>
     </Compile>

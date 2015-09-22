@@ -1,6 +1,8 @@
 ﻿Public Class LoginForm
 
     Private Sub onThisLoad(sender As Object, e As EventArgs) Handles MyBase.Load
+        DB.InitUsersTable()
+        DB.init("test.mdb")
         txtUsername.Tag = lblUsername
         lblUsername.Tag = txtUsername
         txtPassword.Tag = lblPassword

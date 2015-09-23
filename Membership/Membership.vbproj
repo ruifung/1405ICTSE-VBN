@@ -73,9 +73,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DB\API\IMember.vb" />
-    <Compile Include="DB\API\Users\IUser.vb" />
-    <Compile Include="DB\API\Users\IUserManager.vb" />
+    <Compile Include="API\Members\IMember.vb" />
+    <Compile Include="API\Members\IMemberManager.vb" />
+    <Compile Include="API\Users\IUser.vb" />
+    <Compile Include="API\Users\IUserManager.vb" />
     <Compile Include="DB\DB.vb" />
     <Compile Include="DB\Users.vb" />
     <Compile Include="UI\LoginForm.vb">

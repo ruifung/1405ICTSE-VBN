@@ -16,15 +16,18 @@ Partial Public Class DB
     End Sub
     Public Class User
         Inherits DBObject
-        Public Property id As Integer
+        Implements IUser
+        Public Overrides Function table() As Table
+            Return UsersTable
+        End Function
+        Public ReadOnly Property userID As Integer _
+            Implements IUser.userID
             Get
                 Return Me("id")
             End Get
-            Set(value As Integer)
-                Me("id") = value
-            End Set
         End Property
-        Public Property username As String
+        Public Property userName As String _
+            Implements IUser.userName
             Get
                 Return Me("username")
             End Get
@@ -32,14 +35,16 @@ Partial Public Class DB
                 Me("username") = value
             End Set
         End Property
-        Public WriteOnly Property password As String
+        Public WriteOnly Property password As String _
+            Implements IUser.password
             Set(value As String)
                 Dim pwd = Encoding.UTF8.GetBytes(value.ToCharArray())
                 Dim sha = SHA256Managed.Create()
                 Me("authkey") = sha.ComputeHash(pwd)
             End Set
         End Property
-        Public Function validate(ByVal password As String) As Boolean
+        Public Function checkPassword(ByVal password As String) As Boolean _
+            Implements IUser.checkPassword
             Dim pwd = Encoding.UTF8.GetBytes(password.ToCharArray())
             Dim sha = SHA256Managed.Create()
             Return DirectCast(Me("authkey"), Byte()).SequenceEqual(sha.ComputeHash(pwd))

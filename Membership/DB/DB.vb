@@ -124,7 +124,7 @@ Public Class DB
         Public Shared Function RowsCount(Optional criteria As String = Nothing) As Integer
             Dim result As Integer = 0
             self.Open()
-            Dim table As Table = DirectCast(Activator.CreateInstance(Of T)(), DBObject).table
+            Dim table As Table = DirectCast(Activator.CreateInstance(GetType(T)), DBObject).table
             Dim cmd As New OleDbCommand([String].Format("SELECT count(*) FROM `{0}`", table.Name), self)
             If criteria IsNot Nothing Then
                 cmd.CommandText += Convert.ToString(" WHERE ") & criteria
@@ -197,7 +197,7 @@ Public Class DB
 #End Region
     End Class
 
-    Public Class DBObject
+    Public MustInherit Class DBObject
 #Region "Static"
         Public Shared Function Find(Of T As DBObject)(pkey As Object) As T
             Dim obj As DBObject = DirectCast(Activator.CreateInstance(GetType(T)), DBObject)
@@ -227,7 +227,6 @@ Public Class DB
         End Function
 #End Region
 #Region "Instance"
-        Public ReadOnly table As Table
         Private data As Dictionary(Of String, Object)
         Public Sub New()
             data = New Dictionary(Of String, Object)()
@@ -253,7 +252,7 @@ Public Class DB
             Dim cmd As New OleDbCommand("", self)
             cmd.CommandText = [String].Format("INSEERT INTO `{0}` (", table.Name)
             For Each field As String In data.Keys
-                If table.Fields(table.PrimaryKey).DataType.Equals(MDBType.AutoNumber) Then
+                If table.Fields(field).DataType.Equals(MDBType.AutoNumber) Then
                     Continue For
                 End If
                 If Not data.ContainsKey(field) Then
@@ -328,6 +327,7 @@ Public Class DB
             p.Size = table.Fields(field).Size
             Return p
         End Function
+        Public MustOverride Function table() As Table
 #End Region
     End Class
 End Class

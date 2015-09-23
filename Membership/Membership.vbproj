@@ -79,6 +79,7 @@
     <Compile Include="API\Users\IUserManager.vb" />
     <Compile Include="DB\DB.vb" />
     <Compile Include="DB\Users.vb" />
+    <Compile Include="Registry.vb" />
     <Compile Include="UI\LoginForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +102,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UI\UserManagement\AddUser.Designer.vb">
+      <DependentUpon>AddUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserManagement\AddUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\LoginForm.resx">
@@ -111,6 +118,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserManagement\AddUser.resx">
+      <DependentUpon>AddUser.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

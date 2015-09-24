@@ -23,7 +23,11 @@
     End Sub
 
     Private Sub onExitClick(sender As Object, e As EventArgs) Handles btnExit.Click
-        Application.Exit()
+        Me.Close()
+    End Sub
+
+    Private Sub onThisClosed(sender As Object, e As EventArgs) Handles Me.Closed
+
     End Sub
 
     Private Sub onLoginClick(sender As Object, e As EventArgs) Handles btnLogin.Click

@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5B4D02F4-7E95-4358-B4ED-FA0C7AEB2110}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Membership.My.MyApplication</StartupObject>
+    <StartupObject>Membership.Program</StartupObject>
     <RootNamespace>Membership</RootNamespace>
     <AssemblyName>Membership</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -79,6 +79,7 @@
     <Compile Include="API\Users\IUserManager.vb" />
     <Compile Include="DB\DB.vb" />
     <Compile Include="DB\Users.vb" />
+    <Compile Include="Program.vb" />
     <Compile Include="Registry.vb" />
     <Compile Include="UI\LoginForm.vb">
       <SubType>Form</SubType>

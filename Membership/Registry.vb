@@ -1,4 +1,4 @@
-﻿Public Class Registry
+﻿Public Module Registry
     Private userManagerVar As IUserManager
     Public Property userManager As IUserManager
         Get
@@ -10,4 +10,4 @@
             End If
         End Set
     End Property
-End Class
+End Module

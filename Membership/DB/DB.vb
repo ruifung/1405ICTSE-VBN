@@ -7,7 +7,7 @@ Public Class DB
     Public Shared self As OleDbConnection
     Public Shared Sub init(path As String, Optional pass As String = "bU6S1JnPTM95")
         ' Random generated password
-        Dim constr As String = [String].Format(ConnFormat, path, pass)
+        Dim constr As String = String.Format(ConnFormat, path, pass)
         If Not File.Exists(path) Then
             Dim cat As New ADOX.Catalog()
             cat.Create(constr)
@@ -69,17 +69,17 @@ Public Class DB
         End Sub
         Public Function CreateSQL() As String
             Dim s As String = If(DataType.SizeRequired, String.Format("({0})", Size), "")
-            Return [String].Format("`{0}` {1}{2}{3}", Me.Name, Me.DataType.SQL, s, If(Me.NotNull, " NOT NULL", ""))
+            Return String.Format("`{0}` {1}{2}{3}", Me.Name, Me.DataType.SQL, s, If(Me.NotNull, " NOT NULL", ""))
         End Function
     End Class
     Public Class Table
         Public Name As String, PrimaryKey As String
         Public Fields As Dictionary(Of String, Field) = New Dictionary(Of String, Field)
         Public Function CreateSQL() As String
-            Dim sql As String = [String].Format("CREATE TABLE `{0}` (", Name)
+            Dim sql As String = String.Format("CREATE TABLE `{0}` (", Name)
             For Each pair As KeyValuePair(Of String, Field) In Fields
                 pair.Value.Name = pair.Key
-                sql += [String].Format("{0}, ", pair.Value.CreateSQL())
+                sql += String.Format("{0}, ", pair.Value.CreateSQL())
             Next
             sql += String.Format("PRIMARY KEY(`{0}`));", PrimaryKey)
             Return sql
@@ -92,7 +92,7 @@ Public Class DB
         End Sub
         Public Sub Drop()
             self.Open()
-            Dim cmd As New OleDbCommand([String].Format("DROP TABLE `{0}`;", Name), self)
+            Dim cmd As New OleDbCommand(String.Format("DROP TABLE `{0}`;", Name), self)
             cmd.ExecuteNonQuery()
             self.Close()
         End Sub
@@ -104,7 +104,7 @@ Public Class DB
         Public Shared Function Query(Optional criteria As String = Nothing) As DBList(Of T)
             Dim list As New DBList(Of T)()
             self.Open()
-            Dim cmd As New OleDbCommand([String].Format("SELECT * FROM `{0}`", list.table.Name), self)
+            Dim cmd As New OleDbCommand(String.Format("SELECT * FROM `{0}`", list.table.Name), self)
             If criteria IsNot Nothing Then
                 cmd.CommandText += Convert.ToString(" WHERE ") & criteria
             End If
@@ -125,7 +125,7 @@ Public Class DB
             Dim result As Integer = 0
             self.Open()
             Dim table As Table = DirectCast(Activator.CreateInstance(GetType(T)), DBObject).table
-            Dim cmd As New OleDbCommand([String].Format("SELECT count(*) FROM `{0}`", table.Name), self)
+            Dim cmd As New OleDbCommand(String.Format("SELECT count(*) FROM `{0}`", table.Name), self)
             If criteria IsNot Nothing Then
                 cmd.CommandText += Convert.ToString(" WHERE ") & criteria
             End If
@@ -157,14 +157,14 @@ Public Class DB
                 Return
             End If
             temp(field) = value
-            Dim sql As String = [String].Format("UPDATE `{0}` SET `{1}`=? WHERE ", table.Name, field)
+            Dim sql As String = String.Format("UPDATE `{0}` SET `{1}`=? WHERE ", table.Name, field)
             Dim cmd As New OleDbCommand(sql, self)
             cmd.Parameters.Add(temp.AsParam(field))
             Dim llist As New LinkedList(Of DBObject)(Me)
             Dim node As LinkedListNode(Of DBObject) = llist.First
             While node IsNot Nothing
                 node.Value(field) = value
-                cmd.CommandText += [String].Format("{0}=?", table.PrimaryKey)
+                cmd.CommandText += String.Format("{0}=?", table.PrimaryKey)
                 cmd.Parameters.Add(node.Value.AsParam(table.PrimaryKey))
                 If node.[Next] IsNot Nothing Then
                     cmd.CommandText += " OR "
@@ -179,12 +179,12 @@ Public Class DB
             If Me.Count = 0 Then
                 Return
             End If
-            Dim sql As String = [String].Format("DELETE FROM `{0}` WHERE ", table.Name)
+            Dim sql As String = String.Format("DELETE FROM `{0}` WHERE ", table.Name)
             Dim cmd As New OleDbCommand(sql, self)
             Dim llist As New LinkedList(Of DBObject)(Me)
             Dim node As LinkedListNode(Of DBObject) = llist.First
             While node IsNot Nothing
-                cmd.CommandText += [String].Format("{0}=?", table.PrimaryKey)
+                cmd.CommandText += String.Format("{0}=?", table.PrimaryKey)
                 cmd.Parameters.Add(node.Value.AsParam(table.PrimaryKey))
                 If node.[Next] IsNot Nothing Then
                     cmd.CommandText += " OR "
@@ -208,7 +208,7 @@ Public Class DB
             obj(field) = value
             self.Open()
             Dim cmd As New OleDbCommand("", self)
-            cmd.CommandText = [String].Format("SELECT * FROM `{0}` WHERE `{1}`=?", obj.table.Name, field)
+            cmd.CommandText = String.Format("SELECT * FROM `{0}` WHERE `{1}`=?", obj.table.Name, field)
             cmd.Parameters.Add(obj.AsParam(field))
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
             Dim success As Boolean = reader.Read()
@@ -234,7 +234,7 @@ Public Class DB
         Public Sub Refresh()
             self.Open()
             Dim cmd As New OleDbCommand("", self)
-            cmd.CommandText = [String].Format("SELECT * FROM `{0}` SET WHERE `{1}`=?", table.Name, table.PrimaryKey)
+            cmd.CommandText = String.Format("SELECT * FROM `{0}` SET WHERE `{1}`=?", table.Name, table.PrimaryKey)
             cmd.Parameters.Add(AsParam(table.PrimaryKey))
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
             If reader.Read() Then
@@ -250,7 +250,7 @@ Public Class DB
             self.Open()
             Dim values As String = "("
             Dim cmd As New OleDbCommand("", self)
-            cmd.CommandText = [String].Format("INSEERT INTO `{0}` (", table.Name)
+            cmd.CommandText = String.Format("INSEERT INTO `{0}` (", table.Name)
             For Each field As String In data.Keys
                 If table.Fields(field).DataType.Equals(MDBType.AutoNumber) Then
                     Continue For
@@ -258,7 +258,7 @@ Public Class DB
                 If Not data.ContainsKey(field) Then
                     Continue For
                 End If
-                cmd.CommandText += [String].Format("`{0}`,", field)
+                cmd.CommandText += String.Format("`{0}`,", field)
                 values += "?,"
                 cmd.Parameters.Add(AsParam(field))
             Next
@@ -279,7 +279,7 @@ Public Class DB
         Public Sub Update()
             self.Open()
             Dim cmd As New OleDbCommand("", self)
-            cmd.CommandText = [String].Format("UPDATE `{0}` SET ", table.Name)
+            cmd.CommandText = String.Format("UPDATE `{0}` SET ", table.Name)
             For Each field As String In data.Keys
                 If field.Equals(table.PrimaryKey) Then
                     Continue For
@@ -287,11 +287,11 @@ Public Class DB
                 If Not data.ContainsKey(field) Then
                     Continue For
                 End If
-                cmd.CommandText += [String].Format(" `{0}`=?,", field)
+                cmd.CommandText += String.Format(" `{0}`=?,", field)
                 cmd.Parameters.Add(AsParam(field))
             Next
             cmd.CommandText.Remove(cmd.CommandText.Length - 1)
-            cmd.CommandText += [String].Format(" WHERE `{0}`=?", table.PrimaryKey)
+            cmd.CommandText += String.Format(" WHERE `{0}`=?", table.PrimaryKey)
             cmd.Parameters.Add(AsParam(table.PrimaryKey))
             cmd.ExecuteNonQuery()
             self.Close()
@@ -299,7 +299,7 @@ Public Class DB
         Public Sub Delete()
             self.Open()
             Dim cmd As New OleDbCommand("", self)
-            cmd.CommandText = [String].Format("DELETE FROM `{0}` SET WHERE `{1}`=?", table.Name, table.PrimaryKey)
+            cmd.CommandText = String.Format("DELETE FROM `{0}` SET WHERE `{1}`=?", table.Name, table.PrimaryKey)
             cmd.Parameters.Add(AsParam(table.PrimaryKey))
             cmd.ExecuteNonQuery()
             self.Close()

@@ -62,6 +62,7 @@ Public Class DB
         Public DataType As MDBType
         Public Size As Integer
         Public NotNull As Boolean = False
+        Public DefaultValue As Object = Nothing
         Public Sub New(datatype As MDBType, Optional size As Integer = 0)
             Me.Name = ""
             Me.DataType = datatype
@@ -69,7 +70,7 @@ Public Class DB
         End Sub
         Public Function CreateSQL() As String
             Dim s As String = If(DataType.SizeRequired, String.Format("({0})", Size), "")
-            Return String.Format("`{0}` {1}{2}{3}", Me.Name, Me.DataType.SQL, s, If(Me.NotNull, " NOT NULL", ""))
+            Return String.Format("`{0}` {1}{2}{3}{4}", Me.Name, Me.DataType.SQL, s, If(Me.NotNull, " NOT NULL", ""), If(IsNothing(Me.DefaultValue), "", " DEFAULT ?"))
         End Function
     End Class
     Public Class Table
@@ -87,6 +88,14 @@ Public Class DB
         Public Sub Create()
             self.Open()
             Dim cmd As New OleDbCommand(CreateSQL(), self)
+            For Each pair As KeyValuePair(Of String, Field) In Fields
+                If Not IsNothing(pair.Value.DefaultValue) Then
+                    Dim param = cmd.CreateParameter()
+                    param.OleDbType = pair.Value.DataType.DBType
+                    param.Value = pair.Value.DefaultValue
+                    cmd.Parameters.Add(param)
+                End If
+            Next
             cmd.ExecuteNonQuery()
             self.Close()
         End Sub
@@ -150,30 +159,32 @@ Public Class DB
                 obj.Insert()
             Next
         End Sub
-        Public Sub Update(field As String, value As Object)
-            self.Open()
-            Dim temp As DBObject = DirectCast(Activator.CreateInstance(Of T)(), DBObject)
-            If Me.Count = 0 Then
-                Return
-            End If
-            temp(field) = value
-            Dim sql As String = String.Format("UPDATE `{0}` SET `{1}`=? WHERE ", table.Name, field)
-            Dim cmd As New OleDbCommand(sql, self)
-            cmd.Parameters.Add(temp.AsParam(field))
-            Dim llist As New LinkedList(Of DBObject)(Me)
-            Dim node As LinkedListNode(Of DBObject) = llist.First
-            While node IsNot Nothing
-                node.Value(field) = value
-                cmd.CommandText += String.Format("{0}=?", table.PrimaryKey)
-                cmd.Parameters.Add(node.Value.AsParam(table.PrimaryKey))
-                If node.[Next] IsNot Nothing Then
-                    cmd.CommandText += " OR "
+        Public WriteOnly Property Update(field As String) As Object
+            Set(value As Object)
+                self.Open()
+                Dim temp As DBObject = DirectCast(Activator.CreateInstance(Of T)(), DBObject)
+                If Me.Count = 0 Then
+                    Return
                 End If
-                node = node.[Next]
-            End While
-            cmd.ExecuteNonQuery()
-            self.Close()
-        End Sub
+                temp(field) = value
+                Dim sql As String = String.Format("UPDATE `{0}` SET `{1}`=? WHERE ", table.Name, field)
+                Dim cmd As New OleDbCommand(sql, self)
+                cmd.Parameters.Add(temp.AsParam(field))
+                Dim llist As New LinkedList(Of DBObject)(Me)
+                Dim node As LinkedListNode(Of DBObject) = llist.First
+                While node IsNot Nothing
+                    node.Value(field) = value
+                    cmd.CommandText += String.Format("{0}=?", table.PrimaryKey)
+                    cmd.Parameters.Add(node.Value.AsParam(table.PrimaryKey))
+                    If node.[Next] IsNot Nothing Then
+                        cmd.CommandText += " OR "
+                    End If
+                    node = node.[Next]
+                End While
+                cmd.ExecuteNonQuery()
+                self.Close()
+            End Set
+        End Property
         Public Sub Delete()
             self.Open()
             If Me.Count = 0 Then

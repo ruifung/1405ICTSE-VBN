@@ -43,11 +43,5 @@ Partial Public Class DB
                 Me("authkey") = sha.ComputeHash(pwd)
             End Set
         End Property
-        Public Function checkPassword(ByVal password As String) As Boolean _
-            Implements IUser.checkPassword
-            Dim pwd = Encoding.UTF8.GetBytes(password.ToCharArray())
-            Dim sha = SHA256Managed.Create()
-            Return DirectCast(Me("authkey"), Byte()).SequenceEqual(sha.ComputeHash(pwd))
-        End Function
     End Class
 End Class

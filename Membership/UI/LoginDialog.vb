@@ -6,7 +6,7 @@
     End Sub
 
     Private Sub onExitClick(sender As Object, e As EventArgs) Handles btnExit.Click
-        Me.DialogResult = DialogResult.Abort
+        Me.DialogResult = DialogResult.Cancel
     End Sub
 
     Private Sub onLoginClick(sender As Object, e As EventArgs) Handles btnLogin.Click

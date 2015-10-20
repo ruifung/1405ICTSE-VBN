@@ -23,12 +23,10 @@ Partial Class LoginDialog
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Logo = New System.Windows.Forms.PictureBox()
-        Me.txtUsername = New System.Windows.Forms.TextBox()
-        Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
-        Me.lblUsername = New System.Windows.Forms.Label()
-        Me.lblPassword = New System.Windows.Forms.Label()
+        Me.txtUsername = New Membership.TextBoxEx()
+        Me.txtPassword = New Membership.TextBoxEx()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -42,25 +40,6 @@ Partial Class LoginDialog
         Me.Logo.Size = New System.Drawing.Size(144, 120)
         Me.Logo.TabIndex = 0
         Me.Logo.TabStop = False
-        '
-        'txtUsername
-        '
-        Me.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtUsername.Location = New System.Drawing.Point(165, 13)
-        Me.txtUsername.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Size = New System.Drawing.Size(166, 26)
-        Me.txtUsername.TabIndex = 1
-        '
-        'txtPassword
-        '
-        Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPassword.Location = New System.Drawing.Point(165, 47)
-        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(166, 26)
-        Me.txtPassword.TabIndex = 2
-        Me.txtPassword.UseSystemPasswordChar = True
         '
         'btnLogin
         '
@@ -81,31 +60,30 @@ Partial Class LoginDialog
         Me.btnExit.Text = "Exit"
         Me.btnExit.UseVisualStyleBackColor = True
         '
-        'lblUsername
+        'txtUsername
         '
-        Me.lblUsername.AutoSize = True
-        Me.lblUsername.BackColor = System.Drawing.Color.Transparent
-        Me.lblUsername.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.lblUsername.ForeColor = System.Drawing.Color.Gray
-        Me.lblUsername.Location = New System.Drawing.Point(168, 15)
-        Me.lblUsername.Name = "lblUsername"
-        Me.lblUsername.Size = New System.Drawing.Size(81, 19)
-        Me.lblUsername.TabIndex = 5
-        Me.lblUsername.Text = "Username"
+        Me.txtUsername.CustomBorder = False
+        Me.txtUsername.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtUsername.Location = New System.Drawing.Point(165, 13)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Placeholder = "Username"
+        Me.txtUsername.PlaceholderColor = System.Drawing.Color.Gray
+        Me.txtUsername.Size = New System.Drawing.Size(166, 26)
+        Me.txtUsername.TabIndex = 5
         '
-        'lblPassword
+        'txtPassword
         '
-        Me.lblPassword.AutoSize = True
-        Me.lblPassword.BackColor = System.Drawing.Color.Transparent
-        Me.lblPassword.Cursor = System.Windows.Forms.Cursors.IBeam
-        Me.lblPassword.ForeColor = System.Drawing.Color.Gray
-        Me.lblPassword.Location = New System.Drawing.Point(168, 49)
-        Me.lblPassword.Name = "lblPassword"
-        Me.lblPassword.Size = New System.Drawing.Size(81, 19)
-        Me.lblPassword.TabIndex = 6
-        Me.lblPassword.Text = "Password"
+        Me.txtPassword.CustomBorder = False
+        Me.txtPassword.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtPassword.Location = New System.Drawing.Point(164, 47)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Placeholder = "Password"
+        Me.txtPassword.PlaceholderColor = System.Drawing.Color.Gray
+        Me.txtPassword.Size = New System.Drawing.Size(167, 26)
+        Me.txtPassword.TabIndex = 6
+        Me.txtPassword.UseSystemPasswordChar = True
         '
-        'LoginForm
+        'LoginDialog
         '
         Me.AcceptButton = Me.btnLogin
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 19.0!)
@@ -113,18 +91,16 @@ Partial Class LoginDialog
         Me.BackColor = System.Drawing.Color.White
         Me.CancelButton = Me.btnExit
         Me.ClientSize = New System.Drawing.Size(344, 146)
-        Me.Controls.Add(Me.lblPassword)
-        Me.Controls.Add(Me.lblUsername)
-        Me.Controls.Add(Me.btnExit)
-        Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.txtUsername)
+        Me.Controls.Add(Me.btnExit)
+        Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.Logo)
         Me.Font = New System.Drawing.Font("Consolas", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
-        Me.Name = "LoginForm"
+        Me.Name = "LoginDialog"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Login"
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).EndInit()
@@ -133,11 +109,9 @@ Partial Class LoginDialog
 
     End Sub
     Friend WithEvents Logo As System.Windows.Forms.PictureBox
-    Friend WithEvents txtUsername As System.Windows.Forms.TextBox
-    Friend WithEvents txtPassword As System.Windows.Forms.TextBox
     Friend WithEvents btnLogin As System.Windows.Forms.Button
     Friend WithEvents btnExit As System.Windows.Forms.Button
-    Friend WithEvents lblUsername As System.Windows.Forms.Label
-    Friend WithEvents lblPassword As System.Windows.Forms.Label
+    Friend WithEvents txtUsername As Membership.TextBoxEx
+    Friend WithEvents txtPassword As Membership.TextBoxEx
 
 End Class

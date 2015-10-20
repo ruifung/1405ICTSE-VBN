@@ -77,6 +77,12 @@
     <Compile Include="API\Members\IMemberManager.vb" />
     <Compile Include="API\Users\IUser.vb" />
     <Compile Include="API\Users\IUserManager.vb" />
+    <Compile Include="Contorls\TextBoxEx.Designer.vb">
+      <DependentUpon>TextBoxEx.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Contorls\TextBoxEx.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DB\DB.vb" />
     <Compile Include="DB\Users.vb" />
     <Compile Include="Program.vb" />

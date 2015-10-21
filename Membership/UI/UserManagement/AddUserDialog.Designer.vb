@@ -98,7 +98,6 @@ Partial Class AddUserDialog
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(161, 24)
         Me.lblStatus.TabIndex = 7
-        Me.lblStatus.Text = "Label4"
         Me.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'AddUserDialog

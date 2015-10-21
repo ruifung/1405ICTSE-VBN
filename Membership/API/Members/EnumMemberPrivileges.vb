@@ -1,0 +1,7 @@
+﻿Public Enum EnumMemberPrivileges
+    VOTING_RIGHTS
+    EQUITY_RIGHTS
+    RECIPROCAL
+    AFFLIATED
+    WEEKEND_BOOKINGS
+End Enum

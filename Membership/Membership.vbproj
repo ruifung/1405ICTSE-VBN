@@ -73,8 +73,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Members\EnumMemberPrivileges.vb" />
     <Compile Include="API\Members\IMember.vb" />
     <Compile Include="API\Members\IMemberManager.vb" />
+    <Compile Include="API\Members\IMemberTypeManager.vb" />
+    <Compile Include="API\Members\MembershipType.vb" />
     <Compile Include="API\Users\IUser.vb" />
     <Compile Include="API\Users\IUserManager.vb" />
     <Compile Include="Contorls\TextBoxEx.Designer.vb">
@@ -121,6 +124,7 @@
     <Compile Include="UI\UserManagement\AddUserDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Util\MaybeOption.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\LoginDialog.resx">

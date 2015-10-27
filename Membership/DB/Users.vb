@@ -7,10 +7,10 @@ Partial Public Class DB
         If Not IsNothing(UsersTable) Then Return
         UsersTable = New Table
         UsersTable.Name = "users"
-        UsersTable.Fields.Add("id", New Field(MDBType.AutoNumber))
-        UsersTable.Fields.Add("username", New Field(MDBType.Text, 20))
-        UsersTable.Fields.Add("authkey", New Field(MDBType.Binary, 32))
-        UsersTable.Fields.Add("role", New Field(MDBType.Byte))
+        UsersTable.Fields("id") = New Field(MDBType.AutoNumber)
+        UsersTable.Fields("username") = New Field(MDBType.Text, 20)
+        UsersTable.Fields("authkey") = New Field(MDBType.Binary, 32)
+        UsersTable.Fields("role") = New Field(MDBType.Byte)
         UsersTable.PrimaryKey = "id"
         DB.RegisterTable(UsersTable)
     End Sub

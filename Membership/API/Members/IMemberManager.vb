@@ -22,4 +22,16 @@
     ''' <param name="member">Member to remove.</param>
     ''' <returns>If member was successfully removed.</returns>
     Function removeMember(member As IMember) As Boolean
+
+    ''' <summary>
+    ''' Searches the database for matching members.
+    ''' </summary>
+    ''' <param name="searchParam">IMember instance containing parameters to match.</param>
+    ''' <param name="fuzzy">Allows partial matches where applicable.</param>
+    ''' <returns></returns>
+    Function search(searchParam As IMember, fuzzy As Boolean) As List(Of IMember)
+
+    Sub init()
+    Sub load()
+    Sub save()
 End Interface

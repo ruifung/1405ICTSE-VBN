@@ -80,16 +80,16 @@
     <Compile Include="API\Members\MembershipType.vb" />
     <Compile Include="API\Users\IUser.vb" />
     <Compile Include="API\Users\IUserManager.vb" />
-    <Compile Include="Contorls\TextBoxEx.Designer.vb">
+    <Compile Include="Controls\TextBoxEx.Designer.vb">
       <DependentUpon>TextBoxEx.vb</DependentUpon>
     </Compile>
-    <Compile Include="Contorls\TextBoxEx.vb">
+    <Compile Include="Controls\TextBoxEx.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DB\DB.vb" />
     <Compile Include="DB\Users.vb" />
     <Compile Include="Program.vb" />
-    <Compile Include="Registry.vb" />
+    <Compile Include="ConfigManager.vb" />
     <Compile Include="UI\LoginDialog.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +135,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\MainForm.resx">
+      <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserManagement\AddUserDialog.resx">
       <DependentUpon>AddUserDialog.vb</DependentUpon>

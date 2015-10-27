@@ -3,11 +3,9 @@
     Sub Main()
         Application.EnableVisualStyles()
         'Config Load.
-        Try
-
-        Finally
-
-        End Try
+        ConfigManager.init()
+        ConfigManager.load()
+        ConfigManager.save()
         While running
             Dim login = New LoginDialog
             Try
@@ -25,6 +23,7 @@
 
 
     Public Sub quit()
+        ConfigManager.save()
         running = False
         Application.Exit()
     End Sub

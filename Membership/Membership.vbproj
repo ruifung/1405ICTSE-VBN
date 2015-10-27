@@ -87,6 +87,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DB\DB.vb" />
+    <Compile Include="DB\Members.vb" />
     <Compile Include="DB\Users.vb" />
     <Compile Include="Program.vb" />
     <Compile Include="ConfigManager.vb" />

@@ -50,6 +50,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -73,6 +74,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Data\IDataStore.vb" />
     <Compile Include="API\Members\EnumMemberPrivileges.vb" />
     <Compile Include="API\Members\IMember.vb" />
     <Compile Include="API\Members\IMemberManager.vb" />
@@ -80,6 +82,7 @@
     <Compile Include="API\Members\MembershipType.vb" />
     <Compile Include="API\Users\IUser.vb" />
     <Compile Include="API\Users\IUserManager.vb" />
+    <Compile Include="API\Data\DataManager.vb" />
     <Compile Include="Controls\TextBoxEx.Designer.vb">
       <DependentUpon>TextBoxEx.vb</DependentUpon>
     </Compile>
@@ -91,7 +94,7 @@
     <Compile Include="DB\UserManager.vb" />
     <Compile Include="DB\Users.vb" />
     <Compile Include="Program.vb" />
-    <Compile Include="ConfigManager.vb" />
+    <Compile Include="Config\ConfigManager.vb" />
     <Compile Include="UI\LoginDialog.vb">
       <SubType>Form</SubType>
     </Compile>

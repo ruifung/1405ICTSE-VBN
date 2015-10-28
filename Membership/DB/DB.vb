@@ -2,13 +2,11 @@
 Imports System.IO
 
 Public Class DB
-    Private Const ConnFormat As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};Jet OLEDB:Database Password={1};"
     Private Shared tables As List(Of Table) = New List(Of Table)
     Public Shared self As OleDbConnection
-    Public Shared Sub init(path As String, Optional pass As String = "bU6S1JnPTM95")
-        ' Random generated password
-        Dim constr As String = String.Format(ConnFormat, path, pass)
-        If Not File.Exists(path) Then
+    Public Shared Sub init(csb As OleDbConnectionStringBuilder)
+        Dim constr As String = csb.ToString()
+        If Not File.Exists(csb.DataSource) Then
             Dim cat As New ADOX.Catalog()
             cat.Create(constr)
             DirectCast(cat.ActiveConnection, ADODB.Connection).Close()
@@ -20,6 +18,14 @@ Public Class DB
             self = New OleDbConnection(constr)
         End If
     End Sub
+    Public Shared Function Test(csb As OleDbConnectionStringBuilder) As Boolean
+        Try
+            Dim db = New OleDbConnection(csb.ToString())
+        Catch ex As Exception
+            Return False
+        End Try
+        Return True
+    End Function
     Public Shared Function RegisterTable(table As Table) As Table
         If Not tables.Contains(table) Then
             tables.Add(table)

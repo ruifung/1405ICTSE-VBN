@@ -10,13 +10,19 @@ Partial Public Class DB
         UsersTable.Fields("id") = New Field(MDBType.AutoNumber)
         UsersTable.Fields("username") = New Field(MDBType.Text, 20)
         UsersTable.Fields("authkey") = New Field(MDBType.Binary, 32)
-        UsersTable.Fields("role") = New Field(MDBType.Byte)
+        UsersTable.Fields("permissions") = New Field(MDBType.Number)
         UsersTable.PrimaryKey = "id"
         DB.RegisterTable(UsersTable)
     End Sub
     Public Class User
         Inherits DBObject
         Implements IUser
+        Public Shared Function TryGet(id As Integer) As User
+            Return User.Find(Of User)(id)
+        End Function
+        Public Shared Function TryGet(field As String, value As Object)
+            Return User.Find(Of User)(field, value)
+        End Function
         Public Overrides Function table() As Table
             Return UsersTable
         End Function
@@ -43,5 +49,18 @@ Partial Public Class DB
                 Me("authkey") = sha.ComputeHash(pwd)
             End Set
         End Property
+        Public Property permmission As Integer Implements IUser.accessLevel
+            Get
+                Return Me("permission")
+            End Get
+            Set(value As Integer)
+                Me("permisson") = value
+            End Set
+        End Property
+        Public Function validate(pass As String) As Boolean
+            Dim pwd = Encoding.UTF8.GetBytes(pass.ToCharArray())
+            Dim sha = SHA256Managed.Create()
+            Return sha.ComputeHash(pwd).SequenceEqual(Me("authkey"))
+        End Function
     End Class
 End Class

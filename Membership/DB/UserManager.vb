@@ -3,10 +3,15 @@
         Implements IUserManager
 
         Public Function addUser(name As String, pass As String) As Boolean Implements IUserManager.addUser
-            Dim user As User = New User()
-            user.userName = name
-            user.password = pass
-            user.Insert()
+            Try
+                Dim user As User = New User()
+                user.userName = name
+                user.password = pass
+                user.Insert()
+                Return True
+            Catch ex As Exception
+                Return False
+            End Try
         End Function
 
         Public Function checkUser(userName As String, pass As String) As Boolean Implements IUserManager.checkUser
@@ -23,11 +28,11 @@
         End Function
 
         Public Function getUser(id As Integer) As MaybeOption(Of IUser) Implements IUserManager.getUser
-            Return MaybeOption(Of IUser).apply(DirectCast(User.TryGet(id), IUser))
+            Return MaybeOption.create(DirectCast(User.TryGet(id), IUser))
         End Function
 
         Public Function getUser(name As String) As MaybeOption(Of IUser) Implements IUserManager.getUser
-            Return MaybeOption(Of IUser).apply(DirectCast(User.TryGet("username", name), IUser))
+            Return MaybeOption.create(DirectCast(User.TryGet("username", name), IUser))
         End Function
 
         Public Function getUsers() As List(Of IUser) Implements IUserManager.getUsers

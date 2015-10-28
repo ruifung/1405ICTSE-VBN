@@ -1,11 +1,30 @@
 ﻿Imports Membership
 
+
+Public Module MaybeOption
+    ''' <summary>
+    ''' Get either a Some or a None based on the value passed in.
+    ''' </summary>
+    ''' <typeparam name="Type"></typeparam>
+    ''' <param name="item"></param>
+    ''' <returns>Some or None</returns>
+    Function create(Of Type As Class)(item As Type) As MaybeOption(Of Type)
+        If IsNothing(item) Then
+            Return New None(Of Type)
+        Else
+            Return New Some(Of Type)(item)
+        End If
+    End Function
+End Module
+
 ''' <summary>
 ''' Option implementation.
 ''' Inspired by scala.
 ''' </summary>
 ''' <typeparam name="T">Type of value this Option contains.</typeparam>
-Public MustInherit Class MaybeOption(Of T)
+''' 
+Public MustInherit Class MaybeOption(Of T As Class)
+
     ''' <summary>
     ''' Checks if the MaybeOption is empty
     ''' </summary>
@@ -24,14 +43,14 @@ Public MustInherit Class MaybeOption(Of T)
     ''' <typeparam name="R">Type to map to.</typeparam>
     ''' <param name="mapFunc">Map function</param>
     ''' <returns>Some(Of R) or None</returns>
-    MustOverride Function map(Of R)(mapFunc As Func(Of T, R)) As MaybeOption(Of R)
+    MustOverride Function map(Of R As Class)(mapFunc As Func(Of T, R)) As MaybeOption(Of R)
     ''' <summary>
     ''' Similar to map except the map function must return a MaybeOption
     ''' </summary>
     ''' <typeparam name="R">Type to map to.</typeparam>
     ''' <param name="mapFunc">Map function</param>
     ''' <returns></returns>
-    MustOverride Function flatMap(Of R)(mapFunc As Func(Of T, MaybeOption(Of R))) As MaybeOption(Of R)
+    MustOverride Function flatMap(Of R As Class)(mapFunc As Func(Of T, MaybeOption(Of R))) As MaybeOption(Of R)
 
     ''' <summary>
     ''' Does an action on the contents.
@@ -83,24 +102,10 @@ Public MustInherit Class MaybeOption(Of T)
     ''' <param name="predicate"></param>
     ''' <returns>Return value of predicate - true if None</returns>
     MustOverride Function forAll(predicate As Predicate(Of T)) As Boolean
-
-    ''' <summary>
-    ''' Get either a Some or a None based on the value passed in.
-    ''' </summary>
-    ''' <typeparam name="Type"></typeparam>
-    ''' <param name="item"></param>
-    ''' <returns>Some or None</returns>
-    Shared Function apply(Of Type)(item As Type) As MaybeOption(Of Type)
-        If IsNothing(item) Then
-            Return New None(Of Type)
-        Else
-            Return New Some(Of Type)(item)
-        End If
-    End Function
 End Class
 
 
-Public Class Some(Of SomeType)
+Public Class Some(Of SomeType As Class)
     Inherits MaybeOption(Of SomeType)
 
     Private item As SomeType
@@ -109,7 +114,7 @@ Public Class Some(Of SomeType)
         item = obj
     End Sub
 
-    Public Overrides Function flatMap(Of R)(mapFunc As Func(Of SomeType, MaybeOption(Of R))) As MaybeOption(Of R)
+    Public Overrides Function flatMap(Of R As Class)(mapFunc As Func(Of SomeType, MaybeOption(Of R))) As MaybeOption(Of R)
         Return mapFunc(item)
     End Function
 
@@ -133,8 +138,8 @@ Public Class Some(Of SomeType)
         Return False
     End Function
 
-    Public Overrides Function map(Of R)(mapFunc As Func(Of SomeType, R)) As MaybeOption(Of R)
-        Return MaybeOption(Of R).apply(mapFunc(item))
+    Public Overrides Function map(Of R As Class)(mapFunc As Func(Of SomeType, R)) As MaybeOption(Of R)
+        Return New Some(Of R)(mapFunc(item))
     End Function
 
     Public Overrides Function orAlt(altnernative As MaybeOption(Of SomeType)) As MaybeOption(Of SomeType)
@@ -162,10 +167,10 @@ Public Class Some(Of SomeType)
     End Function
 End Class
 
-Public Class None(Of SomeType)
+Public Class None(Of SomeType As Class)
     Inherits MaybeOption(Of SomeType)
 
-    Public Overrides Function flatMap(Of R)(mapFunc As Func(Of SomeType, MaybeOption(Of R))) As MaybeOption(Of R)
+    Public Overrides Function flatMap(Of R As Class)(mapFunc As Func(Of SomeType, MaybeOption(Of R))) As MaybeOption(Of R)
         Return New None(Of R)
     End Function
 
@@ -188,7 +193,7 @@ Public Class None(Of SomeType)
         Return True
     End Function
 
-    Public Overrides Function map(Of R)(mapFunc As Func(Of SomeType, R)) As MaybeOption(Of R)
+    Public Overrides Function map(Of R As Class)(mapFunc As Func(Of SomeType, R)) As MaybeOption(Of R)
         Return New None(Of R)
     End Function
 

@@ -82,7 +82,7 @@ Partial Public Class DB
                 If IsNothing(Me("photo")) Then Return New None(Of Image)
                 If _photo.isEmpty Then
                     Dim stream As MemoryStream = New MemoryStream(DirectCast(Me("photo"), Byte()))
-                    _photo = MaybeOption(Of Image).apply(Image.FromStream(stream))
+                    _photo = MaybeOption.create(Image.FromStream(stream))
                     stream.Close()
                 End If
                 Return _photo

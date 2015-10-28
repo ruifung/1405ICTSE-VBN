@@ -1,5 +1,5 @@
 ﻿Public Class DataManager
-    ReadOnly dataStore As IDataStore
+    Public ReadOnly dataStore As IDataStore
 
     Private userManagerVar As IUserManager
     Property userManager As IUserManager
@@ -25,7 +25,7 @@
         End Set
     End Property
 
-    Private memberTypeManagerVar As IMemberTypeManager)
+    Private memberTypeManagerVar As IMemberTypeManager
     Property memberTypeManager As IMemberTypeManager
         Get
             Return memberTypeManagerVar
@@ -37,9 +37,9 @@
         End Set
     End Property
 
-    Sub New(dataStore As IDataStore)
+    Sub New(dataStore As IDataStore, Optional dataStoreParam As Object = Nothing)
         Me.dataStore = dataStore
-        dataStore.init(Me)
+        dataStore.init(Me, MaybeOption.create(dataStoreParam))
         dataStore.load()
         dataStore.save()
     End Sub

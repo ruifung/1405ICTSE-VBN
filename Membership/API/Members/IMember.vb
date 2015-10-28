@@ -1,5 +1,5 @@
 ﻿Public Interface IMember
-    Property id As Integer
+    ReadOnly Property id As Integer
     Property firstName As String
     Property lastName As String
     Property contactNumber As String

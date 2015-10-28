@@ -19,15 +19,17 @@ Partial Public Class DB
     End Sub
     Public Class Member
         Inherits DBObject
+        Implements IMember
+
         Private emailFilter As Regex = New Regex("^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$")
         Private contactFilter As Regex = New Regex("^\+{0,1}\d{9,}$")
-        Private _photo As Image = Nothing
-        Public ReadOnly Property id As Integer
+        Private _photo As MaybeOption(Of Image) = New None(Of Image)
+        Public ReadOnly Property id As Integer Implements IMember.id
             Get
                 Return Me("id")
             End Get
         End Property
-        Public Property firstName As String
+        Public Property firstName As String Implements IMember.firstName
             Get
                 Return Me("firstname")
             End Get
@@ -35,7 +37,7 @@ Partial Public Class DB
                 Me("firstname") = value
             End Set
         End Property
-        Public Property lastName As String
+        Public Property lastName As String Implements IMember.lastName
             Get
                 Return Me("lastname")
             End Get
@@ -43,7 +45,7 @@ Partial Public Class DB
                 Me("lastname") = value
             End Set
         End Property
-        Public Property membership As Integer
+        Public Property membership As Integer Implements IMember.membershipTypeID
             Get
                 Return Me("membership")
             End Get
@@ -51,7 +53,7 @@ Partial Public Class DB
                 Me("membership") = value
             End Set
         End Property
-        Public Property contact As String
+        Public Property contact As String Implements IMember.contactNumber
             Get
                 Return Me("contact")
             End Get
@@ -63,7 +65,7 @@ Partial Public Class DB
                 End If
             End Set
         End Property
-        Public Property email As String
+        Public Property email As String Implements IMember.email
             Get
                 Return Me("email")
             End Get
@@ -75,27 +77,29 @@ Partial Public Class DB
                 End If
             End Set
         End Property
-        Public Property photo As Image
+        Public Property photo As MaybeOption(Of Image) Implements IMember.photo
             Get
-                If IsNothing(Me("photo")) Then Return Nothing
-                If IsNothing(_photo) Then
+                If IsNothing(Me("photo")) Then Return New None(Of Image)
+                If _photo.isEmpty Then
                     Dim stream As MemoryStream = New MemoryStream(DirectCast(Me("photo"), Byte()))
-                    _photo = Image.FromStream(stream)
+                    _photo = MaybeOption(Of Image).apply(Image.FromStream(stream))
                     stream.Close()
                 End If
                 Return _photo
             End Get
-            Set(value As Image)
+            Set(value As MaybeOption(Of Image))
                 _photo = value
-                Dim stream As MemoryStream = New MemoryStream()
-                _photo.Save(stream, ImageFormat.Jpeg)
-                Dim bytes(stream.Length) As Byte
-                stream.Read(bytes, 0, stream.Length)
-                stream.Close()
-                Me("photo") = bytes
+                _photo.forEach(Sub(x)
+                                   Dim stream As MemoryStream = New MemoryStream()
+                                   x.Save(stream, ImageFormat.Jpeg)
+                                   Dim bytes(stream.Length) As Byte
+                                   stream.Read(bytes, 0, stream.Length)
+                                   stream.Close()
+                                   Me("photo") = bytes
+                               End Sub)
             End Set
         End Property
-        Public Property activated As Boolean
+        Public Property activated As Boolean Implements IMember.isActive
             Get
                 Return Me("active") > 0
             End Get

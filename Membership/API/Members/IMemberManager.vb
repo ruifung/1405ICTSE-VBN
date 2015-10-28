@@ -1,7 +1,7 @@
 ﻿Public Interface IMemberManager
     ''' <summary>
     ''' Add a new member.
-    ''' Member ID must be ignored and overridden
+    ''' Member ID may be ignored based on storage backend.
     ''' </summary>
     ''' <param name="member">Member to add</param>
     ''' <returns>Some(IMember) if succeeded. Else None.</returns>

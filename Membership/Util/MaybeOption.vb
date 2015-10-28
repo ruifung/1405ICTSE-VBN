@@ -97,117 +97,118 @@ Public MustInherit Class MaybeOption(Of T)
             Return New Some(Of Type)(item)
         End If
     End Function
+End Class
 
-    Public Class Some(Of SomeType)
-        Inherits MaybeOption(Of SomeType)
 
-        Private item As SomeType
+Public Class Some(Of SomeType)
+    Inherits MaybeOption(Of SomeType)
 
-        Sub New(obj As SomeType)
-            item = obj
-        End Sub
+    Private item As SomeType
 
-        Public Overrides Function flatMap(Of R)(mapFunc As Func(Of SomeType, MaybeOption(Of R))) As MaybeOption(Of R)
-            Return mapFunc(item)
-        End Function
+    Sub New(obj As SomeType)
+        item = obj
+    End Sub
 
-        Public Overrides Sub forEach(action As Action(Of SomeType))
-            action(item)
-        End Sub
+    Public Overrides Function flatMap(Of R)(mapFunc As Func(Of SomeType, MaybeOption(Of R))) As MaybeOption(Of R)
+        Return mapFunc(item)
+    End Function
 
-        Public Overrides Function getOrAlt(alternative As SomeType) As SomeType
-            Return item
-        End Function
+    Public Overrides Sub forEach(action As Action(Of SomeType))
+        action(item)
+    End Sub
 
-        Public Overrides Function getValue() As SomeType
-            Return item
-        End Function
+    Public Overrides Function getOrAlt(alternative As SomeType) As SomeType
+        Return item
+    End Function
 
-        Public Overrides Function isDefined() As Boolean
-            Return True
-        End Function
+    Public Overrides Function getValue() As SomeType
+        Return item
+    End Function
 
-        Public Overrides Function isEmpty() As Boolean
-            Return False
-        End Function
+    Public Overrides Function isDefined() As Boolean
+        Return True
+    End Function
 
-        Public Overrides Function map(Of R)(mapFunc As Func(Of SomeType, R)) As MaybeOption(Of R)
-            Return MaybeOption(Of R).apply(mapFunc(item))
-        End Function
+    Public Overrides Function isEmpty() As Boolean
+        Return False
+    End Function
 
-        Public Overrides Function orAlt(altnernative As MaybeOption(Of SomeType)) As MaybeOption(Of SomeType)
+    Public Overrides Function map(Of R)(mapFunc As Func(Of SomeType, R)) As MaybeOption(Of R)
+        Return MaybeOption(Of R).apply(mapFunc(item))
+    End Function
+
+    Public Overrides Function orAlt(altnernative As MaybeOption(Of SomeType)) As MaybeOption(Of SomeType)
+        Return Me
+    End Function
+
+    Public Overrides Function orNothing() As SomeType
+        Return item
+    End Function
+
+    Public Overrides Function filter(filterFunc As Predicate(Of SomeType)) As MaybeOption(Of SomeType)
+        If (filterFunc(item)) Then
             Return Me
-        End Function
+        Else
+            Return New None(Of SomeType)
+        End If
+    End Function
 
-        Public Overrides Function orNothing() As SomeType
-            Return item
-        End Function
+    Public Overrides Function exists(predicate As Predicate(Of SomeType)) As Boolean
+        Return predicate(item)
+    End Function
 
-        Public Overrides Function filter(filterFunc As Predicate(Of SomeType)) As MaybeOption(Of SomeType)
-            If (filterFunc(item)) Then
-                Return Me
-            Else
-                Return New None(Of SomeType)
-            End If
-        End Function
+    Public Overrides Function forAll(predicate As Predicate(Of SomeType)) As Boolean
+        Return predicate(item)
+    End Function
+End Class
 
-        Public Overrides Function exists(predicate As Predicate(Of SomeType)) As Boolean
-            Return predicate(item)
-        End Function
+Public Class None(Of SomeType)
+    Inherits MaybeOption(Of SomeType)
 
-        Public Overrides Function forAll(predicate As Predicate(Of SomeType)) As Boolean
-            Return predicate(item)
-        End Function
-    End Class
+    Public Overrides Function flatMap(Of R)(mapFunc As Func(Of SomeType, MaybeOption(Of R))) As MaybeOption(Of R)
+        Return New None(Of R)
+    End Function
 
-    Public Class None(Of SomeType)
-        Inherits MaybeOption(Of SomeType)
+    Public Overrides Sub forEach(action As Action(Of SomeType))
+    End Sub
 
-        Public Overrides Function flatMap(Of R)(mapFunc As Func(Of SomeType, MaybeOption(Of R))) As MaybeOption(Of R)
-            Return New None(Of R)
-        End Function
+    Public Overrides Function getOrAlt(alternative As SomeType) As SomeType
+        Return alternative
+    End Function
 
-        Public Overrides Sub forEach(action As Action(Of SomeType))
-        End Sub
+    Public Overrides Function getValue() As SomeType
+        Throw New InvalidOperationException()
+    End Function
 
-        Public Overrides Function getOrAlt(alternative As SomeType) As SomeType
-            Return alternative
-        End Function
+    Public Overrides Function isDefined() As Boolean
+        Return False
+    End Function
 
-        Public Overrides Function getValue() As SomeType
-            Throw New InvalidOperationException()
-        End Function
+    Public Overrides Function isEmpty() As Boolean
+        Return True
+    End Function
 
-        Public Overrides Function isDefined() As Boolean
-            Return False
-        End Function
+    Public Overrides Function map(Of R)(mapFunc As Func(Of SomeType, R)) As MaybeOption(Of R)
+        Return New None(Of R)
+    End Function
 
-        Public Overrides Function isEmpty() As Boolean
-            Return True
-        End Function
+    Public Overrides Function orAlt(altnernative As MaybeOption(Of SomeType)) As MaybeOption(Of SomeType)
+        Return altnernative
+    End Function
 
-        Public Overrides Function map(Of R)(mapFunc As Func(Of SomeType, R)) As MaybeOption(Of R)
-            Return New None(Of R)
-        End Function
+    Public Overrides Function orNothing() As SomeType
+        Return Nothing
+    End Function
 
-        Public Overrides Function orAlt(altnernative As MaybeOption(Of SomeType)) As MaybeOption(Of SomeType)
-            Return altnernative
-        End Function
+    Public Overrides Function filter(filterFunc As Predicate(Of SomeType)) As MaybeOption(Of SomeType)
+        Return Me
+    End Function
 
-        Public Overrides Function orNothing() As SomeType
-            Return Nothing
-        End Function
+    Public Overrides Function exists(predicate As Predicate(Of SomeType)) As Boolean
+        Return False
+    End Function
 
-        Public Overrides Function filter(filterFunc As Predicate(Of SomeType)) As MaybeOption(Of SomeType)
-            Return Me
-        End Function
-
-        Public Overrides Function exists(predicate As Predicate(Of SomeType)) As Boolean
-            Return False
-        End Function
-
-        Public Overrides Function forAll(predicate As Predicate(Of SomeType)) As Boolean
-            Return True
-        End Function
-    End Class
+    Public Overrides Function forAll(predicate As Predicate(Of SomeType)) As Boolean
+        Return True
+    End Function
 End Class

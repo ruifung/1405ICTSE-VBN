@@ -47,9 +47,7 @@ Partial Public Class DB
                 Return Convert.ToBase64String(CType(Me("authkey"), Byte()))
             End Get
             Set(value As String)
-                Dim pwd = Encoding.UTF8.GetBytes(value.ToCharArray())
-                Dim sha = SHA256Managed.Create()
-                Me("authkey") = sha.ComputeHash(pwd)
+                Me("authkey") = hash(value, userName)
             End Set
         End Property
         ReadOnly Property passwordHashed As Boolean _
@@ -67,9 +65,16 @@ Partial Public Class DB
             End Set
         End Property
         Public Function validate(pass As String) As Boolean Implements IUser.verifyPass
-            Dim pwd = Encoding.UTF8.GetBytes(pass.ToCharArray())
+            Return hash(pass, userName).SequenceEqual(CType(Me("authkey"), IEnumerable(Of Byte)))
+        End Function
+
+        Private Function hash(str As String, salt As String) As Byte()
+            Dim saltPos As Integer = CInt(Math.Round(Math.Min(Math.Max(
+                (str.Length + salt.Length) / 2, 0), str.Length)))
+            Dim salted = String.Concat(str.Substring(0, saltPos), salt, str.Substring(saltPos))
+            Dim bytes = Encoding.UTF8.GetBytes(salted.ToCharArray())
             Dim sha = SHA256Managed.Create()
-            Return sha.ComputeHash(pwd).SequenceEqual(CType(Me("authkey"), IEnumerable(Of Byte)))
+            Return sha.ComputeHash(bytes)
         End Function
     End Class
 End Class

@@ -3,7 +3,7 @@
 Public Module ConfigManager
     Private appSettings As AppSettingsSection
     Private noneString = New None(Of String)
-    Public dataManager As DataManager
+    Public dataManager As DataStoreManager
 
     ''' <summary>
     ''' Dictionary of all configuration keys.

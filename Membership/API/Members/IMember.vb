@@ -1,5 +1,6 @@
 ﻿Public Interface IMember
-    ReadOnly Property id As Integer
+    Inherits IDataElement
+
     Property firstName As String
     Property lastName As String
     Property contactNumber As String

@@ -15,6 +15,7 @@ Public Module MaybeOption
             Return New Some(Of Type)(item)
         End If
     End Function
+
 End Module
 
 ''' <summary>

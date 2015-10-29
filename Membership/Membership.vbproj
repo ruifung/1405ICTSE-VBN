@@ -74,25 +74,25 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Data\IDataElement.vb" />
     <Compile Include="API\Data\IDataStore.vb" />
     <Compile Include="API\Members\EnumMemberPrivileges.vb" />
     <Compile Include="API\Members\IMember.vb" />
-    <Compile Include="API\Members\IMemberManager.vb" />
-    <Compile Include="API\Members\IMemberTypeManager.vb" />
+    <Compile Include="API\Data\IDataManager.vb" />
     <Compile Include="API\Members\MembershipType.vb" />
     <Compile Include="API\Users\IUser.vb" />
-    <Compile Include="API\Users\IUserManager.vb" />
-    <Compile Include="API\Data\DataManager.vb" />
+    <Compile Include="API\Data\DataStoreManager.vb" />
     <Compile Include="Controls\TextBoxEx.Designer.vb">
       <DependentUpon>TextBoxEx.vb</DependentUpon>
     </Compile>
     <Compile Include="Controls\TextBoxEx.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DB\DB.vb" />
-    <Compile Include="DB\Members.vb" />
-    <Compile Include="DB\UserManager.vb" />
-    <Compile Include="DB\Users.vb" />
+    <Compile Include="Data\DB\DB.vb" />
+    <Compile Include="Data\DB\Members.vb" />
+    <Compile Include="Data\DB\UserManager.vb" />
+    <Compile Include="Data\DB\Users.vb" />
+    <Compile Include="Data\PlainUser.vb" />
     <Compile Include="Program.vb" />
     <Compile Include="Config\ConfigManager.vb" />
     <Compile Include="UI\LoginDialog.vb">

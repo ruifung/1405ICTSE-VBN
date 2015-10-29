@@ -27,7 +27,7 @@ Partial Public Class DB
             Return UsersTable
         End Function
         Public ReadOnly Property userID As Integer _
-            Implements IUser.userID
+            Implements IUser.id
             Get
                 Return Me("id")
             End Get
@@ -41,13 +41,22 @@ Partial Public Class DB
                 Me("username") = value
             End Set
         End Property
-        Public WriteOnly Property password As String _
+        Public Property password As String _
             Implements IUser.password
+            Get
+                Return Convert.ToBase64String(Me("authkey"))
+            End Get
             Set(value As String)
                 Dim pwd = Encoding.UTF8.GetBytes(value.ToCharArray())
                 Dim sha = SHA256Managed.Create()
                 Me("authkey") = sha.ComputeHash(pwd)
             End Set
+        End Property
+        ReadOnly Property passwordHashed As Boolean _
+            Implements IUser.passwordHashed
+            Get
+                Return True
+            End Get
         End Property
         Public Property permmission As Integer Implements IUser.accessLevel
             Get
@@ -57,7 +66,7 @@ Partial Public Class DB
                 Me("permisson") = value
             End Set
         End Property
-        Public Function validate(pass As String) As Boolean
+        Public Function validate(pass As String) As Boolean Implements IUser.verifyPass
             Dim pwd = Encoding.UTF8.GetBytes(pass.ToCharArray())
             Dim sha = SHA256Managed.Create()
             Return sha.ComputeHash(pwd).SequenceEqual(Me("authkey"))

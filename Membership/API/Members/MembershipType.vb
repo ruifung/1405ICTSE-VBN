@@ -1,6 +1,7 @@
 ﻿Public Class MembershipType
+    Implements IDataElement
     Private id = -1
-    Property typeID As Integer
+    Property typeID As Integer Implements IDataElement.id
         Set(value As Integer)
             If id = -1 Then
                 id = value

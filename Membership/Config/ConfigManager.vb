@@ -1,8 +1,9 @@
-﻿Imports System.Configuration
+﻿Imports System.Collections.Immutable
+Imports System.Configuration
 
 Public Module ConfigManager
     Private appSettings As AppSettingsSection
-    Private noneString = New None(Of String)
+    Private noneString As None(Of String) = New None(Of String)
     Public dataManager As DataStoreManager
 
     ''' <summary>
@@ -10,15 +11,16 @@ Public Module ConfigManager
     ''' Value is if the key must NEVER be missing.
     ''' </summary>
     ''' <returns></returns>
-    Public ReadOnly Property configurationKeys As Dictionary(Of String, Boolean) =
-        New Dictionary(Of String, Boolean) From {
-            {"DataMode", True},
-            {"DataSource", True},
-            {"DataAuth", True},
-            {"DataUser", False},
-            {"DataPass", False}
-        }
-
+    Public ReadOnly Property configurationKeys As ImmutableDictionary(Of String, Boolean) =
+        ImmutableDictionary.CreateRange(
+            New Dictionary(Of String, Boolean) From {
+                {"DataMode", True},
+                {"DataSource", True},
+                {"DataAuth", True},
+                {"DataUser", False},
+                {"DataPass", False}
+            }
+        )
     Public ReadOnly Property configuration As Dictionary(Of String, MaybeOption(Of String)) =
         New Dictionary(Of String, MaybeOption(Of String))
 
@@ -26,7 +28,7 @@ Public Module ConfigManager
     Private Function loadSetting(key As String,
                          Optional verify As Predicate(Of String) = Nothing) As MaybeOption(Of String)
         Dim setting = MaybeOption.create(appSettings.Settings.Item(key)) _
-            .map(Of String)(Function(x) x.Value)
+            .map(Function(x) x.Value)
         If Not IsNothing(verify) Then
             setting = setting.filter(verify)
         End If

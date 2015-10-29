@@ -9,21 +9,24 @@ Partial Public Class DB
                 Throw New ArgumentException("Password must be in plaintext!")
             End If
             Try
-                Dim user As User = New User()
-                user.userName = userToAdd.userName
-                user.password = userToAdd.password
-                user.permmission = userToAdd.accessLevel
-                user.Insert()
-                Return New Some(Of IUser)(user)
-            Catch ex As Exception
-                Return New None(Of IUser)
+                If User.TryGet("username", userToAdd.userName) IsNot Nothing Then
+                    Throw New ArgumentException("Duplicate User!")
+                End If
+                Dim newUser As User = New User()
+                    newUser.userName = userToAdd.userName
+                    newUser.password = userToAdd.password
+                    newUser.permmission = userToAdd.accessLevel
+                    newUser.Insert()
+                    Return New Some(Of IUser)(newUser)
+                Catch ex As Exception
+                    Return New None(Of IUser)
             End Try
         End Function
 
         Public Function delUser(toDel As IUser) As Boolean Implements IDataManager(Of IUser).removeEntry
             Dim theUser As User
             theUser = User.TryGet("username", toDel.userName)
-            If IsNothing(theUser) And toDel.id >= 0 Then
+            If IsNothing(theUser) AndAlso toDel.id >= 0 Then
                 theUser = User.TryGet(toDel.id)
             End If
             If IsNothing(theUser) Then Return False

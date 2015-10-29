@@ -23,19 +23,19 @@ Public Class TextBoxEx
 
     Protected Overrides Sub WndProc(ByRef msg As Message)
         MyBase.WndProc(msg)
-        If (_phShow Or Me.CustomBorder) And msg.Msg = &HF Then
+        If (_phShow Or Me.CustomBorder) AndAlso msg.Msg = &HF Then
             Dim hdc = GetWindowDC(Me.Handle)
             Using g = Graphics.FromHdc(hdc)
                 Dim rect = New Rectangle(Me.ClientRectangle.Location, Me.ClientRectangle.Size)
-                rect.X = (Me.Width - Me.ClientRectangle.Width) / 2
-                rect.Y = (Me.Height - Me.ClientRectangle.Height) / 2
+                rect.X = CInt((Me.Width - Me.ClientRectangle.Width) / 2)
+                rect.Y = CInt((Me.Height - Me.ClientRectangle.Height) / 2)
                 If Me.CustomBorder Then
                     g.DrawRectangle(New Pen(Me.CustomBorderColor), New Rectangle(0, 0, Me.Width - 1, Me.Height - 1))
                 End If
                 If _phShow Then
                     g.FillRectangle(New SolidBrush(Me.BackColor), rect)
                     Dim sf = New StringFormat()
-                    sf.Alignment = Me.TextAlign
+                    sf.Alignment = CType(Me.TextAlign, StringAlignment)
                     sf.LineAlignment = StringAlignment.Center
                     g.DrawString(Placeholder, Me.Font, New SolidBrush(PlaceholderColor), rect, sf)
                 End If

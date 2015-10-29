@@ -4,8 +4,10 @@
     End Sub
 
     Private Sub onLoginClick(sender As Object, e As EventArgs) Handles btnLogin.Click
-        Dim userCheckResult = ConfigManager.dataManager.userManager _
-            .checkUser(txtUsername.Text, txtPassword.Text)
+        Dim matchingUsernames = ConfigManager.dataManager.userManager _
+            .search(New PlainUser(username:=txtUsername.Text), False)
+        Dim userCheckResult = matchingUsernames.Count = 1 AndAlso
+            matchingUsernames.Exists(Function(x) x.verifyPass(txtPassword.Text))
         If userCheckResult Then
             Me.DialogResult = DialogResult.OK
         Else

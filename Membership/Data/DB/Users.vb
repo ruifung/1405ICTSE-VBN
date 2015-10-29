@@ -20,7 +20,7 @@ Partial Public Class DB
         Public Shared Function TryGet(id As Integer) As User
             Return User.Find(Of User)(id)
         End Function
-        Public Shared Function TryGet(field As String, value As Object)
+        Public Shared Function TryGet(field As String, value As Object) As User
             Return User.Find(Of User)(field, value)
         End Function
         Public Overrides Function table() As Table
@@ -29,13 +29,13 @@ Partial Public Class DB
         Public ReadOnly Property userID As Integer _
             Implements IUser.id
             Get
-                Return Me("id")
+                Return CInt(Me("id"))
             End Get
         End Property
         Public Property userName As String _
             Implements IUser.userName
             Get
-                Return Me("username")
+                Return CType(Me("username"), String)
             End Get
             Set(value As String)
                 Me("username") = value
@@ -44,7 +44,7 @@ Partial Public Class DB
         Public Property password As String _
             Implements IUser.password
             Get
-                Return Convert.ToBase64String(Me("authkey"))
+                Return Convert.ToBase64String(CType(Me("authkey"), Byte()))
             End Get
             Set(value As String)
                 Dim pwd = Encoding.UTF8.GetBytes(value.ToCharArray())
@@ -60,7 +60,7 @@ Partial Public Class DB
         End Property
         Public Property permmission As Integer Implements IUser.accessLevel
             Get
-                Return Me("permission")
+                Return CInt(Me("permission"))
             End Get
             Set(value As Integer)
                 Me("permisson") = value
@@ -69,7 +69,7 @@ Partial Public Class DB
         Public Function validate(pass As String) As Boolean Implements IUser.verifyPass
             Dim pwd = Encoding.UTF8.GetBytes(pass.ToCharArray())
             Dim sha = SHA256Managed.Create()
-            Return sha.ComputeHash(pwd).SequenceEqual(Me("authkey"))
+            Return sha.ComputeHash(pwd).SequenceEqual(CType(Me("authkey"), IEnumerable(Of Byte)))
         End Function
     End Class
 End Class

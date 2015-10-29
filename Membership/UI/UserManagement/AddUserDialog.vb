@@ -8,7 +8,7 @@
     End Sub
 
 
-    Sub onBtnClick(sender As Button, e As EventArgs) Handles btnAdd.Click
+    Sub onBtnClick(sender As Object, e As EventArgs) Handles btnAdd.Click
         Me.DialogResult = DialogResult.OK
     End Sub
 End Class

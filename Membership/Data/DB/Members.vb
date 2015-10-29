@@ -26,12 +26,12 @@ Partial Public Class DB
         Private _photo As MaybeOption(Of Image) = New None(Of Image)
         Public ReadOnly Property id As Integer Implements IMember.id
             Get
-                Return Me("id")
+                Return CInt(Me("id"))
             End Get
         End Property
         Public Property firstName As String Implements IMember.firstName
             Get
-                Return Me("firstname")
+                Return CType(Me("firstname"), String)
             End Get
             Set(value As String)
                 Me("firstname") = value
@@ -39,7 +39,7 @@ Partial Public Class DB
         End Property
         Public Property lastName As String Implements IMember.lastName
             Get
-                Return Me("lastname")
+                Return CType(Me("lastname"), String)
             End Get
             Set(value As String)
                 Me("lastname") = value
@@ -47,7 +47,7 @@ Partial Public Class DB
         End Property
         Public Property membership As Integer Implements IMember.membershipTypeID
             Get
-                Return Me("membership")
+                Return CInt(Me("membership"))
             End Get
             Set(value As Integer)
                 Me("membership") = value
@@ -55,7 +55,7 @@ Partial Public Class DB
         End Property
         Public Property contact As String Implements IMember.contactNumber
             Get
-                Return Me("contact")
+                Return CType(Me("contact"), String)
             End Get
             Set(value As String)
                 If contactFilter.IsMatch(value) Then
@@ -67,7 +67,7 @@ Partial Public Class DB
         End Property
         Public Property email As String Implements IMember.email
             Get
-                Return Me("email")
+                Return CType(Me("email"), String)
             End Get
             Set(value As String)
                 If emailFilter.IsMatch(value) Then
@@ -92,8 +92,8 @@ Partial Public Class DB
                 _photo.forEach(Sub(x)
                                    Dim stream As MemoryStream = New MemoryStream()
                                    x.Save(stream, ImageFormat.Jpeg)
-                                   Dim bytes(stream.Length) As Byte
-                                   stream.Read(bytes, 0, stream.Length)
+                                   Dim bytes(CInt(stream.Length)) As Byte
+                                   stream.Read(bytes, 0, CInt(stream.Length))
                                    stream.Close()
                                    Me("photo") = bytes
                                End Sub)
@@ -101,7 +101,7 @@ Partial Public Class DB
         End Property
         Public Property activated As Boolean Implements IMember.isActive
             Get
-                Return Me("active") > 0
+                Return CInt(Me("active")) > 0
             End Get
             Set(value As Boolean)
                 Me("active") = If(value, 1, 0)

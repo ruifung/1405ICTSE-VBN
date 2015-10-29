@@ -1,5 +1,5 @@
 ﻿Public Module Program
-    Private running = True
+    Private running As Boolean = True
     Sub Main()
         Application.EnableVisualStyles()
         'Config Load.

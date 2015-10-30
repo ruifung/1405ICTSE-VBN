@@ -51,13 +51,21 @@ Public Module ConfigManager
 
     Private Sub initData()
         Try
-
-            If (configuration("DataMode").Equals("OLEDB-ACCESS")) Then
-                'Initialize oledb-access
-
-            Else
-                'Handle invalid db type.
-                Throw New InvalidOperationException("Invalid DB Type")
+            Dim dataMode = configuration("DataMode").getValue
+            Dim dataAuth = CBool(configuration("DataAuth").getValue)
+            If dataMode.Contains("OLEDB") Then
+                Dim csb = New OleDb.OleDbConnectionStringBuilder
+                csb.Add("Data Source", configuration("DataSource").getValue)
+                Select Case configuration("DataMode").getValue
+                    Case "OLEDB-ACCESS-JET"
+                        csb.Add("Provider", "Microsoft.Jet.OLEDB.4.0")
+                    Case "OLEDB-ACCESS-ACE"
+                        csb.Add("Provider", "Microsoft.ACE.OLEDB.12.0")
+                    Case Else
+                        Throw New Exception
+                End Select
+                'TODO: Add actual IDataStore implementation.
+                dataManager = New DataStoreManager(Nothing, csb)
             End If
         Catch ex As Exception
 
@@ -65,6 +73,5 @@ Public Module ConfigManager
     End Sub
 
     Sub init()
-
     End Sub
 End Module

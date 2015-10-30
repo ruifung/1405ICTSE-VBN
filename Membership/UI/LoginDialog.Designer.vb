@@ -25,8 +25,8 @@ Partial Class LoginDialog
         Me.Logo = New System.Windows.Forms.PictureBox()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
-        Me.txtUsername = New Membership.TextBoxEx()
-        Me.txtPassword = New Membership.TextBoxEx()
+        Me.txtUsername = New TextBoxEx
+        Me.txtPassword = New TextBoxEx
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '

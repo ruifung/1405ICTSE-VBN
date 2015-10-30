@@ -87,6 +87,7 @@
     <Compile Include="API\Members\EnumMemberPrivileges.vb" />
     <Compile Include="API\Members\IMember.vb" />
     <Compile Include="API\Data\IDataManager.vb" />
+    <Compile Include="API\Members\IMemberTransaction.vb" />
     <Compile Include="API\Members\MembershipType.vb" />
     <Compile Include="API\Users\IUser.vb" />
     <Compile Include="API\Data\DataStoreManager.vb" />
@@ -102,8 +103,17 @@
     <Compile Include="Data\DB\UserManager.vb" />
     <Compile Include="Data\DB\Users.vb" />
     <Compile Include="Data\PlainUser.vb" />
+    <Compile Include="Exceptions\DataSourceException.vb" />
+    <Compile Include="Exceptions\InvalidSettingException.vb" />
+    <Compile Include="Exceptions\SettingsErrorException.vb" />
     <Compile Include="Program.vb" />
     <Compile Include="Config\ConfigManager.vb" />
+    <Compile Include="UI\DBConfigDialog.Designer.vb">
+      <DependentUpon>DBConfigDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\DBConfigDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\LoginDialog.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +151,9 @@
     <Compile Include="Util\MaybeOption.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="UI\DBConfigDialog.resx">
+      <DependentUpon>DBConfigDialog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\LoginDialog.resx">
       <DependentUpon>LoginDialog.vb</DependentUpon>
     </EmbeddedResource>

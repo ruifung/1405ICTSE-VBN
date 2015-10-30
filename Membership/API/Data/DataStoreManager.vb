@@ -37,6 +37,18 @@
         End Set
     End Property
 
+    Private transactionManagerVar As IDataManager(Of IMemberTransaction)
+    Property transactionManager As IDataManager(Of IMemberTransaction
+        Get
+            Return transactionManagerVar
+        End Get
+        Set(value As IDataManager(Of IMemberTransaction)
+            If (Not IsNothing(transactionManagerVar)) Then
+                transactionManagerVar = value
+            End If
+        End Set
+    End Property
+
     Sub New(dataStore As IDataStore, Optional dataStoreParam As Object = Nothing)
         Me.dataStore = dataStore
         dataStore.init(Me, MaybeOption.create(dataStoreParam))

@@ -5,6 +5,7 @@ Public Module ConfigManager
     Private appSettings As AppSettingsSection
     Private noneString As None(Of String) = New None(Of String)
     Public dataManager As DataStoreManager
+    Public currentUser As IUser
 
     ''' <summary>
     ''' Dictionary of all configuration keys.
@@ -32,21 +33,24 @@ Public Module ConfigManager
         If Not IsNothing(verify) Then
             setting = setting.filter(verify)
         End If
-        Return setting
+        If (setting.isDefined) Then
+            Return setting
+        Else
+            Throw New InvalidSettingException(key)
+        End If
     End Function
 
     Private Sub loadSettings()
         Try
-            appSettings = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings
-        Catch ex As ConfigurationErrorsException
-            MsgBox(ex.ToString, MsgBoxStyle.Critical, "Critical Error!")
-            Program.quit()
-        End Try
+            For Each k In configuration.Keys
+                Dim val = loadSetting(k)
+                val.forEach(Sub(x) configuration(k) = val)
+            Next
+        Catch ex As InvalidSettingException
 
-        For Each k In configuration.Keys
-            Dim val = loadSetting(k)
-            val.forEach(Sub(x) configuration(k) = val)
-        Next
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub initData()
@@ -65,13 +69,22 @@ Public Module ConfigManager
                         Throw New Exception
                 End Select
                 'TODO: Add actual IDataStore implementation.
-                dataManager = New DataStoreManager(Nothing, csb)
+                dataManager = New DataStoreManager(New DB.DataStore, csb)
             End If
         Catch ex As Exception
-
+            Throw New DataSourceException
         End Try
     End Sub
 
     Sub init()
+        Try
+            appSettings = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings
+        Catch ex As ConfigurationErrorsException
+            MsgBox(ex.ToString, MsgBoxStyle.Critical, "Critical Error!")
+            Program.quit()
+        End Try
+
+        loadSettings()
+        initData()
     End Sub
 End Module

@@ -7,18 +7,27 @@
         While running
             Dim login = New LoginDialog
             Try
-                login.ShowDialog()
-                If login.DialogResult = DialogResult.OK Then
+                If IsNothing(ConfigManager.currentUser) Then
+                    login.ShowDialog()
+                    If login.DialogResult = DialogResult.OK Then
+                        ConfigManager.currentUser = login.user
+                    ElseIf login.DialogResult = DialogResult.Cancel
+                        quit()
+                    End If
+                Else
                     Application.Run(New ApplicationContext(New MainForm))
-                ElseIf login.DialogResult = DialogResult.Cancel
-                    quit()
                 End If
+
             Finally
                 login.Dispose()
             End Try
         End While
     End Sub
 
+    Public Sub logout()
+        ConfigManager.currentUser = Nothing
+        Application.Exit()
+    End Sub
 
     Public Sub quit()
         Try

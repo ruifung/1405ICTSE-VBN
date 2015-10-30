@@ -96,6 +96,7 @@
     <Compile Include="Controls\TextBoxEx.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Data\DB\DataStore.vb" />
     <Compile Include="Data\DB\DB.vb" />
     <Compile Include="Data\DB\Members.vb" />
     <Compile Include="Data\DB\UserManager.vb" />

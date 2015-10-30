@@ -91,6 +91,12 @@
     <Compile Include="API\Members\MembershipType.vb" />
     <Compile Include="API\Users\IUser.vb" />
     <Compile Include="API\Data\DataStoreManager.vb" />
+    <Compile Include="Controls\MemberDetails.Designer.vb">
+      <DependentUpon>MemberDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MemberDetails.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\TextBoxEx.Designer.vb">
       <DependentUpon>TextBoxEx.vb</DependentUpon>
     </Compile>
@@ -142,15 +148,18 @@
     <Compile Include="UI\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UserManagement\AddUserDialog.Designer.vb">
-      <DependentUpon>AddUserDialog.vb</DependentUpon>
+    <Compile Include="UI\UserManagement\ModifyMemberDialog.Designer.vb">
+      <DependentUpon>ModifyMemberDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserManagement\AddUserDialog.vb">
+    <Compile Include="UI\UserManagement\ModifyMemberDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Util\MaybeOption.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\MemberDetails.resx">
+      <DependentUpon>MemberDetails.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\DBConfigDialog.resx">
       <DependentUpon>DBConfigDialog.vb</DependentUpon>
     </EmbeddedResource>
@@ -166,8 +175,8 @@
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UserManagement\AddUserDialog.resx">
-      <DependentUpon>AddUserDialog.vb</DependentUpon>
+    <EmbeddedResource Include="UI\UserManagement\ModifyMemberDialog.resx">
+      <DependentUpon>ModifyMemberDialog.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

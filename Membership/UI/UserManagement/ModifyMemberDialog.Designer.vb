@@ -22,13 +22,18 @@ Partial Class ModifyMemberDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim None_11 As Membership.None(Of System.Drawing.Image) = New Membership.None(Of System.Drawing.Image)()
+        Dim None_12 As Membership.None(Of System.Drawing.Image) = New Membership.None(Of System.Drawing.Image)()
         Me.tabView = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.memberDetailsView = New Membership.MemberDetails()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.MemberDetails1 = New Membership.MemberDetails()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnAccept = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.tabView.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabView
@@ -43,7 +48,9 @@ Partial Class ModifyMemberDialog
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.MemberDetails1)
+        Me.TabPage1.Controls.Add(Me.btnCancel)
+        Me.TabPage1.Controls.Add(Me.btnAccept)
+        Me.TabPage1.Controls.Add(Me.memberDetailsView)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -52,8 +59,29 @@ Partial Class ModifyMemberDialog
         Me.TabPage1.Text = "Member Profile"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'memberDetailsView
+        '
+        Me.memberDetailsView.address = Nothing
+        Me.memberDetailsView.BoundMember = Nothing
+        Me.memberDetailsView.contactNumber = ""
+        Me.memberDetailsView.dob = New Date(2015, 10, 31, 12, 18, 58, 628)
+        Me.memberDetailsView.email = ""
+        Me.memberDetailsView.firstName = ""
+        Me.memberDetailsView.gender = Membership.Gender.NONE
+        Me.memberDetailsView.id = 0
+        Me.memberDetailsView.image = Nothing
+        Me.memberDetailsView.isActive = False
+        Me.memberDetailsView.lastName = ""
+        Me.memberDetailsView.Location = New System.Drawing.Point(12, 12)
+        Me.memberDetailsView.membershipTypeID = 0
+        Me.memberDetailsView.Name = "memberDetailsView"
+        Me.memberDetailsView.photo = None_12
+        Me.memberDetailsView.Size = New System.Drawing.Size(442, 303)
+        Me.memberDetailsView.TabIndex = 0
+        '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.DataGridView1)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -62,22 +90,31 @@ Partial Class ModifyMemberDialog
         Me.TabPage2.Text = "Transactions"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'MemberDetails1
+        'btnCancel
         '
-        Me.MemberDetails1.contactNumber = ""
-        Me.MemberDetails1.dob = New Date(2015, 10, 31, 12, 18, 58, 628)
-        Me.MemberDetails1.email = ""
-        Me.MemberDetails1.firstName = ""
-        Me.MemberDetails1.gender = Membership.Gender.MALE
-        Me.MemberDetails1.id = 0
-        Me.MemberDetails1.isActive = False
-        Me.MemberDetails1.lastName = ""
-        Me.MemberDetails1.Location = New System.Drawing.Point(12, 12)
-        Me.MemberDetails1.membershipTypeID = 0
-        Me.MemberDetails1.Name = "MemberDetails1"
-        Me.MemberDetails1.photo = None_11
-        Me.MemberDetails1.Size = New System.Drawing.Size(442, 303)
-        Me.MemberDetails1.TabIndex = 0
+        Me.btnCancel.Location = New System.Drawing.Point(291, 297)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 61
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnAccept
+        '
+        Me.btnAccept.Location = New System.Drawing.Point(372, 297)
+        Me.btnAccept.Name = "btnAccept"
+        Me.btnAccept.Size = New System.Drawing.Size(75, 23)
+        Me.btnAccept.TabIndex = 60
+        Me.btnAccept.Text = "Save"
+        Me.btnAccept.UseVisualStyleBackColor = True
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(4, 3)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(448, 315)
+        Me.DataGridView1.TabIndex = 0
         '
         'ModifyMemberDialog
         '
@@ -88,9 +125,11 @@ Partial Class ModifyMemberDialog
         Me.ClientSize = New System.Drawing.Size(468, 352)
         Me.Controls.Add(Me.tabView)
         Me.Name = "ModifyMemberDialog"
-        Me.Text = "ModifyMemberDialog"
+        Me.Text = "Member Profile"
         Me.tabView.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -98,5 +137,8 @@ Partial Class ModifyMemberDialog
     Friend WithEvents tabView As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents MemberDetails1 As MemberDetails
+    Friend WithEvents memberDetailsView As MemberDetails
+    Friend WithEvents btnCancel As Button
+    Friend WithEvents btnAccept As Button
+    Friend WithEvents DataGridView1 As DataGridView
 End Class

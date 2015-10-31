@@ -6,8 +6,8 @@ Public Class MemberDetails
     Implements IMember
 
     Private selfBind As BindingSource = New BindingSource With {.DataSource = Me}
-    Private memberBinding As BindingSource
-    Private propBindings As List(Of Binding)
+    Private memberBinding As BindingSource = New BindingSource
+    Private propBindings As List(Of Binding) = New List(Of Binding)
 
     Overloads Property Enabled As Boolean
         Get
@@ -87,37 +87,55 @@ Public Class MemberDetails
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Dim genderDisplay = New List(Of DisplayGender)
-        For Each x As Gender In [Enum].GetValues(GetType(Gender))
-            genderDisplay.Add(New DisplayGender(x, If(x = Gender.NONE, String.Empty, x.ToString)))
-        Next
-        cbGender.DataSource = genderDisplay
-        cbGender.ValueMember = "gender"
-        cbGender.DisplayMember = "display"
+        Me.clear()
+        ' So the designer doesn't throw a big bunch of errors!
+        If Not Util.IsInDesignMode Then
+            Dim genderDisplay = New List(Of DisplayGender)
+            For Each x As Gender In [Enum].GetValues(GetType(Gender))
+                genderDisplay.Add(New DisplayGender(x, If(x = Gender.NONE, String.Empty, x.ToString)))
+            Next
+            cbGender.DataSource = genderDisplay
+            cbGender.ValueMember = "gender"
+            cbGender.DisplayMember = "display"
 
-        cbMembershipType.DataSource = New BindingSource With {.DataSource = dataManager.memberTypeManager.list}
-        cbMembershipType.DisplayMember = "typeName"
-        cbMembershipType.ValueMember = "typeID"
+            cbMembershipType.DataSource = New BindingSource With {.DataSource = dataManager.memberTypeManager.list}
+            cbMembershipType.DisplayMember = "typeName"
+            cbMembershipType.ValueMember = "typeID"
 
-        cbStatus.DataSource = New List(Of DisplayStatus) From {
-            New DisplayStatus(True, "Active"),
-            New DisplayStatus(False, "Inactive")
-        }
-        cbStatus.DisplayMember = "display"
-        cbStatus.ValueMember = "status"
+            cbStatus.DataSource = New List(Of DisplayStatus) From {
+                New DisplayStatus(True, "Active"),
+                New DisplayStatus(False, "Inactive")
+            }
+            cbStatus.DisplayMember = "display"
+            cbStatus.ValueMember = "status"
 
-        ' Bindings
-        txtID.DataBindings.Add("Text", selfBind, "id", True)
-        txtFName.DataBindings.Add("Text", selfBind, "firstName")
-        txtLName.DataBindings.Add("Text", selfBind, "lastName")
-        txtContact.DataBindings.Add("Text", selfBind, "contactNumber")
-        txtAddress.DataBindings.Add("Text", selfBind, "address")
-        txtEmail.DataBindings.Add("Text", selfBind, "email")
-        dtDOB.DataBindings.Add("Value", selfBind, "dob")
-        cbGender.DataBindings.Add("SelectedValue", selfBind, "gender")
-        cbMembershipType.DataBindings.Add("SelectedValue", selfBind, "membershipTypeID")
-        cbStatus.DataBindings.Add("SelectedValue", selfBind, "isActive")
-        pbPhoto.DataBindings.Add("Image", selfBind, "image")
+            ' Bindings
+            txtID.DataBindings.Add("Text", selfBind, "id", True)
+            txtFName.DataBindings.Add("Text", selfBind, "firstName")
+            txtLName.DataBindings.Add("Text", selfBind, "lastName")
+            txtContact.DataBindings.Add("Text", selfBind, "contactNumber")
+            txtAddress.DataBindings.Add("Text", selfBind, "address")
+            txtEmail.DataBindings.Add("Text", selfBind, "email")
+            dtDOB.DataBindings.Add("Value", selfBind, "dob")
+            cbGender.DataBindings.Add("SelectedValue", selfBind, "gender")
+            cbMembershipType.DataBindings.Add("SelectedValue", selfBind, "membershipTypeID")
+            cbStatus.DataBindings.Add("SelectedValue", selfBind, "isActive")
+            pbPhoto.DataBindings.Add("Image", selfBind, "image")
+        End If
+    End Sub
+
+    Sub clear()
+        id = -1
+        firstName = String.Empty
+        lastName = String.Empty
+        contactNumber = String.Empty
+        address = String.Empty
+        email = String.Empty
+        dob = New Date
+        gender = Gender.NONE
+        photo = New None(Of Image)
+        isActive = False
+        membershipTypeID = -1
     End Sub
 
     ' Container Classes for display.

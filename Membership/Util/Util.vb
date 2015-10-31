@@ -1,4 +1,5 @@
-﻿''' <summary>
+﻿Imports System.ComponentModel
+''' <summary>
 ''' Utility methods.
 ''' </summary>
 Module Util
@@ -27,5 +28,15 @@ Module Util
         Else
             Return Nothing
         End If
+    End Function
+
+    Function IsInDesignMode() As Boolean
+        Dim designMode = LicenseManager.UsageMode = LicenseUsageMode.Designtime
+        If Not designMode Then
+            Using proc = Process.GetCurrentProcess
+                Return proc.ProcessName.ToLowerInvariant.Contains("devenv")
+            End Using
+        End If
+        Return designMode
     End Function
 End Module

@@ -1,6 +1,7 @@
 ﻿Imports System.Text.RegularExpressions
 Imports System.Drawing.Imaging
 Imports System.IO
+Imports Membership
 
 Partial Public Class DB
     Public Shared MembersTable As Table
@@ -9,6 +10,8 @@ Partial Public Class DB
         MembersTable.Fields("id") = New Field(MDBType.AutoNumber)
         MembersTable.Fields("firstname") = New Field(MDBType.Text, 50)
         MembersTable.Fields("lastname") = New Field(MDBType.Text, 50)
+        MembersTable.Fields("dob") = New Field(MDBType.DateTime)
+        MembersTable.Fields("gender") = New Field(MDBType.Number)
         MembersTable.Fields("membership") = New Field(MDBType.Number)
         MembersTable.Fields("contact") = New Field(MDBType.Text, 15)
         MembersTable.Fields("email") = New Field(MDBType.Text, 50)
@@ -107,6 +110,25 @@ Partial Public Class DB
                 Me("active") = If(value, 1, 0)
             End Set
         End Property
+        'TODO: IMPLEMENT
+        Public Property dob As Date Implements IMember.dob
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Date)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property gender As Gender Implements IMember.gender
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Gender)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
         Public Overrides Function table() As Table
             Return MembersTable
         End Function

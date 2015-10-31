@@ -11,11 +11,11 @@
             Return id
         End Get
     End Property
-    ReadOnly typeName As String
-    ReadOnly registrationFees As Double
-    ReadOnly transferFees As Double
-    ReadOnly monthlyFees As Double
-    ReadOnly privilges As HashSet(Of EnumMemberPrivileges)
+    ReadOnly Property typeName As String
+    ReadOnly Property registrationFees As Double
+    ReadOnly Property transferFees As Double
+    ReadOnly Property monthlyFees As Double
+    ReadOnly Property privilges As HashSet(Of EnumMemberPrivileges)
 
     Sub New(name As String,
             registFees As Double, transferFees As Double,
@@ -26,4 +26,8 @@
         Me.monthlyFees = monthlyFees
         Me.privilges = privilges
     End Sub
+
+    Overrides Function ToString() As String
+        Return typeName
+    End Function
 End Class

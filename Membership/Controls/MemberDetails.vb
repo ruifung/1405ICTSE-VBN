@@ -3,6 +3,32 @@
 Public Class MemberDetails
     Implements IMember
 
+    Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+
+        Dim items = [Enum].GetValues(GetType(Gender))
+        Dim genderList = New List(Of Tuple(Of Gender, String))
+        For Each X As Gender In items
+            Dim str = X.ToString
+            str = String.Concat(str.Substring(0, 1).ToUpper, str.Substring(1).ToLower)
+            genderList.Add(Tuple.Create(X, str))
+        Next
+        Me.cbGender.DisplayMember = "Item2"
+        Me.cbGender.ValueMember = "Item1"
+
+        Me.cbMembershipType.DataSource = dataManager.memberTypeManager.list
+        Me.cbMembershipType.ValueMember = "typeID"
+    End Sub
+
+    Overrides Sub Refresh()
+        MyBase.Refresh()
+        Me.cbMembershipType.DataSource = dataManager.memberTypeManager.list
+    End Sub
+
     WriteOnly Property displayMember As IMember
         Set(member As IMember)
             Me.id = member.id
@@ -10,6 +36,8 @@ Public Class MemberDetails
             Me.lastName = member.lastName
             Me.contactNumber = member.contactNumber
             Me.email = member.email
+            Me.dob = member.dob
+            Me.gender = member.gender
             Me.photo = member.photo
             Me.isActive = member.isActive
             Me.membershipTypeID = member.membershipTypeID
@@ -27,9 +55,10 @@ Public Class MemberDetails
             txtFName.Enabled = value
             txtLName.Enabled = value
             txtEmail.Enabled = value
-            numAge.Enabled = value
+            dtDOB.Enabled = value
             cbGender.Enabled = value
             cbStatus.Enabled = value
+            cbMembershipType.Enabled = value
         End Set
     End Property
 
@@ -89,10 +118,18 @@ Public Class MemberDetails
 
     Public Property membershipTypeID As Integer Implements IMember.membershipTypeID
         Get
-            Throw New NotImplementedException()
+            Return CInt(cbMembershipType.SelectedValue)
         End Get
         Set(value As Integer)
-            Throw New NotImplementedException()
+            For i = 0 To cbMembershipType.Items.Count - 1
+                Dim item = CType(cbMembershipType.Items.Item(i), MembershipType)
+                If item.typeID = value Then
+                    cbMembershipType.SelectedIndex = i
+                    Return
+                End If
+                cbMembershipType.SelectedIndex = -1
+            Next
+
         End Set
     End Property
 
@@ -102,6 +139,30 @@ Public Class MemberDetails
         End Get
         Set(value As MaybeOption(Of Image))
             pbPhoto.Image = value.orNothing
+        End Set
+    End Property
+
+    Public Property dob As Date Implements IMember.dob
+        Get
+            Return dtDOB.Value
+        End Get
+        Set(value As Date)
+            dtDOB.Value = value
+        End Set
+    End Property
+
+    Public Property gender As Gender Implements IMember.gender
+        Get
+            Return CType(cbGender.SelectedValue, Gender)
+        End Get
+        Set(value As Gender)
+            For i = 0 To cbGender.Items.Count - 1
+                Dim item = CType(cbGender.Items.Item(i), Tuple(Of Gender, String))
+                If item.Item1.Equals(value) Then
+                    cbGender.SelectedIndex = i
+                End If
+                cbGender.SelectedIndex = -1
+            Next
         End Set
     End Property
 End Class

@@ -38,11 +38,11 @@
     End Property
 
     Private transactionManagerVar As IDataManager(Of IMemberTransaction)
-    Property transactionManager As IDataManager(Of IMemberTransaction
+    Property transactionManager As IDataManager(Of IMemberTransaction)
         Get
             Return transactionManagerVar
         End Get
-        Set(value As IDataManager(Of IMemberTransaction)
+        Set(value As IDataManager(Of IMemberTransaction))
             If (Not IsNothing(transactionManagerVar)) Then
                 transactionManagerVar = value
             End If

@@ -1,7 +1,7 @@
 ﻿Public Class InvalidSettingException
     Inherits ApplicationException
-    ReadOnly settingKey As String
-    Shadows ReadOnly InnerException As Exception
+    Public ReadOnly Property settingKey As String
+    Public Shadows ReadOnly InnerException As Exception
 
     Sub New(settingKey As String)
         Me.settingKey = settingKey

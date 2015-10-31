@@ -129,6 +129,15 @@ Partial Public Class DB
             End Set
         End Property
 
+        Public Property address As String Implements IMember.address
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As String)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
         Public Overrides Function table() As Table
             Return MembersTable
         End Function

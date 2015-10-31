@@ -18,8 +18,8 @@ Public Module ConfigManager
                 {"DataMode", True},
                 {"DataSource", True},
                 {"DataAuth", True},
-                {"DataUser", False},
-                {"DataPass", False}
+                {"DataUser", True},
+                {"DataPass", True}
             }
         )
     Public ReadOnly Property configuration As Dictionary(Of String, MaybeOption(Of String)) =
@@ -30,10 +30,9 @@ Public Module ConfigManager
                          Optional verify As Predicate(Of String) = Nothing) As MaybeOption(Of String)
         Dim setting = MaybeOption.create(appSettings.Settings.Item(key)) _
             .map(Function(x) x.Value)
-        If Not IsNothing(verify) Then
-            setting = setting.filter(verify)
-        End If
-        If (setting.isDefined) Then
+        Dim maybeVerify = MaybeOption.create(verify)
+        If If(configurationKeys(key), setting.isDefined, True) AndAlso
+                maybeVerify.forAll(Function(x) setting.forAll(Function(y) x(y))) Then
             Return setting
         Else
             Throw New InvalidSettingException(key)
@@ -41,16 +40,35 @@ Public Module ConfigManager
     End Function
 
     Private Sub loadSettings()
-        Try
-            For Each k In configuration.Keys
+        Dim errorFlagsB = ImmutableHashSet.CreateBuilder(Of ErrorFlags)
+        For Each k In configuration.Keys
+            Try
                 Dim val = loadSetting(k)
                 val.forEach(Sub(x) configuration(k) = val)
-            Next
-        Catch ex As InvalidSettingException
-
-        Catch ex As Exception
-
-        End Try
+            Catch ex As InvalidSettingException
+                'Load default setting for key?
+                Select Case ex.settingKey
+                    Case "DataMode"
+                        errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
+                    Case "DataSource"
+                        errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
+                    Case "DataAuth"
+                        errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
+                    Case "DataUser"
+                        errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
+                    Case "DataPass"
+                        errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
+                End Select
+                configuration(k) = New None(Of String)
+                Continue For
+            End Try
+        Next
+        Dim flags = errorFlagsB.ToImmutableHashSet
+        With flags
+            If .Contains(ErrorFlags.DATABASE_CONFIG) Then
+                Dim dbConfig = New DBConfigDialog
+            End If
+        End With
     End Sub
 
     Private Sub initData()
@@ -61,9 +79,9 @@ Public Module ConfigManager
                 Dim csb = New OleDb.OleDbConnectionStringBuilder
                 csb.Add("Data Source", configuration("DataSource").getValue)
                 Select Case configuration("DataMode").getValue
-                    Case "OLEDB-ACCESS-JET"
+                    Case DBModes.OLEDB_ACCESS_JET.ToString
                         csb.Add("Provider", "Microsoft.Jet.OLEDB.4.0")
-                    Case "OLEDB-ACCESS-ACE"
+                    Case DBModes.OLEDB_ACCESS_ACE.ToString
                         csb.Add("Provider", "Microsoft.ACE.OLEDB.12.0")
                     Case Else
                         Throw New Exception
@@ -87,4 +105,13 @@ Public Module ConfigManager
         loadSettings()
         initData()
     End Sub
+
+    Public Enum DBModes
+        OLEDB_ACCESS_JET
+        OLEDB_ACCESS_ACE
+    End Enum
+
+    Private Enum ErrorFlags
+        DATABASE_CONFIG
+    End Enum
 End Module

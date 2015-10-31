@@ -66,6 +66,7 @@ Partial Public Class DB
                 If entry.accessLevel > 0 Then
                     theUser.permmission = entry.accessLevel
                 End If
+                Return True
             Else
                 Throw New ArgumentException("User must either be a DB user, or a PlainText user.")
             End If

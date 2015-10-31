@@ -1,48 +1,13 @@
-﻿Imports Membership
+﻿Imports System.ComponentModel
+Imports System.Runtime.CompilerServices
+Imports Membership
 
 Public Class MemberDetails
     Implements IMember
 
-    Sub New()
-
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-
-        Dim items = [Enum].GetValues(GetType(Gender))
-        Dim genderList = New List(Of Tuple(Of Gender, String))
-        For Each X As Gender In items
-            Dim str = X.ToString
-            str = String.Concat(str.Substring(0, 1).ToUpper, str.Substring(1).ToLower)
-            genderList.Add(Tuple.Create(X, str))
-        Next
-        Me.cbGender.DisplayMember = "Item2"
-        Me.cbGender.ValueMember = "Item1"
-
-        Me.cbMembershipType.DataSource = dataManager.memberTypeManager.list
-        Me.cbMembershipType.ValueMember = "typeID"
-    End Sub
-
-    Overrides Sub Refresh()
-        MyBase.Refresh()
-        Me.cbMembershipType.DataSource = dataManager.memberTypeManager.list
-    End Sub
-
-    WriteOnly Property displayMember As IMember
-        Set(member As IMember)
-            Me.id = member.id
-            Me.firstName = member.firstName
-            Me.lastName = member.lastName
-            Me.contactNumber = member.contactNumber
-            Me.email = member.email
-            Me.dob = member.dob
-            Me.gender = member.gender
-            Me.photo = member.photo
-            Me.isActive = member.isActive
-            Me.membershipTypeID = member.membershipTypeID
-        End Set
-    End Property
+    Private selfBind As BindingSource = New BindingSource With {.DataSource = Me}
+    Private memberBinding As BindingSource
+    Private propBindings As List(Of Binding)
 
     Overloads Property Enabled As Boolean
         Get
@@ -62,107 +27,116 @@ Public Class MemberDetails
         End Set
     End Property
 
-    Public Property contactNumber As String Implements IMember.contactNumber
-        Get
-            Return txtContact.Text
-        End Get
-        Set(value As String)
-            txtContact.Text = value
-        End Set
-    End Property
-
-    Public Property email As String Implements IMember.email
-        Get
-            Return txtEmail.Text
-        End Get
-        Set(value As String)
-            txtEmail.Text = value
-        End Set
-    End Property
-
+    Public Property id As Integer Implements IDataElement.id
     Public Property firstName As String Implements IMember.firstName
-        Get
-            Return txtFName.Text
-        End Get
-        Set(value As String)
-            txtFName.Text = value
-        End Set
-    End Property
-
-    Public Shadows Property id As Integer Implements IDataElement.id
-        Get
-            Return CInt(txtID.Text)
-        End Get
-        Set(value As Integer)
-            txtID.Text = value.ToString
-        End Set
-    End Property
-
-    Public Property isActive As Boolean Implements IMember.isActive
-        Get
-            Return cbStatus.SelectedIndex = 0
-        End Get
-        Set(value As Boolean)
-            cbStatus.SelectedIndex = If(isActive, 0, 1)
-        End Set
-    End Property
-
     Public Property lastName As String Implements IMember.lastName
-        Get
-            Return txtLName.Text
-        End Get
-        Set(value As String)
-            txtLName.Text = value
-        End Set
-    End Property
-
-    Public Property membershipTypeID As Integer Implements IMember.membershipTypeID
-        Get
-            Return CInt(cbMembershipType.SelectedValue)
-        End Get
-        Set(value As Integer)
-            For i = 0 To cbMembershipType.Items.Count - 1
-                Dim item = CType(cbMembershipType.Items.Item(i), MembershipType)
-                If item.typeID = value Then
-                    cbMembershipType.SelectedIndex = i
-                    Return
-                End If
-                cbMembershipType.SelectedIndex = -1
-            Next
-
-        End Set
-    End Property
-
-    Public Property photo As MaybeOption(Of Image) Implements IMember.photo
-        Get
-            Return MaybeOption.create(pbPhoto.Image)
-        End Get
-        Set(value As MaybeOption(Of Image))
-            pbPhoto.Image = value.orNothing
-        End Set
-    End Property
-
+    Public Property contactNumber As String Implements IMember.contactNumber
+    Public Property address As String Implements IMember.address
+    Public Property email As String Implements IMember.email
     Public Property dob As Date Implements IMember.dob
+    Public Property gender As Gender Implements IMember.gender
+    Public Property photo As MaybeOption(Of Image) Implements IMember.photo
+    Public Property isActive As Boolean Implements IMember.isActive
+    Public Property membershipTypeID As Integer Implements IMember.membershipTypeID
+
+    ''' <summary>
+    ''' Helper property for data binding.
+    ''' </summary>
+    Public Property image As Image
         Get
-            Return dtDOB.Value
+            Return photo.orNothing
         End Get
-        Set(value As Date)
-            dtDOB.Value = value
+        Set(value As Image)
+            photo = MaybeOption.create(value)
         End Set
     End Property
 
-    Public Property gender As Gender Implements IMember.gender
+    Public Property BoundMember As IMember
         Get
-            Return CType(cbGender.SelectedValue, Gender)
+            Return CType(memberBinding.DataSource, IMember)
         End Get
-        Set(value As Gender)
-            For i = 0 To cbGender.Items.Count - 1
-                Dim item = CType(cbGender.Items.Item(i), Tuple(Of Gender, String))
-                If item.Item1.Equals(value) Then
-                    cbGender.SelectedIndex = i
-                End If
-                cbGender.SelectedIndex = -1
-            Next
+        Set(value As IMember)
+            If value Is Nothing AndAlso BoundMember IsNot Nothing Then
+                propBindings.ForEach(Sub(x) Me.DataBindings.Remove(x))
+                propBindings.Clear()
+            ElseIf value IsNot Nothing AndAlso BoundMember Is Nothing Then
+                Dim m = DataSourceUpdateMode.OnPropertyChanged
+                With propBindings
+                    .Add(New Binding("id", memberBinding, "id", False, m))
+                    .Add(New Binding("firstName", memberBinding, "firstName", False, m))
+                    .Add(New Binding("lastName", memberBinding, "lastName", False, m))
+                    .Add(New Binding("contactNumber", memberBinding, "contactNumber", False, m))
+                    .Add(New Binding("address", memberBinding, "address", False, m))
+                    .Add(New Binding("email", memberBinding, "email", False, m))
+                    .Add(New Binding("dob", memberBinding, "dob", False, m))
+                    .Add(New Binding("gender", memberBinding, "gender", False, m))
+                    .Add(New Binding("photo", memberBinding, "photo", False, m))
+                    .Add(New Binding("isActive", memberBinding, "isActive", False, m))
+                    .Add(New Binding("membershipTypeID", memberBinding, "membershipTypeID", False, m))
+                End With
+                For Each x In propBindings
+                    Me.DataBindings.Add(x)
+                Next
+            End If
+            memberBinding.DataSource = value
         End Set
     End Property
+
+    Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        Dim genderDisplay = New List(Of DisplayGender)
+        For Each x As Gender In [Enum].GetValues(GetType(Gender))
+            genderDisplay.Add(New DisplayGender(x, If(x = Gender.NONE, String.Empty, x.ToString)))
+        Next
+        cbGender.DataSource = genderDisplay
+        cbGender.ValueMember = "gender"
+        cbGender.DisplayMember = "display"
+
+        cbMembershipType.DataSource = New BindingSource With {.DataSource = dataManager.memberTypeManager.list}
+        cbMembershipType.DisplayMember = "typeName"
+        cbMembershipType.ValueMember = "typeID"
+
+        cbStatus.DataSource = New List(Of DisplayStatus) From {
+            New DisplayStatus(True, "Active"),
+            New DisplayStatus(False, "Inactive")
+        }
+        cbStatus.DisplayMember = "display"
+        cbStatus.ValueMember = "status"
+
+        ' Bindings
+        txtID.DataBindings.Add("Text", selfBind, "id", True)
+        txtFName.DataBindings.Add("Text", selfBind, "firstName")
+        txtLName.DataBindings.Add("Text", selfBind, "lastName")
+        txtContact.DataBindings.Add("Text", selfBind, "contactNumber")
+        txtAddress.DataBindings.Add("Text", selfBind, "address")
+        txtEmail.DataBindings.Add("Text", selfBind, "email")
+        dtDOB.DataBindings.Add("Value", selfBind, "dob")
+        cbGender.DataBindings.Add("SelectedValue", selfBind, "gender")
+        cbMembershipType.DataBindings.Add("SelectedValue", selfBind, "membershipTypeID")
+        cbStatus.DataBindings.Add("SelectedValue", selfBind, "isActive")
+        pbPhoto.DataBindings.Add("Image", selfBind, "image")
+    End Sub
+
+    ' Container Classes for display.
+
+    Private Class DisplayGender
+        Property gender As Gender
+        Property display As String
+        Sub New(g As Gender, d As String)
+            Me.gender = g
+            Me.display = d
+        End Sub
+    End Class
+
+    Private Class DisplayStatus
+        Property status As Boolean
+        Property display As String
+        Sub New(b As Boolean, d As String)
+            Me.status = b
+            Me.display = d
+        End Sub
+    End Class
 End Class

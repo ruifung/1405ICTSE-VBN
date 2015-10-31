@@ -39,18 +39,6 @@ Public Class MemberDetails
     Public Property isActive As Boolean Implements IMember.isActive
     Public Property membershipTypeID As Integer Implements IMember.membershipTypeID
 
-    ''' <summary>
-    ''' Helper property for data binding.
-    ''' </summary>
-    Public Property image As Image
-        Get
-            Return photo.orNothing
-        End Get
-        Set(value As Image)
-            photo = MaybeOption.create(value)
-        End Set
-    End Property
-
     Public Property BoundMember As IMember
         Get
             Return CType(memberBinding.DataSource, IMember)
@@ -110,7 +98,18 @@ Public Class MemberDetails
             cbStatus.ValueMember = "status"
 
             ' Bindings
-            txtID.DataBindings.Add("Text", selfBind, "id", True)
+            Dim binding As Binding
+            binding = New Binding("Text", selfBind, "id", True)
+            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs) e.Value = e.Value.ToString
+            AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
+                                          Dim tID As Integer
+                                          If Integer.TryParse(CType(e.Value, String), tID) Then
+                                              e.Value = tID
+                                          Else
+                                              e.Value = -1
+                                          End If
+                                      End Sub
+            txtID.DataBindings.Add(binding)
             txtFName.DataBindings.Add("Text", selfBind, "firstName")
             txtLName.DataBindings.Add("Text", selfBind, "lastName")
             txtContact.DataBindings.Add("Text", selfBind, "contactNumber")
@@ -118,9 +117,48 @@ Public Class MemberDetails
             txtEmail.DataBindings.Add("Text", selfBind, "email")
             dtDOB.DataBindings.Add("Value", selfBind, "dob")
             cbGender.DataBindings.Add("SelectedValue", selfBind, "gender")
-            cbMembershipType.DataBindings.Add("SelectedValue", selfBind, "membershipTypeID")
-            cbStatus.DataBindings.Add("SelectedValue", selfBind, "isActive")
-            pbPhoto.DataBindings.Add("Image", selfBind, "image")
+            binding = New Binding("SelectedValue", selfBind, "isActive", True)
+            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
+                                           e.Value = If(CBool(e.Value), 1, 0)
+                                       End Sub
+            AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
+                                          Select Case CInt(e.Value)
+                                              Case 0
+                                                  e.Value = False
+                                              Case 1
+                                                  e.Value = True
+                                          End Select
+                                      End Sub
+            cbStatus.DataBindings.Add(binding)
+            binding = New Binding("SelectedIndex", selfBind, "membershipTypeID", True)
+            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
+                                           Dim tID = CInt(e.Value)
+                                           If tID >= 0 Then
+                                               For x = 0 To cbMembershipType.Items.Count - 1
+                                                   If CType(cbMembershipType.Items(x), MembershipType).typeID = tID Then
+                                                       e.Value = x
+                                                       Exit Sub
+                                                   End If
+                                               Next
+                                           End If
+                                           e.Value = -1
+                                       End Sub
+            AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
+                                          Dim tID = CInt(e.Value)
+                                          If tID >= 0 Then
+                                              e.Value = CType(cbMembershipType.Items(tID), MembershipType).typeID
+                                          End If
+                                          e.Value = -1
+                                      End Sub
+            cbMembershipType.DataBindings.Add(binding)
+            binding = New Binding("Image", selfBind, "photo", True, DataSourceUpdateMode.OnPropertyChanged)
+            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
+                                           e.Value = CType(e.Value, MaybeOption(Of Image)).orNothing
+                                       End Sub
+            AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
+                                          e.Value = MaybeOption.create(CType(e.Value, Image))
+                                      End Sub
+            pbPhoto.DataBindings.Add(binding)
         End If
     End Sub
 
@@ -150,10 +188,10 @@ Public Class MemberDetails
     End Class
 
     Private Class DisplayStatus
-        Property status As Boolean
+        Property status As Integer
         Property display As String
         Sub New(b As Boolean, d As String)
-            Me.status = b
+            Me.status = If(b, 1, 0)
             Me.display = d
         End Sub
     End Class

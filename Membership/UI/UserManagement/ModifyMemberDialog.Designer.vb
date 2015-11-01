@@ -69,7 +69,6 @@ Partial Class ModifyMemberDialog
         Me.memberDetailsView.firstName = ""
         Me.memberDetailsView.gender = Membership.Gender.NONE
         Me.memberDetailsView.id = 0
-        Me.memberDetailsView.image = Nothing
         Me.memberDetailsView.isActive = False
         Me.memberDetailsView.lastName = ""
         Me.memberDetailsView.Location = New System.Drawing.Point(12, 12)

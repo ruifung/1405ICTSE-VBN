@@ -38,6 +38,7 @@ Public Class MemberDetails
     Public Property photo As MaybeOption(Of Image) Implements IMember.photo
     Public Property isActive As Boolean Implements IMember.isActive
     Public Property membershipTypeID As Integer Implements IMember.membershipTypeID
+    Public noIDString As String = "*new*"
 
     Public Property BoundMember As IMember
         Get
@@ -100,10 +101,14 @@ Public Class MemberDetails
             ' Bindings
             Dim binding As Binding
             binding = New Binding("Text", selfBind, "id", True)
-            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs) e.Value = e.Value.ToString
+            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
+                                           e.Value = If(CInt(e.Value) >= 0, e.Value.ToString, noIDString)
+                                       End Sub
             AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
                                           Dim tID As Integer
-                                          If Integer.TryParse(CType(e.Value, String), tID) Then
+                                          If CStr(e.Value) = noIDString Then
+                                              e.Value = -1
+                                          ElseIf Integer.TryParse(CStr(e.Value), tID) Then
                                               e.Value = tID
                                           Else
                                               e.Value = -1

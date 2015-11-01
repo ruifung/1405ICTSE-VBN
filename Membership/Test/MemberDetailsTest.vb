@@ -19,13 +19,16 @@ Public Class MemberDetailsTest
             .isActive = True,
             .lastName = "MyLastName",
             .membershipTypeID = -1,
-            .photo = New None(Of Image)
+            .photo = New None(Of Image),
+            .id = (New Random).Next()
         }
         MemberDetails1.BoundMember = member
+        MemberDetails2.BoundMember = member
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         MemberDetails1.BoundMember = Nothing
+        MemberDetails2.BoundMember = Nothing
     End Sub
 
     Private Class TestMember
@@ -36,7 +39,7 @@ Public Class MemberDetailsTest
         Public Property email As String Implements IMember.email
         Public Property firstName As String Implements IMember.firstName
         Public Property gender As Gender Implements IMember.gender
-        Public ReadOnly Property id As Integer Implements IDataElement.id
+        Public Property id As Integer Implements IDataElement.id
         Public Property isActive As Boolean Implements IMember.isActive
         Public Property lastName As String Implements IMember.lastName
         Public Property membershipTypeID As Integer Implements IMember.membershipTypeID

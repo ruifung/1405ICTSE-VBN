@@ -3,8 +3,11 @@
     Sub Main()
         Application.EnableVisualStyles()
         'Config Load.
-        ConfigManager.init()
+        'ConfigManager.init()
         While running
+            Dim test = New MemberDetailsTest
+            test.ShowDialog()
+            Exit While
             Dim login = New LoginDialog
             Try
                 If IsNothing(ConfigManager.currentUser) Then

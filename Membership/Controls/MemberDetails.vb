@@ -210,12 +210,13 @@ Public Class MemberDetails
             cbGender.ValueMember = "gender"
             cbGender.DisplayMember = "display"
 
-            Try
-                cbMembershipType.DataSource = New BindingSource With {.DataSource = dataManager.memberTypeManager.list}
-                cbMembershipType.DisplayMember = "typeName"
-                cbMembershipType.ValueMember = "typeID"
-            Catch ex As Exception
-            End Try
+            cbMembershipType.DataSource = New BindingSource With {
+                .DataSource = MaybeOption.create(Util.exec(dataManager, Function(x) x.memberTypeManager)) _
+                    .map(Function(x) x.list) _
+                    .getOrAlt(New List(Of MembershipType))
+            }
+            cbMembershipType.DisplayMember = "typeName"
+            cbMembershipType.ValueMember = "typeID"
 
             cbStatus.DataSource = New List(Of DisplayStatus) From {
                 New DisplayStatus(True, "Active"),

@@ -348,7 +348,6 @@ Public Class MemberDetails
     End Sub
 
     ' Container Classes for display.
-
     Private Class DisplayGender
         Property gender As Gender
         Property display As String

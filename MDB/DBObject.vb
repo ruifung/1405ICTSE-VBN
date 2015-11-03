@@ -18,7 +18,7 @@ Public MustInherit Class DBObject
         If success Then
             Dim keys As List(Of String) = obj.table.Fields.Keys.ToList()
             For i As Integer = 0 To keys.Count - 1
-                obj(keys(i)) = reader(i)
+                obj(keys(i)) = If(IsDBNull(reader(i)), Nothing, reader(i))
             Next
         End If
         reader.Close()

@@ -15,7 +15,7 @@ Public Class DBList(Of T As DBObject)
             Dim obj As DBObject = DirectCast(Activator.CreateInstance(GetType(T)), DBObject)
             Dim keys As List(Of String) = obj.table.Fields.Keys.ToList()
             For i As Integer = 0 To keys.Count - 1
-                obj(keys(i)) = reader(i)
+                obj(keys(i)) = If(IsDBNull(reader(i)), Nothing, reader(i))
             Next
             list.Add(DirectCast(obj, T))
         End While

@@ -101,6 +101,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Data\Database\DataStore.vb" />
+    <Compile Include="Data\Database\MemberManager.vb" />
     <Compile Include="Data\Database\Members.vb" />
     <Compile Include="Data\Database\Memberships.vb" />
     <Compile Include="Data\Database\PlainMember.vb" />

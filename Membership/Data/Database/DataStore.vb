@@ -9,8 +9,10 @@ Namespace Database
         End Sub
 
         Public Sub init(manager As DataStoreManager, param As MaybeOption(Of Object)) Implements IDataStore.init
+            Tables.InitMembersTable()
+            Tables.InitMShipsTable()
+            Tables.InitUsersTable()
             manager.userManager = New UserManager()
-
             Dim csb As OleDbConnectionStringBuilder = TryCast(param.orNothing, OleDbConnectionStringBuilder)
             If IsNothing(csb) Then Throw (New ArgumentException("Parameters is not a OleDbConnectionStringBuilder!"))
             DB.init(csb)

@@ -2,24 +2,27 @@
 Imports System.Drawing.Imaging
 Imports System.IO
 Imports Membership
-
-Partial Public Class DB
-    Public Shared MembersTable As Table
-    Public Shared Sub InitMembersTable()
-        MembersTable = New Table()
-        MembersTable.Fields("id") = New Field(MDBType.AutoNumber)
-        MembersTable.Fields("firstname") = New Field(MDBType.Text, 50)
-        MembersTable.Fields("lastname") = New Field(MDBType.Text, 50)
-        MembersTable.Fields("dob") = New Field(MDBType.DateTime)
-        MembersTable.Fields("gender") = New Field(MDBType.Number)
-        MembersTable.Fields("membership") = New Field(MDBType.Number)
-        MembersTable.Fields("contact") = New Field(MDBType.Text, 15)
-        MembersTable.Fields("email") = New Field(MDBType.Text, 50)
-        MembersTable.Fields("photo") = New Field(MDBType.Binary, 5 * 1024 * 1024)
-        MembersTable.Fields("activate") = New Field(MDBType.Byte)
-        MembersTable.PrimaryKey = "id"
-        DB.RegisterTable(MembersTable)
-    End Sub
+Imports MDB
+Namespace Database
+    Partial Public Class Tables
+        Public Shared MembersTable As Table
+        Public Shared Sub InitMembersTable()
+            MembersTable = New Table()
+            MembersTable.Fields("id") = New Field(MDBType.AutoNumber)
+            MembersTable.Fields("firstname") = New Field(MDBType.Text, 50)
+            MembersTable.Fields("lastname") = New Field(MDBType.Text, 50)
+            MembersTable.Fields("dob") = New Field(MDBType.DateTime)
+            MembersTable.Fields("gender") = New Field(MDBType.Number)
+            MembersTable.Fields("membership") = New Field(MDBType.Number)
+            MembersTable.Fields("contact") = New Field(MDBType.Text, 15)
+            MembersTable.Fields("email") = New Field(MDBType.Text, 50)
+            MembersTable.Fields("photo") = New Field(MDBType.Binary, 5 * 1024 * 1024)
+            MembersTable.Fields("activate") = New Field(MDBType.Byte)
+            MembersTable.PrimaryKey = "id"
+            MembersTable.Constraints.Add(New MDB.Constraint(MDB.Constraint.ConsType.PrimaryKey, "id"))
+            DB.RegisterTable(MembersTable)
+        End Sub
+    End Class
     Public Class Member
         Inherits DBObject
         Implements IMember
@@ -139,7 +142,7 @@ Partial Public Class DB
         End Property
 
         Public Overrides Function table() As Table
-            Return MembersTable
+            Return Tables.MembersTable
         End Function
     End Class
-End Class
+End Namespace

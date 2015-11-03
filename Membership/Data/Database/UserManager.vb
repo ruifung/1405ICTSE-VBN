@@ -1,6 +1,6 @@
 ﻿Imports Membership
-
-Partial Public Class DB
+Imports MDB
+Namespace Database
     Public Class UserManager
         Implements IDataManager(Of IUser)
 
@@ -13,13 +13,13 @@ Partial Public Class DB
                     Throw New ArgumentException("Duplicate User!")
                 End If
                 Dim newUser As User = New User()
-                    newUser.userName = userToAdd.userName
-                    newUser.password = userToAdd.password
-                    newUser.permmission = userToAdd.accessLevel
-                    newUser.Insert()
-                    Return New Some(Of IUser)(newUser)
-                Catch ex As Exception
-                    Return New None(Of IUser)
+                newUser.userName = userToAdd.userName
+                newUser.password = userToAdd.password
+                newUser.permmission = userToAdd.accessLevel
+                newUser.Insert()
+                Return New Some(Of IUser)(newUser)
+            Catch ex As Exception
+                Return New None(Of IUser)
             End Try
         End Function
 
@@ -39,7 +39,7 @@ Partial Public Class DB
         End Function
 
         Public Function getUsers() As List(Of IUser) Implements IDataManager(Of IUser).list
-            Dim list As New List(Of IUser)(DB.DBList(Of User).Query())
+            Dim list As New List(Of IUser)(DBList(Of User).Query())
             Return list
         End Function
 
@@ -51,7 +51,7 @@ Partial Public Class DB
                 Dim theUser As User = Nothing
                 If entry.id >= 0 Then
                     theUser = User.TryGet(entry.id)
-                ElseIf Not IsNothing(entry.userName)
+                ElseIf Not IsNothing(entry.userName) Then
                     theUser = User.TryGet("username", entry.userName)
                 End If
                 If IsNothing(theUser) Then
@@ -88,4 +88,4 @@ Partial Public Class DB
 
         End Sub
     End Class
-End Class
+End Namespace

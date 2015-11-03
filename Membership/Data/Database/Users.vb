@@ -1,20 +1,23 @@
 ﻿Imports System.Security.Cryptography
 Imports System.Text
-
-Partial Public Class DB
-    Public Shared UsersTable As Table = Nothing
-    Public Shared Sub InitUsersTable()
-        If Not IsNothing(UsersTable) Then Return
-        UsersTable = New Table
-        UsersTable.Name = "users"
-        UsersTable.Fields("id") = New Field(MDBType.AutoNumber)
-        UsersTable.Fields("username") = New Field(MDBType.Text, 20)
-        UsersTable.Fields("authkey") = New Field(MDBType.Binary, 32)
-        UsersTable.Fields("salt") = New Field(MDBType.Binary, 16)
-        UsersTable.Fields("permissions") = New Field(MDBType.Number)
-        UsersTable.PrimaryKey = "id"
-        DB.RegisterTable(UsersTable)
-    End Sub
+Imports MDB
+Namespace Database
+    Partial Public Class Tables
+        Public Shared UsersTable As Table = Nothing
+        Public Shared Sub InitUsersTable()
+            If Not IsNothing(UsersTable) Then Return
+            UsersTable = New Table
+            UsersTable.Name = "users"
+            UsersTable.Fields("id") = New Field(MDBType.AutoNumber)
+            UsersTable.Fields("username") = New Field(MDBType.Text, 20)
+            UsersTable.Fields("authkey") = New Field(MDBType.Binary, 32)
+            UsersTable.Fields("salt") = New Field(MDBType.Binary, 16)
+            UsersTable.Fields("permissions") = New Field(MDBType.Number)
+            UsersTable.PrimaryKey = "id"
+            UsersTable.Constraints.Add(New MDB.Constraint(MDB.Constraint.ConsType.PrimaryKey, "id"))
+            DB.RegisterTable(UsersTable)
+        End Sub
+    End Class
     Public Class User
         Inherits DBObject
         Implements IUser
@@ -25,7 +28,7 @@ Partial Public Class DB
             Return User.Find(Of User)(field, value)
         End Function
         Public Overrides Function table() As Table
-            Return UsersTable
+            Return Tables.UsersTable
         End Function
         Public ReadOnly Property userID As Integer _
             Implements IUser.id
@@ -80,4 +83,4 @@ Partial Public Class DB
             Return sha.ComputeHash(salted)
         End Function
     End Class
-End Class
+End Namespace

@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
-Partial Public Class DB
+Imports MDB
+Namespace Database
     Public Class DataStore
         Implements IDataStore
 
@@ -8,7 +9,7 @@ Partial Public Class DB
         End Sub
 
         Public Sub init(manager As DataStoreManager, param As MaybeOption(Of Object)) Implements IDataStore.init
-            manager.userManager = New DB.UserManager()
+            manager.userManager = New UserManager()
             Dim csb As OleDbConnectionStringBuilder = TryCast(param.orNothing, OleDbConnectionStringBuilder)
             If IsNothing(csb) Then Throw (New ArgumentException("Parameters is not a OleDbConnectionStringBuilder!"))
             DB.init(csb)
@@ -22,4 +23,4 @@ Partial Public Class DB
 
         End Sub
     End Class
-End Class
+End Namespace

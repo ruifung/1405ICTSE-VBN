@@ -4,19 +4,10 @@ Namespace Database
         Implements IDataManager(Of IMember)
 
         Public Function addEntry(entry As IMember) As MaybeOption(Of IMember) Implements IDataManager(Of IMember).addEntry
-            Dim member As IMember = New Member
-            member.address = entry.address
-            member.contactNumber = entry.contactNumber
-            member.dob = entry.dob
-            member.email = entry.email
-            member.firstName = entry.firstName
-            member.gender = entry.gender
-            member.isActive = entry.isActive
-            member.lastName = entry.lastName
-            member.membershipTypeID = entry.membershipTypeID
-            member.photo = entry.photo
-            DirectCast(member, Member).Insert()
-            Return MaybeOption.create(member)
+            Dim member = New Member
+            member.setAll(entry)
+            member.Insert()
+            Return MaybeOption.create(DirectCast(member, IMember))
         End Function
 
         Public Function getEntry(id As Integer) As MaybeOption(Of IMember) Implements IDataManager(Of IMember).getEntry
@@ -37,12 +28,9 @@ Namespace Database
         End Sub
 
         Public Function removeEntry(entry As IMember) As Boolean Implements IDataManager(Of IMember).removeEntry
-            Dim m As Member = TryCast(entry, Member)
-            If IsNothing(m) Then
-                Throw (New ArgumentException("entry is not a Database.Member!"))
-            End If
-            m.Delete()
-            Return True
+            Dim m As Member = If(TryCast(entry, Member), Member.TryGet(entry.id))
+            Util.exec(m, Sub(x) x.Delete())
+            Return Not IsNothing(m)
         End Function
 
         Public Sub save() Implements IDataManager(Of IMember).save
@@ -56,10 +44,11 @@ Namespace Database
         Public Function updateEntry(entry As IMember) As Boolean Implements IDataManager(Of IMember).updateEntry
             Dim m As Member = TryCast(entry, Member)
             If IsNothing(m) Then
-                Throw (New ArgumentException("entry is not a Database.Member!"))
+                m = Member.TryGet(entry.id)
+                Util.exec(m, Sub(x) x.setAll(entry))
             End If
-            m.Update()
-            Return True
+            Util.exec(m, Sub(x) x.Update())
+            Return Not IsNothing(m)
         End Function
     End Class
 End Namespace

@@ -148,6 +148,31 @@ Namespace Database
             End Set
         End Property
 
+        Public Property paymentCredit As Double Implements IMember.paymentCredit
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Double)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Sub setAll(entry As IMember)
+            With Me
+                .firstName = entry.firstName
+                .lastName = entry.lastName
+                .contact = entry.contactNumber
+                .address = entry.address
+                .email = entry.email
+                .dob = entry.dob
+                .gender = entry.gender
+                .photo = entry.photo
+                .activated = entry.isActive
+                .membership = entry.membershipTypeID
+                .paymentCredit = entry.paymentCredit
+            End With
+        End Sub
+
         Public Overrides Function table() As Table
             Return Tables.MembersTable
         End Function

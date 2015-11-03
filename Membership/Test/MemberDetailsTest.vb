@@ -43,6 +43,8 @@ Public Class MemberDetailsTest
         Public Property isActive As Boolean Implements IMember.isActive
         Public Property lastName As String Implements IMember.lastName
         Public Property membershipTypeID As Integer Implements IMember.membershipTypeID
+        Public Property paymentCredit As Double Implements IMember.paymentCredit
+
         Public Property photo As MaybeOption(Of Image) Implements IMember.photo
     End Class
 End Class

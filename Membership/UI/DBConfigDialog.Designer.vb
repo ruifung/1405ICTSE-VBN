@@ -22,28 +22,28 @@ Partial Class DBConfigDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DSSelector = New System.Windows.Forms.ComboBox()
+        Me.cbDSSelector = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.DSPath = New System.Windows.Forms.TextBox()
+        Me.txtDSPath = New System.Windows.Forms.TextBox()
         Me.DSBtn = New System.Windows.Forms.Button()
-        Me.DSAuth = New System.Windows.Forms.CheckBox()
+        Me.chkDSAuth = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.DSAuthPass = New Membership.TextBoxEx()
-        Me.DSAuthName = New Membership.TextBoxEx()
+        Me.txtDSAuthPass = New Membership.TextBoxEx()
+        Me.txtDSAuthName = New Membership.TextBoxEx()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'DSSelector
+        'cbDSSelector
         '
-        Me.DSSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.DSSelector.FormattingEnabled = True
-        Me.DSSelector.Location = New System.Drawing.Point(118, 12)
-        Me.DSSelector.Name = "DSSelector"
-        Me.DSSelector.Size = New System.Drawing.Size(229, 21)
-        Me.DSSelector.TabIndex = 0
+        Me.cbDSSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbDSSelector.FormattingEnabled = True
+        Me.cbDSSelector.Location = New System.Drawing.Point(118, 12)
+        Me.cbDSSelector.Name = "cbDSSelector"
+        Me.cbDSSelector.Size = New System.Drawing.Size(229, 21)
+        Me.cbDSSelector.TabIndex = 0
         '
         'Label1
         '
@@ -63,12 +63,12 @@ Partial Class DBConfigDialog
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Data Source"
         '
-        'DSPath
+        'txtDSPath
         '
-        Me.DSPath.Location = New System.Drawing.Point(118, 40)
-        Me.DSPath.Name = "DSPath"
-        Me.DSPath.Size = New System.Drawing.Size(229, 20)
-        Me.DSPath.TabIndex = 3
+        Me.txtDSPath.Location = New System.Drawing.Point(118, 40)
+        Me.txtDSPath.Name = "txtDSPath"
+        Me.txtDSPath.Size = New System.Drawing.Size(229, 20)
+        Me.txtDSPath.TabIndex = 3
         '
         'DSBtn
         '
@@ -79,20 +79,20 @@ Partial Class DBConfigDialog
         Me.DSBtn.Text = "Browse"
         Me.DSBtn.UseVisualStyleBackColor = True
         '
-        'DSAuth
+        'chkDSAuth
         '
-        Me.DSAuth.AutoSize = True
-        Me.DSAuth.Location = New System.Drawing.Point(86, 0)
-        Me.DSAuth.Name = "DSAuth"
-        Me.DSAuth.Size = New System.Drawing.Size(15, 14)
-        Me.DSAuth.TabIndex = 6
-        Me.DSAuth.UseVisualStyleBackColor = True
+        Me.chkDSAuth.AutoSize = True
+        Me.chkDSAuth.Location = New System.Drawing.Point(86, 0)
+        Me.chkDSAuth.Name = "chkDSAuth"
+        Me.chkDSAuth.Size = New System.Drawing.Size(15, 14)
+        Me.chkDSAuth.TabIndex = 6
+        Me.chkDSAuth.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.DSAuthPass)
-        Me.GroupBox1.Controls.Add(Me.DSAuthName)
-        Me.GroupBox1.Controls.Add(Me.DSAuth)
+        Me.GroupBox1.Controls.Add(Me.txtDSAuthPass)
+        Me.GroupBox1.Controls.Add(Me.txtDSAuthName)
+        Me.GroupBox1.Controls.Add(Me.chkDSAuth)
         Me.GroupBox1.Location = New System.Drawing.Point(21, 79)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(202, 74)
@@ -100,29 +100,29 @@ Partial Class DBConfigDialog
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Authentication"
         '
-        'DSAuthPass
+        'txtDSAuthPass
         '
-        Me.DSAuthPass.CustomBorder = False
-        Me.DSAuthPass.CustomBorderColor = System.Drawing.Color.Red
-        Me.DSAuthPass.Enabled = False
-        Me.DSAuthPass.Location = New System.Drawing.Point(6, 46)
-        Me.DSAuthPass.Name = "DSAuthPass"
-        Me.DSAuthPass.Placeholder = "Password"
-        Me.DSAuthPass.PlaceholderColor = System.Drawing.Color.DarkGray
-        Me.DSAuthPass.Size = New System.Drawing.Size(188, 20)
-        Me.DSAuthPass.TabIndex = 8
+        Me.txtDSAuthPass.CustomBorder = False
+        Me.txtDSAuthPass.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtDSAuthPass.Enabled = False
+        Me.txtDSAuthPass.Location = New System.Drawing.Point(6, 46)
+        Me.txtDSAuthPass.Name = "txtDSAuthPass"
+        Me.txtDSAuthPass.Placeholder = "Password"
+        Me.txtDSAuthPass.PlaceholderColor = System.Drawing.Color.DarkGray
+        Me.txtDSAuthPass.Size = New System.Drawing.Size(188, 20)
+        Me.txtDSAuthPass.TabIndex = 8
         '
-        'DSAuthName
+        'txtDSAuthName
         '
-        Me.DSAuthName.CustomBorder = False
-        Me.DSAuthName.CustomBorderColor = System.Drawing.Color.Red
-        Me.DSAuthName.Enabled = False
-        Me.DSAuthName.Location = New System.Drawing.Point(6, 20)
-        Me.DSAuthName.Name = "DSAuthName"
-        Me.DSAuthName.Placeholder = "Username"
-        Me.DSAuthName.PlaceholderColor = System.Drawing.Color.DarkGray
-        Me.DSAuthName.Size = New System.Drawing.Size(188, 20)
-        Me.DSAuthName.TabIndex = 7
+        Me.txtDSAuthName.CustomBorder = False
+        Me.txtDSAuthName.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtDSAuthName.Enabled = False
+        Me.txtDSAuthName.Location = New System.Drawing.Point(6, 20)
+        Me.txtDSAuthName.Name = "txtDSAuthName"
+        Me.txtDSAuthName.Placeholder = "Username"
+        Me.txtDSAuthName.PlaceholderColor = System.Drawing.Color.DarkGray
+        Me.txtDSAuthName.Size = New System.Drawing.Size(188, 20)
+        Me.txtDSAuthName.TabIndex = 7
         '
         'btnSave
         '
@@ -156,10 +156,10 @@ Partial Class DBConfigDialog
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.DSBtn)
-        Me.Controls.Add(Me.DSPath)
+        Me.Controls.Add(Me.txtDSPath)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.DSSelector)
+        Me.Controls.Add(Me.cbDSSelector)
         Me.Name = "DBConfigDialog"
         Me.Text = "Configure Data Source"
         Me.GroupBox1.ResumeLayout(False)
@@ -169,15 +169,15 @@ Partial Class DBConfigDialog
 
     End Sub
 
-    Friend WithEvents DSSelector As ComboBox
+    Friend WithEvents cbDSSelector As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents DSPath As TextBox
+    Friend WithEvents txtDSPath As TextBox
     Friend WithEvents DSBtn As Button
-    Friend WithEvents DSAuth As CheckBox
+    Friend WithEvents chkDSAuth As CheckBox
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents DSAuthName As TextBoxEx
-    Friend WithEvents DSAuthPass As TextBoxEx
+    Friend WithEvents txtDSAuthName As TextBoxEx
+    Friend WithEvents txtDSAuthPass As TextBoxEx
     Friend WithEvents btnSave As Button
     Friend WithEvents btnCancel As Button
 End Class

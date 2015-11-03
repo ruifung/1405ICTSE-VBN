@@ -100,10 +100,11 @@
     <Compile Include="Controls\TextBoxEx.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Data\MDB\DataStore.vb" />
-    <Compile Include="Data\MDB\Members.vb" />
-    <Compile Include="Data\MDB\UserManager.vb" />
-    <Compile Include="Data\MDB\Users.vb" />
+    <Compile Include="Data\Database\DataStore.vb" />
+    <Compile Include="Data\Database\Members.vb" />
+    <Compile Include="Data\Database\Memberships.vb" />
+    <Compile Include="Data\Database\UserManager.vb" />
+    <Compile Include="Data\Database\Users.vb" />
     <Compile Include="Data\PlainUser.vb" />
     <Compile Include="Exceptions\DataSourceException.vb" />
     <Compile Include="Exceptions\InvalidSettingException.vb" />

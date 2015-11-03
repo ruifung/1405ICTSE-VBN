@@ -25,6 +25,8 @@ Public Class PlainMember
 
     Public Property photo As MaybeOption(Of Image) Implements IMember.photo
 
+    Public Property paymentCredit As Double Implements IMember.paymentCredit
+
     Sub New()
         _dob = Date.MinValue
         _gender = Gender.NONE

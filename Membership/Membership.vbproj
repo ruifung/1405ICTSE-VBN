@@ -84,8 +84,10 @@
     <Compile Include="API\Members\EnumMemberPrivileges.vb" />
     <Compile Include="API\Members\IMember.vb" />
     <Compile Include="API\Data\IDataManager.vb" />
-    <Compile Include="API\Members\IMemberTransaction.vb" />
+    <Compile Include="API\Members\Payments\IMemberCharge.vb" />
     <Compile Include="API\Members\MembershipType.vb" />
+    <Compile Include="API\Members\Payments\IMemberPayment.vb" />
+    <Compile Include="API\Members\Payments\IPaymentManager.vb" />
     <Compile Include="API\Users\IUser.vb" />
     <Compile Include="API\Data\DataStoreManager.vb" />
     <Compile Include="Controls\MemberDetails.Designer.vb">

@@ -5,9 +5,6 @@
         'Config Load.
         'ConfigManager.init()
         While running
-            Dim test = New MainForm
-            test.ShowDialog()
-            Exit While
             Dim login = New LoginDialog
             Try
                 If IsNothing(ConfigManager.currentUser) Then

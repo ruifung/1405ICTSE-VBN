@@ -15,6 +15,7 @@ Public Class MemberDetails
     Private _firstName, _lastName, _contactNumber, _address, _email As String
     Private _dob As Date, _gender As Gender, _photo As MaybeOption(Of Image)
     Private _id, _membershipTypeID As Integer, _isActive As Boolean
+    Private _paymentCredit As Double, initialized As Boolean
 
     Overloads Property Enabled As Boolean
         Get
@@ -151,6 +152,17 @@ Public Class MemberDetails
     End Property
 
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+    Public Property paymentCredit As Double Implements IMember.paymentCredit
+        Get
+            Return _paymentCredit
+        End Get
+        Set(value As Double)
+            _paymentCredit = value
+            onPropertyChanged()
+        End Set
+    End Property
+
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
     Public Property MinDate As Date
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
     Public Property MaxDate As Date
@@ -191,142 +203,140 @@ Public Class MemberDetails
         End Set
     End Property
 
-    Sub New()
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        Me.clear()
-        ' So the designer doesn't throw a big bunch of errors!
-        If Not Util.IsInDesignMode Then
-            MinDate = Date.MinValue
-            MaxDate = Date.MaxValue
-
-            Dim genderDisplay = New List(Of DisplayGender)
-            For Each x As Gender In [Enum].GetValues(GetType(Gender))
-                genderDisplay.Add(New DisplayGender(x, If(x = Gender.NONE, String.Empty, x.ToString)))
-            Next
-            cbGender.DataSource = genderDisplay
-            cbGender.ValueMember = "gender"
-            cbGender.DisplayMember = "display"
-
-            cbMembershipType.DataSource = New BindingSource With {
-                .DataSource = MaybeOption.create(Util.exec(dataManager, Function(x) x.memberTypeManager)) _
-                    .map(Function(x) x.list) _
-                    .getOrAlt(New List(Of MembershipType))
-            }
-            cbMembershipType.DisplayMember = "typeName"
-            cbMembershipType.ValueMember = "typeID"
-
-            cbStatus.DataSource = New List(Of DisplayStatus) From {
-                New DisplayStatus(True, "Active"),
-                New DisplayStatus(False, "Inactive")
-            }
-            cbStatus.DisplayMember = "display"
-            cbStatus.ValueMember = "status"
-
-            ' Bindings
-            Dim binding As Binding
-            binding = New Binding("Text", selfBind, "id", True)
-            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
-                                           If IsDBNull(e.Value) Then
-                                               e.Value = -1
-                                               Exit Sub
-                                           End If
-                                           e.Value = If(CInt(e.Value) >= 0, e.Value.ToString, noIDString)
-                                       End Sub
-            AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
-                                          If IsDBNull(e.Value) Then
-                                              e.Value = -1
-                                              Exit Sub
-                                          End If
-                                          Dim tID As Integer
-                                          If CStr(e.Value) = noIDString Then
-                                              e.Value = -1
-                                          ElseIf Integer.TryParse(CStr(e.Value), tID) Then
-                                              e.Value = tID
-                                          Else
-                                              e.Value = -1
-                                          End If
-                                      End Sub
-
-            txtID.DataBindings.Add(binding)
-            txtFName.DataBindings.Add("Text", selfBind, "firstName")
-            txtLName.DataBindings.Add("Text", selfBind, "lastName")
-            txtContact.DataBindings.Add("Text", selfBind, "contactNumber")
-            txtAddress.DataBindings.Add("Text", selfBind, "address")
-            txtEmail.DataBindings.Add("Text", selfBind, "email")
-            dtDOB.DataBindings.Add("MinDate", selfBind, "MinDate", False, DataSourceUpdateMode.OnPropertyChanged)
-            dtDOB.DataBindings.Add("MaxDate", selfBind, "MaxDate", False, DataSourceUpdateMode.OnPropertyChanged)
-            dtDOB.DataBindings.Add("Value", selfBind, "dob", False, DataSourceUpdateMode.OnPropertyChanged)
-            cbGender.DataBindings.Add("SelectedValue", selfBind, "gender", False, DataSourceUpdateMode.OnPropertyChanged)
-            binding = New Binding("SelectedValue", selfBind, "isActive", True, DataSourceUpdateMode.OnPropertyChanged)
-            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
-                                           If IsDBNull(e.Value) Then
-                                               e.Value = -1
-                                               Exit Sub
-                                           End If
-                                           e.Value = If(CBool(e.Value), 1, 0)
-                                       End Sub
-            AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
-                                          If IsDBNull(e.Value) Then
-                                              e.Value = -1
-                                              Exit Sub
-                                          End If
-                                          Select Case CInt(e.Value)
-                                              Case 0
-                                                  e.Value = False
-                                              Case 1
-                                                  e.Value = True
-                                          End Select
-                                      End Sub
-            cbStatus.DataBindings.Add(binding)
-            binding = New Binding("SelectedIndex", selfBind, "membershipTypeID", True, DataSourceUpdateMode.OnPropertyChanged)
-            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
-                                           If IsDBNull(e.Value) Then
-                                               e.Value = -1
-                                               Exit Sub
-                                           End If
-                                           Dim tID = CInt(e.Value)
-                                           If tID >= 0 Then
-                                               For x = 0 To cbMembershipType.Items.Count - 1
-                                                   If CType(cbMembershipType.Items(x), MembershipType).typeID = tID Then
-                                                       e.Value = x
-                                                       Exit Sub
-                                                   End If
-                                               Next
-                                           End If
-                                           e.Value = -1
-                                       End Sub
-            AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
-                                          If IsDBNull(e.Value) Then
-                                              e.Value = -1
-                                              Exit Sub
-                                          End If
-                                          Dim tID = CInt(e.Value)
-                                          If tID >= 0 Then
-                                              e.Value = CType(cbMembershipType.Items(tID), MembershipType).typeID
-                                          End If
-                                          e.Value = -1
-                                      End Sub
-            cbMembershipType.DataBindings.Add(binding)
-            binding = New Binding("Image", selfBind, "photo", True, DataSourceUpdateMode.OnPropertyChanged)
-            AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
-                                           If IsDBNull(e.Value) Then
-                                               e.Value = Nothing
-                                           Else
-                                               e.Value = CType(e.Value, MaybeOption(Of Image)).orNothing
-                                           End If
-                                       End Sub
-            AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
-                                          If IsDBNull(e.Value) Then
-                                              e.Value = New None(Of Image)
-                                          Else
-                                              e.Value = MaybeOption.create(CType(e.Value, Image))
-                                          End If
-                                      End Sub
-            pbPhoto.DataBindings.Add(binding)
+    Sub initializeControl() Handles Me.ControlAdded
+        If initialized Then
+            Exit Sub
         End If
+
+        Me.clear()
+        MinDate = Date.MinValue
+        MaxDate = Date.MaxValue
+
+        Dim genderDisplay = New List(Of DisplayGender)
+        For Each x As Gender In [Enum].GetValues(GetType(Gender))
+            genderDisplay.Add(New DisplayGender(x, If(x = Gender.NONE, String.Empty, x.ToString)))
+        Next
+        cbGender.DataSource = genderDisplay
+        cbGender.ValueMember = "gender"
+        cbGender.DisplayMember = "display"
+
+        cbMembershipType.DataSource = New BindingSource With {
+            .DataSource = MaybeOption.create(Util.exec(dataManager, Function(x) x.memberTypeManager)) _
+                .map(Function(x) x.list) _
+                .getOrAlt(New List(Of MembershipType))
+        }
+        cbMembershipType.DisplayMember = "typeName"
+        cbMembershipType.ValueMember = "typeID"
+
+        cbStatus.DataSource = New List(Of DisplayStatus) From {
+            New DisplayStatus(True, "Active"),
+            New DisplayStatus(False, "Inactive")
+        }
+        cbStatus.DisplayMember = "display"
+        cbStatus.ValueMember = "status"
+
+        ' Bindings
+        Dim binding As Binding
+        binding = New Binding("Text", selfBind, "id", True)
+        AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
+                                       If IsDBNull(e.Value) Then
+                                           e.Value = -1
+                                           Exit Sub
+                                       End If
+                                       e.Value = If(CInt(e.Value) >= 0, e.Value.ToString, noIDString)
+                                   End Sub
+        AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
+                                      If IsDBNull(e.Value) Then
+                                          e.Value = -1
+                                          Exit Sub
+                                      End If
+                                      Dim tID As Integer
+                                      If CStr(e.Value) = noIDString Then
+                                          e.Value = -1
+                                      ElseIf Integer.TryParse(CStr(e.Value), tID) Then
+                                          e.Value = tID
+                                      Else
+                                          e.Value = -1
+                                      End If
+                                  End Sub
+
+        txtID.DataBindings.Add(binding)
+        txtFName.DataBindings.Add("Text", selfBind, "firstName")
+        txtLName.DataBindings.Add("Text", selfBind, "lastName")
+        txtContact.DataBindings.Add("Text", selfBind, "contactNumber")
+        txtAddress.DataBindings.Add("Text", selfBind, "address")
+        txtEmail.DataBindings.Add("Text", selfBind, "email")
+        dtDOB.DataBindings.Add("MinDate", selfBind, "MinDate", False, DataSourceUpdateMode.OnPropertyChanged)
+        dtDOB.DataBindings.Add("MaxDate", selfBind, "MaxDate", False, DataSourceUpdateMode.OnPropertyChanged)
+        dtDOB.DataBindings.Add("Value", selfBind, "dob", False, DataSourceUpdateMode.OnPropertyChanged)
+        cbGender.DataBindings.Add("SelectedValue", selfBind, "gender", False, DataSourceUpdateMode.OnPropertyChanged)
+        binding = New Binding("SelectedValue", selfBind, "isActive", True, DataSourceUpdateMode.OnPropertyChanged)
+        AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
+                                       If IsDBNull(e.Value) Then
+                                           e.Value = -1
+                                           Exit Sub
+                                       End If
+                                       e.Value = If(CBool(e.Value), 1, 0)
+                                   End Sub
+        AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
+                                      If IsDBNull(e.Value) Then
+                                          e.Value = -1
+                                          Exit Sub
+                                      End If
+                                      Select Case CInt(e.Value)
+                                          Case 0
+                                              e.Value = False
+                                          Case 1
+                                              e.Value = True
+                                      End Select
+                                  End Sub
+        cbStatus.DataBindings.Add(binding)
+        binding = New Binding("SelectedIndex", selfBind, "membershipTypeID", True, DataSourceUpdateMode.OnPropertyChanged)
+        AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
+                                       If IsDBNull(e.Value) Then
+                                           e.Value = -1
+                                           Exit Sub
+                                       End If
+                                       Dim tID = CInt(e.Value)
+                                       If tID >= 0 Then
+                                           For x = 0 To cbMembershipType.Items.Count - 1
+                                               If CType(cbMembershipType.Items(x), MembershipType).typeID = tID Then
+                                                   e.Value = x
+                                                   Exit Sub
+                                               End If
+                                           Next
+                                       End If
+                                       e.Value = -1
+                                   End Sub
+        AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
+                                      If IsDBNull(e.Value) Then
+                                          e.Value = -1
+                                          Exit Sub
+                                      End If
+                                      Dim tID = CInt(e.Value)
+                                      If tID >= 0 Then
+                                          e.Value = CType(cbMembershipType.Items(tID), MembershipType).typeID
+                                      End If
+                                      e.Value = -1
+                                  End Sub
+        cbMembershipType.DataBindings.Add(binding)
+        binding = New Binding("Image", selfBind, "photo", True, DataSourceUpdateMode.OnPropertyChanged)
+        AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
+                                       If IsDBNull(e.Value) Then
+                                           e.Value = Nothing
+                                       Else
+                                           e.Value = CType(e.Value, MaybeOption(Of Image)).orNothing
+                                       End If
+                                   End Sub
+        AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
+                                      If IsDBNull(e.Value) Then
+                                          e.Value = New None(Of Image)
+                                      Else
+                                          e.Value = MaybeOption.create(CType(e.Value, Image))
+                                      End If
+                                  End Sub
+        pbPhoto.DataBindings.Add(binding)
+        initialized = True
     End Sub
 
     Sub clear()

@@ -17,6 +17,8 @@ Public Interface IMember
     Property photo As MaybeOption(Of Image)
     Property isActive As Boolean
     Property membershipTypeID As Integer
+
+    Property paymentCredit As Double
 End Interface
 
 Public Enum Gender

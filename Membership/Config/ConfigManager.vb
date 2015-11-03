@@ -114,4 +114,16 @@ Public Module ConfigManager
     Private Enum ErrorFlags
         DATABASE_CONFIG
     End Enum
+
+    Public Class DBTypes
+        Property display As String
+        Property type As DBModes
+        Property isFileBased As Boolean
+
+        Sub New(display As String, type As DBModes, isFileBased As Boolean)
+            Me.display = display
+            Me.type = type
+            Me.isFileBased = isFileBased
+        End Sub
+    End Class
 End Module

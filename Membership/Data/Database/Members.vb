@@ -13,13 +13,16 @@ Namespace Database
             MembersTable.Fields("lastname") = New Field(MDBType.Text, 50)
             MembersTable.Fields("dob") = New Field(MDBType.DateTime)
             MembersTable.Fields("gender") = New Field(MDBType.Number)
-            MembersTable.Fields("membership") = New Field(MDBType.Number)
+            MembersTable.Fields("mship") = New Field(MDBType.Number)
             MembersTable.Fields("contact") = New Field(MDBType.Text, 15)
             MembersTable.Fields("email") = New Field(MDBType.Text, 50)
             MembersTable.Fields("photo") = New Field(MDBType.Binary, 5 * 1024 * 1024)
             MembersTable.Fields("activate") = New Field(MDBType.Byte)
             MembersTable.PrimaryKey = "id"
             MembersTable.Constraints.Add(New MDB.Constraint(MDB.Constraint.ConsType.PrimaryKey, "id"))
+            MembersTable.Constraints.Add( _
+                New Constraint(Constraint.ConsType.ForeignKey, _
+                               "mship", "memberships", "id"))
             DB.RegisterTable(MembersTable)
         End Sub
     End Class

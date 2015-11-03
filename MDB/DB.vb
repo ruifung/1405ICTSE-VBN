@@ -13,6 +13,9 @@ Public Class DB
             For Each t As Table In tables
                 t.Create()
             Next
+            For Each t As Table In tables
+                t.ApplyConstraint()
+            Next
         Else
             conn = New OleDbConnection(constr)
         End If

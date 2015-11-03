@@ -22,7 +22,7 @@ Public Class Table
         cmd.ExecuteNonQuery()
         DB.conn.Close()
     End Sub
-    Public Sub AddConstraint()
+    Public Sub ApplyConstraint()
         If Constraints.Count = 0 Then Return
         DB.conn.Open()
         Dim cmd As OleDbCommand = New OleDbCommand("", DB.conn)

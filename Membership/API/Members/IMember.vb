@@ -8,6 +8,10 @@ Public Interface IMember
     Property contactNumber As String
     Property address As String
     Property email As String
+    ''' <summary>
+    ''' Use Date.MinValue if absent.
+    ''' </summary>
+    ''' <returns></returns>
     Property dob As Date
     Property gender As Gender
     Property photo As MaybeOption(Of Image)

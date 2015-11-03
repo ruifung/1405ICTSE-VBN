@@ -103,6 +103,7 @@
     <Compile Include="Data\Database\DataStore.vb" />
     <Compile Include="Data\Database\Members.vb" />
     <Compile Include="Data\Database\Memberships.vb" />
+    <Compile Include="Data\Database\PlainMember.vb" />
     <Compile Include="Data\Database\UserManager.vb" />
     <Compile Include="Data\Database\Users.vb" />
     <Compile Include="Data\PlainUser.vb" />
@@ -151,10 +152,10 @@
     <Compile Include="UI\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UserManagement\ModifyMemberDialog.Designer.vb">
+    <Compile Include="UI\MemberManagement\ModifyMemberDialog.Designer.vb">
       <DependentUpon>ModifyMemberDialog.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UserManagement\ModifyMemberDialog.vb">
+    <Compile Include="UI\MemberManagement\ModifyMemberDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Util\MaybeOption.vb" />
@@ -182,7 +183,7 @@
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UserManagement\ModifyMemberDialog.resx">
+    <EmbeddedResource Include="UI\MemberManagement\ModifyMemberDialog.resx">
       <DependentUpon>ModifyMemberDialog.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -218,6 +219,9 @@
       <Project>{1dd7f8a1-7efe-468a-8e96-716bbb3427de}</Project>
       <Name>MDB</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\UserManagement\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

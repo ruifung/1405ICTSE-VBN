@@ -87,7 +87,7 @@ Public Module ConfigManager
                         Throw New Exception
                 End Select
                 'TODO: Add actual IDataStore implementation.
-                dataManager = New DataStoreManager(New DB.DataStore, csb)
+                dataManager = New DataStoreManager(New Database.DataStore, csb)
             End If
         Catch ex As Exception
             Throw New DataSourceException

@@ -5,7 +5,7 @@
         'Config Load.
         'ConfigManager.init()
         While running
-            Dim test = New MemberDetailsTest
+            Dim test = New MainForm
             test.ShowDialog()
             Exit While
             Dim login = New LoginDialog

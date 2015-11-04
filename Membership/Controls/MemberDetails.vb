@@ -1,6 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Runtime.CompilerServices
-Imports Membership
+Imports Membership.config
 
 Public Class MemberDetails
     Implements IMember

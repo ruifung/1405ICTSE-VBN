@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Runtime.CompilerServices
+Imports Membership.config
 
 Public Class MainForm
     Implements INotifyPropertyChanged

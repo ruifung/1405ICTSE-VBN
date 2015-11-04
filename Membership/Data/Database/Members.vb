@@ -20,8 +20,8 @@ Namespace Database
             MembersTable.Fields("activate") = New Field(MDBType.Byte)
             MembersTable.PrimaryKey = "id"
             MembersTable.Constraints.Add(New MDB.Constraint(MDB.Constraint.ConsType.PrimaryKey, "id"))
-            MembersTable.Constraints.Add( _
-                New Constraint(Constraint.ConsType.ForeignKey, _
+            MembersTable.Constraints.Add(
+                New Constraint(Constraint.ConsType.ForeignKey,
                                "mship", "memberships", "id"))
             DB.RegisterTable(MembersTable)
         End Sub

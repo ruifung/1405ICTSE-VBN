@@ -1,41 +1,48 @@
-﻿Public Module Program
+﻿Imports Membership.config
+
+Public Module Program
     Private running As Boolean = True
+
+    ReadOnly Property isRunning As Boolean
+        Get
+            Return running
+        End Get
+    End Property
+
+
     Sub Main()
         Application.EnableVisualStyles()
         'Config Load.
-        'ConfigManager.init()
+        init()
         While running
-            Dim test = New ModifyMemberDialog(Nothing, True)
-            test.ShowDialog()
-            Exit While
             Dim login = New LoginDialog
             Try
-                If IsNothing(ConfigManager.currentUser) Then
+                If IsNothing(currentUser) Then
                     login.ShowDialog()
                     If login.DialogResult = DialogResult.OK Then
-                        ConfigManager.currentUser = login.user
+                        currentUser = login.user
                     ElseIf login.DialogResult = DialogResult.Cancel
                         quit()
                     End If
-                Else
-                    Application.Run(New ApplicationContext(New MainForm))
                 End If
-
             Finally
                 login.Dispose()
             End Try
+            If running Then
+                Application.Run(New ApplicationContext(New MainForm))
+            End If
         End While
     End Sub
 
     Public Sub logout()
-        ConfigManager.currentUser = Nothing
+        currentUser = Nothing
         Application.Exit()
     End Sub
 
     Public Sub quit()
         Try
-            ConfigManager.dataManager.dataStore.save()
-            ConfigManager.dataManager.dataStore.close()
+            dataManager.dataStore.save()
+            dataManager.dataStore.close()
         Catch ex As Exception
 
         End Try

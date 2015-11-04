@@ -1,4 +1,6 @@
-﻿Public Class LoginDialog
+﻿Imports Membership.config
+
+Public Class LoginDialog
     Property user As IUser
 
     Private Sub onExitClick(sender As Object, e As EventArgs) Handles btnExit.Click
@@ -6,7 +8,7 @@
     End Sub
 
     Private Sub onLoginClick(sender As Object, e As EventArgs) Handles btnLogin.Click
-        Dim matchingUsers = ConfigManager.dataManager.userManager _
+        Dim matchingUsers = dataManager.userManager _
             .search(New PlainUser(username:=txtUsername.Text), True, False)
         Dim userCheckResult = matchingUsers.Count = 1 AndAlso
             matchingUsers.Exists(Function(x) x.verifyPass(txtPassword.Text))

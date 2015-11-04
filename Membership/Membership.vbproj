@@ -90,6 +90,7 @@
     <Compile Include="API\Members\Payments\IPaymentManager.vb" />
     <Compile Include="API\Users\IUser.vb" />
     <Compile Include="API\Data\DataStoreManager.vb" />
+    <Compile Include="Config\DataSourceConfig.vb" />
     <Compile Include="Controls\MemberDetails.Designer.vb">
       <DependentUpon>MemberDetails.vb</DependentUpon>
     </Compile>

@@ -28,6 +28,7 @@ Public Class MainForm
                                           ElseIf rbInactive.Checked
                                               active = False
                                           End If
+                                          active = x.isActive.Equals(active)
                                           Dim typeSelected As Boolean
                                           For Each y As MembershipType In lbTypes.SelectedItems
                                               If y.typeID = x.membershipTypeID Then
@@ -78,6 +79,7 @@ Public Class MainForm
 
     Private Sub onPropertyChanged(<CallerMemberName> Optional propName As String = Nothing)
         RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propName))
+
     End Sub
 
 End Class

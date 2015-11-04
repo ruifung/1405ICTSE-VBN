@@ -11,6 +11,7 @@ Namespace Database
             t.Fields("month_fee") = New Field(MDBType.Currency)
             t.Fields("trans_fee") = New Field(MDBType.Currency)
             t.Fields("desc") = New Field(MDBType.Text, 200)
+            t.Fields("privileges") = New Field(MDBType.Number)
             t.PrimaryKey = "id"
             t.Constraints.Add(New Constraint(Constraint.ConsType.PrimaryKey, "id"))
             DB.RegisterTable(t)
@@ -19,12 +20,17 @@ Namespace Database
     End Class
     Public Class Membership
         Inherits DBObject
-        Public ReadOnly Property id As Integer
+        Implements IMembershipType
+
+        Public Property id As Integer Implements IDataElement.id
             Get
                 Return CInt(Me("id"))
             End Get
+            Set(value As Integer)
+
+            End Set
         End Property
-        Public Property type As String
+        Public Property type As String Implements IMembershipType.typeName
             Get
                 Return CStr(Me("type"))
             End Get
@@ -32,38 +38,61 @@ Namespace Database
                 Me("type") = value
             End Set
         End Property
-        Public Property RegistrationFee As Decimal
+        Public Property RegistrationFee As Double Implements IMembershipType.registrationFees
             Get
-                Return CDec(Me("reg_fee"))
+                Return CDbl(Me("reg_fee"))
             End Get
-            Set(value As Decimal)
+            Set(value As Double)
                 Me("reg_fee") = value
             End Set
         End Property
-        Public Property MonthlyFee As Decimal
+        Public Property MonthlyFee As Double Implements IMembershipType.monthlyFees
             Get
-                Return CDec(Me("month_fee"))
+                Return CDbl(Me("month_fee"))
             End Get
-            Set(value As Decimal)
+            Set(value As Double)
                 Me("month_fee") = value
             End Set
         End Property
-        Public Property TransferFee As Decimal
+        Public Property TransferFee As Double Implements IMembershipType.transferFees
             Get
-                Return CDec(Me("trans_fee"))
+                Dim result = Me("trans_fee")
+                Return If(IsNothing(result) OrElse IsDBNull(result), 0, CDbl(result))
             End Get
-            Set(value As Decimal)
+            Set(value As Double)
                 Me("trans_fee") = value
             End Set
         End Property
-        Public Property Description As String
+        Public Property Description As String Implements IMembershipType.description
             Get
-                Return CStr(Me("desc"))
+                Return TryCast(Me("desc"), String)
             End Get
             Set(value As String)
                 Me("desc") = value
             End Set
         End Property
+
+        Public Property privilges As HashSet(Of EnumMemberPrivileges) Implements IMembershipType.privilges
+            Get
+                Dim result = Me("privileges")
+                Dim bits As Integer = If(IsNothing(result) OrElse IsDBNull(result), 0, CInt(result))
+                Dim hs As HashSet(Of EnumMemberPrivileges) = New HashSet(Of EnumMemberPrivileges)
+                For Each i As Integer In [Enum].GetValues(GetType(EnumMemberPrivileges))
+                    If (bits And i) <> 0 Then
+                        hs.Add(DirectCast(i, EnumMemberPrivileges))
+                    End If
+                Next
+                Return hs
+            End Get
+            Set(value As HashSet(Of EnumMemberPrivileges))
+                Dim v As Integer = 0
+                For Each bit As Integer In value
+                    v = v Or bit
+                Next
+
+            End Set
+        End Property
+
         Public Overrides Function table() As Table
             Return Tables.MembershipsTable
         End Function

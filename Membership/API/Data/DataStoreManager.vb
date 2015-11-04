@@ -25,12 +25,12 @@
         End Set
     End Property
 
-    Private memberTypeManagerVar As IDataManager(Of MembershipType)
-    Property memberTypeManager As IDataManager(Of MembershipType)
+    Private memberTypeManagerVar As IDataManager(Of IMembershipType)
+    Property memberTypeManager As IDataManager(Of IMembershipType)
         Get
             Return memberTypeManagerVar
         End Get
-        Set(value As IDataManager(Of MembershipType))
+        Set(value As IDataManager(Of IMembershipType))
             If (Not IsNothing(memberTypeManagerVar)) Then
                 memberTypeManagerVar = value
             End If

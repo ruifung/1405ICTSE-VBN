@@ -85,7 +85,7 @@
     <Compile Include="API\Members\IMember.vb" />
     <Compile Include="API\Data\IDataManager.vb" />
     <Compile Include="API\Members\Payments\IMemberCharge.vb" />
-    <Compile Include="API\Members\MembershipType.vb" />
+    <Compile Include="API\Members\IMembershipType.vb" />
     <Compile Include="API\Members\Payments\IMemberPayment.vb" />
     <Compile Include="API\Members\Payments\IPaymentManager.vb" />
     <Compile Include="API\Users\IUser.vb" />
@@ -103,12 +103,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Data\Database\DataStore.vb" />
-    <Compile Include="Data\Database\MemberManager.vb" />
+    <Compile Include="Data\Database\Managers\MemberManager.vb" />
+    <Compile Include="Data\Database\Managers\MemberTypeManager.vb" />
     <Compile Include="Data\Database\Members.vb" />
     <Compile Include="Data\Database\Memberships.vb" />
-    <Compile Include="Data\Database\PlainMember.vb" />
-    <Compile Include="Data\Database\UserManager.vb" />
+    <Compile Include="Data\Database\Managers\UserManager.vb" />
     <Compile Include="Data\Database\Users.vb" />
+    <Compile Include="Data\PlainMember.vb" />
     <Compile Include="Data\PlainUser.vb" />
     <Compile Include="Exceptions\DataSourceException.vb" />
     <Compile Include="Exceptions\InvalidSettingException.vb" />

@@ -1,7 +1,7 @@
 ﻿Public Enum EnumMemberPrivileges
-    VOTING_RIGHTS
-    EQUITY_RIGHTS
-    RECIPROCAL
-    AFFLIATED
-    WEEKEND_BOOKINGS
+    VOTING_RIGHTS = 1
+    EQUITY_RIGHTS = 2
+    RECIPROCAL = 4
+    AFFLIATED = 8
+    WEEKEND_BOOKINGS = 16
 End Enum

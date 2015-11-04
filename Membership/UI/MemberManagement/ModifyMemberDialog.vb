@@ -10,6 +10,7 @@
         _member = member
         memberDetailsView.Enabled = False
         btnEdit.Visible = editable
+        Me.Text = String.Concat("Member Details for: ", If(IsNothing(member), String.Empty, String.Concat(member.firstName, member.lastName)))
     End Sub
 
     Private Sub onEnableEdit(sender As Object, e As EventArgs) Handles btnEdit.Click

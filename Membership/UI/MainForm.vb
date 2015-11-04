@@ -30,7 +30,7 @@ Public Class MainForm
                                           End If
                                           active = x.isActive.Equals(active)
                                           Dim typeSelected As Boolean
-                                          For Each y As MembershipType In lbTypes.SelectedItems
+                                          For Each y As IMembershipType In lbTypes.SelectedItems
                                               If y.typeID = x.membershipTypeID Then
                                                   typeSelected = True
                                               End If

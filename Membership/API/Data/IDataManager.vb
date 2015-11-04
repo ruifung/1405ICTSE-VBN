@@ -36,7 +36,7 @@
     ''' <param name="searchParam">IMember instance containing parameters to match.</param>
     ''' <param name="fuzzy">Allows partial matches where applicable.</param>
     ''' <returns></returns>
-    Function search(searchParam As T, fuzzy As Boolean) As List(Of T)
+    Function search(searchParam As T, matchAll As Boolean, fuzzyMatching As Boolean) As List(Of T)
 
     ''' <summary>
     ''' List all entries.

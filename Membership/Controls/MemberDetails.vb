@@ -223,7 +223,7 @@ Public Class MemberDetails
         cbMembershipType.DataSource = New BindingSource With {
             .DataSource = MaybeOption.create(Util.exec(dataManager, Function(x) x.memberTypeManager)) _
                 .map(Function(x) x.list) _
-                .getOrAlt(New List(Of MembershipType))
+                .getOrAlt(New List(Of IMembershipType))
         }
         cbMembershipType.DisplayMember = "typeName"
         cbMembershipType.ValueMember = "typeID"
@@ -300,7 +300,7 @@ Public Class MemberDetails
                                        Dim tID = CInt(e.Value)
                                        If tID >= 0 Then
                                            For x = 0 To cbMembershipType.Items.Count - 1
-                                               If CType(cbMembershipType.Items(x), MembershipType).typeID = tID Then
+                                               If CType(cbMembershipType.Items(x), IMembershipType).typeID = tID Then
                                                    e.Value = x
                                                    Exit Sub
                                                End If
@@ -315,7 +315,7 @@ Public Class MemberDetails
                                       End If
                                       Dim tID = CInt(e.Value)
                                       If tID >= 0 Then
-                                          e.Value = CType(cbMembershipType.Items(tID), MembershipType).typeID
+                                          e.Value = CType(cbMembershipType.Items(tID), IMembershipType).typeID
                                       End If
                                       e.Value = -1
                                   End Sub

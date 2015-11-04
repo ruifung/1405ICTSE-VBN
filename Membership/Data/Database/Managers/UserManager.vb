@@ -1,5 +1,7 @@
 ﻿Imports Membership
 Imports MDB
+Imports System.Data.OleDb
+
 Namespace Database
     Public Class UserManager
         Implements IDataManager(Of IUser)
@@ -73,7 +75,25 @@ Namespace Database
         End Function
 
         Public Function search(searchParam As IUser, matchAll As Boolean, fuzzy As Boolean) As List(Of IUser) Implements IDataManager(Of IUser).search
-            Throw New NotImplementedException()
+            Dim criteria As String = ""
+            Dim match_op As String = If(fuzzy, " Like ", "=")
+            Dim params As List(Of OleDbParameter) = New List(Of OleDbParameter)
+            If fuzzy And Not searchParam.userName Is Nothing Then _
+                searchParam.userName = String.Format("*{0}*", searchParam.userName)
+            If matchAll Then
+                criteria += String.Format("username{0}? OR", match_op)
+                criteria += String.Format("permissions{0}?", If(fuzzy, "<=", "="))
+                params.Add(MDBType.Text.asParam(searchParam.userName))
+                params.Add(MDBType.Number.asParam(searchParam.accessLevel))
+            ElseIf searchParam.userName IsNot Nothing Then
+                criteria += String.Format("username{0}?", match_op)
+                params.Add(MDBType.Text.asParam(searchParam.userName))
+            Else
+                criteria += String.Format("permissions{0}?", If(fuzzy, "<=", "="))
+                params.Add(MDBType.Number.asParam(searchParam.accessLevel))
+            End If
+            Dim list As New List(Of IUser)(DBList(Of User).Query(criteria, params.ToArray()))
+            Return list
         End Function
 
         Public Sub init() Implements IDataManager(Of IUser).init

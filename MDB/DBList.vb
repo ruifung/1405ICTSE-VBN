@@ -3,12 +3,16 @@
 Public Class DBList(Of T As DBObject)
     Inherits List(Of T)
 #Region "Static"
-    Public Shared Function Query(Optional criteria As String = Nothing) As DBList(Of T)
+    Public Shared Function Query() As DBList(Of T)
+        Return Query(Nothing)
+    End Function
+    Public Shared Function Query(criteria As String, ParamArray params() As OleDbParameter) As DBList(Of T)
         Dim list As New DBList(Of T)()
         DB.conn.Open()
         Dim cmd As New OleDbCommand(String.Format("SELECT * FROM `{0}`", list.table.Name), DB.conn)
         If criteria IsNot Nothing Then
             cmd.CommandText += Convert.ToString(" WHERE ") & criteria
+            cmd.Parameters.AddRange(params)
         End If
         Dim reader As OleDbDataReader = cmd.ExecuteReader()
         While reader.Read()
@@ -23,13 +27,17 @@ Public Class DBList(Of T As DBObject)
         DB.conn.Close()
         Return DirectCast(list, DBList(Of T))
     End Function
-    Public Shared Function RowsCount(Optional criteria As String = Nothing) As Integer
+    Public Shared Function RowsCount() As Integer
+        Return RowsCount(Nothing)
+    End Function
+    Public Shared Function RowsCount(criteria As String, ParamArray params() As OleDbParameter) As Integer
         Dim result As Integer = 0
         DB.conn.Open()
         Dim table As Table = DirectCast(Activator.CreateInstance(GetType(T)), DBObject).table
         Dim cmd As New OleDbCommand(String.Format("SELECT count(*) FROM `{0}`", table.Name), DB.conn)
         If criteria IsNot Nothing Then
             cmd.CommandText += Convert.ToString(" WHERE ") & criteria
+            cmd.Parameters.AddRange(params)
         End If
         Dim reader As OleDbDataReader = cmd.ExecuteReader()
         If reader.Read() Then

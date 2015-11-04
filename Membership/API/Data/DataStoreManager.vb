@@ -50,9 +50,13 @@
     End Property
 
     Sub New(dataStore As IDataStore, Optional dataStoreParam As Object = Nothing)
-        Me.dataStore = dataStore
-        dataStore.init(Me, MaybeOption.create(dataStoreParam))
-        dataStore.load()
-        dataStore.save()
+        Try
+            Me.dataStore = dataStore
+            dataStore.init(Me, MaybeOption.create(dataStoreParam))
+            dataStore.load()
+            dataStore.save()
+        Catch ex As Exception When TypeOf ex IsNot OleDb.OleDbException
+            Throw New Exceptions.DataSourceException(ex.Message, ex)
+        End Try
     End Sub
 End Class

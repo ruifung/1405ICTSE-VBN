@@ -3,6 +3,7 @@ Imports System.Configuration
 Imports Membership.Exceptions
 Namespace config
     Public Module ConfigManager
+        Private config As Configuration
         Private appSettings As AppSettingsSection
         Private noneString As None(Of String) = New None(Of String)
         Public dataManager As DataStoreManager
@@ -50,7 +51,7 @@ Namespace config
 
         Private Function loadSetting(key As String,
                          Optional verify As Predicate(Of String) = Nothing) As MaybeOption(Of String)
-            Dim setting = MaybeOption.create(appSettings.Settings.Item(key)) _
+            Dim setting = MaybeOption.create(appSettings.Settings(key)) _
             .map(Function(x) x.Value)
             Dim maybeVerify = MaybeOption.create(configurationKeys(key))
             If maybeVerify.forAll(Function(x) x(setting.orNothing)) Then
@@ -91,7 +92,9 @@ Namespace config
 
         Sub init()
             Try
-                appSettings = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings
+                config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+                appSettings = config.AppSettings
+                MsgBox(config.FilePath)
             Catch ex As ConfigurationErrorsException
                 MsgBox(ex.ToString, MsgBoxStyle.Critical, "Critical Error!")
                 quit()
@@ -142,7 +145,16 @@ Namespace config
             End While
         End Sub
 
-
+        Public Sub save()
+            For Each kv In configuration.ToList
+                If appSettings.Settings.AllKeys.Contains(kv.Key) Then
+                    appSettings.Settings(kv.Key).Value = kv.Value.orNothing
+                Else
+                    appSettings.Settings.Add(kv.Key, kv.Value.orNothing)
+                End If
+            Next
+            config.Save(ConfigurationSaveMode.Full)
+        End Sub
 
         Private Enum ErrorFlags
             DATABASE_CONFIG

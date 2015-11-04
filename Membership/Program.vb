@@ -14,6 +14,7 @@ Public Module Program
         Application.EnableVisualStyles()
         'Config Load.
         init()
+        save()
         While running
             Dim login = New LoginDialog
             Try
@@ -46,6 +47,7 @@ Public Module Program
         Catch ex As Exception
 
         End Try
+        save()
         running = False
         Application.Exit()
     End Sub

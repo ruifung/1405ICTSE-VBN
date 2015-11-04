@@ -22,6 +22,10 @@ Namespace Database
         Inherits DBObject
         Implements IMembershipType
 
+        Public Shared Function TryGet(id As Integer) As Membership
+            Return DBObject.Find(Of Membership)(id)
+        End Function
+
         Public Property id As Integer Implements IDataElement.id
             Get
                 Return CInt(Me("id"))

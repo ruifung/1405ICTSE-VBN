@@ -72,7 +72,7 @@ Namespace Database
             End If
         End Function
 
-        Public Function search(searchParam As IUser, fuzzy As Boolean) As List(Of IUser) Implements IDataManager(Of IUser).search
+        Public Function search(searchParam As IUser, matchAll As Boolean, fuzzy As Boolean) As List(Of IUser) Implements IDataManager(Of IUser).search
             Throw New NotImplementedException()
         End Function
 

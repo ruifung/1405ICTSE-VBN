@@ -31,7 +31,7 @@ Public Class MainForm
                                           active = x.isActive.Equals(active)
                                           Dim typeSelected As Boolean
                                           For Each y As IMembershipType In lbTypes.SelectedItems
-                                              If y.typeID = x.membershipTypeID Then
+                                              If y.id = x.membershipTypeID Then
                                                   typeSelected = True
                                               End If
                                           Next
@@ -74,7 +74,7 @@ Public Class MainForm
         If IsNothing(searchParam) Then
             Exit Sub
         End If
-        memberList = If(dataMembers.search(searchParam, True), New List(Of IMember))
+        memberList = If(dataMembers.search(searchParam, False, True), New List(Of IMember))
     End Sub
 
     Private Sub onPropertyChanged(<CallerMemberName> Optional propName As String = Nothing)

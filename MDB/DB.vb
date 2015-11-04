@@ -1,6 +1,6 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
-Module DB
+Public Module DB
     Private tables As List(Of Table) = New List(Of Table)
     Public conn As OleDbConnection
     Public Sub init(csb As OleDbConnectionStringBuilder)

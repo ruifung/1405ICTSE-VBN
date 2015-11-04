@@ -34,7 +34,8 @@
     ''' Searches the database for matching members.
     ''' </summary>
     ''' <param name="searchParam">IMember instance containing parameters to match.</param>
-    ''' <param name="fuzzy">Allows partial matches where applicable.</param>
+    ''' <param name="matchAll">Match all fields where applicable.</param>
+    ''' <param name="fuzzyMatching">Allows partial matches in fields where applicable.</param>
     ''' <returns></returns>
     Function search(searchParam As T, matchAll As Boolean, fuzzyMatching As Boolean) As List(Of T)
 

@@ -31,7 +31,7 @@ Public Class MemberTypeManager
         Throw New NotImplementedException()
     End Function
 
-    Public Function search(searchParam As IMembershipType, fuzzy As Boolean) As List(Of IMembershipType) Implements IDataManager(Of IMembershipType).search
+    Public Function search(searchParam As IMembershipType, matchAll As Boolean, fuzzy As Boolean) As List(Of IMembershipType) Implements IDataManager(Of IMembershipType).search
         Throw New NotImplementedException()
     End Function
 

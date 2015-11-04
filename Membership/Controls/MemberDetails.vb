@@ -300,7 +300,7 @@ Public Class MemberDetails
                                        Dim tID = CInt(e.Value)
                                        If tID >= 0 Then
                                            For x = 0 To cbMembershipType.Items.Count - 1
-                                               If CType(cbMembershipType.Items(x), IMembershipType).typeID = tID Then
+                                               If CType(cbMembershipType.Items(x), IMembershipType).id = tID Then
                                                    e.Value = x
                                                    Exit Sub
                                                End If
@@ -315,7 +315,7 @@ Public Class MemberDetails
                                       End If
                                       Dim tID = CInt(e.Value)
                                       If tID >= 0 Then
-                                          e.Value = CType(cbMembershipType.Items(tID), IMembershipType).typeID
+                                          e.Value = CType(cbMembershipType.Items(tID), IMembershipType).id
                                       End If
                                       e.Value = -1
                                   End Sub

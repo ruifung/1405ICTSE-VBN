@@ -37,8 +37,8 @@ Namespace Database
 
         End Sub
 
-        Public Function search(searchParam As IMember, fuzzy As Boolean) As List(Of IMember) Implements IDataManager(Of IMember).search
-
+        Public Function search(searchParam As IMember, matchAll As Boolean, fuzzyMatching As Boolean) As List(Of IMember) Implements IDataManager(Of IMember).search
+            Throw New NotImplementedException
         End Function
 
         Public Function updateEntry(entry As IMember) As Boolean Implements IDataManager(Of IMember).updateEntry

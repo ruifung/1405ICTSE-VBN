@@ -25,14 +25,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MDB.DBObject">
-    <Position X="5.75" Y="0.5" Width="1.5" />
+    <Position X="5.75" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAQAAEAAAABAAABAAAAAAAAEAAEIAAAQAAAQAAAAAAA=</HashCode>
       <FileName>DBObject.vb</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MDB.Field">
-    <Position X="2.25" Y="3.75" Width="1.5" />
+    <Position X="2.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAIAgAAAAAAAAAQAAABAAAAAAAAAABAAAAA=</HashCode>
       <FileName>Field.vb</FileName>

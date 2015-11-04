@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MDB.Constraint">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="MDB.Constraint.ConsType">
+        <TypeIdentifier>
+          <NewMemberFileName>Constraint.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAEAAAAAAAAAAAAAAABAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Constraint.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MDB.DBList(Of T)">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABAEABAAAAAAAAAAAEAAAgAAAAAAAAQAAA=</HashCode>
+      <FileName>DBList.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MDB.DBObject">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEAAAABAAABAAAAAAAAEAAEIAAAQAAAQAAAAAAA=</HashCode>
+      <FileName>DBObject.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MDB.Field">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAIAgAAAAAAAAAQAAABAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Field.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MDB.MDBType">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAGAAAUIAAAACDBACAgQCQAAACAAAAAA=</HashCode>
+      <FileName>MDBType.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MDB.Table">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="con" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAQAAAAAAAAAQQAAQAAAFAAAAAAAAAAgAA=</HashCode>
+      <FileName>Table.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Module Name="MDB.DB">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAABAAAAAAAAAAAQAAAIAAAAACAAAAAA=</HashCode>
+      <FileName>DB.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

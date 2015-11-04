@@ -148,12 +148,14 @@ Namespace config
         Public Sub save()
             For Each kv In configuration.ToList
                 If appSettings.Settings.AllKeys.Contains(kv.Key) Then
-                    appSettings.Settings(kv.Key).Value = kv.Value.orNothing
+                    appSettings.Settings(kv.Key).Value = kv.Value.getOrAlt(String.Empty)
                 Else
-                    appSettings.Settings.Add(kv.Key, kv.Value.orNothing)
+                    appSettings.Settings.Add(kv.Key, kv.Value.getOrAlt(String.Empty))
                 End If
             Next
-            config.Save(ConfigurationSaveMode.Full)
+            config.Save(ConfigurationSaveMode.Full, True)
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+            ConfigurationManager.RefreshSection("appSettings")
         End Sub
 
         Private Enum ErrorFlags

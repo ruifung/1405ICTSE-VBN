@@ -47,8 +47,8 @@ Public Module Program
         Catch ex As Exception
 
         End Try
-        save()
         running = False
         Application.Exit()
+        save()
     End Sub
 End Module

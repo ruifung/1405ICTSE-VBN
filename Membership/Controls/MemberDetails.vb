@@ -7,6 +7,7 @@ Public Class MemberDetails
     Implements INotifyPropertyChanged
 
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
+    Public Event MemberDataChanging As PropertyChangingEventHandler
 
     Private selfBind As BindingSource = New BindingSource With {.DataSource = Me}
     Private memberBinding As BindingSource = New BindingSource
@@ -42,6 +43,7 @@ Public Class MemberDetails
             Return _id
         End Get
         Set(value As Integer)
+            onMemberDataChanging()
             _id = value
             onPropertyChanged()
         End Set
@@ -52,6 +54,7 @@ Public Class MemberDetails
             Return _firstName
         End Get
         Set(value As String)
+            onMemberDataChanging()
             _firstName = value
             onPropertyChanged()
         End Set
@@ -62,6 +65,7 @@ Public Class MemberDetails
             Return _lastName
         End Get
         Set(value As String)
+            onMemberDataChanging()
             _lastName = value
             onPropertyChanged()
         End Set
@@ -72,6 +76,7 @@ Public Class MemberDetails
             Return _contactNumber
         End Get
         Set(value As String)
+            onMemberDataChanging()
             _contactNumber = value
             onPropertyChanged()
         End Set
@@ -82,6 +87,7 @@ Public Class MemberDetails
             Return _address
         End Get
         Set(value As String)
+            onMemberDataChanging()
             _address = value
             onPropertyChanged()
         End Set
@@ -92,6 +98,7 @@ Public Class MemberDetails
             Return _email
         End Get
         Set(value As String)
+            onMemberDataChanging()
             _email = value
             onPropertyChanged()
         End Set
@@ -102,6 +109,7 @@ Public Class MemberDetails
             Return _dob
         End Get
         Set(value As Date)
+            onMemberDataChanging()
             If value >= MinDate AndAlso value <= MaxDate Then
                 _dob = value
             Else
@@ -116,6 +124,7 @@ Public Class MemberDetails
             Return _gender
         End Get
         Set(value As Gender)
+            onMemberDataChanging()
             _gender = value
             onPropertyChanged()
         End Set
@@ -126,6 +135,7 @@ Public Class MemberDetails
             Return _photo
         End Get
         Set(value As MaybeOption(Of Image))
+            onMemberDataChanging()
             _photo = If(IsNothing(value), New None(Of Image), value)
             onPropertyChanged()
         End Set
@@ -136,6 +146,7 @@ Public Class MemberDetails
             Return _isActive
         End Get
         Set(value As Boolean)
+            onMemberDataChanging()
             _isActive = value
             onPropertyChanged()
         End Set
@@ -146,6 +157,7 @@ Public Class MemberDetails
             Return _membershipTypeID
         End Get
         Set(value As Integer)
+            onMemberDataChanging()
             _membershipTypeID = value
             onPropertyChanged()
         End Set
@@ -157,6 +169,7 @@ Public Class MemberDetails
             Return _paymentCredit
         End Get
         Set(value As Double)
+            onMemberDataChanging()
             _paymentCredit = value
             onPropertyChanged()
         End Set
@@ -351,6 +364,10 @@ Public Class MemberDetails
         photo = New None(Of Image)
         isActive = False
         membershipTypeID = -1
+    End Sub
+
+    Sub onMemberDataChanging(<CallerMemberName> Optional propName As String = Nothing)
+        RaiseEvent MemberDataChanging(Me, New PropertyChangingEventArgs(propName))
     End Sub
 
     Sub onPropertyChanged(<CallerMemberName> Optional propName As String = Nothing)

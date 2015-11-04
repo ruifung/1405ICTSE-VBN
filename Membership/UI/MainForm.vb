@@ -54,6 +54,8 @@ Public Class MainForm
         }
         lbTypes.DisplayMember = "typeName"
         lbTypes.ValueMember = "typeID"
+
+        dgMemberView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
     End Sub
 
     Private Sub onSearch(sender As Object, e As EventArgs) Handles btnSearch.Click
@@ -83,4 +85,8 @@ Public Class MainForm
 
     End Sub
 
+    Private Sub openMember(sender As Object, e As DataGridViewCellEventArgs) Handles dgMemberView.CellContentDoubleClick
+        Dim member = TryCast(dgMemberView.Rows(e.RowIndex).DataBoundItem, IMember)
+        Dim memberDetails = New ModifyMemberDialog(member, True)
+    End Sub
 End Class

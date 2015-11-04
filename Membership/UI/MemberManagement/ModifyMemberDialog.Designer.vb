@@ -24,10 +24,12 @@ Partial Class ModifyMemberDialog
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModifyMemberDialog))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.btnEdit = New System.Windows.Forms.ToolStripButton()
         Me.btnCancel = New System.Windows.Forms.ToolStripButton()
         Me.btnSave = New System.Windows.Forms.ToolStripButton()
+        Me.btnClose = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnBilling = New System.Windows.Forms.ToolStripButton()
+        Me.btnEdit = New System.Windows.Forms.ToolStripButton()
         Me.memberDetailsView = New Membership.MemberDetails()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -35,21 +37,12 @@ Partial Class ModifyMemberDialog
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEdit, Me.btnCancel, Me.btnSave, Me.btnBilling})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCancel, Me.btnSave, Me.btnClose, Me.ToolStripSeparator1, Me.btnBilling, Me.btnEdit})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(443, 25)
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'btnEdit
-        '
-        Me.btnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
-        Me.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(86, 22)
-        Me.btnEdit.Text = "Enable Editing"
         '
         'btnCancel
         '
@@ -71,14 +64,40 @@ Partial Class ModifyMemberDialog
         Me.btnSave.Text = "Save"
         Me.btnSave.Visible = False
         '
+        'btnClose
+        '
+        Me.btnClose.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnClose.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnClose.Image = CType(resources.GetObject("btnClose.Image"), System.Drawing.Image)
+        Me.btnClose.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(40, 22)
+        Me.btnClose.Text = "Close"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
         'btnBilling
         '
+        Me.btnBilling.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
         Me.btnBilling.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.btnBilling.Image = CType(resources.GetObject("btnBilling.Image"), System.Drawing.Image)
         Me.btnBilling.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnBilling.Name = "btnBilling"
-        Me.btnBilling.Size = New System.Drawing.Size(44, 22)
-        Me.btnBilling.Text = "Billing"
+        Me.btnBilling.Size = New System.Drawing.Size(76, 22)
+        Me.btnBilling.Text = "Open Billing"
+        '
+        'btnEdit
+        '
+        Me.btnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
+        Me.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(95, 22)
+        Me.btnEdit.Text = "Enter Edit Mode"
         '
         'memberDetailsView
         '
@@ -115,4 +134,6 @@ Partial Class ModifyMemberDialog
     Friend WithEvents btnCancel As ToolStripButton
     Friend WithEvents btnSave As ToolStripButton
     Friend WithEvents btnBilling As ToolStripButton
+    Friend WithEvents btnClose As ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
 End Class

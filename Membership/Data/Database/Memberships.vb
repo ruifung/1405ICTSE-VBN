@@ -4,7 +4,7 @@ Namespace Database
         Public Shared MembershipsTable As Table
         Public Shared Sub InitMShipsTable()
             Dim t As Table = New Table
-            t.Name = "Memberships"
+            t.Name = "memberships"
             t.Fields("id") = New Field(MDBType.AutoNumber)
             t.Fields("type") = New Field(MDBType.Text, 20)
             t.Fields("reg_fee") = New Field(MDBType.Currency)

@@ -8,6 +8,7 @@ Namespace Database
         Public Shared MembersTable As Table
         Public Shared Sub InitMembersTable()
             MembersTable = New Table()
+            MembersTable.Name = "members"
             MembersTable.Fields("id") = New Field(MDBType.AutoNumber)
             MembersTable.Fields("firstname") = New Field(MDBType.Text, 50)
             MembersTable.Fields("lastname") = New Field(MDBType.Text, 50)

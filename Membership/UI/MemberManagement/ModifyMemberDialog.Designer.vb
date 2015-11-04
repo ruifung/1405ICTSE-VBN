@@ -27,8 +27,8 @@ Partial Class ModifyMemberDialog
         Me.btnEdit = New System.Windows.Forms.ToolStripButton()
         Me.btnCancel = New System.Windows.Forms.ToolStripButton()
         Me.btnSave = New System.Windows.Forms.ToolStripButton()
-        Me.memberDetailsView = New Membership.MemberDetails()
         Me.btnBilling = New System.Windows.Forms.ToolStripButton()
+        Me.memberDetailsView = New Membership.MemberDetails()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -71,6 +71,15 @@ Partial Class ModifyMemberDialog
         Me.btnSave.Text = "Save"
         Me.btnSave.Visible = False
         '
+        'btnBilling
+        '
+        Me.btnBilling.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnBilling.Image = CType(resources.GetObject("btnBilling.Image"), System.Drawing.Image)
+        Me.btnBilling.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnBilling.Name = "btnBilling"
+        Me.btnBilling.Size = New System.Drawing.Size(44, 22)
+        Me.btnBilling.Text = "Billing"
+        '
         'memberDetailsView
         '
         Me.memberDetailsView.BoundMember = Nothing
@@ -81,15 +90,6 @@ Partial Class ModifyMemberDialog
         Me.memberDetailsView.Name = "memberDetailsView"
         Me.memberDetailsView.Size = New System.Drawing.Size(455, 321)
         Me.memberDetailsView.TabIndex = 1
-        '
-        'btnBilling
-        '
-        Me.btnBilling.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnBilling.Image = CType(resources.GetObject("btnBilling.Image"), System.Drawing.Image)
-        Me.btnBilling.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnBilling.Name = "btnBilling"
-        Me.btnBilling.Size = New System.Drawing.Size(44, 22)
-        Me.btnBilling.Text = "Billing"
         '
         'ModifyMemberDialog
         '

@@ -149,7 +149,7 @@ Partial Class MainForm
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.dgMemberView)
         Me.SplitContainer1.Size = New System.Drawing.Size(805, 380)
-        Me.SplitContainer1.SplitterDistance = 188
+        Me.SplitContainer1.SplitterDistance = 187
         Me.SplitContainer1.TabIndex = 3
         '
         'GroupBox2
@@ -302,7 +302,7 @@ Partial Class MainForm
         Me.dgMemberView.Location = New System.Drawing.Point(0, 0)
         Me.dgMemberView.Name = "dgMemberView"
         Me.dgMemberView.ReadOnly = True
-        Me.dgMemberView.Size = New System.Drawing.Size(613, 380)
+        Me.dgMemberView.Size = New System.Drawing.Size(614, 380)
         Me.dgMemberView.TabIndex = 0
         '
         'MainForm

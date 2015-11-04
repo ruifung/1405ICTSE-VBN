@@ -1,4 +1,6 @@
-﻿Public Class DataSourceException
-    Inherits ApplicationException
+﻿Namespace Exceptions
+    Public Class DataSourceException
+        Inherits ApplicationException
 
-End Class
+    End Class
+End Namespace

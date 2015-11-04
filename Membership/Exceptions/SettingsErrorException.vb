@@ -1,4 +1,6 @@
-﻿Public Class SettingsErrorException
-    Inherits ApplicationException
+﻿Namespace Exceptions
+    Public Class SettingsErrorException
+        Inherits ApplicationException
 
-End Class
+    End Class
+End Namespace

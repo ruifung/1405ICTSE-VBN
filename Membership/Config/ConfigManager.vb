@@ -1,5 +1,6 @@
 ﻿Imports System.Collections.Immutable
 Imports System.Configuration
+Imports Membership.Exceptions
 
 Public Module ConfigManager
     Private appSettings As AppSettingsSection

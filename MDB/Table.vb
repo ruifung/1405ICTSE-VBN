@@ -5,10 +5,12 @@ Public Class Table
     Public Fields As Dictionary(Of String, Field) = New Dictionary(Of String, Field)
     Public Function CreateSQL() As String
         Dim sql As String = String.Format("CREATE TABLE `{0}` (", Name)
+        Dim fs As List(Of String) = New List(Of String)
         For Each pair As KeyValuePair(Of String, Field) In Fields
             pair.Value.Name = pair.Key
-            sql += String.Format("{0}, ", pair.Value.CreateSQL())
+            fs.Add(String.Format("{0}", pair.Value.CreateSQL()))
         Next
+        sql += String.Join(", ", fs.ToArray()) + ")"
         Return sql
     End Function
     Public Sub Create()

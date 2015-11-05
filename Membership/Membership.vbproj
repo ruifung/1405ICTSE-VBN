@@ -117,6 +117,7 @@
     <Compile Include="Data\Database\Managers\UserManager.vb" />
     <Compile Include="Data\Database\Payment\Charges.vb" />
     <Compile Include="Data\Database\Payment\Payments.vb" />
+    <Compile Include="Data\Database\PlainInvoice.vb" />
     <Compile Include="Data\Database\Users.vb" />
     <Compile Include="Data\PlainMember.vb" />
     <Compile Include="Data\PlainUser.vb" />

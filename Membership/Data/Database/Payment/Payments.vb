@@ -20,7 +20,7 @@ Namespace Database
             PaymentsTable = t
         End Sub
     End Class
-    Public Class Payments
+    Public Class Payment
         Inherits DBObject
         Implements IMemberPayment
 

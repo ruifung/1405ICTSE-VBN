@@ -9,6 +9,11 @@
         Me.DataType = datatype
         Me.Size = size
     End Sub
+    ''' <summary>
+    ''' Get SQL for the field
+    ''' </summary>
+    ''' <returns>the sql</returns>
+    ''' <remarks></remarks>
     Public Function CreateSQL() As String
         Dim s As String = If(DataType.SizeRequired, String.Format("({0})", Size), "")
         Return String.Format("`{0}` {1}{2}{3}{4}", Me.Name, Me.DataType.SQL, s, If(Me.NotNull, " NOT NULL", ""), If(IsNothing(Me.DefaultValue), "", " DEFAULT ?"))

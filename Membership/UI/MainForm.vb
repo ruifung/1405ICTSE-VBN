@@ -6,17 +6,17 @@ Public Class MainForm
     Implements INotifyPropertyChanged
 
     Private dataMembers As IDataManager(Of IMember) = dataManager.memberManager
-    Private _memberList As List(Of IMember)
+    Private _memberList As List(Of IMember), dataSource As BindingSource = New BindingSource With {.DataSource = filteredMembers}
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
     Property memberList As List(Of IMember)
         Get
-            Return _memberList
+            Return If(_memberList, New List(Of IMember))
         End Get
         Set(value As List(Of IMember))
             _memberList = value
             onPropertyChanged()
-            onFilteredChange()
+            updateFilter()
         End Set
     End Property
 
@@ -42,8 +42,9 @@ Public Class MainForm
         End Get
     End Property
 
-    Sub onFilteredChange()
+    Sub updateFilter()
         onPropertyChanged("filteredMembers")
+        dataSource.DataSource = filteredMembers
     End Sub
 
 
@@ -53,9 +54,10 @@ Public Class MainForm
             .DataSource = dataManager.memberTypeManager.list
         }
         lbTypes.DisplayMember = "typeName"
-        lbTypes.ValueMember = "typeID"
+        lbTypes.ValueMember = "id"
 
         dgMemberView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgMemberView.DataSource = dataSource
     End Sub
 
     Private Sub onSearch(sender As Object, e As EventArgs)

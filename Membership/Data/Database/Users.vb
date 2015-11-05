@@ -51,7 +51,7 @@ Namespace Database
                 Return Convert.ToBase64String(CType(Me("authkey"), Byte()))
             End Get
             Set(value As String)
-                Dim salt(16) As Byte
+                Dim salt(15) As Byte
                 RNGCryptoServiceProvider.Create().GetBytes(salt)
                 Me("salt") = salt
                 Me("authkey") = hash(Encoding.UTF8.GetBytes(value), salt)

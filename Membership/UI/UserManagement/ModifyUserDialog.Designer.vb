@@ -22,8 +22,16 @@ Partial Class ModifyUserDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Me.SuspendLayout()
+        '
+        'ModifyUserDialog
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(709, 334)
+        Me.Name = "ModifyUserDialog"
         Me.Text = "ModifyUserDialog"
+        Me.ResumeLayout(False)
+
     End Sub
 End Class

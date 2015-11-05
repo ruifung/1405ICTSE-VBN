@@ -17,7 +17,7 @@ Namespace Database
             MembersTable.Fields("mship") = New Field(MDBType.Number)
             MembersTable.Fields("contact") = New Field(MDBType.Text, 15)
             MembersTable.Fields("email") = New Field(MDBType.Text, 50)
-            MembersTable.Fields("photo") = New Field(MDBType.Binary, 5 * 1024 * 1024)
+            MembersTable.Fields("photo") = New Field(MDBType.OLE)
             MembersTable.Fields("credit") = New Field(MDBType.Currency)
             MembersTable.Fields("activate") = New Field(MDBType.Byte)
             MembersTable.PrimaryKey = "id"

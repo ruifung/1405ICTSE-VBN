@@ -2,7 +2,7 @@
 
 Public Class MDBType
 #Region "Types"
-    Public Shared ReadOnly Text As New MDBType("VARCHAR", OleDbType.VarWChar, GetType(String))
+    Public Shared ReadOnly Text As New MDBType("VARCHAR", OleDbType.VarWChar, GetType(String), True)
     Public Shared ReadOnly Memo As New MDBType("LONGTEXT", OleDbType.LongVarWChar, GetType(String))
     Public Shared ReadOnly [Byte] As New MDBType("BYTE", OleDbType.UnsignedTinyInt, GetType(Byte))
     Public Shared ReadOnly DateTime As New MDBType("DATETIME", OleDbType.Date, GetType(Date))
@@ -11,7 +11,8 @@ Public Class MDBType
     Public Shared ReadOnly [Double] As New MDBType("DOUBLE", OleDbType.Double, GetType(Double))
     Public Shared ReadOnly Number As New MDBType("LONG", OleDbType.Integer, GetType(Int32))
     Public Shared ReadOnly [Integer] As New MDBType("SHORT", OleDbType.SmallInt, GetType(Int16))
-    Public Shared ReadOnly Binary As New MDBType("VARBINARY", OleDbType.VarBinary, GetType(Byte()))
+    Public Shared ReadOnly Binary As New MDBType("VARBINARY", OleDbType.VarBinary, GetType(Byte()), True)
+    Public Shared ReadOnly OLE As New MDBType("LONGBINARY", OleDbType.LongVarBinary, GetType(Byte()))
     Public Shared ReadOnly AutoNumber As New MDBType("AUTOINCREMENT", OleDbType.Integer, GetType(Int32))
 #End Region
 #Region "Instance Properties & Functions"
@@ -33,17 +34,13 @@ Public Class MDBType
     ''' <summary>
     ''' does this data type require size
     ''' </summary>
-    ''' <returns>true if it needs</returns>
     ''' <remarks></remarks>
-    Public ReadOnly Property SizeRequired As Boolean
-        Get
-            Return NetType = GetType(String) Or NetType = GetType(Byte())
-        End Get
-    End Property
-    Private Sub New(sql As String, dbtype As OleDbType, t As Type)
+    Public ReadOnly SizeRequired As Boolean
+    Private Sub New(sql As String, dbtype As OleDbType, t As Type, Optional sr As Boolean = False)
         Me.SQL = sql
         Me.DBType = dbtype
         Me.NetType = t
+        Me.SizeRequired = sr
     End Sub
     ''' <summary>
     ''' Create a OleDbParameter as current datatype

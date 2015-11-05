@@ -39,7 +39,7 @@ Public Class ModifyMemberDialog
     ''' </summary>
     ''' <param name="member">Member to bind to.</param>
     ''' <param name="editable">Is editable.</param>
-    Sub New(member As IMember, Optional editable As Boolean = False)
+    Sub New(member As WrappedMember, Optional editable As Boolean = False)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -47,6 +47,7 @@ Public Class ModifyMemberDialog
         ' Add any initialization after the InitializeComponent() call.
         _member = member
         memberDetailsView.Enabled = False
+        memberDetailsView.BoundMember = _member
         btnEdit.Visible = editable
         Text = String.Concat("Member Details for: ", If(IsNothing(member), String.Empty, String.Concat("#", member.id.ToString)))
     End Sub
@@ -120,7 +121,7 @@ Public Class ModifyMemberDialog
     End Sub
 
     Private Sub gotoBilling(sender As Object, e As EventArgs) Handles btnBilling.Click
-        Dim billingForm = New MemberBilling(member)
+        Dim billingForm = New MemberBilling(WrappedMember.wrap(member))
         Me.Visible = False
         billingForm.ShowDialog()
         Me.Visible = True

@@ -18,6 +18,7 @@ Namespace Database
                 manager.userManager = New UserManager()
                 manager.memberManager = New MemberManager()
                 manager.memberTypeManager = New MemberTypeManager()
+                manager.paymentManager = New PaymentManager()
                 Dim csb As OleDbConnectionStringBuilder = TryCast(param.orNothing, OleDbConnectionStringBuilder)
                 If IsNothing(csb) Then Throw (New ArgumentException("Parameters is not a OleDbConnectionStringBuilder!"))
                 DB.init(csb)

@@ -5,7 +5,7 @@ Imports Membership.config
 Public Class MainForm
     Implements INotifyPropertyChanged
 
-    Private loggingOut As Boolean
+    Private loggingOut, hasSearch As Boolean
     Private dataMembers As IDataManager(Of IMember) = dataManager.memberManager
     Private _memberList As List(Of WrappedMember), dataSource As BindingSource = New BindingSource With {.DataSource = filteredMembers}
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
@@ -69,7 +69,8 @@ Public Class MainForm
         memberList = dataManager.memberManager.list.Select(WrappedMember.wrap).ToList
     End Sub
 
-    Private Sub onSearch(sender As Object, e As EventArgs)
+    Private Sub onSearch(sender As Object, e As EventArgs) Handles btnSearch.Click
+        hasSearch = True
         Dim searchParam As PlainMember = Nothing
         If rbSearchName.Checked Then
             searchParam = New PlainMember With {
@@ -93,7 +94,6 @@ Public Class MainForm
 
     Private Sub onPropertyChanged(<CallerMemberName> Optional propName As String = Nothing)
         RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propName))
-
     End Sub
 
     Private Sub formIsClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -102,9 +102,13 @@ Public Class MainForm
         End If
     End Sub
 
-    Private Sub openMember(sender As Object, e As DataGridViewCellEventArgs)
+    Private Sub openMember(sender As Object, e As DataGridViewCellEventArgs) Handles dgMemberView.CellDoubleClick
         Dim member = TryCast(dgMemberView.Rows(e.RowIndex).DataBoundItem, IMember)
-        Dim memberDetails = New ModifyMemberDialog(member, True)
+        If member IsNot Nothing Then
+            Dim memberDetails = New ModifyMemberDialog(WrappedMember.wrap(member), True)
+            memberDetails.ShowDialog()
+            reload()
+        End If
     End Sub
 
     Private Sub onExitBtn(sender As Object, e As EventArgs) Handles btnExit.Click
@@ -116,11 +120,39 @@ Public Class MainForm
         logout()
     End Sub
 
+    Private Sub onBtnRemoveMembers(sender As Object, e As EventArgs) Handles btnRemoveMembers.Click
+        Dim list = New List(Of IMember)
+        For Each x As DataGridViewRow In dgMemberView.SelectedRows
+            exec(TryCast(x.DataBoundItem, IMember), Sub(y) list.Add(y))
+        Next
+        Dim result = MsgBox(String.Format("Are you sure you want to delete {0} members?", list.Count), MsgBoxStyle.YesNo)
+        If result = MsgBoxResult.Yes Then
+            list.ForEach(Sub(x) dataManager.userManager.removeEntry(DirectCast(x, IUser)))
+        End If
+    End Sub
+
+    Private Sub onClearFilters(sender As Object, e As EventArgs) Handles btnClearFilters.Click
+        txtSearch.Clear()
+        lbTypes.ClearSelected()
+        rbAllStates.Checked = True
+        hasSearch = False
+        reload()
+    End Sub
+
+    Private Sub reload()
+        If hasSearch Then
+            onSearch(Me, New EventArgs)
+        Else
+            memberList = dataManager.memberManager.list.Select(WrappedMember.wrap).ToList
+        End If
+    End Sub
+
     Private Sub addNewMember(sender As Object, e As EventArgs) Handles btnAddMember.Click
         Dim dialog = New ModifyMemberDialog()
         Dim result = dialog.ShowDialog
         If result = DialogResult.OK Then
             dataManager.memberManager.addEntry(dialog.member)
         End If
+        onClearFilters(Me, New EventArgs)
     End Sub
 End Class

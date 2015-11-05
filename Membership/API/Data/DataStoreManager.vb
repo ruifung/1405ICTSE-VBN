@@ -37,14 +37,14 @@
         End Set
     End Property
 
-    Private transactionManagerVar As IDataManager(Of IMemberCharge)
-    Property transactionManager As IDataManager(Of IMemberCharge)
+    Private _paymentManager As IPaymentManager
+    Property paymentManager As IPaymentManager
         Get
-            Return transactionManagerVar
+            Return _paymentManager
         End Get
-        Set(value As IDataManager(Of IMemberCharge))
-            If (IsNothing(transactionManagerVar)) Then
-                transactionManagerVar = value
+        Set(value As IPaymentManager)
+            If (IsNothing(_paymentManager)) Then
+                _paymentManager = value
             End If
         End Set
     End Property

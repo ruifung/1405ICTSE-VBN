@@ -79,10 +79,15 @@ Namespace Database
         Public Function updateEntry(entry As IMember) As Boolean Implements IDataManager(Of IMember).updateEntry
             Dim m As Member = TryCast(entry, Member)
             If IsNothing(m) Then
-                m = Member.TryGet(entry.id)
-                Util.exec(m, Sub(x) x.setAll(entry))
+                If TypeOf entry Is WrappedMember Then
+                    m = TryCast(DirectCast(entry, WrappedMember)._backingMember, Member)
+                End If
+                If m Is Nothing Then
+                    m = Member.TryGet(entry.id)
+                    exec(m, Sub(x) x.setAll(entry))
+                End If
             End If
-            Util.exec(m, Sub(x) x.Update())
+            exec(m, Sub(x) x.Update())
             Return Not IsNothing(m)
         End Function
 

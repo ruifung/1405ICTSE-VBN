@@ -95,11 +95,14 @@ Namespace Database
             Get
                 If IsNothing(Me("photo")) Then Return New None(Of Image)
                 If _photo.isEmpty Then
-                    Dim bytes() As Byte = DirectCast(Me("photo"), Byte())
-                    ' break and see the bytes correct or not
-                    Using stream As MemoryStream = New MemoryStream(bytes, False)
+                    Dim stream As MemoryStream = New MemoryStream(DirectCast(Me("photo"), Byte()))
+                    Try
                         _photo = MaybeOption.create(Image.FromStream(stream))
-                    End Using
+                    Catch ex As ArgumentException
+                        _photo = New None(Of Image)
+                        Update()
+                    End Try
+                    stream.Close()
                 End If
                 Return _photo
             End Get
@@ -108,9 +111,8 @@ Namespace Database
                 _photo.forEach(Sub(x)
                                    Dim stream As MemoryStream = New MemoryStream()
                                    x.Save(stream, ImageFormat.Jpeg)
-                                   Dim bytes(CInt(stream.Length)) As Byte
-                                   stream.Read(bytes, 0, CInt(stream.Length))
-                                   stream.Close()
+                                   Dim bytes() = stream.ToArray
+                                   stream.Dispose()
                                    Me("photo") = bytes
                                End Sub)
             End Set
@@ -162,7 +164,7 @@ Namespace Database
 
         Public Property paymentTerm As PaymentTerm Implements IMember.paymentTerm
             Get
-                Return DirectCast(Me("term"), PaymentTerm)
+                Return CType(Me("term"), PaymentTerm)
             End Get
             Set(value As PaymentTerm)
                 Me("term") = CInt(value)

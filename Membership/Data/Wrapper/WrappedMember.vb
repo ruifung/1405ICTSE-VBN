@@ -1,4 +1,6 @@
-﻿Public Class WrappedMember
+﻿Imports System.ComponentModel
+
+Public Class WrappedMember
     Implements IMember
 
     Public Shared wrap As Func(Of IMember, WrappedMember) =
@@ -6,8 +8,9 @@
             Return If(TryCast(member, WrappedMember), New WrappedMember(member))
         End Function
 
-    Private _backingMember As IMember
+    Public ReadOnly _backingMember As IMember
 
+    <DisplayName("Address")>
     Public Property address As String Implements IMember.address
         Get
             Return _backingMember.address
@@ -17,6 +20,7 @@
         End Set
     End Property
 
+    <DisplayName("Telephone Number")>
     Public Property contactNumber As String Implements IMember.contactNumber
         Get
             Return _backingMember.contactNumber
@@ -26,6 +30,7 @@
         End Set
     End Property
 
+    <DisplayName("Birthday")>
     Public Property dob As Date Implements IMember.dob
         Get
             Return _backingMember.dob
@@ -35,6 +40,7 @@
         End Set
     End Property
 
+    <DisplayName("E-Mail")>
     Public Property email As String Implements IMember.email
         Get
             Return _backingMember.email
@@ -44,6 +50,7 @@
         End Set
     End Property
 
+    <DisplayName("First Name")>
     Public Property firstName As String Implements IMember.firstName
         Get
             Return _backingMember.firstName
@@ -53,6 +60,7 @@
         End Set
     End Property
 
+    <DisplayName("Gender")>
     Public Property gender As Gender Implements IMember.gender
         Get
             Return _backingMember.gender
@@ -62,12 +70,14 @@
         End Set
     End Property
 
+    <DisplayName("ID")>
     Public ReadOnly Property id As Integer Implements IDataElement.id
         Get
             Return _backingMember.id
         End Get
     End Property
 
+    <DisplayName("Membership State")>
     Public Property isActive As Boolean Implements IMember.isActive
         Get
             Return _backingMember.isActive
@@ -77,6 +87,7 @@
         End Set
     End Property
 
+    <DisplayName("Last Name")>
     Public Property lastName As String Implements IMember.lastName
         Get
             Return _backingMember.lastName
@@ -86,6 +97,7 @@
         End Set
     End Property
 
+    <DisplayName("Membership Type")>
     Public Property membershipTypeID As Integer Implements IMember.membershipTypeID
         Get
             Return _backingMember.membershipTypeID
@@ -95,6 +107,7 @@
         End Set
     End Property
 
+    <DisplayName("Payment Credit")>
     Public Property paymentCredit As Decimal Implements IMember.paymentCredit
         Get
             Return _backingMember.paymentCredit
@@ -104,6 +117,7 @@
         End Set
     End Property
 
+    <DisplayName("Payment Term")>
     Public Property paymentTerm As PaymentTerm Implements IMember.paymentTerm
         Get
             Return _backingMember.paymentTerm
@@ -113,6 +127,7 @@
         End Set
     End Property
 
+    <DisplayName("Payment Term Due")>
     Public Property paymentTermDue As Date Implements IMember.paymentTermDue
         Get
             Return _backingMember.paymentTermDue
@@ -122,6 +137,7 @@
         End Set
     End Property
 
+    <DisplayName("Photo")>
     Public Property photo As MaybeOption(Of Image) Implements IMember.photo
         Get
             Return _backingMember.photo

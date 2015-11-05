@@ -28,21 +28,6 @@ Partial Class MainForm
         Me.lblDataSource = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtSearch = New Membership.TextBoxEx()
-        Me.btnSearch = New System.Windows.Forms.Button()
-        Me.rbSearchName = New System.Windows.Forms.RadioButton()
-        Me.rbSearchEmail = New System.Windows.Forms.RadioButton()
-        Me.rbSearchContact = New System.Windows.Forms.RadioButton()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lbTypes = New System.Windows.Forms.ListBox()
-        Me.rbInactive = New System.Windows.Forms.RadioButton()
-        Me.rbActive = New System.Windows.Forms.RadioButton()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.dgMemberView = New System.Windows.Forms.DataGridView()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnExit = New System.Windows.Forms.ToolStripButton()
         Me.btnLogout = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
@@ -50,7 +35,23 @@ Partial Class MainForm
         Me.btnRemoveMembers = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnManageUsers = New System.Windows.Forms.ToolStripButton()
         Me.btnChangePass = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtSearch = New Membership.TextBoxEx()
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.rbSearchName = New System.Windows.Forms.RadioButton()
+        Me.rbSearchEmail = New System.Windows.Forms.RadioButton()
+        Me.rbSearchContact = New System.Windows.Forms.RadioButton()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lbTypes = New System.Windows.Forms.ListBox()
+        Me.rbInactive = New System.Windows.Forms.RadioButton()
+        Me.rbActive = New System.Windows.Forms.RadioButton()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.dgMemberView = New System.Windows.Forms.DataGridView()
+        Me.btnClearFilters = New System.Windows.Forms.ToolStripButton()
+        Me.rbAllStates = New System.Windows.Forms.RadioButton()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -58,9 +59,9 @@ Partial Class MainForm
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgMemberView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'StatusStrip1
@@ -96,12 +97,75 @@ Partial Class MainForm
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExit, Me.btnLogout, Me.ToolStripDropDownButton1, Me.btnManageUsers, Me.btnChangePass})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExit, Me.btnLogout, Me.ToolStripDropDownButton1, Me.btnManageUsers, Me.btnChangePass, Me.btnClearFilters})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(828, 25)
         Me.ToolStrip1.TabIndex = 4
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'btnExit
+        '
+        Me.btnExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
+        Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(29, 22)
+        Me.btnExit.Text = "Exit"
+        '
+        'btnLogout
+        '
+        Me.btnLogout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnLogout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
+        Me.btnLogout.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnLogout.Name = "btnLogout"
+        Me.btnLogout.Size = New System.Drawing.Size(49, 22)
+        Me.btnLogout.Text = "Logout"
+        '
+        'ToolStripDropDownButton1
+        '
+        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddMember, Me.btnRemoveMembers})
+        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
+        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(126, 22)
+        Me.ToolStripDropDownButton1.Text = "Member Operations"
+        '
+        'btnAddMember
+        '
+        Me.btnAddMember.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnAddMember.Name = "btnAddMember"
+        Me.btnAddMember.Size = New System.Drawing.Size(178, 22)
+        Me.btnAddMember.Text = "Add Member"
+        '
+        'btnRemoveMembers
+        '
+        Me.btnRemoveMembers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnRemoveMembers.Name = "btnRemoveMembers"
+        Me.btnRemoveMembers.Size = New System.Drawing.Size(178, 22)
+        Me.btnRemoveMembers.Text = "Remove Member(s)"
+        '
+        'btnManageUsers
+        '
+        Me.btnManageUsers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnManageUsers.Image = CType(resources.GetObject("btnManageUsers.Image"), System.Drawing.Image)
+        Me.btnManageUsers.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnManageUsers.Name = "btnManageUsers"
+        Me.btnManageUsers.Size = New System.Drawing.Size(108, 22)
+        Me.btnManageUsers.Text = "User Management"
+        '
+        'btnChangePass
+        '
+        Me.btnChangePass.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnChangePass.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnChangePass.Image = CType(resources.GetObject("btnChangePass.Image"), System.Drawing.Image)
+        Me.btnChangePass.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnChangePass.Name = "btnChangePass"
+        Me.btnChangePass.Size = New System.Drawing.Size(105, 22)
+        Me.btnChangePass.Text = "Change Password"
         '
         'SplitContainer1
         '
@@ -120,7 +184,7 @@ Partial Class MainForm
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.dgMemberView)
         Me.SplitContainer1.Size = New System.Drawing.Size(828, 380)
-        Me.SplitContainer1.SplitterDistance = 191
+        Me.SplitContainer1.SplitterDistance = 190
         Me.SplitContainer1.TabIndex = 5
         '
         'GroupBox2
@@ -191,8 +255,20 @@ Partial Class MainForm
         Me.rbSearchContact.Text = "Contact Number"
         Me.rbSearchContact.UseVisualStyleBackColor = True
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PictureBox1.Image = Global.Membership.My.Resources.Resources.logo_imperial_golf_club
+        Me.PictureBox1.Location = New System.Drawing.Point(0, 262)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(190, 118)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 6
+        Me.PictureBox1.TabStop = False
+        '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.rbAllStates)
         Me.GroupBox1.Controls.Add(Me.lbTypes)
         Me.GroupBox1.Controls.Add(Me.rbInactive)
         Me.GroupBox1.Controls.Add(Me.rbActive)
@@ -216,7 +292,7 @@ Partial Class MainForm
         'rbInactive
         '
         Me.rbInactive.AutoSize = True
-        Me.rbInactive.Location = New System.Drawing.Point(68, 125)
+        Me.rbInactive.Location = New System.Drawing.Point(66, 125)
         Me.rbInactive.Name = "rbInactive"
         Me.rbInactive.Size = New System.Drawing.Size(63, 17)
         Me.rbInactive.TabIndex = 4
@@ -263,97 +339,34 @@ Partial Class MainForm
         Me.dgMemberView.Location = New System.Drawing.Point(0, 0)
         Me.dgMemberView.Name = "dgMemberView"
         Me.dgMemberView.ReadOnly = True
-        Me.dgMemberView.Size = New System.Drawing.Size(633, 380)
+        Me.dgMemberView.Size = New System.Drawing.Size(634, 380)
         Me.dgMemberView.TabIndex = 0
         '
-        'PictureBox1
+        'btnClearFilters
         '
-        Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PictureBox1.Image = Global.Membership.My.Resources.Resources.logo_imperial_golf_club
-        Me.PictureBox1.Location = New System.Drawing.Point(0, 262)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(191, 118)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 6
-        Me.PictureBox1.TabStop = False
+        Me.btnClearFilters.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnClearFilters.Image = CType(resources.GetObject("btnClearFilters.Image"), System.Drawing.Image)
+        Me.btnClearFilters.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnClearFilters.Name = "btnClearFilters"
+        Me.btnClearFilters.Size = New System.Drawing.Size(72, 22)
+        Me.btnClearFilters.Text = "Clear Filters"
         '
-        'btnExit
+        'rbAllStates
         '
-        Me.btnExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
-        Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(29, 22)
-        Me.btnExit.Text = "Exit"
-        '
-        'btnLogout
-        '
-        Me.btnLogout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnLogout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
-        Me.btnLogout.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(49, 22)
-        Me.btnLogout.Text = "Logout"
-        '
-        'ToolStripDropDownButton1
-        '
-        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddMember, Me.btnRemoveMembers})
-        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
-        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
-        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(126, 22)
-        Me.ToolStripDropDownButton1.Text = "Member Operations"
-        '
-        'btnAddMember
-        '
-        Me.btnAddMember.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnAddMember.Name = "btnAddMember"
-        Me.btnAddMember.Size = New System.Drawing.Size(178, 22)
-        Me.btnAddMember.Text = "Add Member"
-        '
-        'btnRemoveMembers
-        '
-        Me.btnRemoveMembers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnRemoveMembers.Name = "btnRemoveMembers"
-        Me.btnRemoveMembers.Size = New System.Drawing.Size(178, 22)
-        Me.btnRemoveMembers.Text = "Remove Member(s)"
-        '
-        'btnManageUsers
-        '
-        Me.btnManageUsers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnManageUsers.Image = CType(resources.GetObject("btnManageUsers.Image"), System.Drawing.Image)
-        Me.btnManageUsers.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnManageUsers.Name = "btnManageUsers"
-        Me.btnManageUsers.Size = New System.Drawing.Size(108, 22)
-        Me.btnManageUsers.Text = "User Management"
-        '
-        'btnChangePass
-        '
-        Me.btnChangePass.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnChangePass.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnChangePass.Image = CType(resources.GetObject("btnChangePass.Image"), System.Drawing.Image)
-        Me.btnChangePass.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnChangePass.Name = "btnChangePass"
-        Me.btnChangePass.Size = New System.Drawing.Size(105, 22)
-        Me.btnChangePass.Text = "Change Password"
-        '
-        'ToolStrip2
-        '
-        Me.ToolStrip2.Location = New System.Drawing.Point(0, 25)
-        Me.ToolStrip2.Name = "ToolStrip2"
-        Me.ToolStrip2.Size = New System.Drawing.Size(828, 25)
-        Me.ToolStrip2.TabIndex = 6
-        Me.ToolStrip2.Text = "ToolStrip2"
+        Me.rbAllStates.AutoSize = True
+        Me.rbAllStates.Location = New System.Drawing.Point(132, 125)
+        Me.rbAllStates.Name = "rbAllStates"
+        Me.rbAllStates.Size = New System.Drawing.Size(36, 17)
+        Me.rbAllStates.TabIndex = 6
+        Me.rbAllStates.TabStop = True
+        Me.rbAllStates.Text = "All"
+        Me.rbAllStates.UseVisualStyleBackColor = True
         '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(828, 427)
-        Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.StatusStrip1)
@@ -369,10 +382,10 @@ Partial Class MainForm
         Me.SplitContainer1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.dgMemberView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -404,5 +417,6 @@ Partial Class MainForm
     Friend WithEvents btnRemoveMembers As ToolStripMenuItem
     Friend WithEvents btnManageUsers As ToolStripButton
     Friend WithEvents btnChangePass As ToolStripButton
-    Friend WithEvents ToolStrip2 As ToolStrip
+    Friend WithEvents btnClearFilters As ToolStripButton
+    Friend WithEvents rbAllStates As RadioButton
 End Class

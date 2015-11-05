@@ -32,7 +32,7 @@ Namespace config
             If File.Exists(configPath) Then
                 Dim configText = File.ReadAllText(configPath)
                 configText = Encoding.UTF8.GetString(Convert.FromBase64String(configText))
-                config = DirectCast(JsonConvert.DeserializeObject(configText, GetType(ProgramConfig)), ProgramConfig)
+                config = JsonConvert.DeserializeObject(Of ProgramConfig)(configText)
 
                 'validate
                 If Not (config.validateDataSource AndAlso

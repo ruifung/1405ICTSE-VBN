@@ -7,7 +7,7 @@
             Get
                 Return If(_DataSourceType, String.Empty)
             End Get
-            Friend Set(value As String)
+            Set(value As String)
                 _DataSourceType = value
             End Set
         End Property
@@ -19,7 +19,7 @@
             Get
                 Return If(_DataSourcePath, String.Empty)
             End Get
-            Friend Set(value As String)
+            Set(value As String)
                 _DataSourcePath = value
             End Set
         End Property
@@ -31,7 +31,7 @@
             Get
                 Return _DataSourceAuth
             End Get
-            Friend Set(value As Boolean)
+            Set(value As Boolean)
                 _DataSourceAuth = value
             End Set
         End Property
@@ -40,7 +40,7 @@
             Get
                 Return If(_DataSourceUser, String.Empty)
             End Get
-            Friend Set(value As String)
+            Set(value As String)
                 _DataSourceUser = value
             End Set
         End Property

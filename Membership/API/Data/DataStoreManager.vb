@@ -7,7 +7,7 @@
             Return userManagerVar
         End Get
         Set(value As IDataManager(Of IUser))
-            If (Not IsNothing(userManagerVar)) Then
+            If (IsNothing(userManagerVar)) Then
                 userManagerVar = value
             End If
         End Set
@@ -19,7 +19,7 @@
             Return memberManagerVar
         End Get
         Set(value As IDataManager(Of IMember))
-            If (Not IsNothing(memberManagerVar)) Then
+            If (IsNothing(memberManagerVar)) Then
                 memberManagerVar = value
             End If
         End Set
@@ -31,7 +31,7 @@
             Return memberTypeManagerVar
         End Get
         Set(value As IDataManager(Of IMembershipType))
-            If (Not IsNothing(memberTypeManagerVar)) Then
+            If (IsNothing(memberTypeManagerVar)) Then
                 memberTypeManagerVar = value
             End If
         End Set
@@ -43,7 +43,7 @@
             Return transactionManagerVar
         End Get
         Set(value As IDataManager(Of IMemberCharge))
-            If (Not IsNothing(transactionManagerVar)) Then
+            If (IsNothing(transactionManagerVar)) Then
                 transactionManagerVar = value
             End If
         End Set

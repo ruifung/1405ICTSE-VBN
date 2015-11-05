@@ -143,7 +143,17 @@ Public Class ModifyMemberDialog
         Try
             Dim result = dialog.ShowDialog()
             If result = DialogResult.OK Then
-                memberDetailsView.photo = create(Image.FromStream(dialog.OpenFile))
+                Dim stream = dialog.OpenFile
+                Dim cid = New CropImageDialog With {
+                    .ImageToCrop = Image.FromStream(stream),
+                    .CropSize = New Size(170, 218),
+                    .Text = "Crop Photo"
+                }
+                stream.Close()
+                cid.ShowDialog()
+                If cid.DialogResult = DialogResult.OK Then
+                    memberDetailsView.photo = MaybeOption.create(Of Image)(cid.CropResult)
+                End If
             End If
         Catch ex As Exception
         Finally

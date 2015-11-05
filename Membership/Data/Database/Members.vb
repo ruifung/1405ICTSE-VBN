@@ -17,6 +17,9 @@ Namespace Database
             MembersTable.Fields("email") = New Field(MDBType.Text, 50)
             MembersTable.Fields("photo") = New Field(MDBType.OLE)
             MembersTable.Fields("credit") = New Field(MDBType.Currency)
+            MembersTable.Fields("addr") = New Field(MDBType.Text, 255)
+            MembersTable.Fields("term") = New Field(MDBType.Number)
+            MembersTable.Fields("term_due") = New Field(MDBType.Number)
             MembersTable.Fields("activate") = New Field(MDBType.Byte)
             MembersTable.PrimaryKey = "id"
             MembersTable.Constraints.Add(New MDB.Constraint(MDB.Constraint.ConsType.PrimaryKey, "id"))
@@ -139,10 +142,10 @@ Namespace Database
 
         Public Property address As String Implements IMember.address
             Get
-                Throw New NotImplementedException()
+                Return CStr(Me("addr"))
             End Get
             Set(value As String)
-                Throw New NotImplementedException()
+                Me("addr") = value
             End Set
         End Property
 
@@ -157,19 +160,19 @@ Namespace Database
 
         Public Property paymentTerm As PaymentTerm Implements IMember.paymentTerm
             Get
-                Throw New NotImplementedException()
+                Return DirectCast(Me("term"), PaymentTerm)
             End Get
             Set(value As PaymentTerm)
-                Throw New NotImplementedException()
+                Me("term") = CInt(value)
             End Set
         End Property
 
         Public Property paymentTermDue As Date Implements IMember.paymentTermDue
             Get
-                Throw New NotImplementedException()
+                Return CDate(Me("term_due"))
             End Get
             Set(value As Date)
-                Throw New NotImplementedException()
+                Me("term_due") = value
             End Set
         End Property
 

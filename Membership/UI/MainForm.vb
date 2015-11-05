@@ -43,13 +43,15 @@ Public Class MainForm
         End Get
     End Property
 
-    Sub updateFilter()
+    Sub updateFilter() Handles rbActive.CheckedChanged, rbInactive.CheckedChanged, rbAllStates.CheckedChanged, lbTypes.SelectedIndexChanged
         onPropertyChanged("filteredMembers")
         dataSource.DataSource = filteredMembers
     End Sub
 
 
     Private Sub onFormLoad(sender As Object, e As EventArgs) Handles Me.Load
+        hasSearch = False
+
         lblDataSource.Text = configuration.DataSourcePath
 
         If ConfigManager.currentUser.accessLevel > 1 Then
@@ -66,7 +68,7 @@ Public Class MainForm
 
         dgMemberView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgMemberView.DataSource = dataSource
-        memberList = dataManager.memberManager.list.Select(WrappedMember.wrap).ToList
+        reload()
     End Sub
 
     Private Sub onSearch(sender As Object, e As EventArgs) Handles btnSearch.Click

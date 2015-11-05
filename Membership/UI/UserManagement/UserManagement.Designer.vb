@@ -53,10 +53,13 @@ Partial Class UserManagement
         '
         'DataGridView1
         '
+        Me.DataGridView1.AllowUserToAddRows = False
+        Me.DataGridView1.AllowUserToDeleteRows = False
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Username, Me.Access_lvl})
         Me.DataGridView1.Location = New System.Drawing.Point(13, 40)
         Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.Size = New System.Drawing.Size(352, 213)
         Me.DataGridView1.TabIndex = 4
         '
@@ -64,11 +67,13 @@ Partial Class UserManagement
         '
         Me.Username.HeaderText = "Username"
         Me.Username.Name = "Username"
+        Me.Username.ReadOnly = True
         '
         'Access_lvl
         '
         Me.Access_lvl.HeaderText = "Access Level"
         Me.Access_lvl.Name = "Access_lvl"
+        Me.Access_lvl.ReadOnly = True
         '
         'MenuStrip1
         '

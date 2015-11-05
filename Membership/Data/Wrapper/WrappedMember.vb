@@ -10,13 +10,30 @@ Public Class WrappedMember
 
     Public ReadOnly _backingMember As IMember
 
-    <DisplayName("Address")>
-    Public Property address As String Implements IMember.address
+    <DisplayName("ID")>
+    Public ReadOnly Property id As Integer Implements IDataElement.id
         Get
-            Return _backingMember.address
+            Return _backingMember.id
+        End Get
+    End Property
+
+    <DisplayName("First Name")>
+    Public Property firstName As String Implements IMember.firstName
+        Get
+            Return _backingMember.firstName
         End Get
         Set(value As String)
-            _backingMember.address = value
+            _backingMember.firstName = value
+        End Set
+    End Property
+
+    <DisplayName("Last Name")>
+    Public Property lastName As String Implements IMember.lastName
+        Get
+            Return _backingMember.lastName
+        End Get
+        Set(value As String)
+            _backingMember.lastName = value
         End Set
     End Property
 
@@ -30,16 +47,6 @@ Public Class WrappedMember
         End Set
     End Property
 
-    <DisplayName("Birthday")>
-    Public Property dob As Date Implements IMember.dob
-        Get
-            Return _backingMember.dob
-        End Get
-        Set(value As Date)
-            _backingMember.dob = value
-        End Set
-    End Property
-
     <DisplayName("E-Mail")>
     Public Property email As String Implements IMember.email
         Get
@@ -50,13 +57,23 @@ Public Class WrappedMember
         End Set
     End Property
 
-    <DisplayName("First Name")>
-    Public Property firstName As String Implements IMember.firstName
+    <DisplayName("Address")>
+    Public Property address As String Implements IMember.address
         Get
-            Return _backingMember.firstName
+            Return _backingMember.address
         End Get
         Set(value As String)
-            _backingMember.firstName = value
+            _backingMember.address = value
+        End Set
+    End Property
+
+    <DisplayName("Birthday")>
+    Public Property dob As Date Implements IMember.dob
+        Get
+            Return _backingMember.dob
+        End Get
+        Set(value As Date)
+            _backingMember.dob = value
         End Set
     End Property
 
@@ -70,13 +87,6 @@ Public Class WrappedMember
         End Set
     End Property
 
-    <DisplayName("ID")>
-    Public ReadOnly Property id As Integer Implements IDataElement.id
-        Get
-            Return _backingMember.id
-        End Get
-    End Property
-
     <DisplayName("Membership State")>
     Public Property isActive As Boolean Implements IMember.isActive
         Get
@@ -84,16 +94,6 @@ Public Class WrappedMember
         End Get
         Set(value As Boolean)
             _backingMember.isActive = value
-        End Set
-    End Property
-
-    <DisplayName("Last Name")>
-    Public Property lastName As String Implements IMember.lastName
-        Get
-            Return _backingMember.lastName
-        End Get
-        Set(value As String)
-            _backingMember.lastName = value
         End Set
     End Property
 

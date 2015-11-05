@@ -35,23 +35,23 @@ Partial Class MainForm
         Me.btnRemoveMembers = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnManageUsers = New System.Windows.Forms.ToolStripButton()
         Me.btnChangePass = New System.Windows.Forms.ToolStripButton()
+        Me.btnClearFilters = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.txtSearch = New Membership.TextBoxEx()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.rbSearchName = New System.Windows.Forms.RadioButton()
         Me.rbSearchEmail = New System.Windows.Forms.RadioButton()
         Me.rbSearchContact = New System.Windows.Forms.RadioButton()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rbAllStates = New System.Windows.Forms.RadioButton()
         Me.lbTypes = New System.Windows.Forms.ListBox()
         Me.rbInactive = New System.Windows.Forms.RadioButton()
         Me.rbActive = New System.Windows.Forms.RadioButton()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgMemberView = New System.Windows.Forms.DataGridView()
-        Me.btnClearFilters = New System.Windows.Forms.ToolStripButton()
-        Me.rbAllStates = New System.Windows.Forms.RadioButton()
+        Me.txtSearch = New Membership.TextBoxEx()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -167,6 +167,15 @@ Partial Class MainForm
         Me.btnChangePass.Size = New System.Drawing.Size(105, 22)
         Me.btnChangePass.Text = "Change Password"
         '
+        'btnClearFilters
+        '
+        Me.btnClearFilters.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnClearFilters.Image = CType(resources.GetObject("btnClearFilters.Image"), System.Drawing.Image)
+        Me.btnClearFilters.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnClearFilters.Name = "btnClearFilters"
+        Me.btnClearFilters.Size = New System.Drawing.Size(72, 22)
+        Me.btnClearFilters.Text = "Clear Filters"
+        '
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -200,17 +209,6 @@ Partial Class MainForm
         Me.GroupBox2.TabIndex = 7
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Search"
-        '
-        'txtSearch
-        '
-        Me.txtSearch.CustomBorder = False
-        Me.txtSearch.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtSearch.Location = New System.Drawing.Point(7, 19)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Placeholder = "Search"
-        Me.txtSearch.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtSearch.Size = New System.Drawing.Size(161, 20)
-        Me.txtSearch.TabIndex = 0
         '
         'btnSearch
         '
@@ -281,6 +279,18 @@ Partial Class MainForm
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filters"
         '
+        'rbAllStates
+        '
+        Me.rbAllStates.AutoSize = True
+        Me.rbAllStates.Checked = True
+        Me.rbAllStates.Location = New System.Drawing.Point(132, 125)
+        Me.rbAllStates.Name = "rbAllStates"
+        Me.rbAllStates.Size = New System.Drawing.Size(36, 17)
+        Me.rbAllStates.TabIndex = 6
+        Me.rbAllStates.TabStop = True
+        Me.rbAllStates.Text = "All"
+        Me.rbAllStates.UseVisualStyleBackColor = True
+        '
         'lbTypes
         '
         Me.lbTypes.FormattingEnabled = True
@@ -302,12 +312,10 @@ Partial Class MainForm
         'rbActive
         '
         Me.rbActive.AutoSize = True
-        Me.rbActive.Checked = True
         Me.rbActive.Location = New System.Drawing.Point(7, 125)
         Me.rbActive.Name = "rbActive"
         Me.rbActive.Size = New System.Drawing.Size(55, 17)
         Me.rbActive.TabIndex = 3
-        Me.rbActive.TabStop = True
         Me.rbActive.Text = "Active"
         Me.rbActive.UseVisualStyleBackColor = True
         '
@@ -342,25 +350,16 @@ Partial Class MainForm
         Me.dgMemberView.Size = New System.Drawing.Size(634, 380)
         Me.dgMemberView.TabIndex = 0
         '
-        'btnClearFilters
+        'txtSearch
         '
-        Me.btnClearFilters.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnClearFilters.Image = CType(resources.GetObject("btnClearFilters.Image"), System.Drawing.Image)
-        Me.btnClearFilters.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnClearFilters.Name = "btnClearFilters"
-        Me.btnClearFilters.Size = New System.Drawing.Size(72, 22)
-        Me.btnClearFilters.Text = "Clear Filters"
-        '
-        'rbAllStates
-        '
-        Me.rbAllStates.AutoSize = True
-        Me.rbAllStates.Location = New System.Drawing.Point(132, 125)
-        Me.rbAllStates.Name = "rbAllStates"
-        Me.rbAllStates.Size = New System.Drawing.Size(36, 17)
-        Me.rbAllStates.TabIndex = 6
-        Me.rbAllStates.TabStop = True
-        Me.rbAllStates.Text = "All"
-        Me.rbAllStates.UseVisualStyleBackColor = True
+        Me.txtSearch.CustomBorder = False
+        Me.txtSearch.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtSearch.Location = New System.Drawing.Point(7, 19)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Placeholder = "Search"
+        Me.txtSearch.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtSearch.Size = New System.Drawing.Size(161, 20)
+        Me.txtSearch.TabIndex = 0
         '
         'MainForm
         '

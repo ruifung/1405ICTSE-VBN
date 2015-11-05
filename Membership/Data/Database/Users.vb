@@ -68,7 +68,7 @@ Namespace Database
                 Return CInt(Me("permissions"))
             End Get
             Set(value As Integer)
-                Me("permissons") = value
+                Me("permissions") = value
             End Set
         End Property
         Public Function validate(pass As String) As Boolean Implements IUser.verifyPass

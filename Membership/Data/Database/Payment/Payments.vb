@@ -12,7 +12,7 @@ Namespace Database
             t.Fields("total") = New Field(MDBType.Currency)
             t.Fields("paid") = New Field(MDBType.Currency)
             t.Fields("balance") = New Field(MDBType.Currency)
-            t.Fields("addition") = New Field(MDBType.Text, 500)
+            t.Fields("addition") = New Field(MDBType.Memo)
             t.PrimaryKey = "id"
             t.Constraints.Add(New Constraint(Constraint.ConsType.PrimaryKey, "id"))
             t.Constraints.Add(New Constraint(Constraint.ConsType.ForeignKey, "member", MembersTable.Name, "id"))

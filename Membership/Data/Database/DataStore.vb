@@ -12,7 +12,6 @@ Namespace Database
             Tables.InitMembersTable()
             Tables.InitMShipsTable()
             Tables.InitUsersTable()
-            Tables.InitMShipsTable()
             Tables.InitPaymentTable()
             Tables.InitChargesTable()
             manager.userManager = New UserManager()

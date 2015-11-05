@@ -65,10 +65,10 @@ Namespace Database
         End Property
         Public Property permmission As Integer Implements IUser.accessLevel
             Get
-                Return CInt(Me("permission"))
+                Return CInt(Me("permissions"))
             End Get
             Set(value As Integer)
-                Me("permisson") = value
+                Me("permissions") = value
             End Set
         End Property
         Public Function validate(pass As String) As Boolean Implements IUser.verifyPass

@@ -45,6 +45,12 @@
     ''' <returns>A List containing all entries.</returns>
     Function list() As List(Of T)
 
+    ''' <summary>
+    ''' Gets the number of entries.
+    ''' </summary>
+    ''' <returns>Number of entries</returns>
+    Function count() As ULong
+
     Sub init()
     Sub load()
     Sub save()

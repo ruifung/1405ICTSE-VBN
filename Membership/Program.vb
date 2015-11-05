@@ -3,7 +3,7 @@
 Public Module Program
     Private running As Boolean = True
 
-    ReadOnly Property isRunning As Boolean
+    Public ReadOnly Property isRunning As Boolean
         Get
             Return running
         End Get
@@ -15,6 +15,23 @@ Public Module Program
         'Config Load.
         init()
         save()
+        'First time run stuff
+        If (dataManager.userManager.count = 0) Then
+            Dim initUserDialog = New InitialUserDialog
+            Dim result = initUserDialog.ShowDialog
+            If result = DialogResult.OK Then
+                Dim newUser = New PlainUser With {
+                    .userName = initUserDialog.username,
+                    .password = initUserDialog.password,
+                    .accessLevel = 1
+                }
+                If dataManager.userManager.addEntry(newUser).isEmpty Then
+                    quit()
+                End If
+            Else
+                quit()
+            End If
+        End If
         While running
             Dim login = New LoginDialog
             Try

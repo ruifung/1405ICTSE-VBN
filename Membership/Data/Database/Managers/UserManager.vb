@@ -96,6 +96,10 @@ Namespace Database
             Return list
         End Function
 
+        Public Function count() As ULong Implements IDataManager(Of IUser).count
+            Throw New NotImplementedException
+        End Function
+
         Public Sub init() Implements IDataManager(Of IUser).init
 
         End Sub

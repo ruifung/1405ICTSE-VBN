@@ -92,6 +92,17 @@ Namespace Database
             End Set
         End Property
 
+        Public Overrides Sub Insert()
+            MyBase.Insert()
+            Dim oc = New DBList(Of Charge)
+            For Each c As Charge In charges
+                Dim dc As Charge = New Charge
+                dc("id") = c.id
+                oc.Add(dc)
+            Next
+            oc.Update("paid_in") = id
+        End Sub
+
         Public Overrides Sub Update()
             Dim oc As DBList(Of Charge) = DBList(Of Charge).Query("paid_in=?", MDBType.Number.asParam(Me.id))
             oc.Update("paid_in") = 0

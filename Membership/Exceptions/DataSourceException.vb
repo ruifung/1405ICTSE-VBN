@@ -5,7 +5,7 @@
         Sub New()
             MyBase.New
         End Sub
-        Sub New(message As String, innerException As Exception)
+        Sub New(message As String, Optional innerException As Exception = Nothing)
             MyBase.New(message, innerException)
         End Sub
     End Class

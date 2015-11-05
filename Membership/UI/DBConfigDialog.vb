@@ -1,12 +1,13 @@
 ﻿Imports System.ComponentModel
 Imports System.Runtime.CompilerServices
+Imports Membership.API.config.data
 Imports Membership.config
 
 Public Class DBConfigDialog
     Implements INotifyPropertyChanged
 
     Private _DSPath, _DSType, _DSUser, _DSPass As String
-    Private _DSAuth As Boolean, _DSTypes As List(Of DBType)
+    Private _DSAuth As Boolean, _DSTypes As List(Of DSType)
     Private selfBind As BindingSource = New BindingSource With {.DataSource = Me}
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
@@ -75,17 +76,32 @@ Public Class DBConfigDialog
     End Sub
 
     Private Sub cbDSSelector_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDSSelector.SelectedIndexChanged
-        Dim item = CType(cbDSSelector.SelectedItem, DBType)
-        Util.exec(item, Sub(x) DSBtn.Visible = x.isFileBased)
+        Dim item = TryCast(cbDSSelector.SelectedItem, DSType)
+        Util.exec(item, Sub(x)
+                            DSBtn.Visible = x.isFileBased
+                            If x.authMode = DSAuthMode.USERPASS Then
+                                chkDSAuth.Enabled = True
+                                txtDSAuthName.Enabled = True
+                                txtDSAuthPass.Enabled = True
+                            ElseIf x.authMode = DSAuthMode.PASSWORDONLY
+                                chkDSAuth.Enabled = True
+                                txtDSAuthName.Enabled = False
+                                txtDSAuthPass.Enabled = True
+                            Else
+                                chkDSAuth.Enabled = False
+                                txtDSAuthName.Enabled = False
+                                txtDSAuthPass.Enabled = False
+                            End If
+                        End Sub)
     End Sub
 
-    Property DSTypes As List(Of DBType)
+    Property DSTypes As List(Of DSType)
         Get
-            Return If(_DSTypes, New List(Of DBType))
+            Return If(_DSTypes, New List(Of DSType))
         End Get
-        Set(value As List(Of DBType))
+        Set(value As List(Of DSType))
             If IsNothing(value) Then
-                _DSTypes = New List(Of DBType)
+                _DSTypes = New List(Of DSType)
             Else
                 _DSTypes = value
             End If
@@ -110,8 +126,11 @@ Public Class DBConfigDialog
     End Sub
 
     Private Sub DSBtn_Click(sender As Object, e As EventArgs) Handles DSBtn.Click
-        Dim dialog = New SaveFileDialog With {
-            .Title = "Select Database File"
+        Dim dialog = New OpenFileDialog With {
+            .Title = "Select Data Source",
+            .CheckFileExists = False,
+            .DereferenceLinks = False,
+            .Multiselect = False
         }
         Dim result = dialog.ShowDialog()
         If result = DialogResult.OK Then

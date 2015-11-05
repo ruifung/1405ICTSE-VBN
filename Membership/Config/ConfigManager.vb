@@ -19,7 +19,7 @@ Namespace config
         Public ReadOnly Property configurationKeys As ImmutableDictionary(Of String, Func(Of String, Boolean)) =
         ImmutableDictionary.CreateRange(
             New Dictionary(Of String, Func(Of String, Boolean)) From {
-                {"DataMode", Function(x) getDSTypes.Exists(Function(y) y.type.Equals(x))},
+                {"DataMode", Function(x) supportedDataSources.Exists(Function(y) y.type.Equals(x))},
                 {"DataSource", Function(x) (Not IsNothing(x)) AndAlso x.Length > 0},
                 {"DataAuth", Function(x)
                                  Dim temp As Boolean
@@ -115,7 +115,7 @@ Namespace config
                 With flags
                     If .Contains(ErrorFlags.DATABASE_CONFIG) Then
                         Dim dbConfig = New DBConfigDialog With {
-                            .DSTypes = getDSTypes(),
+                            .DSTypes = supportedDataSources,
                             .DSType = configuration("DataMode").orNothing,
                             .DSPath = configuration("DataSource").orNothing,
                             .DSUser = configuration("DataUser").orNothing,

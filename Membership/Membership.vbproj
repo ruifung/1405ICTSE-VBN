@@ -83,6 +83,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\DataSourceConfig.vb" />
     <Compile Include="API\Data\IDataElement.vb" />
     <Compile Include="API\Data\IDataStore.vb" />
     <Compile Include="API\Members\EnumMemberPrivileges.vb" />

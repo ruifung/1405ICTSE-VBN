@@ -123,6 +123,9 @@
     <Compile Include="Data\Database\Users.vb" />
     <Compile Include="Data\PlainMember.vb" />
     <Compile Include="Data\PlainUser.vb" />
+    <Compile Include="Data\Wrapper\WrappedMember.vb" />
+    <Compile Include="Data\Wrapper\WrappedMembershipType.vb" />
+    <Compile Include="Data\Wrapper\WrappedUser.vb" />
     <Compile Include="Exceptions\DataSourceException.vb" />
     <Compile Include="Exceptions\InvalidSettingException.vb" />
     <Compile Include="Exceptions\SettingsErrorException.vb" />

@@ -6,21 +6,21 @@ Public Class MainForm
     Implements INotifyPropertyChanged
 
     Private dataMembers As IDataManager(Of IMember) = dataManager.memberManager
-    Private _memberList As List(Of IMember), dataSource As BindingSource = New BindingSource With {.DataSource = filteredMembers}
+    Private _memberList As List(Of WrappedMember), dataSource As BindingSource = New BindingSource With {.DataSource = filteredMembers}
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
 
-    Property memberList As List(Of IMember)
+    Property memberList As List(Of WrappedMember)
         Get
-            Return If(_memberList, New List(Of IMember))
+            Return If(_memberList, New List(Of WrappedMember))
         End Get
-        Set(value As List(Of IMember))
+        Set(value As List(Of WrappedMember))
             _memberList = value
             onPropertyChanged()
             updateFilter()
         End Set
     End Property
 
-    ReadOnly Property filteredMembers As List(Of IMember)
+    ReadOnly Property filteredMembers As List(Of WrappedMember)
         Get
             Return memberList.FindAll(Function(x)
                                           Dim active As Boolean
@@ -49,9 +49,9 @@ Public Class MainForm
 
 
     Private Sub onFormLoad(sender As Object, e As EventArgs) Handles Me.Load
-        memberList = New List(Of IMember)
+        memberList = New List(Of WrappedMember)
         lbTypes.DataSource = New BindingSource With {
-            .DataSource = dataManager.memberTypeManager.list
+            .DataSource = (dataManager.memberTypeManager.list.Select(WrappedMembershipType.wrap).ToList)
         }
         lbTypes.DisplayMember = "typeName"
         lbTypes.ValueMember = "id"
@@ -79,7 +79,7 @@ Public Class MainForm
         If IsNothing(searchParam) Then
             Exit Sub
         End If
-        memberList = If(dataMembers.search(searchParam, False, True), New List(Of IMember))
+        memberList = If(dataMembers.search(searchParam, False, True).Select(WrappedMember.wrap).ToList, New List(Of WrappedMember))
     End Sub
 
     Private Sub onPropertyChanged(<CallerMemberName> Optional propName As String = Nothing)

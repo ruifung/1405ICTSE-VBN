@@ -62,6 +62,7 @@ Namespace config
                             dataInit = True
                         Catch ex As DataSourceException
                             flags.Add(ErrorFlags.DATABASE_CONFIG)
+                            MsgBox(String.Format("Database Error: {0}", ex.Message))
                             Console.Write(ex.ToString)
                         End Try
                     End If

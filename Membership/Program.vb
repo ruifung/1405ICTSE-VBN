@@ -16,7 +16,7 @@ Public Module Program
         init()
         save()
         'First time run stuff
-        If (dataManager.userManager.count = 0) Then
+        If running AndAlso dataManager.userManager.count = 0 Then
             Dim initUserDialog = New InitialUserDialog
             Dim result = initUserDialog.ShowDialog
             If result = DialogResult.OK Then

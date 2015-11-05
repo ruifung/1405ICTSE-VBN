@@ -99,6 +99,12 @@
     <Compile Include="API\Data\DataStoreManager.vb" />
     <Compile Include="Config\DataSourceConfig.vb" />
     <Compile Include="Config\ProgramConfig.vb" />
+    <Compile Include="Controls\ImageCropper.Designer.vb">
+      <DependentUpon>ImageCropper.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ImageCropper.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controls\MemberDetails.Designer.vb">
       <DependentUpon>MemberDetails.vb</DependentUpon>
     </Compile>
@@ -136,6 +142,12 @@
       <DependentUpon>MemberDetailsTest.vb</DependentUpon>
     </Compile>
     <Compile Include="Test\MemberDetailsTest.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CropImageDialog.Designer.vb">
+      <DependentUpon>CropImageDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\CropImageDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\DBConfigDialog.Designer.vb">
@@ -206,11 +218,17 @@
     <Compile Include="Util\Util.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\ImageCropper.resx">
+      <DependentUpon>ImageCropper.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MemberDetails.resx">
       <DependentUpon>MemberDetails.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Test\MemberDetailsTest.resx">
       <DependentUpon>MemberDetailsTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CropImageDialog.resx">
+      <DependentUpon>CropImageDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\DBConfigDialog.resx">
       <DependentUpon>DBConfigDialog.vb</DependentUpon>
@@ -281,6 +299,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\noimage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grab.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grabbing.cur" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

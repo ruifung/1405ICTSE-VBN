@@ -22,24 +22,13 @@ Partial Class LoginDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Logo = New System.Windows.Forms.PictureBox()
         Me.btnLogin = New System.Windows.Forms.Button()
         Me.btnExit = New System.Windows.Forms.Button()
-        Me.txtUsername = New TextBoxEx
-        Me.txtPassword = New TextBoxEx
+        Me.txtPassword = New Membership.TextBoxEx()
+        Me.txtUsername = New Membership.TextBoxEx()
+        Me.Logo = New System.Windows.Forms.PictureBox()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'Logo
-        '
-        Me.Logo.BackColor = System.Drawing.Color.Transparent
-        Me.Logo.Image = Global.Membership.My.Resources.Resources.logo_imperial_golf_club
-        Me.Logo.Location = New System.Drawing.Point(13, 13)
-        Me.Logo.Margin = New System.Windows.Forms.Padding(4)
-        Me.Logo.Name = "Logo"
-        Me.Logo.Size = New System.Drawing.Size(144, 120)
-        Me.Logo.TabIndex = 0
-        Me.Logo.TabStop = False
         '
         'btnLogin
         '
@@ -60,17 +49,6 @@ Partial Class LoginDialog
         Me.btnExit.Text = "Exit"
         Me.btnExit.UseVisualStyleBackColor = True
         '
-        'txtUsername
-        '
-        Me.txtUsername.CustomBorder = False
-        Me.txtUsername.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtUsername.Location = New System.Drawing.Point(165, 13)
-        Me.txtUsername.Name = "txtUsername"
-        Me.txtUsername.Placeholder = "Username"
-        Me.txtUsername.PlaceholderColor = System.Drawing.Color.Gray
-        Me.txtUsername.Size = New System.Drawing.Size(166, 26)
-        Me.txtUsername.TabIndex = 5
-        '
         'txtPassword
         '
         Me.txtPassword.CustomBorder = False
@@ -82,6 +60,28 @@ Partial Class LoginDialog
         Me.txtPassword.Size = New System.Drawing.Size(167, 26)
         Me.txtPassword.TabIndex = 6
         Me.txtPassword.UseSystemPasswordChar = True
+        '
+        'txtUsername
+        '
+        Me.txtUsername.CustomBorder = False
+        Me.txtUsername.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtUsername.Location = New System.Drawing.Point(165, 13)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Placeholder = "Username"
+        Me.txtUsername.PlaceholderColor = System.Drawing.Color.Gray
+        Me.txtUsername.Size = New System.Drawing.Size(166, 26)
+        Me.txtUsername.TabIndex = 5
+        '
+        'Logo
+        '
+        Me.Logo.BackColor = System.Drawing.Color.Transparent
+        Me.Logo.Image = Global.Membership.My.Resources.Resources.logo_imperial_golf_club
+        Me.Logo.Location = New System.Drawing.Point(13, 13)
+        Me.Logo.Margin = New System.Windows.Forms.Padding(4)
+        Me.Logo.Name = "Logo"
+        Me.Logo.Size = New System.Drawing.Size(144, 120)
+        Me.Logo.TabIndex = 0
+        Me.Logo.TabStop = False
         '
         'LoginDialog
         '

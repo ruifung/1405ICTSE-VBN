@@ -205,7 +205,7 @@ Public Class MemberDetails
     Public Property MinDate As Date
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
     Public Property MaxDate As Date
-    Public noIDString As String = "*new*"
+    Public noIDString As String = "(new)"
 
     Public Property BoundMember As IMember
         Get
@@ -400,19 +400,17 @@ Public Class MemberDetails
         RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propName))
     End Sub
 
-    Sub validateContact(sender As Object, e As CancelEventArgs) Handles txtContact.Validating
+    Sub validateContact(sender As Object, e As EventArgs) Handles txtContact.TextChanged, txtContact.LostFocus
         If Not Util.contactFilter.IsMatch(txtContact.Text) Then
             errorProvider.SetError(txtContact, "Invalid Contact Number")
-            e.Cancel = True
         Else
             errorProvider.SetError(txtContact, String.Empty)
         End If
     End Sub
 
-    Sub validateEmail(sender As Object, e As CancelEventArgs) Handles txtEmail.Validating
+    Sub validateEmail(sender As Object, e As EventArgs) Handles txtEmail.TextChanged, txtContact.LostFocus
         If Not Util.emailFilter.IsMatch(txtEmail.Text) Then
             errorProvider.SetError(txtEmail, "Invalid E-Mail Address")
-            e.Cancel = True
         Else
             errorProvider.SetError(txtEmail, String.Empty)
         End If

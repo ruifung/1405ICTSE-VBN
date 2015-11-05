@@ -38,6 +38,7 @@ Partial Class MainForm
         Me.btnClearFilters = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtSearch = New Membership.TextBoxEx()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.rbSearchName = New System.Windows.Forms.RadioButton()
         Me.rbSearchEmail = New System.Windows.Forms.RadioButton()
@@ -51,7 +52,6 @@ Partial Class MainForm
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgMemberView = New System.Windows.Forms.DataGridView()
-        Me.txtSearch = New Membership.TextBoxEx()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -210,6 +210,17 @@ Partial Class MainForm
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Search"
         '
+        'txtSearch
+        '
+        Me.txtSearch.CustomBorder = False
+        Me.txtSearch.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtSearch.Location = New System.Drawing.Point(7, 19)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Placeholder = "Search"
+        Me.txtSearch.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtSearch.Size = New System.Drawing.Size(161, 20)
+        Me.txtSearch.TabIndex = 0
+        '
         'btnSearch
         '
         Me.btnSearch.Location = New System.Drawing.Point(108, 65)
@@ -350,17 +361,6 @@ Partial Class MainForm
         Me.dgMemberView.Size = New System.Drawing.Size(634, 380)
         Me.dgMemberView.TabIndex = 0
         '
-        'txtSearch
-        '
-        Me.txtSearch.CustomBorder = False
-        Me.txtSearch.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtSearch.Location = New System.Drawing.Point(7, 19)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Placeholder = "Search"
-        Me.txtSearch.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtSearch.Size = New System.Drawing.Size(161, 20)
-        Me.txtSearch.TabIndex = 0
-        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -371,6 +371,7 @@ Partial Class MainForm
         Me.Controls.Add(Me.StatusStrip1)
         Me.MinimumSize = New System.Drawing.Size(844, 466)
         Me.Name = "MainForm"
+        Me.Text = "Members Management"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.ToolStrip1.ResumeLayout(False)

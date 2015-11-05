@@ -23,37 +23,38 @@ Partial Class ModifyUserDialog
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
-        Me.Label4 = New System.Windows.Forms.Label()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.numAccess = New System.Windows.Forms.NumericUpDown()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtPassword = New Membership.TextBoxEx()
+        Me.txtRePassword = New Membership.TextBoxEx()
+        CType(Me.numAccess, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(18, 17)
+        Me.Label1.Location = New System.Drawing.Point(48, 16)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(58, 13)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Username:"
         '
-        'TextBox1
+        'txtUsername
         '
-        Me.TextBox1.Location = New System.Drawing.Point(83, 13)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(220, 20)
-        Me.TextBox1.TabIndex = 1
+        Me.txtUsername.Location = New System.Drawing.Point(113, 12)
+        Me.txtUsername.Name = "txtUsername"
+        Me.txtUsername.Size = New System.Drawing.Size(169, 20)
+        Me.txtUsername.TabIndex = 1
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(4, 41)
+        Me.Label2.Location = New System.Drawing.Point(34, 40)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(70, 13)
         Me.Label2.TabIndex = 5
@@ -61,7 +62,7 @@ Partial Class ModifyUserDialog
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(171, 106)
+        Me.Button1.Location = New System.Drawing.Point(168, 151)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 6
@@ -71,73 +72,92 @@ Partial Class ModifyUserDialog
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(21, 68)
+        Me.Label3.Location = New System.Drawing.Point(20, 67)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(56, 13)
+        Me.Label3.Size = New System.Drawing.Size(84, 13)
         Me.Label3.TabIndex = 9
-        Me.Label3.Text = "Password:"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(83, 65)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(220, 20)
-        Me.TextBox2.TabIndex = 10
+        Me.Label3.Text = " New Password:"
         '
         'btnCancel
         '
-        Me.btnCancel.Location = New System.Drawing.Point(78, 106)
+        Me.btnCancel.Location = New System.Drawing.Point(75, 151)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
         Me.btnCancel.TabIndex = 11
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'NumericUpDown1
+        'numAccess
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(83, 39)
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(88, 20)
-        Me.NumericUpDown1.TabIndex = 12
+        Me.numAccess.Location = New System.Drawing.Point(113, 38)
+        Me.numAccess.Name = "numAccess"
+        Me.numAccess.Size = New System.Drawing.Size(169, 20)
+        Me.numAccess.TabIndex = 12
         '
-        'Label4
+        'Label5
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(177, 41)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(39, 13)
-        Me.Label4.TabIndex = 13
-        Me.Label4.Text = "Label4"
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(13, 93)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(94, 13)
+        Me.Label5.TabIndex = 14
+        Me.Label5.Text = "Confirm Password:"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.CustomBorder = False
+        Me.txtPassword.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtPassword.Location = New System.Drawing.Point(113, 64)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Placeholder = "Leave it empty if not changing"
+        Me.txtPassword.PlaceholderColor = System.Drawing.Color.DarkGray
+        Me.txtPassword.Size = New System.Drawing.Size(169, 20)
+        Me.txtPassword.TabIndex = 15
+        Me.txtPassword.UseSystemPasswordChar = True
+        '
+        'txtRePassword
+        '
+        Me.txtRePassword.CustomBorder = False
+        Me.txtRePassword.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtRePassword.Location = New System.Drawing.Point(113, 90)
+        Me.txtRePassword.Name = "txtRePassword"
+        Me.txtRePassword.Placeholder = "Re-type Password"
+        Me.txtRePassword.PlaceholderColor = System.Drawing.Color.DarkGray
+        Me.txtRePassword.Size = New System.Drawing.Size(169, 20)
+        Me.txtRePassword.TabIndex = 16
+        Me.txtRePassword.UseSystemPasswordChar = True
         '
         'ModifyUserDialog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(331, 136)
-        Me.Controls.Add(Me.Label4)
-        Me.Controls.Add(Me.NumericUpDown1)
+        Me.ClientSize = New System.Drawing.Size(325, 186)
+        Me.Controls.Add(Me.txtRePassword)
+        Me.Controls.Add(Me.txtPassword)
+        Me.Controls.Add(Me.Label5)
+        Me.Controls.Add(Me.numAccess)
         Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtUsername)
         Me.Controls.Add(Me.Label1)
         Me.Name = "ModifyUserDialog"
         Me.Text = "ModifyUserDialog"
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.numAccess, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtUsername As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox2 As TextBox
     Friend WithEvents btnCancel As Button
-    Friend WithEvents NumericUpDown1 As NumericUpDown
-    Friend WithEvents Label4 As Label
+    Friend WithEvents numAccess As NumericUpDown
+    Friend WithEvents Label5 As Label
+    Friend WithEvents txtPassword As TextBoxEx
+    Friend WithEvents txtRePassword As TextBoxEx
 End Class

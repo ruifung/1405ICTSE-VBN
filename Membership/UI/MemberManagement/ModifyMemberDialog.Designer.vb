@@ -33,6 +33,7 @@ Partial Class ModifyMemberDialog
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnBilling = New System.Windows.Forms.ToolStripButton()
         Me.btnEdit = New System.Windows.Forms.ToolStripButton()
+        Me.MemberDetails1 = New Membership.MemberDetails()
         Me.memberDetailsView = New Membership.MemberDetails()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -43,7 +44,7 @@ Partial Class ModifyMemberDialog
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPhoto, Me.btnPhotoClear, Me.seperatorEdit, Me.btnCancel, Me.btnSave, Me.btnClose, Me.ToolStripSeparator1, Me.btnBilling, Me.btnEdit})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(443, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(469, 25)
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -123,19 +124,25 @@ Partial Class ModifyMemberDialog
         Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
         Me.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(95, 19)
+        Me.btnEdit.Size = New System.Drawing.Size(95, 22)
         Me.btnEdit.Text = "Enter Edit Mode"
+        '
+        'MemberDetails1
+        '
+        Me.MemberDetails1.BoundMember = Nothing
+        Me.MemberDetails1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MemberDetails1.Location = New System.Drawing.Point(0, 25)
+        Me.MemberDetails1.Name = "MemberDetails1"
+        Me.MemberDetails1.Size = New System.Drawing.Size(500, 313)
+        Me.MemberDetails1.TabIndex = 3
         '
         'memberDetailsView
         '
         Me.memberDetailsView.BoundMember = Nothing
-        Me.memberDetailsView.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.memberDetailsView.Enabled = False
-        Me.memberDetailsView.Location = New System.Drawing.Point(0, 0)
-        Me.memberDetailsView.MinimumSize = New System.Drawing.Size(455, 321)
+        Me.memberDetailsView.Location = New System.Drawing.Point(0, 23)
         Me.memberDetailsView.Name = "memberDetailsView"
-        Me.memberDetailsView.Size = New System.Drawing.Size(455, 321)
-        Me.memberDetailsView.TabIndex = 1
+        Me.memberDetailsView.Size = New System.Drawing.Size(470, 303)
+        Me.memberDetailsView.TabIndex = 3
         '
         'ModifyMemberDialog
         '
@@ -143,10 +150,11 @@ Partial Class ModifyMemberDialog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(443, 302)
-        Me.Controls.Add(Me.ToolStrip1)
+        Me.ClientSize = New System.Drawing.Size(469, 326)
         Me.Controls.Add(Me.memberDetailsView)
-        Me.MinimumSize = New System.Drawing.Size(459, 341)
+        Me.Controls.Add(Me.ToolStrip1)
+        Me.MaximumSize = New System.Drawing.Size(485, 365)
+        Me.MinimumSize = New System.Drawing.Size(485, 365)
         Me.Name = "ModifyMemberDialog"
         Me.Text = "Member Profile"
         Me.ToolStrip1.ResumeLayout(False)
@@ -155,7 +163,6 @@ Partial Class ModifyMemberDialog
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents memberDetailsView As MemberDetails
     Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents btnEdit As ToolStripButton
     Friend WithEvents btnCancel As ToolStripButton
@@ -166,4 +173,6 @@ Partial Class ModifyMemberDialog
     Friend WithEvents btnPhoto As ToolStripButton
     Friend WithEvents btnPhotoClear As ToolStripButton
     Friend WithEvents seperatorEdit As ToolStripSeparator
+    Friend WithEvents MemberDetails1 As MemberDetails
+    Friend WithEvents memberDetailsView As MemberDetails
 End Class

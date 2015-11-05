@@ -20,6 +20,7 @@ Public Class MemberDetails
     Private _dob As Date, _gender As Gender, _photo As MaybeOption(Of Image)
     Private _id, _membershipTypeID As Integer, _isActive As Boolean
     Private _paymentCredit As Decimal, initialized As Boolean
+    Private _paymentTerm As PaymentTerm, _paymentTermDue As Date
 
     Overloads Property Enabled As Boolean
         Get
@@ -179,6 +180,28 @@ Public Class MemberDetails
     End Property
 
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+    Public Property paymentTerm As PaymentTerm Implements IMember.paymentTerm
+        Get
+            Return _paymentTerm
+        End Get
+        Set(value As PaymentTerm)
+            _paymentTerm = value
+            onPropertyChanged()
+        End Set
+    End Property
+
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
+    Public Property paymentTermDue As Date Implements IMember.paymentTermDue
+        Get
+            Return _paymentTermDue
+        End Get
+        Set(value As Date)
+            _paymentTermDue = value
+            onPropertyChanged()
+        End Set
+    End Property
+
+    <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
     Public Property MinDate As Date
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
     Public Property MaxDate As Date
@@ -219,26 +242,8 @@ Public Class MemberDetails
         End Set
     End Property
 
-    Public Property paymentTerm As PaymentTerm Implements IMember.paymentTerm
-        Get
-            Throw New NotImplementedException()
-        End Get
-        Set(value As PaymentTerm)
-            Throw New NotImplementedException()
-        End Set
-    End Property
-
-    Public Property paymentTermDue As Date Implements IMember.paymentTermDue
-        Get
-            Throw New NotImplementedException()
-        End Get
-        Set(value As Date)
-            Throw New NotImplementedException()
-        End Set
-    End Property
-
     Sub initializeControl() Handles Me.ControlAdded
-        If initialized Then
+        If initialized OrElse Util.IsInDesignMode Then
             Exit Sub
         End If
 
@@ -393,6 +398,24 @@ Public Class MemberDetails
 
     Sub onPropertyChanged(<CallerMemberName> Optional propName As String = Nothing)
         RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(propName))
+    End Sub
+
+    Sub validateContact(sender As Object, e As CancelEventArgs) Handles txtContact.Validating
+        If Not Util.contactFilter.IsMatch(txtContact.Text) Then
+            errorProvider.SetError(txtContact, "Invalid Contact Number")
+            e.Cancel = True
+        Else
+            errorProvider.SetError(txtContact, String.Empty)
+        End If
+    End Sub
+
+    Sub validateEmail(sender As Object, e As CancelEventArgs) Handles txtEmail.Validating
+        If Not Util.emailFilter.IsMatch(txtEmail.Text) Then
+            errorProvider.SetError(txtEmail, "Invalid E-Mail Address")
+            e.Cancel = True
+        Else
+            errorProvider.SetError(txtEmail, String.Empty)
+        End If
     End Sub
 
     ' Container Classes for display.

@@ -2,6 +2,7 @@
 
 Public Module Program
     Private running As Boolean = True
+    Private context As ApplicationContext
 
     Public ReadOnly Property isRunning As Boolean
         Get
@@ -33,13 +34,14 @@ Public Module Program
             End If
         End If
         While running
+            context = New ApplicationContext(New MainForm)
             Dim login = New LoginDialog
             Try
                 If IsNothing(currentUser) Then
-                    login.ShowDialog()
-                    If login.DialogResult = DialogResult.OK Then
+                    Dim result = login.ShowDialog()
+                    If result = DialogResult.OK Then
                         currentUser = login.user
-                    ElseIf login.DialogResult = DialogResult.Cancel
+                    ElseIf result = DialogResult.Cancel
                         quit()
                     End If
                 End If
@@ -47,14 +49,19 @@ Public Module Program
                 login.Dispose()
             End Try
             If running Then
-                Application.Run(New ApplicationContext(New MainForm))
+                Application.Run(context)
+                context.Dispose()
             End If
         End While
     End Sub
 
     Public Sub logout()
         currentUser = Nothing
-        Application.Exit()
+        Dim list = New List(Of Form)
+        For Each x As Form In Application.OpenForms
+            list.Add(x)
+        Next
+        list.ForEach(Sub(x) x.Close())
     End Sub
 
     Public Sub quit()

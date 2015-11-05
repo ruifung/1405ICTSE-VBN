@@ -1,7 +1,5 @@
-﻿Imports System.Text.RegularExpressions
-Imports System.Drawing.Imaging
+﻿Imports System.Drawing.Imaging
 Imports System.IO
-Imports Membership
 Imports MDB
 Namespace Database
     Partial Public Class Tables
@@ -36,8 +34,6 @@ Namespace Database
             Return DBObject.Find(Of Member)(id)
         End Function
 
-        Private emailFilter As Regex = New Regex("^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$")
-        Private contactFilter As Regex = New Regex("^\+{0,1}\d{9,}$")
         Private _photo As MaybeOption(Of Image) = New None(Of Image)
         Public ReadOnly Property id As Integer Implements IMember.id
             Get

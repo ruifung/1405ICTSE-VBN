@@ -5,6 +5,7 @@ Imports Membership.config
 Public Class MainForm
     Implements INotifyPropertyChanged
 
+    Private loggingOut As Boolean
     Private dataMembers As IDataManager(Of IMember) = dataManager.memberManager
     Private _memberList As List(Of WrappedMember), dataSource As BindingSource = New BindingSource With {.DataSource = filteredMembers}
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
@@ -49,6 +50,13 @@ Public Class MainForm
 
 
     Private Sub onFormLoad(sender As Object, e As EventArgs) Handles Me.Load
+        lblDataSource.Text = configuration.DataSourcePath
+
+        If ConfigManager.currentUser.accessLevel > 1 Then
+            btnManageUsers.Visible = False
+            btnManageUsers.Enabled = False
+        End If
+
         memberList = New List(Of WrappedMember)
         lbTypes.DataSource = New BindingSource With {
             .DataSource = (dataManager.memberTypeManager.list.Select(WrappedMembershipType.wrap).ToList)
@@ -58,6 +66,7 @@ Public Class MainForm
 
         dgMemberView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgMemberView.DataSource = dataSource
+        memberList = dataManager.memberManager.list.Select(WrappedMember.wrap).ToList
     End Sub
 
     Private Sub onSearch(sender As Object, e As EventArgs)
@@ -88,8 +97,8 @@ Public Class MainForm
     End Sub
 
     Private Sub formIsClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If e.CloseReason = CloseReason.UserClosing Then
-
+        If e.CloseReason = CloseReason.UserClosing AndAlso Not loggingOut Then
+            quit()
         End If
     End Sub
 
@@ -98,7 +107,16 @@ Public Class MainForm
         Dim memberDetails = New ModifyMemberDialog(member, True)
     End Sub
 
-    Private Sub addNewMember(sender As Object, e As EventArgs)
+    Private Sub onExitBtn(sender As Object, e As EventArgs) Handles btnExit.Click
+        quit()
+    End Sub
+
+    Private Sub onLogoutBtn(sender As Object, e As EventArgs) Handles btnLogout.Click
+        loggingOut = True
+        logout()
+    End Sub
+
+    Private Sub addNewMember(sender As Object, e As EventArgs) Handles btnAddMember.Click
         Dim dialog = New ModifyMemberDialog()
         Dim result = dialog.ShowDialog
         If result = DialogResult.OK Then

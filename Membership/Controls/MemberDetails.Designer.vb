@@ -22,6 +22,7 @@ Partial Class MemberDetails
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.cbStatus = New System.Windows.Forms.ComboBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -29,7 +30,13 @@ Partial Class MemberDetails
         Me.Label9 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.dtDOB = New System.Windows.Forms.DateTimePicker()
+        Me.txtAddress = New Membership.TextBoxEx()
+        Me.txtEmail = New Membership.TextBoxEx()
+        Me.txtContact = New Membership.TextBoxEx()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtID = New Membership.TextBoxEx()
+        Me.txtLName = New Membership.TextBoxEx()
+        Me.txtFName = New Membership.TextBoxEx()
         Me.cbGender = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -37,16 +44,12 @@ Partial Class MemberDetails
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtAddress = New Membership.TextBoxEx()
-        Me.txtEmail = New Membership.TextBoxEx()
-        Me.txtContact = New Membership.TextBoxEx()
-        Me.txtID = New Membership.TextBoxEx()
-        Me.txtLName = New Membership.TextBoxEx()
-        Me.txtFName = New Membership.TextBoxEx()
         Me.pbPhoto = New System.Windows.Forms.PictureBox()
+        Me.errorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.pbPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.errorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -119,7 +122,7 @@ Partial Class MemberDetails
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Location = New System.Drawing.Point(179, 3)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(260, 297)
+        Me.GroupBox2.Size = New System.Drawing.Size(288, 297)
         Me.GroupBox2.TabIndex = 135
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Member Information"
@@ -131,6 +134,40 @@ Partial Class MemberDetails
         Me.dtDOB.Size = New System.Drawing.Size(160, 20)
         Me.dtDOB.TabIndex = 146
         '
+        'txtAddress
+        '
+        Me.txtAddress.CustomBorder = False
+        Me.txtAddress.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtAddress.Location = New System.Drawing.Point(97, 159)
+        Me.txtAddress.Multiline = True
+        Me.txtAddress.Name = "txtAddress"
+        Me.txtAddress.Placeholder = "Address"
+        Me.txtAddress.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtAddress.Size = New System.Drawing.Size(160, 59)
+        Me.txtAddress.TabIndex = 145
+        '
+        'txtEmail
+        '
+        Me.txtEmail.CustomBorder = False
+        Me.txtEmail.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtEmail.Location = New System.Drawing.Point(97, 130)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Placeholder = "example@example.com"
+        Me.txtEmail.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtEmail.Size = New System.Drawing.Size(160, 20)
+        Me.txtEmail.TabIndex = 144
+        '
+        'txtContact
+        '
+        Me.txtContact.CustomBorder = False
+        Me.txtContact.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtContact.Location = New System.Drawing.Point(97, 103)
+        Me.txtContact.Name = "txtContact"
+        Me.txtContact.Placeholder = "Contact #"
+        Me.txtContact.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtContact.Size = New System.Drawing.Size(160, 20)
+        Me.txtContact.TabIndex = 143
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -140,6 +177,40 @@ Partial Class MemberDetails
         Me.Label8.TabIndex = 142
         Me.Label8.Text = "E-Mail Address :"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'txtID
+        '
+        Me.txtID.CustomBorder = False
+        Me.txtID.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtID.Enabled = False
+        Me.txtID.Location = New System.Drawing.Point(97, 25)
+        Me.txtID.Name = "txtID"
+        Me.txtID.Placeholder = "Member #"
+        Me.txtID.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtID.Size = New System.Drawing.Size(160, 20)
+        Me.txtID.TabIndex = 141
+        '
+        'txtLName
+        '
+        Me.txtLName.CustomBorder = False
+        Me.txtLName.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtLName.Location = New System.Drawing.Point(97, 77)
+        Me.txtLName.Name = "txtLName"
+        Me.txtLName.Placeholder = "Last Name"
+        Me.txtLName.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtLName.Size = New System.Drawing.Size(160, 20)
+        Me.txtLName.TabIndex = 140
+        '
+        'txtFName
+        '
+        Me.txtFName.CustomBorder = False
+        Me.txtFName.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtFName.Location = New System.Drawing.Point(97, 51)
+        Me.txtFName.Name = "txtFName"
+        Me.txtFName.Placeholder = "First Name"
+        Me.txtFName.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtFName.Size = New System.Drawing.Size(160, 20)
+        Me.txtFName.TabIndex = 139
         '
         'cbGender
         '
@@ -211,74 +282,6 @@ Partial Class MemberDetails
         Me.Label1.Text = "Member ID :"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
-        'txtAddress
-        '
-        Me.txtAddress.CustomBorder = False
-        Me.txtAddress.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtAddress.Location = New System.Drawing.Point(97, 159)
-        Me.txtAddress.Multiline = True
-        Me.txtAddress.Name = "txtAddress"
-        Me.txtAddress.Placeholder = "Address"
-        Me.txtAddress.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtAddress.Size = New System.Drawing.Size(160, 59)
-        Me.txtAddress.TabIndex = 145
-        '
-        'txtEmail
-        '
-        Me.txtEmail.CustomBorder = False
-        Me.txtEmail.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtEmail.Location = New System.Drawing.Point(97, 130)
-        Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Placeholder = "example@example.com"
-        Me.txtEmail.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtEmail.Size = New System.Drawing.Size(160, 20)
-        Me.txtEmail.TabIndex = 144
-        '
-        'txtContact
-        '
-        Me.txtContact.CustomBorder = False
-        Me.txtContact.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtContact.Location = New System.Drawing.Point(97, 103)
-        Me.txtContact.Name = "txtContact"
-        Me.txtContact.Placeholder = "Contact #"
-        Me.txtContact.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtContact.Size = New System.Drawing.Size(163, 20)
-        Me.txtContact.TabIndex = 143
-        '
-        'txtID
-        '
-        Me.txtID.CustomBorder = False
-        Me.txtID.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtID.Enabled = False
-        Me.txtID.Location = New System.Drawing.Point(97, 25)
-        Me.txtID.Name = "txtID"
-        Me.txtID.Placeholder = "Member #"
-        Me.txtID.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtID.Size = New System.Drawing.Size(160, 20)
-        Me.txtID.TabIndex = 141
-        '
-        'txtLName
-        '
-        Me.txtLName.CustomBorder = False
-        Me.txtLName.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtLName.Location = New System.Drawing.Point(97, 77)
-        Me.txtLName.Name = "txtLName"
-        Me.txtLName.Placeholder = "Last Name"
-        Me.txtLName.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtLName.Size = New System.Drawing.Size(160, 20)
-        Me.txtLName.TabIndex = 140
-        '
-        'txtFName
-        '
-        Me.txtFName.CustomBorder = False
-        Me.txtFName.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtFName.Location = New System.Drawing.Point(97, 51)
-        Me.txtFName.Name = "txtFName"
-        Me.txtFName.Placeholder = "First Name"
-        Me.txtFName.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtFName.Size = New System.Drawing.Size(160, 20)
-        Me.txtFName.TabIndex = 139
-        '
         'pbPhoto
         '
         Me.pbPhoto.Image = Global.Membership.My.Resources.Resources.noimage
@@ -290,6 +293,10 @@ Partial Class MemberDetails
         Me.pbPhoto.TabIndex = 104
         Me.pbPhoto.TabStop = False
         '
+        'errorProvider
+        '
+        Me.errorProvider.ContainerControl = Me
+        '
         'MemberDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -298,12 +305,13 @@ Partial Class MemberDetails
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.pbPhoto)
         Me.Name = "MemberDetails"
-        Me.Size = New System.Drawing.Size(442, 303)
+        Me.Size = New System.Drawing.Size(470, 303)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         CType(Me.pbPhoto, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.errorProvider, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -329,4 +337,5 @@ Partial Class MemberDetails
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents errorProvider As ErrorProvider
 End Class

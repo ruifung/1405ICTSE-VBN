@@ -24,9 +24,20 @@ Partial Class MainForm
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MainForm))
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblDataSource = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.btnExit = New System.Windows.Forms.ToolStripButton()
+        Me.btnLogout = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.btnAddMember = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRemoveMembers = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnManageUsers = New System.Windows.Forms.ToolStripButton()
+        Me.btnChangePass = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtSearch = New Membership.TextBoxEx()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.rbSearchName = New System.Windows.Forms.RadioButton()
         Me.rbSearchEmail = New System.Windows.Forms.RadioButton()
@@ -38,19 +49,7 @@ Partial Class MainForm
         Me.rbActive = New System.Windows.Forms.RadioButton()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.dgMemberView = New System.Windows.Forms.DataGridView()
-        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.lblDataSource = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.txtSearch = New Membership.TextBoxEx()
-        Me.btnLogout = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
-        Me.AddMemberToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.RemoveMembersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.btnChangePass = New System.Windows.Forms.ToolStripButton()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,15 +71,99 @@ Partial Class MainForm
         Me.StatusStrip1.TabIndex = 2
         Me.StatusStrip1.Text = "StatusStrip1"
         '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(73, 17)
+        Me.ToolStripStatusLabel1.Text = "Data Source:"
+        '
+        'lblDataSource
+        '
+        Me.lblDataSource.Name = "lblDataSource"
+        Me.lblDataSource.Size = New System.Drawing.Size(153, 17)
+        Me.lblDataSource.Text = "TESTDATA\SOURCE.ACCDB"
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(587, 17)
+        Me.ToolStripStatusLabel2.Spring = True
+        Me.ToolStripStatusLabel2.Text = "1405ICTSE-VBN Group Assignment, Authors: Lim Eng Shun, Yip Rui Fung, Balram "
+        Me.ToolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton2, Me.btnLogout, Me.ToolStripDropDownButton1, Me.ToolStripButton1, Me.btnChangePass})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExit, Me.btnLogout, Me.ToolStripDropDownButton1, Me.btnManageUsers, Me.btnChangePass})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(828, 25)
         Me.ToolStrip1.TabIndex = 4
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'btnExit
+        '
+        Me.btnExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnExit.Image = CType(resources.GetObject("btnExit.Image"), System.Drawing.Image)
+        Me.btnExit.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(29, 22)
+        Me.btnExit.Text = "Exit"
+        '
+        'btnLogout
+        '
+        Me.btnLogout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnLogout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
+        Me.btnLogout.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnLogout.Name = "btnLogout"
+        Me.btnLogout.Size = New System.Drawing.Size(49, 22)
+        Me.btnLogout.Text = "Logout"
+        '
+        'ToolStripDropDownButton1
+        '
+        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddMember, Me.btnRemoveMembers})
+        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
+        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(126, 22)
+        Me.ToolStripDropDownButton1.Text = "Member Operations"
+        '
+        'btnAddMember
+        '
+        Me.btnAddMember.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnAddMember.Name = "btnAddMember"
+        Me.btnAddMember.Size = New System.Drawing.Size(178, 22)
+        Me.btnAddMember.Text = "Add Member"
+        '
+        'btnRemoveMembers
+        '
+        Me.btnRemoveMembers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnRemoveMembers.Name = "btnRemoveMembers"
+        Me.btnRemoveMembers.Size = New System.Drawing.Size(178, 22)
+        Me.btnRemoveMembers.Text = "Remove Member(s)"
+        '
+        'btnManageUsers
+        '
+        Me.btnManageUsers.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnManageUsers.Image = CType(resources.GetObject("btnManageUsers.Image"), System.Drawing.Image)
+        Me.btnManageUsers.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnManageUsers.Name = "btnManageUsers"
+        Me.btnManageUsers.Size = New System.Drawing.Size(108, 22)
+        Me.btnManageUsers.Text = "User Management"
+        '
+        'btnChangePass
+        '
+        Me.btnChangePass.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnChangePass.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnChangePass.Image = CType(resources.GetObject("btnChangePass.Image"), System.Drawing.Image)
+        Me.btnChangePass.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnChangePass.Name = "btnChangePass"
+        Me.btnChangePass.Size = New System.Drawing.Size(105, 22)
+        Me.btnChangePass.Text = "Change Password"
         '
         'SplitContainer1
         '
@@ -97,7 +180,6 @@ Partial Class MainForm
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.Label3)
         Me.SplitContainer1.Panel2.Controls.Add(Me.dgMemberView)
         Me.SplitContainer1.Size = New System.Drawing.Size(828, 380)
         Me.SplitContainer1.SplitterDistance = 191
@@ -116,6 +198,17 @@ Partial Class MainForm
         Me.GroupBox2.TabIndex = 7
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Search"
+        '
+        'txtSearch
+        '
+        Me.txtSearch.CustomBorder = False
+        Me.txtSearch.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtSearch.Location = New System.Drawing.Point(7, 19)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Placeholder = "Search"
+        Me.txtSearch.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtSearch.Size = New System.Drawing.Size(161, 20)
+        Me.txtSearch.TabIndex = 0
         '
         'btnSearch
         '
@@ -233,19 +326,6 @@ Partial Class MainForm
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Membership Types"
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(12, 11)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(480, 31)
-        Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Please enter some search parameters."
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'dgMemberView
         '
         Me.dgMemberView.AllowUserToAddRows = False
@@ -258,99 +338,6 @@ Partial Class MainForm
         Me.dgMemberView.ReadOnly = True
         Me.dgMemberView.Size = New System.Drawing.Size(633, 380)
         Me.dgMemberView.TabIndex = 0
-        '
-        'ToolStripStatusLabel1
-        '
-        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
-        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(73, 17)
-        Me.ToolStripStatusLabel1.Text = "Data Source:"
-        '
-        'lblDataSource
-        '
-        Me.lblDataSource.Name = "lblDataSource"
-        Me.lblDataSource.Size = New System.Drawing.Size(153, 17)
-        Me.lblDataSource.Text = "TESTDATA\SOURCE.ACCDB"
-        '
-        'ToolStripStatusLabel2
-        '
-        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
-        Me.ToolStripStatusLabel2.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(587, 17)
-        Me.ToolStripStatusLabel2.Spring = True
-        Me.ToolStripStatusLabel2.Text = "1405ICTSE-VBN Group Assignment, Authors: Lim Eng Shun, Yip Rui Fung, Balram "
-        Me.ToolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        '
-        'txtSearch
-        '
-        Me.txtSearch.CustomBorder = False
-        Me.txtSearch.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtSearch.Location = New System.Drawing.Point(7, 19)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Placeholder = "Search"
-        Me.txtSearch.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtSearch.Size = New System.Drawing.Size(161, 20)
-        Me.txtSearch.TabIndex = 0
-        '
-        'btnLogout
-        '
-        Me.btnLogout.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnLogout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnLogout.Image = CType(resources.GetObject("btnLogout.Image"), System.Drawing.Image)
-        Me.btnLogout.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(49, 22)
-        Me.btnLogout.Text = "Logout"
-        '
-        'ToolStripDropDownButton1
-        '
-        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddMemberToolStripMenuItem, Me.RemoveMembersToolStripMenuItem})
-        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
-        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
-        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(126, 22)
-        Me.ToolStripDropDownButton1.Text = "Member Operations"
-        '
-        'AddMemberToolStripMenuItem
-        '
-        Me.AddMemberToolStripMenuItem.Name = "AddMemberToolStripMenuItem"
-        Me.AddMemberToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
-        Me.AddMemberToolStripMenuItem.Text = "Add Member"
-        '
-        'RemoveMembersToolStripMenuItem
-        '
-        Me.RemoveMembersToolStripMenuItem.Name = "RemoveMembersToolStripMenuItem"
-        Me.RemoveMembersToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
-        Me.RemoveMembersToolStripMenuItem.Text = "Remove Member(s)"
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(108, 22)
-        Me.ToolStripButton1.Text = "User Management"
-        '
-        'ToolStripButton2
-        '
-        Me.ToolStripButton2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(29, 22)
-        Me.ToolStripButton2.Text = "Exit"
-        '
-        'btnChangePass
-        '
-        Me.btnChangePass.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.btnChangePass.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnChangePass.Image = CType(resources.GetObject("btnChangePass.Image"), System.Drawing.Image)
-        Me.btnChangePass.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.btnChangePass.Name = "btnChangePass"
-        Me.btnChangePass.Size = New System.Drawing.Size(105, 22)
-        Me.btnChangePass.Text = "Change Password"
         '
         'MainForm
         '
@@ -368,7 +355,6 @@ Partial Class MainForm
         Me.ToolStrip1.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
-        Me.SplitContainer1.Panel2.PerformLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
@@ -400,13 +386,12 @@ Partial Class MainForm
     Friend WithEvents rbActive As RadioButton
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents dgMemberView As DataGridView
-    Friend WithEvents ToolStripButton2 As ToolStripButton
+    Friend WithEvents btnExit As ToolStripButton
     Friend WithEvents btnLogout As ToolStripButton
     Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
-    Friend WithEvents AddMemberToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents RemoveMembersToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ToolStripButton1 As ToolStripButton
+    Friend WithEvents btnAddMember As ToolStripMenuItem
+    Friend WithEvents btnRemoveMembers As ToolStripMenuItem
+    Friend WithEvents btnManageUsers As ToolStripButton
     Friend WithEvents btnChangePass As ToolStripButton
 End Class

@@ -2,7 +2,7 @@
 
 Public Class ModifyMemberDialog
     Private _member As IMember
-    Private originalValues As Dictionary(Of String, Object)
+    Private originalValues As Dictionary(Of String, Object) = New Dictionary(Of String, Object)
     Private editMode As Boolean = False, newMode As Boolean = False
 
     Property member As IMember
@@ -113,7 +113,7 @@ Public Class ModifyMemberDialog
         End If
     End Sub
 
-    Private Sub onPropChanging(sender As Object, e As PropertyChangingEventArgs) Handles memberDetailsView.MemberDataChanging
+    Private Sub onPropChanging(sender As Object, e As PropertyChangingEventArgs)
         If Not originalValues.ContainsKey(e.PropertyName) Then
             originalValues.Add(e.PropertyName, CallByName(memberDetailsView, e.PropertyName, CallType.Get))
         End If

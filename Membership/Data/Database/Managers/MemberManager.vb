@@ -50,5 +50,9 @@ Namespace Database
             Util.exec(m, Sub(x) x.Update())
             Return Not IsNothing(m)
         End Function
+
+        Public Function count() As ULong Implements IDataManager(Of IMember).count
+            Throw New NotImplementedException()
+        End Function
     End Class
 End Namespace

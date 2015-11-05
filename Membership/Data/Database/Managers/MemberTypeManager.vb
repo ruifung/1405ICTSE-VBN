@@ -35,6 +35,10 @@ Namespace Database
             Return MaybeOption.create(DirectCast(mship, IMembershipType))
         End Function
 
+        Public Function count() As ULong Implements IDataManager(Of IMembershipType).count
+            Throw New NotImplementedException()
+        End Function
+
         Public Function getEntry(id As Integer) As MaybeOption(Of IMembershipType) Implements IDataManager(Of IMembershipType).getEntry
             Return MaybeOption.create(Of IMembershipType)(TryCast(Member.TryGet(id), IMembershipType))
         End Function

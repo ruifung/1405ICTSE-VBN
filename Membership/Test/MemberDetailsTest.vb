@@ -9,7 +9,7 @@ Public Class MemberDetailsTest
         ' Add any initialization after the InitializeComponent() call.
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim member = New TestMember With {
+        Dim member = New PlainMember With {
             .address = "Somewhere on Earth",
             .contactNumber = "0123456789",
             .dob = New Date(1996, 06, 19),
@@ -30,21 +30,4 @@ Public Class MemberDetailsTest
         MemberDetails1.BoundMember = Nothing
         MemberDetails2.BoundMember = Nothing
     End Sub
-
-    Private Class TestMember
-        Implements IMember
-        Public Property address As String Implements IMember.address
-        Public Property contactNumber As String Implements IMember.contactNumber
-        Public Property dob As Date Implements IMember.dob
-        Public Property email As String Implements IMember.email
-        Public Property firstName As String Implements IMember.firstName
-        Public Property gender As Gender Implements IMember.gender
-        Public Property id As Integer Implements IDataElement.id
-        Public Property isActive As Boolean Implements IMember.isActive
-        Public Property lastName As String Implements IMember.lastName
-        Public Property membershipTypeID As Integer Implements IMember.membershipTypeID
-        Public Property paymentCredit As Double Implements IMember.paymentCredit
-
-        Public Property photo As MaybeOption(Of Image) Implements IMember.photo
-    End Class
 End Class

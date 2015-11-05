@@ -15,7 +15,7 @@ Public Class PlainMember
 
     Public Property gender As Gender Implements IMember.gender
 
-    Public ReadOnly Property id As Integer Implements IDataElement.id
+    Public Property id As Integer Implements IDataElement.id
 
     Public Property isActive As Boolean Implements IMember.isActive
 
@@ -26,6 +26,10 @@ Public Class PlainMember
     Public Property photo As MaybeOption(Of Image) Implements IMember.photo
 
     Public Property paymentCredit As Double Implements IMember.paymentCredit
+
+    Public Property paymentTerm As PaymentTerm Implements IMember.paymentTerm
+
+    Public Property paymentTermDue As Date Implements IMember.paymentTermDue
 
     Sub New()
         _dob = Date.MinValue

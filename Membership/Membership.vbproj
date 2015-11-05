@@ -110,8 +110,6 @@
     <Compile Include="Data\Database\Members.vb" />
     <Compile Include="Data\Database\Memberships.vb" />
     <Compile Include="Data\Database\Managers\UserManager.vb" />
-    <Compile Include="Data\Database\Payment\Charges.vb" />
-    <Compile Include="Data\Database\Payment\Payments.vb" />
     <Compile Include="Data\Database\Users.vb" />
     <Compile Include="Data\PlainMember.vb" />
     <Compile Include="Data\PlainUser.vb" />
@@ -172,6 +170,18 @@
     <Compile Include="UI\MemberManagement\ModifyMemberDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\UserManagement\InitialUserDialog.Designer.vb">
+      <DependentUpon>InitialUserDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserManagement\InitialUserDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UserManagement\ModifyUserDialog.Designer.vb">
+      <DependentUpon>ModifyUserDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserManagement\ModifyUserDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Util\MaybeOption.vb" />
     <Compile Include="Util\Util.vb" />
   </ItemGroup>
@@ -202,6 +212,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MemberManagement\ModifyMemberDialog.resx">
       <DependentUpon>ModifyMemberDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserManagement\InitialUserDialog.resx">
+      <DependentUpon>InitialUserDialog.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

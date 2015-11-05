@@ -158,6 +158,24 @@ Namespace Database
             End Set
         End Property
 
+        Public Property paymentTerm As PaymentTerm Implements IMember.paymentTerm
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As PaymentTerm)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
+        Public Property paymentTermDue As Date Implements IMember.paymentTermDue
+            Get
+                Throw New NotImplementedException()
+            End Get
+            Set(value As Date)
+                Throw New NotImplementedException()
+            End Set
+        End Property
+
         Public Sub setAll(entry As IMember)
             With Me
                 .firstName = entry.firstName

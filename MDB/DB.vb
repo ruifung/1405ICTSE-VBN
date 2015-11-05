@@ -3,6 +3,11 @@ Imports System.IO
 Public Module DB
     Private tables As List(Of Table) = New List(Of Table)
     Public conn As OleDbConnection
+    ''' <summary>
+    ''' Initialize the 
+    ''' </summary>
+    ''' <param name="csb"></param>
+    ''' <remarks></remarks>
     Public Sub init(csb As OleDbConnectionStringBuilder)
         Dim constr As String = csb.ToString()
         If Not File.Exists(csb.DataSource) Then

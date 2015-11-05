@@ -25,7 +25,7 @@ Public Class PlainMember
 
     Public Property photo As MaybeOption(Of Image) Implements IMember.photo
 
-    Public Property paymentCredit As Double Implements IMember.paymentCredit
+    Public Property paymentCredit As Decimal Implements IMember.paymentCredit
 
     Public Property paymentTerm As PaymentTerm Implements IMember.paymentTerm
 

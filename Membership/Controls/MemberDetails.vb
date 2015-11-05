@@ -19,7 +19,7 @@ Public Class MemberDetails
     Private _firstName, _lastName, _contactNumber, _address, _email As String
     Private _dob As Date, _gender As Gender, _photo As MaybeOption(Of Image)
     Private _id, _membershipTypeID As Integer, _isActive As Boolean
-    Private _paymentCredit As Double, initialized As Boolean
+    Private _paymentCredit As Decimal, initialized As Boolean
 
     Overloads Property Enabled As Boolean
         Get
@@ -167,11 +167,11 @@ Public Class MemberDetails
     End Property
 
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
-    Public Property paymentCredit As Double Implements IMember.paymentCredit
+    Public Property paymentCredit As Decimal Implements IMember.paymentCredit
         Get
             Return _paymentCredit
         End Get
-        Set(value As Double)
+        Set(value As Decimal)
             onMemberDataChanging()
             _paymentCredit = value
             onPropertyChanged()

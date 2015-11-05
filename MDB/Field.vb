@@ -4,6 +4,12 @@
     Public Size As Integer
     Public NotNull As Boolean = False
     Public DefaultValue As Object = Nothing
+    ''' <summary>
+    ''' New instance of field
+    ''' </summary>
+    ''' <param name="datatype">datatype of this field</param>
+    ''' <param name="size">size of this field, required when the datatype require size</param>
+    ''' <remarks></remarks>
     Public Sub New(datatype As MDBType, Optional size As Integer = 0)
         Me.Name = ""
         Me.DataType = datatype

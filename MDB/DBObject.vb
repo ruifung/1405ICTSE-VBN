@@ -1,11 +1,29 @@
 ﻿Imports System.Data.OleDb
-
+''' <summary>
+''' A Class wich wrap database record to object
+''' </summary>
+''' <remarks></remarks>
 Public MustInherit Class DBObject
 #Region "Static"
+    ''' <summary>
+    ''' Find a specific record from table as T
+    ''' </summary>
+    ''' <typeparam name="T">Sub class of DBObject</typeparam>
+    ''' <param name="pkey">primary key</param>
+    ''' <returns>the result or nothing</returns>
+    ''' <remarks></remarks>
     Public Shared Function Find(Of T As DBObject)(pkey As Object) As T
         Dim obj As DBObject = DirectCast(Activator.CreateInstance(GetType(T)), DBObject)
         Return Find(Of T)(obj.table.PrimaryKey, pkey)
     End Function
+    ''' <summary>
+    ''' Find a specific record from table as T
+    ''' </summary>
+    ''' <typeparam name="T">Sub class of DBObject</typeparam>
+    ''' <param name="field">field to match</param>
+    ''' <param name="value">value for match</param>
+    ''' <returns>result or nothing</returns>
+    ''' <remarks></remarks>
     Public Shared Function Find(Of T As DBObject)(field As String, value As Object) As T
         Dim obj As DBObject = DirectCast(Activator.CreateInstance(GetType(T)), DBObject)
         obj(field) = value
@@ -34,6 +52,10 @@ Public MustInherit Class DBObject
     Public Sub New()
         data = New Dictionary(Of String, Object)()
     End Sub
+    ''' <summary>
+    ''' Refresh the object, retrieve all data again from database
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Overridable Sub Refresh()
         DB.conn.Open()
         Dim cmd As New OleDbCommand("", DB.conn)
@@ -49,6 +71,10 @@ Public MustInherit Class DBObject
         reader.Close()
         DB.conn.Close()
     End Sub
+    ''' <summary>
+    ''' Insert this object to database
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Overridable Sub Insert()
         DB.conn.Open()
         Dim values As String = "("
@@ -79,6 +105,10 @@ Public MustInherit Class DBObject
         End If
         DB.conn.Close()
     End Sub
+    ''' <summary>
+    ''' Update this record in database
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Overridable Sub Update()
         DB.conn.Open()
         Dim cmd As New OleDbCommand("", DB.conn)
@@ -99,6 +129,10 @@ Public MustInherit Class DBObject
         cmd.ExecuteNonQuery()
         DB.conn.Close()
     End Sub
+    ''' <summary>
+    ''' delete this record from database
+    ''' </summary>
+    ''' <remarks></remarks>
     Public Overridable Sub Delete()
         DB.conn.Open()
         Dim cmd As New OleDbCommand("", DB.conn)
@@ -107,6 +141,13 @@ Public MustInherit Class DBObject
         cmd.ExecuteNonQuery()
         DB.conn.Close()
     End Sub
+    ''' <summary>
+    ''' get or set the value of field
+    ''' </summary>
+    ''' <param name="field">the field</param>
+    ''' <value>the value</value>
+    ''' <returns>the value</returns>
+    ''' <remarks></remarks>
     Default Public Property Item(field As String) As Object
         Get
             If data.ContainsKey(field) Then
@@ -120,6 +161,12 @@ Public MustInherit Class DBObject
             End If
         End Set
     End Property
+    ''' <summary>
+    ''' Get OleDbParameter for a specific field
+    ''' </summary>
+    ''' <param name="field">the field</param>
+    ''' <returns>the parameter</returns>
+    ''' <remarks></remarks>
     Public Function AsParam(field As String) As OleDbParameter
         If Not table.Fields.ContainsKey(field) Then
             Return Nothing
@@ -128,6 +175,11 @@ Public MustInherit Class DBObject
         p.Size = table.Fields(field).Size
         Return p
     End Function
+    ''' <summary>
+    ''' Table of this object
+    ''' </summary>
+    ''' <returns>the table</returns>
+    ''' <remarks></remarks>
     Public MustOverride Function table() As Table
 #End Region
 End Class

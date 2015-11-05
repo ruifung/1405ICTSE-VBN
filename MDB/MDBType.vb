@@ -1,5 +1,8 @@
 ﻿Imports System.Data.OleDb
-
+''' <summary>
+''' Class to represent datatype of mdb
+''' </summary>
+''' <remarks>can not cunstruct by user</remarks>
 Public Class MDBType
 #Region "Types"
     Public Shared ReadOnly Text As New MDBType("VARCHAR", OleDbType.VarWChar, GetType(String), True)

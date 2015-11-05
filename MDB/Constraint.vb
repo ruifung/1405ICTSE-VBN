@@ -1,4 +1,8 @@
-﻿Public Class Constraint
+﻿''' <summary>
+''' A class to represent constraint in database
+''' </summary>
+''' <remarks></remarks>
+Public Class Constraint
     Public Enum ConsType As Byte
         Unique
         PrimaryKey

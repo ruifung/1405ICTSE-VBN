@@ -1,5 +1,9 @@
 ﻿Imports System.Data.OleDb
 Imports System.IO
+''' <summary>
+''' Module to store database connection
+''' </summary>
+''' <remarks></remarks>
 Public Module DB
     Private tables As List(Of Table) = New List(Of Table)
     Public conn As OleDbConnection

@@ -61,7 +61,7 @@ Namespace Database
 
         Public Property chargesPaid As HashSet(Of IMemberCharge) Implements IMemberPayment.chargesPaid
             Get
-
+                Return New HashSet(Of IMemberCharge)(DBList(Of Charges).Query("paid_in=?", MDBType.Number.asParam(Me.id)))
             End Get
             Set(value As HashSet(Of IMemberCharge))
 

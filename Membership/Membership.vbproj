@@ -192,6 +192,12 @@
     <Compile Include="UI\UserManagement\ModifyUserDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\UserManagement\UserManagement.Designer.vb">
+      <DependentUpon>UserManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserManagement\UserManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Util\MaybeOption.vb" />
     <Compile Include="Util\Util.vb" />
   </ItemGroup>

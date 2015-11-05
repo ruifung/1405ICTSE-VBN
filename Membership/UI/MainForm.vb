@@ -58,7 +58,7 @@ Public Class MainForm
         dgMemberView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
     End Sub
 
-    Private Sub onSearch(sender As Object, e As EventArgs) Handles btnSearch.Click
+    Private Sub onSearch(sender As Object, e As EventArgs)
         Dim searchParam As PlainMember = Nothing
         If rbSearchName.Checked Then
             searchParam = New PlainMember With {
@@ -85,12 +85,18 @@ Public Class MainForm
 
     End Sub
 
-    Private Sub openMember(sender As Object, e As DataGridViewCellEventArgs) Handles dgMemberView.CellContentDoubleClick
+    Private Sub formIsClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If e.CloseReason = CloseReason.UserClosing Then
+
+        End If
+    End Sub
+
+    Private Sub openMember(sender As Object, e As DataGridViewCellEventArgs)
         Dim member = TryCast(dgMemberView.Rows(e.RowIndex).DataBoundItem, IMember)
         Dim memberDetails = New ModifyMemberDialog(member, True)
     End Sub
 
-    Private Sub addNewMember(sender As Object, e As EventArgs) Handles btnNewMember.Click
+    Private Sub addNewMember(sender As Object, e As EventArgs)
         Dim dialog = New ModifyMemberDialog()
         Dim result = dialog.ShowDialog
         If result = DialogResult.OK Then

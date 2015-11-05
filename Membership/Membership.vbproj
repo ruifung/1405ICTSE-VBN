@@ -87,6 +87,7 @@
     <Compile Include="API\Members\Payments\IMemberCharge.vb" />
     <Compile Include="API\Members\IMembershipType.vb" />
     <Compile Include="API\Members\Payments\IMemberPayment.vb" />
+    <Compile Include="API\Members\Payments\IPaymentInvoice.vb" />
     <Compile Include="API\Members\Payments\IPaymentManager.vb" />
     <Compile Include="API\Users\IUser.vb" />
     <Compile Include="API\Data\DataStoreManager.vb" />

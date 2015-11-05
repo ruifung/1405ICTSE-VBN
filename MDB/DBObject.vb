@@ -123,7 +123,7 @@ Public MustInherit Class DBObject
             cmd.CommandText += String.Format(" `{0}`=?,", field)
             cmd.Parameters.Add(AsParam(field))
         Next
-        cmd.CommandText.Remove(cmd.CommandText.Length - 1)
+        cmd.CommandText = cmd.CommandText.Remove(cmd.CommandText.Length - 1)
         cmd.CommandText += String.Format(" WHERE `{0}`=?", table.PrimaryKey)
         cmd.Parameters.Add(AsParam(table.PrimaryKey))
         cmd.ExecuteNonQuery()

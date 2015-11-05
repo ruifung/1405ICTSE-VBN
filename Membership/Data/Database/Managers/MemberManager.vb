@@ -1,4 +1,5 @@
-﻿Imports MDB
+﻿Imports System.Data.OleDb
+Imports MDB
 Namespace Database
     Public Class MemberManager
         Implements IDataManager(Of IMember)
@@ -38,7 +39,41 @@ Namespace Database
         End Sub
 
         Public Function search(searchParam As IMember, matchAll As Boolean, fuzzyMatching As Boolean) As List(Of IMember) Implements IDataManager(Of IMember).search
-            Throw New NotImplementedException
+            Dim criteria As String = ""
+            Dim match_op As String = If(fuzzyMatching, " Like ", "=")
+            Dim params As List(Of OleDbParameter) = New List(Of OleDbParameter)
+            If fuzzyMatching Then
+                If searchParam.firstName IsNot Nothing Then searchParam.firstName = String.Format("*{0}*", searchParam.firstName)
+                If searchParam.lastName IsNot Nothing Then searchParam.lastName = String.Format("*{0}*", searchParam.lastName)
+                If searchParam.email IsNot Nothing Then searchParam.email = String.Format("*{0}*", searchParam.email)
+                If searchParam.contactNumber IsNot Nothing Then searchParam.contactNumber = String.Format("*{0}*", searchParam.contactNumber)
+            End If
+            If matchAll Then
+                criteria += "firstname{0}? OR "
+                criteria += "lastname{0}? OR "
+                criteria += "email{0}? OR "
+                criteria += "contact{0}?"
+                params.Add(MDBType.Text.asParam(searchParam.firstName))
+                params.Add(MDBType.Text.asParam(searchParam.lastName))
+                params.Add(MDBType.Text.asParam(searchParam.email))
+                params.Add(MDBType.Text.asParam(searchParam.contactNumber))
+            Else
+                If searchParam.firstName IsNot Nothing Then
+                    criteria += "firstname{0}?"
+                    params.Add(MDBType.Text.asParam(searchParam.firstName))
+                ElseIf searchParam.lastName IsNot Nothing Then
+                    criteria += "lastname{0}?"
+                    params.Add(MDBType.Text.asParam(searchParam.lastName))
+                ElseIf searchParam.email IsNot Nothing Then
+                    criteria += "email{0}?"
+                    params.Add(MDBType.Text.asParam(searchParam.email))
+                Else
+                    criteria += "contact{0}?"
+                    params.Add(MDBType.Text.asParam(searchParam.contactNumber))
+                End If
+            End If
+            criteria = String.Format(criteria, match_op)
+            Return New List(Of IMember)(DBList(Of Member).Query(criteria, params.ToArray()))
         End Function
 
         Public Function updateEntry(entry As IMember) As Boolean Implements IDataManager(Of IMember).updateEntry

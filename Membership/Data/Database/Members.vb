@@ -95,9 +95,11 @@ Namespace Database
             Get
                 If IsNothing(Me("photo")) Then Return New None(Of Image)
                 If _photo.isEmpty Then
-                    Dim stream As MemoryStream = New MemoryStream(DirectCast(Me("photo"), Byte()))
-                    _photo = MaybeOption.create(Image.FromStream(stream))
-                    stream.Close()
+                    Dim bytes() As Byte = DirectCast(Me("photo"), Byte())
+                    ' break and see the bytes correct or not
+                    Using stream As MemoryStream = New MemoryStream(bytes, False)
+                        _photo = MaybeOption.create(Image.FromStream(stream))
+                    End Using
                 End If
                 Return _photo
             End Get

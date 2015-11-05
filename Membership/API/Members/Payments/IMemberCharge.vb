@@ -3,6 +3,6 @@
     Property memberID As Integer
     Property timestamp As Date
     Property description As String
-    Property amount As Double
+    Property amount As Decimal
     Property paid As Boolean
 End Interface

@@ -235,6 +235,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Data\Database\NewFolder1\" />
     <Folder Include="UI\UserManagement\" />
   </ItemGroup>
   <ItemGroup>

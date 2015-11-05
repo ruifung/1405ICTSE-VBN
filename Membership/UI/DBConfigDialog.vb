@@ -71,8 +71,16 @@ Public Class DBConfigDialog
     End Sub
 
     Private Sub chkDSAuth_CheckedChanged(sender As Object, e As EventArgs) Handles chkDSAuth.CheckedChanged
-        txtDSAuthName.Enabled = chkDSAuth.Checked
-        txtDSAuthPass.Enabled = chkDSAuth.Checked
+        Dim item = TryCast(cbDSSelector.SelectedItem, DSType)
+        Dim mode = If(IsNothing(item), DSAuthMode.USERPASS, item.authMode)
+
+        If mode = DSAuthMode.USERPASS Then
+            txtDSAuthName.Enabled = chkDSAuth.Checked
+            txtDSAuthPass.Enabled = chkDSAuth.Checked
+        ElseIf mode = DSAuthMode.PASSWORDONLY
+            txtDSAuthPass.Enabled = chkDSAuth.Checked
+        End If
+
     End Sub
 
     Private Sub cbDSSelector_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbDSSelector.SelectedIndexChanged

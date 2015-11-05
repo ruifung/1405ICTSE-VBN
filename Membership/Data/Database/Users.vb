@@ -78,7 +78,7 @@ Namespace Database
         End Function
 
         Private Function hash(toHash As Byte(), salt As Byte()) As Byte()
-            Dim salted As Byte() = CType(toHash.Concat(salt), Byte())
+            Dim salted As Byte() = toHash.Concat(salt).ToArray
             Dim sha = SHA256Managed.Create()
             Return sha.ComputeHash(salted)
         End Function

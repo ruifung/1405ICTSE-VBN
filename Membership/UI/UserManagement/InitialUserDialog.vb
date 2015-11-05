@@ -35,7 +35,7 @@ Public Class InitialUserDialog
             pass1Check = False
             If .Text.Length < 6 Then
                 errorProvider.SetError(txtPassword, "Password must be at least 6 characters long.")
-            ElseIf Regex.IsMatch(.Text, "[A-Za-z]") AndAlso Regex.IsMatch(.Text, "[0-9]")
+            ElseIf Not (Regex.IsMatch(.Text, "[a-zA-Z]") AndAlso Regex.IsMatch(.Text, "[0-9]")) Then
                 errorProvider.SetError(txtPassword, "Password must be alphanumeric.")
             Else
                 errorProvider.SetError(txtPassword, String.Empty)
@@ -45,7 +45,7 @@ Public Class InitialUserDialog
         updateButtonStates()
     End Sub
 
-    Private Sub validateConfirmPassword(sender As Object, e As CancelEventArgs) Handles txtPasswordConfirm.Validating
+    Private Sub validateConfirmPassword(sender As Object, e As CancelEventArgs) Handles txtPasswordConfirm.Validating, txtPassword.Validating
         If Not txtPassword.Text.Equals(txtPasswordConfirm.Text) Then
             errorProvider.SetError(txtPasswordConfirm, "Passwords do not match!")
             pass2Check = False

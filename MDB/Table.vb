@@ -37,15 +37,20 @@ Public Class Table
     ''' Apply Constraint to the table
     ''' </summary>
     ''' <remarks></remarks>
-    Public Sub ApplyConstraint()
+    Public Sub ApplyConstraint(Optional primary As Boolean = False)
         If Constraints.Count = 0 Then Return
         DB.conn.Open()
         Dim cmd As OleDbCommand = New OleDbCommand("", DB.conn)
         For Each c As Constraint In Constraints
-            cmd.CommandText = String.Format("ALTER {0} ADD {1};", Name, String.Format(con(CInt(c.type)), c.field, c.refTable, c.refField))
+            If primary And c.type <> Constraint.ConsType.PrimaryKey Then
+                Continue For
+            ElseIf (Not primary) And c.type = Constraint.ConsType.PrimaryKey
+                Continue For
+            End If
+            cmd.CommandText = String.Format("ALTER TABLE {0} ADD {1};", Name, String.Format(con(CInt(c.type)), c.field, c.refTable, c.refField))
             cmd.ExecuteNonQuery()
         Next
-        DB.conn.Open()
+        DB.conn.Close()
     End Sub
     ''' <summary>
     ''' Drop the table

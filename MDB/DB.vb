@@ -19,7 +19,10 @@ Public Module DB
                 t.Create()
             Next
             For Each t As Table In tables
-                t.ApplyConstraint()
+                t.ApplyConstraint(True)
+            Next
+            For Each t As Table In tables
+                t.ApplyConstraint(False)
             Next
         Else
             conn = New OleDbConnection(constr)

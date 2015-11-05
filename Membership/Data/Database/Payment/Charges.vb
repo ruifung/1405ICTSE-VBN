@@ -19,7 +19,7 @@ Namespace Database
             ChargesTable = t
         End Sub
     End Class
-    Public Class Charges
+    Public Class Charge
         Inherits DBObject
         Implements IMemberCharge
         Public PaymentId As Integer
@@ -58,6 +58,13 @@ Namespace Database
                 Me("member") = value
             End Set
         End Property
+
+        ''' <summary>
+        ''' Have to set paymentId before set it to true
+        ''' </summary>
+        ''' <value>Paid or not</value>
+        ''' <returns>Paid or not</returns>
+        ''' <remarks></remarks>
         Public Property paid As Boolean Implements IMemberCharge.paid
             Get
                 Return CInt(Me("paid_in")) <> 0

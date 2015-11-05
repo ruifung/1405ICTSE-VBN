@@ -34,7 +34,7 @@ Public MustInherit Class DBObject
     Public Sub New()
         data = New Dictionary(Of String, Object)()
     End Sub
-    Public Sub Refresh()
+    Public Overridable Sub Refresh()
         DB.conn.Open()
         Dim cmd As New OleDbCommand("", DB.conn)
         cmd.CommandText = String.Format("SELECT * FROM `{0}` SET WHERE `{1}`=?", table.Name, table.PrimaryKey)
@@ -49,7 +49,7 @@ Public MustInherit Class DBObject
         reader.Close()
         DB.conn.Close()
     End Sub
-    Public Sub Insert()
+    Public Overridable Sub Insert()
         DB.conn.Open()
         Dim values As String = "("
         Dim cmd As New OleDbCommand("", DB.conn)
@@ -79,7 +79,7 @@ Public MustInherit Class DBObject
         End If
         DB.conn.Close()
     End Sub
-    Public Sub Update()
+    Public Overridable Sub Update()
         DB.conn.Open()
         Dim cmd As New OleDbCommand("", DB.conn)
         cmd.CommandText = String.Format("UPDATE `{0}` SET ", table.Name)
@@ -99,7 +99,7 @@ Public MustInherit Class DBObject
         cmd.ExecuteNonQuery()
         DB.conn.Close()
     End Sub
-    Public Sub Delete()
+    Public Overridable Sub Delete()
         DB.conn.Open()
         Dim cmd As New OleDbCommand("", DB.conn)
         cmd.CommandText = String.Format("DELETE FROM `{0}` SET WHERE `{1}`=?", table.Name, table.PrimaryKey)

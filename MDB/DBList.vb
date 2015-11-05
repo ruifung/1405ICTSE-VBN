@@ -55,12 +55,12 @@ Public Class DBList(Of T As DBObject)
             obj.Refresh()
         Next
     End Sub
-    Public Sub InsertDB()
+    Public Overridable Sub InsertDB()
         For Each obj As DBObject In Me
             obj.Insert()
         Next
     End Sub
-    Public WriteOnly Property Update(field As String) As Object
+    Public Overridable WriteOnly Property Update(field As String) As Object
         Set(value As Object)
             DB.conn.Open()
             Dim temp As DBObject = DirectCast(Activator.CreateInstance(Of T)(), DBObject)
@@ -86,7 +86,7 @@ Public Class DBList(Of T As DBObject)
             DB.conn.Close()
         End Set
     End Property
-    Public Sub Delete()
+    Public Overridable Sub Delete()
         DB.conn.Open()
         If Me.Count = 0 Then
             Return

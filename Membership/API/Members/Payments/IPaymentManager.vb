@@ -4,7 +4,7 @@
 
     Function addCharge(member As IMember, timestamp As Date, desc As String, amount As Decimal) As IMemberCharge
 
-    Function invoice(charges As HashSet(Of IMemberCharge)) As IPaymentInvoice
+    Function invoice(member As IMember, charges As HashSet(Of IMemberCharge)) As IPaymentInvoice
     Function pay(invoice As IPaymentInvoice, amount As Decimal) As IMemberPayment
 
     Function removePayment(payment As IMemberPayment) As Boolean
@@ -18,8 +18,10 @@
     Function getCharge(chargeID As Integer) As IMemberCharge
     Function listCharges(member As IMember, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberCharge)
     Function listCharges(memberID As Integer, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberCharge)
+    Function updateCharge(charge As IMemberCharge) As Boolean
 
     Function getPayment(paymentID As Integer) As IMemberPayment
     Function listPayments(member As IMember, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberPayment)
     Function listPayments(memberID As Integer, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberPayment)
+    Function updatePayment(payment As IMemberPayment) As Boolean
 End Interface

@@ -42,7 +42,7 @@ Public Class Table
         DB.conn.Open()
         Dim cmd As OleDbCommand = New OleDbCommand("", DB.conn)
         For Each c As Constraint In Constraints
-            cmd.CommandText = String.Format("ALTER {0} ADD {1};", String.Format(con(CInt(c.type)), c.field, c.refTable, c.refField))
+            cmd.CommandText = String.Format("ALTER {0} ADD {1};", Name, String.Format(con(CInt(c.type)), c.field, c.refTable, c.refField))
             cmd.ExecuteNonQuery()
         Next
         DB.conn.Open()

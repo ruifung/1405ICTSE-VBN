@@ -1,7 +1,11 @@
 ﻿Public Interface IPaymentManager
     'Probably should cache the result from this.
     Function getUnpaidCharges(member As IMember) As HashSet(Of IMemberCharge)
-    Function pay(charges As HashSet(Of IMemberCharge), amount As Double) As IMemberPayment
+
+    Function addCharge(member As IMember, timestamp As Date, desc As String, amount As Double) As IMemberCharge
+
+    Function invoice(charges As HashSet(Of IMemberCharge)) As IPaymentInvoice
+    Function pay(invoice As IPaymentInvoice, amount As Double) As IMemberPayment
 
     Function removePayment(payment As IMemberPayment) As Boolean
     ''' <summary>

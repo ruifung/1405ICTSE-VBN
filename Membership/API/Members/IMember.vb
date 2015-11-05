@@ -19,6 +19,8 @@ Public Interface IMember
     Property membershipTypeID As Integer
 
     Property paymentCredit As Double
+    Property paymentTerm As PaymentTerm
+    Property paymentTermDue As Date
 End Interface
 
 Public Enum Gender
@@ -26,4 +28,11 @@ Public Enum Gender
     Male
     Female
     Other
+End Enum
+
+Public Enum PaymentTerm
+    Monthly
+    Quarterly
+    BiAnnually
+    Annually
 End Enum

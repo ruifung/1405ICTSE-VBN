@@ -235,6 +235,9 @@
     <EmbeddedResource Include="UI\UserManagement\InitialUserDialog.resx">
       <DependentUpon>InitialUserDialog.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserManagement\UserManagement.resx">
+      <DependentUpon>UserManagement.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">

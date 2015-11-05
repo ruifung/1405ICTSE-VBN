@@ -3,7 +3,10 @@
     Public DataType As MDBType
     Public Size As Integer
     Public NotNull As Boolean = False
-    Public DefaultValue As Object = Nothing
+    ''' <summary>
+    ''' in sql
+    ''' </summary>
+    Public DefaultValue As String = Nothing
     ''' <summary>
     ''' New instance of field
     ''' </summary>
@@ -22,6 +25,6 @@
     ''' <remarks></remarks>
     Public Function CreateSQL() As String
         Dim s As String = If(DataType.SizeRequired, String.Format("({0})", Size), "")
-        Return String.Format("`{0}` {1}{2}{3}{4}", Me.Name, Me.DataType.SQL, s, If(Me.NotNull, " NOT NULL", ""), If(IsNothing(Me.DefaultValue), "", " DEFAULT ?"))
+        Return String.Format("`{0}` {1}{2}{3}{4}", Me.Name, Me.DataType.SQL, s, If(Me.NotNull, " NOT NULL", ""), If(IsNothing(Me.DefaultValue), "", " DEFAULT " & DefaultValue))
     End Function
 End Class

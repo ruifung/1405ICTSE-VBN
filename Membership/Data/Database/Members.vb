@@ -13,6 +13,7 @@ Namespace Database
             MembersTable.Fields("dob") = New Field(MDBType.DateTime)
             MembersTable.Fields("gender") = New Field(MDBType.Number)
             MembersTable.Fields("mship") = New Field(MDBType.Number)
+            MembersTable.Fields("mship").DefaultValue = "-1"
             MembersTable.Fields("contact") = New Field(MDBType.Text, 15)
             MembersTable.Fields("email") = New Field(MDBType.Text, 50)
             MembersTable.Fields("photo") = New Field(MDBType.OLE)

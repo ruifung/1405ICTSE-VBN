@@ -15,7 +15,7 @@ Public Class InitialUserDialog
         End Get
     End Property
 
-    Private Sub validateUsername(sender As Object, e As CancelEventArgs) Handles txtUsername.Validating
+    Private Sub validateUsername(sender As Object, e As EventArgs) Handles txtUsername.TextChanged, txtUsername.LostFocus
         With txtUsername
             unameCheck = False
             If .Text.Length <= 0 Then
@@ -30,7 +30,7 @@ Public Class InitialUserDialog
         updateButtonStates()
     End Sub
 
-    Private Sub validatePassword(sender As Object, e As CancelEventArgs) Handles txtPassword.Validating
+    Private Sub validatePassword(sender As Object, e As EventArgs) Handles txtPassword.TextChanged, txtPassword.LostFocus
         With txtPassword
             pass1Check = False
             If .Text.Length < 6 Then
@@ -45,7 +45,8 @@ Public Class InitialUserDialog
         updateButtonStates()
     End Sub
 
-    Private Sub validateConfirmPassword(sender As Object, e As CancelEventArgs) Handles txtPasswordConfirm.Validating, txtPassword.Validating
+    Private Sub validateConfirmPassword(sender As Object, e As EventArgs) _
+        Handles txtPasswordConfirm.TextChanged, txtPasswordConfirm.LostFocus, txtPassword.TextChanged, txtPassword.LostFocus
         If Not txtPassword.Text.Equals(txtPasswordConfirm.Text) Then
             errorProvider.SetError(txtPasswordConfirm, "Passwords do not match!")
             pass2Check = False
@@ -54,6 +55,12 @@ Public Class InitialUserDialog
             pass2Check = True
         End If
         updateButtonStates()
+    End Sub
+
+    Private Sub onMeLoad(sender As Object, e As EventArgs) Handles MyBase.Load
+        validateConfirmPassword(Nothing, Nothing)
+        validatePassword(Nothing, Nothing)
+        validateUsername(Nothing, Nothing)
     End Sub
 
     Private Sub updateButtonStates()

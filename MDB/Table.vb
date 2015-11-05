@@ -25,11 +25,6 @@ Public Class Table
     Public Sub Create()
         DB.conn.Open()
         Dim cmd As New OleDbCommand(CreateSQL(), DB.conn)
-        For Each pair As KeyValuePair(Of String, Field) In Fields
-            If Not IsNothing(pair.Value.DefaultValue) Then
-                cmd.Parameters.Add(pair.Value.DataType.asParam(pair.Value.DefaultValue))
-            End If
-        Next
         cmd.ExecuteNonQuery()
         DB.conn.Close()
     End Sub

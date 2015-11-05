@@ -97,7 +97,7 @@ Namespace Database
         End Function
 
         Public Function count() As ULong Implements IDataManager(Of IUser).count
-            Throw New NotImplementedException
+            Return CType(DBList(Of User).RowsCount(), ULong)
         End Function
 
         Public Sub init() Implements IDataManager(Of IUser).init

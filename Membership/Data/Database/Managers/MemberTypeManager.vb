@@ -36,7 +36,7 @@ Namespace Database
         End Function
 
         Public Function count() As ULong Implements IDataManager(Of IMembershipType).count
-            Throw New NotImplementedException()
+            Return CType(DBList(Of Membership).RowsCount(), ULong)
         End Function
 
         Public Function getEntry(id As Integer) As MaybeOption(Of IMembershipType) Implements IDataManager(Of IMembershipType).getEntry

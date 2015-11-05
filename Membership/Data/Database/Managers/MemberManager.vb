@@ -52,7 +52,7 @@ Namespace Database
         End Function
 
         Public Function count() As ULong Implements IDataManager(Of IMember).count
-            Throw New NotImplementedException()
+            Return CType(DBList(Of Member).RowsCount(), ULong)
         End Function
     End Class
 End Namespace

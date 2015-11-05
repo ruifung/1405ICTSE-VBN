@@ -1,136 +1,90 @@
 ﻿Imports System.Collections.Immutable
 Imports System.Configuration
 Imports Membership.Exceptions
+Imports Newtonsoft.Json
+Imports System.IO
+Imports System.Text
+
 Namespace config
     Public Module ConfigManager
-        Private config As Configuration
-        Private appSettings As AppSettingsSection
+        Private configPath As String = String.Concat(Path.GetDirectoryName(GetType(Program).Assembly.Location), Path.DirectorySeparatorChar, "MembershipProgramConfig.json")
+        Private config As ProgramConfig
         Private noneString As None(Of String) = New None(Of String)
         Public dataManager As DataStoreManager
         Public currentUser As IUser
 
         Private dataInit As Boolean
 
-        ''' <summary>
-        ''' Dictionary of all configuration keys.
-        ''' Value is if the key must NEVER be missing.
-        ''' </summary>
-        ''' <returns></returns>
-        Public ReadOnly Property configurationKeys As ImmutableDictionary(Of String, Func(Of String, Boolean)) =
-        ImmutableDictionary.CreateRange(
-            New Dictionary(Of String, Func(Of String, Boolean)) From {
-                {"DataMode", Function(x) supportedDataSources.Exists(Function(y) y.type.Equals(x))},
-                {"DataSource", Function(x) (Not IsNothing(x)) AndAlso x.Length > 0},
-                {"DataAuth", Function(x)
-                                 Dim temp As Boolean
-                                 Return Boolean.TryParse(x, temp)
-                             End Function},
-                {"DataUser", Function(x)
-                                 Dim temp As Boolean
-                                 Dim required = If(Boolean.TryParse(configuration("DataAuth").orNothing, temp), temp, False)
-                                 If required Then
-                                     Return Not IsNothing(x)
-                                 Else
-                                     Return False
-                                 End If
-                             End Function},
-                {"DataPass", Function(x)
-                                 Dim temp As Boolean
-                                 Dim required = If(Boolean.TryParse(configuration("DataAuth").orNothing, temp), temp, False)
-                                 If required Then
-                                     Return Not IsNothing(x)
-                                 Else
-                                     Return False
-                                 End If
-                             End Function}
-            }
-        )
-        Public ReadOnly Property configuration As Dictionary(Of String, MaybeOption(Of String)) =
-        New Dictionary(Of String, MaybeOption(Of String))
-
-
-        Private Function loadSetting(key As String,
-                         Optional verify As Predicate(Of String) = Nothing) As MaybeOption(Of String)
-            Dim setting = MaybeOption.create(appSettings.Settings(key)) _
-            .map(Function(x) x.Value)
-            Dim maybeVerify = MaybeOption.create(configurationKeys(key))
-            If maybeVerify.forAll(Function(x) x(setting.orNothing)) Then
-                Return setting
-            Else
-                Throw New InvalidSettingException(key)
-            End If
-        End Function
+        Public ReadOnly Property configuration As ProgramConfig
+            Get
+                Return New ProgramConfig With {
+                    .DataSourceType = config.DataSourceType,
+                    .DataSourcePath = config.DataSourcePath,
+                    .DataSourceAuth = config.DataSourceAuth,
+                    .DataSourceUser = config.DataSourceUser,
+                    .DataSourcePass = config.DataSourcePass
+                }
+            End Get
+        End Property
 
         Private Function loadSettings() As ImmutableHashSet(Of ErrorFlags)
             Dim errorFlagsB = ImmutableHashSet.CreateBuilder(Of ErrorFlags)
-            For Each k In configurationKeys.Keys
-                Dim val As MaybeOption(Of String)
-                Try
-                    val = loadSetting(k)
-                Catch ex As InvalidSettingException
-                    'Load default setting for key?
-                    Select Case ex.settingKey
-                        Case "DataMode"
-                            errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
-                        Case "DataSource"
-                            errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
-                        Case "DataAuth"
-                            errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
-                        Case "DataUser"
-                            errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
-                        Case "DataPass"
-                            errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
-                    End Select
-                    val = New None(Of String)
-                End Try
-                configuration.Add(k, val)
-            Next
+            If File.Exists(configPath) Then
+                Dim configText = File.ReadAllText(configPath)
+                configText = Encoding.UTF8.GetString(Convert.FromBase64String(configText))
+                config = DirectCast(JsonConvert.DeserializeObject(configText, GetType(ProgramConfig)), ProgramConfig)
+
+                'validate
+                If Not (config.validateDataSource AndAlso
+                        config.validateDataPath AndAlso
+                        config.validateDataUser AndAlso
+                        config.validateDataPass) Then
+                    errorFlagsB.Add(ErrorFlags.DATABASE_CONFIG)
+                End If
+            Else
+                config = New ProgramConfig
+                errorFlagsB.Add(ErrorFlags.NEW_CONFIG)
+            End If
+
             Return errorFlagsB.ToImmutableHashSet
         End Function
 
 
 
         Sub init()
-            Try
-                config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
-                appSettings = config.AppSettings
-                MsgBox(config.FilePath)
-            Catch ex As ConfigurationErrorsException
-                MsgBox(ex.ToString, MsgBoxStyle.Critical, "Critical Error!")
-                quit()
-            End Try
             Dim flags = New HashSet(Of ErrorFlags)(loadSettings())
 
             While isRunning AndAlso Not (dataInit)
-                If Not dataInit AndAlso Not flags.Contains(ErrorFlags.DATABASE_CONFIG) Then
-                    Try
-                        initData()
-                        dataInit = True
-                    Catch ex As DataSourceException
-                        flags.Add(ErrorFlags.DATABASE_CONFIG)
-                        Console.Write(ex.ToString)
-                    End Try
+                If Not flags.Contains(ErrorFlags.NEW_CONFIG) Then
+                    If Not dataInit AndAlso Not flags.Contains(ErrorFlags.DATABASE_CONFIG) Then
+                        Try
+                            initData()
+                            dataInit = True
+                        Catch ex As DataSourceException
+                            flags.Add(ErrorFlags.DATABASE_CONFIG)
+                            Console.Write(ex.ToString)
+                        End Try
+                    End If
                 End If
-
                 With flags
-                    If .Contains(ErrorFlags.DATABASE_CONFIG) Then
+                    If .Contains(ErrorFlags.DATABASE_CONFIG) OrElse .Contains(ErrorFlags.NEW_CONFIG) Then
                         Dim dbConfig = New DBConfigDialog With {
                             .DSTypes = supportedDataSources,
-                            .DSType = configuration("DataMode").orNothing,
-                            .DSPath = configuration("DataSource").orNothing,
-                            .DSUser = configuration("DataUser").orNothing,
-                            .DSPass = configuration("DataPass").orNothing
+                            .DSType = config.DataSourceType,
+                            .DSPath = config.DataSourcePath,
+                            .DSAuth = config.DataSourceAuth,
+                            .DSUser = config.DataSourceUser,
+                            .DSPass = config.DataSourcePass
                         }
-                        Boolean.TryParse(configuration("DataAuth").orNothing, dbConfig.DSAuth)
                         Try
                             Dim result = dbConfig.ShowDialog
                             If result = DialogResult.OK Then
                                 With dbConfig
-                                    configuration("DataMode") = create(.DSType)
-                                    configuration("DataSource") = create(.DSPath)
-                                    configuration("DataAuth") = create(.DSAuth.ToString)
-                                    configuration("DataUser") = create(.DSUser)
-                                    configuration("DataPass") = create(.DSPass)
+                                    config.DataSourceType = .DSType
+                                    config.DataSourcePath = .DSPath
+                                    config.DataSourceAuth = .DSAuth
+                                    config.DataSourceUser = .DSUser
+                                    config.DataSourcePass = .DSPass
                                     flags.Remove(ErrorFlags.DATABASE_CONFIG)
                                 End With
                             Else
@@ -140,25 +94,18 @@ Namespace config
                             dbConfig.Dispose()
                         End Try
                     End If
-
+                    flags.Remove(ErrorFlags.NEW_CONFIG)
                 End With
             End While
         End Sub
 
         Public Sub save()
-            For Each kv In configuration.ToList
-                If appSettings.Settings.AllKeys.Contains(kv.Key) Then
-                    appSettings.Settings(kv.Key).Value = kv.Value.getOrAlt(String.Empty)
-                Else
-                    appSettings.Settings.Add(kv.Key, kv.Value.getOrAlt(String.Empty))
-                End If
-            Next
-            config.Save(ConfigurationSaveMode.Full, True)
-            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
-            ConfigurationManager.RefreshSection("appSettings")
+            Dim outString = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(config)))
+            File.WriteAllText(configPath, outString)
         End Sub
 
         Private Enum ErrorFlags
+            NEW_CONFIG
             DATABASE_CONFIG
         End Enum
     End Module

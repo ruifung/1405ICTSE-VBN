@@ -11,7 +11,7 @@ Public Class MDBType
     Public Shared ReadOnly [Double] As New MDBType("DOUBLE", OleDbType.Double, GetType(System.Double))
     Public Shared ReadOnly Number As New MDBType("LONG", OleDbType.Integer, GetType(Int32))
     Public Shared ReadOnly [Integer] As New MDBType("SHORT", OleDbType.SmallInt, GetType(Int16))
-    Public Shared ReadOnly Binary As New MDBType("VARBINARY", OleDbType.VarBinary, GetType(Byte()))
+    Public Shared ReadOnly Binary As New MDBType("LONGBINARY", OleDbType.LongVarBinary, GetType(Byte()))
     Public Shared ReadOnly AutoNumber As New MDBType("AUTOINCREMENT", OleDbType.Integer, GetType(Int32))
 #End Region
 #Region "Instance Properties & Functions"

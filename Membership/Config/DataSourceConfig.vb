@@ -56,18 +56,20 @@ Namespace config
         End Sub
 
         Friend Sub initData()
-            Dim dataMode = configuration("DataMode").getOrAlt(String.Empty)
-            Dim dataAuth As Boolean = False
-            Boolean.TryParse(configuration("DataAuth").orNothing, dataAuth)
+            Dim dataMode = configuration.DataSourceType
             Dim DSConfig = New DSConfigItem With {
-                .DataSource = configuration("DataSource").getOrAlt(String.Empty),
-                .Auth = dataAuth,
-                .User = configuration("DataUser").getOrAlt(String.Empty),
-                .Pass = configuration("DataPass").getOrAlt(String.Empty)
+                .DataSource = configuration.DataSourcePath,
+                .Auth = configuration.DataSourceAuth,
+                .User = configuration.DataSourceUser,
+                .Pass = configuration.DataSourcePass
             }
             Dim type = dsList.Find(Function(x) x.type.ToLower.Equals(dataMode.ToLower))
             If type IsNot Nothing Then
-                dataManager = type.initializer()(DSConfig)
+                Try
+                    dataManager = type.initializer()(DSConfig)
+                Catch ex As OleDb.OleDbException
+                    Throw New Exceptions.DataSourceException(ex.Message, ex)
+                End Try
             Else
                 Throw New Exceptions.DataSourceException("Invalid Data Source!")
             End If

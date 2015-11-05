@@ -65,11 +65,7 @@ Namespace config
             }
             Dim type = dsList.Find(Function(x) x.type.ToLower.Equals(dataMode.ToLower))
             If type IsNot Nothing Then
-                Try
-                    dataManager = type.initializer()(DSConfig)
-                Catch ex As OleDb.OleDbException
-                    Throw New Exceptions.DataSourceException(ex.Message, ex)
-                End Try
+                dataManager = type.initializer()(DSConfig)
             Else
                 Throw New Exceptions.DataSourceException("Invalid Data Source!")
             End If

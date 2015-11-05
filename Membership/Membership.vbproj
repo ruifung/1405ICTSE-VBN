@@ -110,6 +110,8 @@
     <Compile Include="Data\Database\Members.vb" />
     <Compile Include="Data\Database\Memberships.vb" />
     <Compile Include="Data\Database\Managers\UserManager.vb" />
+    <Compile Include="Data\Database\Payment\Charges.vb" />
+    <Compile Include="Data\Database\Payment\Payments.vb" />
     <Compile Include="Data\Database\Users.vb" />
     <Compile Include="Data\PlainMember.vb" />
     <Compile Include="Data\PlainUser.vb" />
@@ -250,9 +252,7 @@
       <Name>MDB</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UI\UserManagement\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\noimage.png" />
   </ItemGroup>

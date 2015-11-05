@@ -94,7 +94,7 @@ Namespace Database
         End Property
         Public Property photo As MaybeOption(Of Image) Implements IMember.photo
             Get
-                If IsNothing(Me("photo")) Then Return New None(Of Image)
+                If IsNothing(Me("photo")) Then Return MaybeOption.create(Of Image)(My.Resources.noimage)
                 If _photo.isEmpty Then
                     Dim stream As MemoryStream = New MemoryStream(DirectCast(Me("photo"), Byte()))
                     Try

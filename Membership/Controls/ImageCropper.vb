@@ -4,7 +4,6 @@ Imports System.IO
 Public Class ImageCropper
 
     Private _cropsize As Size = New Size(120, 160)
-    <Category("Data")>
     Public Property CorpSize As Size
         Get
             Return _cropsize
@@ -33,6 +32,17 @@ Public Class ImageCropper
         End Set
     End Property
 
+    Private _bgcolor As Color = Color.White
+    Public Property ResultBackground As Color
+        Get
+            Return _bgcolor
+        End Get
+        Set(value As Color)
+            _bgcolor = value
+            Me.Invalidate()
+        End Set
+    End Property
+
     Public ReadOnly Property CroppedImage As Image
         Get
             If ImageToCrop Is Nothing Then Return Nothing
@@ -49,9 +59,10 @@ Public Class ImageCropper
             Dim ci As Image = New Bitmap(_cropsize.Width, _cropsize.Height)
             Using g As Graphics = Graphics.FromImage(ci)
                 rect1 = New Rectangle(New Point(0, 0), _cropsize)
+                g.FillRectangle(New SolidBrush(_bgcolor), rect1)
                 rect2.Size = _cropsize
-                rect2.X = _imgrect.X - CInt((Me.Width - rect2.Width) / 2)
-                rect2.Y = _imgrect.Y - CInt((Me.Height - rect2.Height) / 2)
+                rect2.X = CInt((Me.Width - rect2.Width) / 2) - _imgrect.X
+                rect2.Y = CInt((Me.Height - rect2.Height) / 2) - _imgrect.Y
                 g.DrawImage(si, rect1, rect2, GraphicsUnit.Pixel)
             End Using
             Return ci
@@ -78,6 +89,10 @@ Public Class ImageCropper
     Protected Overrides Sub OnPaint(e As PaintEventArgs)
         MyBase.OnPaint(e)
         Dim rect As New Rectangle()
+        rect.Size = _cropsize
+        rect.X = CInt((Me.Width - rect.Width) / 2)
+        rect.Y = CInt((Me.Height - rect.Height) / 2)
+        e.Graphics.FillRectangle(New SolidBrush(_bgcolor), rect)
         If _imgcrop IsNot Nothing Then
             rect.Size = _imgcrop.Size
             rect.Location = New Point(0, 0)
@@ -140,7 +155,7 @@ Public Class ImageCropper
     End Sub
 
     Private Sub btnZoomOut_Click(sender As Object, e As EventArgs) Handles btnZoomOut.Click
-        If _imgscale > 50 Then _imgscale -= 10
+        If _imgscale > 20 Then _imgscale -= 10
         rescale()
     End Sub
 
@@ -151,7 +166,7 @@ Public Class ImageCropper
 
     Private Sub rescale()
         If _imgscale > 300 Then _imgscale = 300
-        If _imgscale < 50 Then _imgscale = 50
+        If _imgscale < 20 Then _imgscale = 20
         btnPercent.Text = String.Format("{0}%", _imgscale)
         If ImageToCrop Is Nothing Then Return
         Dim rect As Rectangle = New Rectangle

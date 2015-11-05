@@ -23,22 +23,10 @@ Partial Class CropImageDialog
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(CropImageDialog))
-        Me.cropper = New Membership.ImageCropper()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.cropper = New Membership.ImageCropper()
         Me.SuspendLayout()
-        '
-        'cropper
-        '
-        Me.cropper.BackColor = System.Drawing.Color.White
-        Me.cropper.BackgroundImage = CType(resources.GetObject("cropper.BackgroundImage"), System.Drawing.Image)
-        Me.cropper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.cropper.CorpSize = New System.Drawing.Size(120, 160)
-        Me.cropper.ImageToCrop = Nothing
-        Me.cropper.Location = New System.Drawing.Point(12, 12)
-        Me.cropper.Name = "cropper"
-        Me.cropper.Size = New System.Drawing.Size(391, 294)
-        Me.cropper.TabIndex = 0
         '
         'btnOK
         '
@@ -59,6 +47,19 @@ Partial Class CropImageDialog
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'cropper
+        '
+        Me.cropper.BackColor = System.Drawing.Color.White
+        Me.cropper.BackgroundImage = CType(resources.GetObject("cropper.BackgroundImage"), System.Drawing.Image)
+        Me.cropper.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.cropper.CorpSize = New System.Drawing.Size(120, 160)
+        Me.cropper.ImageToCrop = Nothing
+        Me.cropper.Location = New System.Drawing.Point(12, 12)
+        Me.cropper.Name = "cropper"
+        Me.cropper.ResultBackground = System.Drawing.Color.White
+        Me.cropper.Size = New System.Drawing.Size(391, 294)
+        Me.cropper.TabIndex = 0
+        '
         'CropImageDialog
         '
         Me.AcceptButton = Me.btnOK
@@ -72,7 +73,7 @@ Partial Class CropImageDialog
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.Name = "CropImageDialog"
-        Me.Text = "CropImageDialog"
+        Me.Text = "Crop Image"
         Me.ResumeLayout(False)
 
     End Sub

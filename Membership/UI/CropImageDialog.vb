@@ -15,6 +15,14 @@
             cropper.ImageToCrop = value
         End Set
     End Property
+    Public Property ResultBackground As Color
+        Get
+            Return cropper.ResultBackground
+        End Get
+        Set(value As Color)
+            cropper.ResultBackground = value
+        End Set
+    End Property
     Private _cropped As Image = Nothing
     Public ReadOnly Property CropResult As Image
         Get

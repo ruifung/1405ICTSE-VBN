@@ -144,6 +144,12 @@
     <Compile Include="Test\MemberDetailsTest.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Test\TestCrop.Designer.vb">
+      <DependentUpon>TestCrop.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Test\TestCrop.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\CropImageDialog.Designer.vb">
       <DependentUpon>CropImageDialog.vb</DependentUpon>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Test\MemberDetailsTest.resx">
       <DependentUpon>MemberDetailsTest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\TestCrop.resx">
+      <DependentUpon>TestCrop.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\CropImageDialog.resx">
       <DependentUpon>CropImageDialog.vb</DependentUpon>

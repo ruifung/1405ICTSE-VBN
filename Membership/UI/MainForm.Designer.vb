@@ -50,6 +50,7 @@ Partial Class MainForm
         Me.btnRemoveMembers = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnManageUsers = New System.Windows.Forms.ToolStripButton()
         Me.btnChangePass = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStrip2 = New System.Windows.Forms.ToolStrip()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -339,11 +340,20 @@ Partial Class MainForm
         Me.btnChangePass.Size = New System.Drawing.Size(105, 22)
         Me.btnChangePass.Text = "Change Password"
         '
+        'ToolStrip2
+        '
+        Me.ToolStrip2.Location = New System.Drawing.Point(0, 25)
+        Me.ToolStrip2.Name = "ToolStrip2"
+        Me.ToolStrip2.Size = New System.Drawing.Size(828, 25)
+        Me.ToolStrip2.TabIndex = 6
+        Me.ToolStrip2.Text = "ToolStrip2"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(828, 427)
+        Me.Controls.Add(Me.ToolStrip2)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.StatusStrip1)
@@ -394,4 +404,5 @@ Partial Class MainForm
     Friend WithEvents btnRemoveMembers As ToolStripMenuItem
     Friend WithEvents btnManageUsers As ToolStripButton
     Friend WithEvents btnChangePass As ToolStripButton
+    Friend WithEvents ToolStrip2 As ToolStrip
 End Class

@@ -1,4 +1,6 @@
 ﻿Imports System.ComponentModel
+Imports System.Drawing.Imaging
+Imports System.Text
 ''' <summary>
 ''' Utility methods.
 ''' </summary>
@@ -38,5 +40,27 @@ Module Util
             End Using
         End If
         Return designMode
+    End Function
+
+    Public Function GetImageFilter() As String
+        Dim allImageExtensions As New StringBuilder()
+        Dim separator As String = ""
+        Dim codecs As ImageCodecInfo() = ImageCodecInfo.GetImageEncoders()
+        Dim images As New Dictionary(Of String, String)()
+        For Each codec As ImageCodecInfo In codecs
+            allImageExtensions.Append(separator)
+            allImageExtensions.Append(codec.FilenameExtension.ToLower)
+            separator = ";"
+            images.Add(String.Format("{0} Files: ({1})", codec.FormatDescription, codec.FilenameExtension.ToLower), codec.FilenameExtension.ToLower)
+        Next
+        Dim sb As New StringBuilder()
+        If allImageExtensions.Length > 0 Then
+            sb.AppendFormat("{0}|{1}", "All Images", allImageExtensions.ToString())
+        End If
+        images.Add("All Files", "*.*")
+        For Each image As KeyValuePair(Of String, String) In images
+            sb.AppendFormat("|{0}|{1}", image.Key, image.Value)
+        Next
+        Return sb.ToString()
     End Function
 End Module

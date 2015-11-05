@@ -89,4 +89,12 @@ Public Class MainForm
         Dim member = TryCast(dgMemberView.Rows(e.RowIndex).DataBoundItem, IMember)
         Dim memberDetails = New ModifyMemberDialog(member, True)
     End Sub
+
+    Private Sub addNewMember(sender As Object, e As EventArgs) Handles btnNewMember.Click
+        Dim dialog = New ModifyMemberDialog()
+        Dim result = dialog.ShowDialog
+        If result = DialogResult.OK Then
+            dataManager.memberManager.addEntry(dialog.member)
+        End If
+    End Sub
 End Class

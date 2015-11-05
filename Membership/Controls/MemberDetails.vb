@@ -9,6 +9,8 @@ Public Class MemberDetails
     Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
     Public Event MemberDataChanging As PropertyChangingEventHandler
 
+    Private Shared placeholderImage As Image = My.Resources.noimage
+
     Private selfBind As BindingSource = New BindingSource With {.DataSource = Me}
     Private memberBinding As BindingSource = New BindingSource
     Private propBindings As List(Of Binding) = New List(Of Binding)
@@ -335,14 +337,14 @@ Public Class MemberDetails
         cbMembershipType.DataBindings.Add(binding)
         binding = New Binding("Image", selfBind, "photo", True, DataSourceUpdateMode.OnPropertyChanged)
         AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
-                                       If IsDBNull(e.Value) Then
-                                           e.Value = Nothing
+                                       If IsDBNull(e.Value) OrElse IsNothing(e.Value) Then
+                                           e.Value = placeholderImage
                                        Else
                                            e.Value = CType(e.Value, MaybeOption(Of Image)).orNothing
                                        End If
                                    End Sub
         AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
-                                      If IsDBNull(e.Value) Then
+                                      If IsDBNull(e.Value) OrElse e.Value Is placeholderImage Then
                                           e.Value = New None(Of Image)
                                       Else
                                           e.Value = MaybeOption.create(CType(e.Value, Image))

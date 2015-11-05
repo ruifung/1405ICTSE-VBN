@@ -24,6 +24,9 @@ Partial Class ModifyMemberDialog
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModifyMemberDialog))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.btnPhoto = New System.Windows.Forms.ToolStripButton()
+        Me.btnPhotoClear = New System.Windows.Forms.ToolStripButton()
+        Me.seperatorEdit = New System.Windows.Forms.ToolStripSeparator()
         Me.btnCancel = New System.Windows.Forms.ToolStripButton()
         Me.btnSave = New System.Windows.Forms.ToolStripButton()
         Me.btnClose = New System.Windows.Forms.ToolStripButton()
@@ -37,12 +40,36 @@ Partial Class ModifyMemberDialog
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnCancel, Me.btnSave, Me.btnClose, Me.ToolStripSeparator1, Me.btnBilling, Me.btnEdit})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPhoto, Me.btnPhotoClear, Me.seperatorEdit, Me.btnCancel, Me.btnSave, Me.btnClose, Me.ToolStripSeparator1, Me.btnBilling, Me.btnEdit})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(443, 25)
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'btnPhoto
+        '
+        Me.btnPhoto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnPhoto.Image = CType(resources.GetObject("btnPhoto.Image"), System.Drawing.Image)
+        Me.btnPhoto.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnPhoto.Name = "btnPhoto"
+        Me.btnPhoto.Size = New System.Drawing.Size(62, 22)
+        Me.btnPhoto.Text = "Set Photo"
+        Me.btnPhoto.Visible = False
+        '
+        'btnPhotoClear
+        '
+        Me.btnPhotoClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnPhotoClear.Image = CType(resources.GetObject("btnPhotoClear.Image"), System.Drawing.Image)
+        Me.btnPhotoClear.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnPhotoClear.Name = "btnPhotoClear"
+        Me.btnPhotoClear.Size = New System.Drawing.Size(73, 22)
+        Me.btnPhotoClear.Text = "Clear Photo"
+        '
+        'seperatorEdit
+        '
+        Me.seperatorEdit.Name = "seperatorEdit"
+        Me.seperatorEdit.Size = New System.Drawing.Size(6, 25)
         '
         'btnCancel
         '
@@ -96,7 +123,7 @@ Partial Class ModifyMemberDialog
         Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
         Me.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(95, 22)
+        Me.btnEdit.Size = New System.Drawing.Size(95, 19)
         Me.btnEdit.Text = "Enter Edit Mode"
         '
         'memberDetailsView
@@ -136,4 +163,7 @@ Partial Class ModifyMemberDialog
     Friend WithEvents btnBilling As ToolStripButton
     Friend WithEvents btnClose As ToolStripButton
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents btnPhoto As ToolStripButton
+    Friend WithEvents btnPhotoClear As ToolStripButton
+    Friend WithEvents seperatorEdit As ToolStripSeparator
 End Class

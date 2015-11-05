@@ -125,19 +125,19 @@ Namespace Database
         'TODO: IMPLEMENT
         Public Property dob As Date Implements IMember.dob
             Get
-                Throw New NotImplementedException()
+                Return CDate(Me("dob"))
             End Get
             Set(value As Date)
-                Throw New NotImplementedException()
+                Me("dob") = value
             End Set
         End Property
 
         Public Property gender As Gender Implements IMember.gender
             Get
-                Throw New NotImplementedException()
+                Return DirectCast(Me("gender"), Gender)
             End Get
             Set(value As Gender)
-                Throw New NotImplementedException()
+                Me("gender") = CInt(value)
             End Set
         End Property
 

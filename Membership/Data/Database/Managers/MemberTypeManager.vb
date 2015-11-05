@@ -55,7 +55,9 @@ Namespace Database
         End Function
 
         Public Function search(searchParam As IMembershipType, matchAll As Boolean, fuzzy As Boolean) As List(Of IMembershipType) Implements IDataManager(Of IMembershipType).search
-            Throw New NotImplementedException()
+            Dim value As String = If(fuzzy, String.Format("*{0}*", searchParam.typeName), searchParam.typeName)
+            Dim criteria As String = "type" & If(fuzzy, " Like ", "=") & "?"
+            Return New List(Of IMembershipType)(DBList(Of Membership).Query(criteria, MDBType.Text.asParam(value)))
         End Function
 
         Public Function updateEntry(entry As IMembershipType) As Boolean Implements IDataManager(Of IMembershipType).updateEntry

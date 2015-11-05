@@ -84,7 +84,7 @@ Namespace Database
                 searchParam.userName = String.Format("*{0}*", searchParam.userName)
             If matchAll Then
                 criteria += String.Format("username{0}? OR", match_op)
-                criteria += String.Format("permissions{0}?", If(fuzzy, "<=", "="))
+                criteria += String.Format(" permissions{0}?", If(fuzzy, "<=", "="))
                 params.Add(MDBType.Text.asParam(searchParam.userName))
                 params.Add(MDBType.Number.asParam(searchParam.accessLevel))
             ElseIf searchParam.userName IsNot Nothing Then

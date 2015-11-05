@@ -53,7 +53,7 @@ Public MustInherit Class DBObject
         DB.conn.Open()
         Dim values As String = "("
         Dim cmd As New OleDbCommand("", DB.conn)
-        cmd.CommandText = String.Format("INSEERT INTO `{0}` (", table.Name)
+        cmd.CommandText = String.Format("INSERT INTO `{0}` (", table.Name)
         For Each field As String In data.Keys
             If table.Fields(field).DataType.Equals(MDBType.AutoNumber) Then
                 Continue For
@@ -65,8 +65,8 @@ Public MustInherit Class DBObject
             values += "?,"
             cmd.Parameters.Add(AsParam(field))
         Next
-        cmd.CommandText.Remove(cmd.CommandText.Length - 1)
-        values.Remove(values.Length - 1)
+        cmd.CommandText = cmd.CommandText.Remove(cmd.CommandText.Length - 1)
+        values = values.Remove(values.Length - 1)
         cmd.CommandText += (Convert.ToString(") VALUES ") & values) + ");"
         cmd.ExecuteNonQuery()
         If table.Fields(table.PrimaryKey).DataType.Equals(MDBType.AutoNumber) Then

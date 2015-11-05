@@ -18,7 +18,7 @@ Public Interface IMember
     Property isActive As Boolean
     Property membershipTypeID As Integer
 
-    Property paymentCredit As Double
+    Property paymentCredit As Decimal
     Property paymentTerm As PaymentTerm
     Property paymentTermDue As Date
 End Interface

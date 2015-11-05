@@ -18,6 +18,7 @@ Namespace Database
             MembersTable.Fields("contact") = New Field(MDBType.Text, 15)
             MembersTable.Fields("email") = New Field(MDBType.Text, 50)
             MembersTable.Fields("photo") = New Field(MDBType.Binary, 5 * 1024 * 1024)
+            MembersTable.Fields("credit") = New Field(MDBType.Currency)
             MembersTable.Fields("activate") = New Field(MDBType.Byte)
             MembersTable.PrimaryKey = "id"
             MembersTable.Constraints.Add(New MDB.Constraint(MDB.Constraint.ConsType.PrimaryKey, "id"))
@@ -149,12 +150,12 @@ Namespace Database
             End Set
         End Property
 
-        Public Property paymentCredit As Double Implements IMember.paymentCredit
+        Public Property paymentCredit As Decimal Implements IMember.paymentCredit
             Get
-                Throw New NotImplementedException()
+                Return CDec(Me("credit"))
             End Get
-            Set(value As Double)
-                Throw New NotImplementedException()
+            Set(value As Decimal)
+                Me("credit") = value
             End Set
         End Property
 

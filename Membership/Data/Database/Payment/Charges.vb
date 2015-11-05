@@ -22,6 +22,7 @@ Namespace Database
     Public Class Charge
         Inherits DBObject
         Implements IMemberCharge
+
         Public PaymentId As Integer
         Public Overrides Function table() As Table
             Return Tables.ChargesTable
@@ -82,6 +83,5 @@ Namespace Database
                 Me("time") = value
             End Set
         End Property
-
     End Class
 End Namespace

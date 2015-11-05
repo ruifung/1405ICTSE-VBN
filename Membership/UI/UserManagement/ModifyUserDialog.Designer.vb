@@ -31,6 +31,8 @@ Partial Class ModifyUserDialog
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Label1
@@ -52,7 +54,7 @@ Partial Class ModifyUserDialog
         'RadioButton1
         '
         Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Location = New System.Drawing.Point(88, 55)
+        Me.RadioButton1.Location = New System.Drawing.Point(88, 52)
         Me.RadioButton1.Name = "RadioButton1"
         Me.RadioButton1.Size = New System.Drawing.Size(31, 17)
         Me.RadioButton1.TabIndex = 2
@@ -63,7 +65,7 @@ Partial Class ModifyUserDialog
         'RadioButton2
         '
         Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Location = New System.Drawing.Point(126, 55)
+        Me.RadioButton2.Location = New System.Drawing.Point(126, 52)
         Me.RadioButton2.Name = "RadioButton2"
         Me.RadioButton2.Size = New System.Drawing.Size(31, 17)
         Me.RadioButton2.TabIndex = 3
@@ -74,7 +76,7 @@ Partial Class ModifyUserDialog
         'RadioButton3
         '
         Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Location = New System.Drawing.Point(164, 55)
+        Me.RadioButton3.Location = New System.Drawing.Point(164, 52)
         Me.RadioButton3.Name = "RadioButton3"
         Me.RadioButton3.Size = New System.Drawing.Size(31, 17)
         Me.RadioButton3.TabIndex = 4
@@ -93,7 +95,7 @@ Partial Class ModifyUserDialog
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 88)
+        Me.Button1.Location = New System.Drawing.Point(12, 126)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 6
@@ -102,7 +104,7 @@ Partial Class ModifyUserDialog
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(126, 88)
+        Me.Button2.Location = New System.Drawing.Point(126, 126)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 23)
         Me.Button2.TabIndex = 7
@@ -111,18 +113,36 @@ Partial Class ModifyUserDialog
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(235, 87)
+        Me.Button3.Location = New System.Drawing.Point(235, 125)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 23)
         Me.Button3.TabIndex = 8
         Me.Button3.Text = "Back"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(13, 93)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(56, 13)
+        Me.Label3.TabIndex = 9
+        Me.Label3.Text = "Password:"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(78, 88)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(220, 20)
+        Me.TextBox2.TabIndex = 10
+        '
         'ModifyUserDialog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(331, 122)
+        Me.ClientSize = New System.Drawing.Size(331, 161)
+        Me.Controls.Add(Me.TextBox2)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
@@ -148,4 +168,6 @@ Partial Class ModifyUserDialog
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents TextBox2 As TextBox
 End Class

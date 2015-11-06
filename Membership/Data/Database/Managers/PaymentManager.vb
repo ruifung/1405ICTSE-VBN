@@ -11,6 +11,7 @@ Namespace Database
             c.memberID = member.id
             c.timestamp = timestamp
             c.description = desc
+            c.paid = False
             c.Insert()
             Return c
         End Function

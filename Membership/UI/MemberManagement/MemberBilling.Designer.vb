@@ -27,13 +27,13 @@ Partial Class MemberBilling
         Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
         Me.btnAddPayment = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnAddCharge = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRemoveCharges = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnViewCharges = New System.Windows.Forms.ToolStripButton()
         Me.btnViewHistory = New System.Windows.Forms.ToolStripButton()
         Me.txtMemberCredit = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.dgView = New System.Windows.Forms.DataGridView()
-        Me.btnRemoveCharges = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.dgView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -69,6 +69,12 @@ Partial Class MemberBilling
         Me.btnAddCharge.Name = "btnAddCharge"
         Me.btnAddCharge.Size = New System.Drawing.Size(171, 22)
         Me.btnAddCharge.Text = "Add Charge"
+        '
+        'btnRemoveCharges
+        '
+        Me.btnRemoveCharges.Name = "btnRemoveCharges"
+        Me.btnRemoveCharges.Size = New System.Drawing.Size(171, 22)
+        Me.btnRemoveCharges.Text = "Remove Charge(s)"
         '
         'btnViewCharges
         '
@@ -122,12 +128,6 @@ Partial Class MemberBilling
         Me.dgView.ReadOnly = True
         Me.dgView.Size = New System.Drawing.Size(506, 368)
         Me.dgView.TabIndex = 1
-        '
-        'btnRemoveCharges
-        '
-        Me.btnRemoveCharges.Name = "btnRemoveCharges"
-        Me.btnRemoveCharges.Size = New System.Drawing.Size(171, 22)
-        Me.btnRemoveCharges.Text = "Remove Charge(s)"
         '
         'MemberBilling
         '

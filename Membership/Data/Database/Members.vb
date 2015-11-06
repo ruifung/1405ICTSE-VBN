@@ -62,10 +62,10 @@ Namespace Database
         End Property
         Public Property membership As Integer Implements IMember.membershipTypeID
             Get
-                Return CInt(Me("membership"))
+                Return CInt(Me("mship"))
             End Get
             Set(value As Integer)
-                Me("membership") = value
+                Me("mship") = value
             End Set
         End Property
         Public Property contact As String Implements IMember.contactNumber
@@ -120,10 +120,10 @@ Namespace Database
         End Property
         Public Property activated As Boolean Implements IMember.isActive
             Get
-                Return CInt(Me("active")) > 0
+                Return CInt(Me("activate")) > 0
             End Get
             Set(value As Boolean)
-                Me("active") = If(value, 1, 0)
+                Me("activate") = If(value, 1, 0)
             End Set
         End Property
         'TODO: IMPLEMENT

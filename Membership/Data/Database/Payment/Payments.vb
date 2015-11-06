@@ -105,8 +105,14 @@ Namespace Database
         Public Overrides Sub Insert()
             MyBase.Insert()
             Dim oc = New DBList(Of Charge)
-            For Each c As Charge In charges
-                Dim dc As Charge = New Charge
+            For Each c As IMemberCharge In charges
+                Dim dc As Charge = New Charge With {
+                    .amount = c.amount,
+                    .description = c.description,
+                    .memberID = c.memberID,
+                    .paid = c.paid,
+                    .timestamp = c.timestamp
+                }
                 dc("id") = c.id
                 oc.Add(dc)
             Next

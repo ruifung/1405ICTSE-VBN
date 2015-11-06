@@ -11,6 +11,8 @@
 
         ' Add any initialization after the InitializeComponent() call.
         Me.member = member
+        numAmount.Maximum = Decimal.MaxValue
+        numAmount.DecimalPlaces = 2
     End Sub
     Private Sub onFormLoad() Handles Me.Load
         dgView.MultiSelect = True
@@ -21,6 +23,24 @@
         initialized = True
     End Sub
 
+    Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
+        If numAmount.Value = 0 Then
+            MsgBox("Amount cannot be 0!", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+        Dim charges As New HashSet(Of IMemberCharge)
+        For Each x As DataGridViewRow In dgView.SelectedRows
+            charges.Add(DirectCast(x.DataBoundItem, IMemberCharge))
+        Next
+        Dim invoice = config.dataManager.paymentManager.invoice(member, charges)
+        invoice.additionalCharges.Add("6% GST", gst)
+        For Each x In invoice.additionalCharges.Keys
+            invoice.totalPayable += invoice.additionalCharges(x)
+        Next
+        Dim payment = config.dataManager.paymentManager.pay(invoice, numAmount.Value)
+
+        DialogResult = DialogResult.OK
+    End Sub
 
     Private Sub selectedChargeChanged() Handles dgView.SelectionChanged
         If Not initialized Then Exit Sub

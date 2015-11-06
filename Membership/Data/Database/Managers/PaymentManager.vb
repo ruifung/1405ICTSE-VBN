@@ -39,8 +39,6 @@ Namespace Database
                 subtotal += x.amount
             Next
 
-            inv.additionalCharges.Add("6% GST", subtotal * 0.06D)
-
             inv.totalPayable = subtotal
             For Each x In inv.additionalCharges.Values
                 inv.totalPayable += x
@@ -120,7 +118,7 @@ Namespace Database
                 c.paid = True
                 updateCharge(c)
             Next
-            dataManager.userManager.updateEntry(DirectCast(m, IUser))
+            dataManager.memberManager.updateEntry(m)
             pm.Insert()
             Return pm
         End Function

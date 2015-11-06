@@ -29,7 +29,9 @@ Namespace Database
         End Sub
 
         Public Function removeEntry(entry As IMember) As Boolean Implements IDataManager(Of IMember).removeEntry
-            Dim m As Member = If(TryCast(entry, Member), Member.TryGet(entry.id))
+            Dim m As Member = TryCast(entry, Member)
+            If m Is Nothing Then m = TryCast(exec(TryCast(entry, WrappedMember), Function(x) x._backingMember), Member)
+            If m Is Nothing Then m = Member.TryGet(entry.id)
             Util.exec(m, Sub(x) x.Delete())
             Return Not IsNothing(m)
         End Function
@@ -76,14 +78,10 @@ Namespace Database
 
         Public Function updateEntry(entry As IMember) As Boolean Implements IDataManager(Of IMember).updateEntry
             Dim m As Member = TryCast(entry, Member)
-            If IsNothing(m) Then
-                If TypeOf entry Is WrappedMember Then
-                    m = TryCast(DirectCast(entry, WrappedMember)._backingMember, Member)
-                End If
-                If m Is Nothing Then
-                    m = Member.TryGet(entry.id)
-                    exec(m, Sub(x) x.setAll(entry))
-                End If
+            If m Is Nothing Then m = TryCast(exec(TryCast(entry, WrappedMember), Function(x) x._backingMember), Member)
+            If m Is Nothing Then
+                m = Member.TryGet(entry.id)
+                exec(m, Sub(x) x.setAll(entry))
             End If
             exec(m, Sub(x) x.Update())
             Return Not IsNothing(m)

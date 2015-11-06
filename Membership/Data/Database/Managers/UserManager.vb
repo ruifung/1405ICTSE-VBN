@@ -78,10 +78,10 @@ Namespace Database
 
         Public Function search(searchParam As IUser, matchAll As Boolean, fuzzy As Boolean) As List(Of IUser) Implements IDataManager(Of IUser).search
             Dim criteria As String = ""
-            Dim match_op As String = If(fuzzy, " Like ", "=")
+            Dim match_op As String = If(fuzzy, " ALike ", "=")
             Dim params As List(Of OleDbParameter) = New List(Of OleDbParameter)
             If fuzzy And Not searchParam.userName Is Nothing Then _
-                searchParam.userName = String.Format("*{0}*", searchParam.userName)
+                searchParam.userName = String.Format("%{0}%", searchParam.userName)
             If matchAll Then
                 criteria += String.Format("username{0}? OR", match_op)
                 criteria += String.Format(" permissions{0}?", If(fuzzy, "<=", "="))

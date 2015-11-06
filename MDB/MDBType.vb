@@ -54,7 +54,7 @@ Public Class MDBType
     Public Function asParam(value As Object) As OleDbParameter
         Dim param As OleDbParameter = New OleDbParameter()
         param.OleDbType = Me.DBType
-        param.Value = value
+        param.Value = If(value, DBNull.Value)
         Return param
     End Function
 #End Region

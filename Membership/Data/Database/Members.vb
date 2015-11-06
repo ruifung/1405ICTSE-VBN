@@ -120,10 +120,10 @@ Namespace Database
         End Property
         Public Property activated As Boolean Implements IMember.isActive
             Get
-                Return CInt(Me("active")) > 0
+                Return CInt(Me("activate")) > 0
             End Get
             Set(value As Boolean)
-                Me("active") = If(value, 1, 0)
+                Me("activate") = If(value, 1, 0)
             End Set
         End Property
         'TODO: IMPLEMENT

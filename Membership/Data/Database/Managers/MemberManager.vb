@@ -40,13 +40,13 @@ Namespace Database
 
         Public Function search(searchParam As IMember, matchAll As Boolean, fuzzyMatching As Boolean) As List(Of IMember) Implements IDataManager(Of IMember).search
             Dim criteria As String = ""
-            Dim match_op As String = If(fuzzyMatching, " Like ", "=")
+            Dim match_op As String = If(fuzzyMatching, " ALike ", "=")
             Dim params As List(Of OleDbParameter) = New List(Of OleDbParameter)
             If fuzzyMatching Then
-                If searchParam.firstName IsNot Nothing Then searchParam.firstName = String.Format("*{0}*", searchParam.firstName)
-                If searchParam.lastName IsNot Nothing Then searchParam.lastName = String.Format("*{0}*", searchParam.lastName)
-                If searchParam.email IsNot Nothing Then searchParam.email = String.Format("*{0}*", searchParam.email)
-                If searchParam.contactNumber IsNot Nothing Then searchParam.contactNumber = String.Format("*{0}*", searchParam.contactNumber)
+                If searchParam.firstName IsNot Nothing Then searchParam.firstName = String.Format("%{0}%", searchParam.firstName)
+                If searchParam.lastName IsNot Nothing Then searchParam.lastName = String.Format("%{0}%", searchParam.lastName)
+                If searchParam.email IsNot Nothing Then searchParam.email = String.Format("%{0}%", searchParam.email)
+                If searchParam.contactNumber IsNot Nothing Then searchParam.contactNumber = String.Format("%{0}%", searchParam.contactNumber)
             End If
             If matchAll Then
                 criteria += "firstname{0}? OR "
@@ -59,10 +59,8 @@ Namespace Database
                 params.Add(MDBType.Text.asParam(searchParam.contactNumber))
             Else
                 If searchParam.firstName IsNot Nothing Then
-                    criteria += "firstname{0}?"
+                    criteria += "firstname{0}? OR lastname{0}?"
                     params.Add(MDBType.Text.asParam(searchParam.firstName))
-                ElseIf searchParam.lastName IsNot Nothing Then
-                    criteria += "lastname{0}?"
                     params.Add(MDBType.Text.asParam(searchParam.lastName))
                 ElseIf searchParam.email IsNot Nothing Then
                     criteria += "email{0}?"

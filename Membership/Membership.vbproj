@@ -221,6 +221,7 @@
     <Compile Include="UI\MemberManagement\PaymentDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\Reporting\ReportPayment.vb" />
     <Compile Include="UI\Reporting\ReportView.Designer.vb">
       <DependentUpon>ReportView.vb</DependentUpon>
     </Compile>
@@ -297,6 +298,7 @@
     <EmbeddedResource Include="UI\MemberManagement\PaymentDialog.resx">
       <DependentUpon>PaymentDialog.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Reporting\Report1.rdlc" />
     <EmbeddedResource Include="UI\Reporting\ReportView.resx">
       <DependentUpon>ReportView.vb</DependentUpon>
     </EmbeddedResource>
@@ -320,7 +322,7 @@
     </None>
     <None Include="My Project\DataSources\WrappedCharge.datasource" />
     <None Include="My Project\DataSources\WrappedMember.datasource" />
-    <None Include="My Project\DataSources\WrappedUser.datasource" />
+    <None Include="My Project\DataSources\WrappedPayment.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>

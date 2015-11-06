@@ -17,6 +17,10 @@ Public Class MemberBilling
     End Sub
 
     Sub onFormLoad(sender As Object, e As EventArgs) Handles Me.Load
+        If currentUser.accessLevel < 2 Then
+            btnRemoveCharges.Enabled = False
+            btnRemovePayment.Enabled = False
+        End If
         dgView.DataSource = binding
         txtMemberCredit.Text = member.paymentCredit.ToString
         Me.Text = String.Format("Member Billing for: #{0} {1} {2}", member.id, member.firstName, member.lastName)
@@ -85,6 +89,16 @@ Public Class MemberBilling
             Dim item = DirectCast(dgView.Rows(e.RowIndex).DataBoundItem, IMemberPayment)
             Dim dialog = New PaymentViewDialog(item)
             dialog.ShowDialog()
+        End If
+        updateView()
+    End Sub
+
+    Private Sub btnRemovePayment_Click(sender As Object, e As EventArgs) Handles btnRemovePayment.Click
+        If historyView Then
+            For Each x As DataGridViewRow In dgView.SelectedRows
+                Dim item = DirectCast(x.DataBoundItem, IMemberPayment)
+                dataManager.paymentManager.removePayment(item)
+            Next
         End If
         updateView()
     End Sub

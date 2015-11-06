@@ -34,6 +34,7 @@ Partial Class MemberBilling
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.dgView = New System.Windows.Forms.DataGridView()
+        Me.btnRemovePayment = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.dgView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -51,7 +52,7 @@ Partial Class MemberBilling
         'ToolStripDropDownButton1
         '
         Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddPayment, Me.btnAddCharge, Me.btnRemoveCharges})
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddPayment, Me.btnAddCharge, Me.btnRemoveCharges, Me.btnRemovePayment})
         Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
         Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
@@ -61,19 +62,19 @@ Partial Class MemberBilling
         'btnAddPayment
         '
         Me.btnAddPayment.Name = "btnAddPayment"
-        Me.btnAddPayment.Size = New System.Drawing.Size(171, 22)
+        Me.btnAddPayment.Size = New System.Drawing.Size(180, 22)
         Me.btnAddPayment.Text = "Add Payment"
         '
         'btnAddCharge
         '
         Me.btnAddCharge.Name = "btnAddCharge"
-        Me.btnAddCharge.Size = New System.Drawing.Size(171, 22)
+        Me.btnAddCharge.Size = New System.Drawing.Size(180, 22)
         Me.btnAddCharge.Text = "Add Charge"
         '
         'btnRemoveCharges
         '
         Me.btnRemoveCharges.Name = "btnRemoveCharges"
-        Me.btnRemoveCharges.Size = New System.Drawing.Size(171, 22)
+        Me.btnRemoveCharges.Size = New System.Drawing.Size(180, 22)
         Me.btnRemoveCharges.Text = "Remove Charge(s)"
         '
         'btnViewCharges
@@ -129,6 +130,12 @@ Partial Class MemberBilling
         Me.dgView.Size = New System.Drawing.Size(506, 368)
         Me.dgView.TabIndex = 1
         '
+        'btnRemovePayment
+        '
+        Me.btnRemovePayment.Name = "btnRemovePayment"
+        Me.btnRemovePayment.Size = New System.Drawing.Size(180, 22)
+        Me.btnRemovePayment.Text = "Remove Payment(s)"
+        '
         'MemberBilling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -158,4 +165,5 @@ Partial Class MemberBilling
     Friend WithEvents btnAddPayment As ToolStripMenuItem
     Friend WithEvents btnAddCharge As ToolStripMenuItem
     Friend WithEvents btnRemoveCharges As ToolStripMenuItem
+    Friend WithEvents btnRemovePayment As ToolStripMenuItem
 End Class

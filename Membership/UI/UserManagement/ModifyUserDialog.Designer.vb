@@ -93,6 +93,7 @@ Partial Class ModifyUserDialog
         'numAccess
         '
         Me.numAccess.Location = New System.Drawing.Point(113, 38)
+        Me.numAccess.Maximum = New Decimal(New Integer() {4, 0, 0, 0})
         Me.numAccess.Name = "numAccess"
         Me.numAccess.Size = New System.Drawing.Size(169, 20)
         Me.numAccess.TabIndex = 12

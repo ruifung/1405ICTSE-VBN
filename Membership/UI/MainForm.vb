@@ -58,6 +58,11 @@ Public Class MainForm
             btnManageUsers.Visible = False
             btnManageUsers.Enabled = False
         End If
+        If ConfigManager.currentUser.accessLevel > 2 Then
+            menuReports.Visible = False
+            menuReports.Enabled = False
+            btnRemoveMembers.Enabled = False
+        End If
 
         memberList = New List(Of WrappedMember)
         lbTypes.DataSource = New BindingSource With {

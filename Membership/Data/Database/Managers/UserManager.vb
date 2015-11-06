@@ -21,7 +21,6 @@ Namespace Database
                 newUser.Insert()
                 Return New Some(Of IUser)(newUser)
             Catch ex As Exception
-                Throw New Exception(ex.Message, ex)
                 Return New None(Of IUser)
                 Console.Write(ex)
             End Try

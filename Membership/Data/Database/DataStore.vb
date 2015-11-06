@@ -12,12 +12,12 @@ Namespace Database
             Try
                 Dim csb As OleDbConnectionStringBuilder = TryCast(param.orNothing, OleDbConnectionStringBuilder)
                 If IsNothing(csb) Then Throw (New ArgumentException("Parameters is not a OleDbConnectionStringBuilder!"))
-                DB.init(csb)
                 Tables.InitMembersTable()
                 Tables.InitMShipsTable()
                 Tables.InitUsersTable()
                 Tables.InitPaymentTable()
                 Tables.InitChargesTable()
+                DB.init(csb)
                 manager.userManager = New UserManager()
                 manager.memberManager = New MemberManager()
                 manager.memberTypeManager = New MemberTypeManager()

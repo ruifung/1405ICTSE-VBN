@@ -22,17 +22,20 @@ Partial Class ModifyUserDialog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtUsername = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.numAccess = New System.Windows.Forms.NumericUpDown()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtPassword = New Membership.TextBoxEx()
         Me.txtRePassword = New Membership.TextBoxEx()
+        Me.ep = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.numAccess, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ep, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -60,14 +63,14 @@ Partial Class ModifyUserDialog
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Access level:"
         '
-        'Button1
+        'btnSave
         '
-        Me.Button1.Location = New System.Drawing.Point(168, 151)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "Save"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(168, 151)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 6
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -127,6 +130,10 @@ Partial Class ModifyUserDialog
         Me.txtRePassword.TabIndex = 16
         Me.txtRePassword.UseSystemPasswordChar = True
         '
+        'ep
+        '
+        Me.ep.ContainerControl = Me
+        '
         'ModifyUserDialog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -138,13 +145,14 @@ Partial Class ModifyUserDialog
         Me.Controls.Add(Me.numAccess)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.txtUsername)
         Me.Controls.Add(Me.Label1)
         Me.Name = "ModifyUserDialog"
         Me.Text = "ModifyUserDialog"
         CType(Me.numAccess, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ep, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -153,11 +161,12 @@ Partial Class ModifyUserDialog
     Friend WithEvents Label1 As Label
     Friend WithEvents txtUsername As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents btnCancel As Button
     Friend WithEvents numAccess As NumericUpDown
     Friend WithEvents Label5 As Label
     Friend WithEvents txtPassword As TextBoxEx
     Friend WithEvents txtRePassword As TextBoxEx
+    Friend WithEvents ep As ErrorProvider
 End Class

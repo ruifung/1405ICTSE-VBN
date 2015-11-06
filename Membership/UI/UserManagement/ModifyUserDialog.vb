@@ -35,7 +35,9 @@ Public Class ModifyUserDialog
     End Sub
 
     Private Sub validatePassword(sender As Object, e As EventArgs) Handles txtPassword.TextChanged, txtRePassword.TextChanged
-        If (New Regex("^([^a-z]+|[^A-Z]+|[^0-9]+)$")).IsMatch(txtPassword.Text) Then
+        If If(createMode, True, Not txtPassword.TextLength = 0) AndAlso
+                (Not (Regex.IsMatch(txtPassword.Text, "[a-zA-Z]") _
+                AndAlso Regex.IsMatch(txtPassword.Text, "[0-9]"))) Then
             ep.SetError(txtPassword, "Password must be alphanumeric!")
             pwdcheck = False
         ElseIf createMode And txtPassword.Text.Length <= 0 Then

@@ -39,6 +39,7 @@ Public Class MainForm
                                           Next
                                           typeSelected = If(lbTypes.SelectedItems.Count = 0, True, typeSelected)
                                           Return active AndAlso typeSelected
+                                          Return (rbAllStates.Checked OrElse active) AndAlso typeSelected
                                       End Function)
         End Get
     End Property

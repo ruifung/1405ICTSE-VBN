@@ -205,6 +205,7 @@ Public Class MemberDetails
     Public Property MinDate As Date
     <DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)>
     Public Property MaxDate As Date
+
     Public noIDString As String = "(new)"
 
     Public Property BoundMember As IMember
@@ -271,6 +272,16 @@ Public Class MemberDetails
         }
         cbStatus.DisplayMember = "display"
         cbStatus.ValueMember = "status"
+
+        Dim termList = New List(Of DisplayPaymentTerm)
+        For Each x As PaymentTerm In [Enum].GetValues(GetType(PaymentTerm))
+            Dim disp = x.ToString.ToLower
+            disp = String.Concat(disp.Substring(0, 1).ToUpper, disp.Substring(1))
+            termList.Add(New DisplayPaymentTerm(x, disp))
+        Next
+        cbPaymentTerm.DataSource = termList
+        cbPaymentTerm.DisplayMember = "display"
+        cbPaymentTerm.ValueMember = "term"
 
         ' Bindings
         Dim binding As Binding
@@ -430,6 +441,15 @@ Public Class MemberDetails
         Property display As String
         Sub New(b As Boolean, d As String)
             Me.status = If(b, 1, 0)
+            Me.display = d
+        End Sub
+    End Class
+
+    Private Class DisplayPaymentTerm
+        Property term As PaymentTerm
+        Property display As String
+        Sub New(t As PaymentTerm, d As String)
+            Me.term = t
             Me.display = d
         End Sub
     End Class

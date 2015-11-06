@@ -141,7 +141,7 @@ Partial Class ModifyMemberDialog
         Me.memberDetailsView.BoundMember = Nothing
         Me.memberDetailsView.Location = New System.Drawing.Point(0, 23)
         Me.memberDetailsView.Name = "memberDetailsView"
-        Me.memberDetailsView.Size = New System.Drawing.Size(470, 303)
+        Me.memberDetailsView.Size = New System.Drawing.Size(470, 313)
         Me.memberDetailsView.TabIndex = 3
         '
         'ModifyMemberDialog
@@ -150,11 +150,12 @@ Partial Class ModifyMemberDialog
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(469, 326)
+        Me.ClientSize = New System.Drawing.Size(469, 336)
         Me.Controls.Add(Me.memberDetailsView)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.MaximumSize = New System.Drawing.Size(485, 365)
-        Me.MinimumSize = New System.Drawing.Size(485, 365)
+        Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(485, 375)
+        Me.MinimumSize = New System.Drawing.Size(485, 375)
         Me.Name = "ModifyMemberDialog"
         Me.Text = "Member Profile"
         Me.ToolStrip1.ResumeLayout(False)

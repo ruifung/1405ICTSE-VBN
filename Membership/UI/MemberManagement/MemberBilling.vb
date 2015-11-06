@@ -13,11 +13,14 @@ Public Class MemberBilling
         ' Add any initialization after the InitializeComponent() call.
         Me.member = member
         binding = New BindingSource With {.DataSource = member}
+        dgView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
     End Sub
 
     Sub onFormLoad(sender As Object, e As EventArgs) Handles Me.Load
         dgView.DataSource = binding
         txtMemberCredit.Text = member.paymentCredit.ToString
+        Me.Text = String.Format("Member Billing for: #{0} {1} {2}", member.id, member.firstName, member.lastName)
+        updateView()
     End Sub
 
     Private Sub updateView()

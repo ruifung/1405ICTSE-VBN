@@ -333,6 +333,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\DataSources\IMember.datasource" />
+    <None Include="My Project\DataSources\IMemberPayment.datasource" />
     <None Include="My Project\DataSources\IMembershipType.datasource" />
     <None Include="My Project\DataSources\PaymentViewDialog.DisplayAdditionalPayments.datasource" />
     <None Include="My Project\DataSources\PlainMember.datasource" />

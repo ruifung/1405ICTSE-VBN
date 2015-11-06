@@ -65,19 +65,29 @@ Namespace Database
             Return listCharges(member.id, minDate, maxDate)
         End Function
 
-        Public Function listPayments(memberID As Integer, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment) Implements IPaymentManager.listPayments
-            Dim criteria As String = "member=?"
-            Dim params As List(Of OleDbParameter) = New List(Of OleDbParameter)
-            params.Add(MDBType.Number.asParam(memberID))
+        Public Function listPayments(Optional memberID As Integer? = Nothing, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment) Implements IPaymentManager.listPayments
+            Dim criteria As String = String.Empty
+            Dim params = New List(Of OleDbParameter)
+            If memberID IsNot Nothing Then
+                criteria += "member=?"
+                params.Add(MDBType.Number.asParam(memberID))
+            End If
+
             If Not IsNothing(minDate) Then
-                criteria += " AND time>=?"
+                If (criteria.Length = 0) Then criteria += " AND "
+                criteria += "time>=?"
                 params.Add(MDBType.DateTime.asParam(minDate))
             End If
             If Not IsNothing(maxDate) Then
-                criteria += " AND time<=?"
+                If (criteria.Length = 0) Then criteria += " AND "
+                criteria += "time<=?"
                 params.Add(MDBType.DateTime.asParam(maxDate))
             End If
-            Return New HashSet(Of IMemberPayment)(DBList(Of Payment).Query(criteria, params.ToArray()))
+            If criteria.Length = 0 Then
+                Return New HashSet(Of IMemberPayment)(DBList(Of Payment).Query())
+            Else
+                Return New HashSet(Of IMemberPayment)(DBList(Of Payment).Query(criteria, params.ToArray()))
+            End If
         End Function
 
         Public Function listPayments(member As IMember, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment) Implements IPaymentManager.listPayments

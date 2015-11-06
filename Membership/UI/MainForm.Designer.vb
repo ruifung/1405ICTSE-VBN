@@ -53,7 +53,7 @@ Partial Class MainForm
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgMemberView = New System.Windows.Forms.DataGridView()
-        Me.menuReports = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.btnReports = New System.Windows.Forms.ToolStripButton()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -99,7 +99,7 @@ Partial Class MainForm
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExit, Me.btnLogout, Me.ToolStripDropDownButton1, Me.btnManageUsers, Me.btnChangePass, Me.btnClearFilters, Me.menuReports})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExit, Me.btnLogout, Me.ToolStripDropDownButton1, Me.btnManageUsers, Me.btnChangePass, Me.btnClearFilters, Me.btnReports})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(828, 25)
@@ -375,15 +375,15 @@ Partial Class MainForm
         Me.dgMemberView.Size = New System.Drawing.Size(634, 380)
         Me.dgMemberView.TabIndex = 0
         '
-        'menuReports
+        'btnReports
         '
-        Me.menuReports.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.menuReports.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.menuReports.Image = CType(resources.GetObject("menuReports.Image"), System.Drawing.Image)
-        Me.menuReports.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.menuReports.Name = "menuReports"
-        Me.menuReports.Size = New System.Drawing.Size(60, 22)
-        Me.menuReports.Text = "Reports"
+        Me.btnReports.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnReports.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnReports.Image = CType(resources.GetObject("btnReports.Image"), System.Drawing.Image)
+        Me.btnReports.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnReports.Name = "btnReports"
+        Me.btnReports.Size = New System.Drawing.Size(51, 22)
+        Me.btnReports.Text = "Reports"
         '
         'MainForm
         '
@@ -444,5 +444,5 @@ Partial Class MainForm
     Friend WithEvents btnClearFilters As ToolStripButton
     Friend WithEvents rbAllStates As RadioButton
     Friend WithEvents lnkClearTypes As LinkLabel
-    Friend WithEvents menuReports As ToolStripDropDownButton
+    Friend WithEvents btnReports As ToolStripButton
 End Class

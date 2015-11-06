@@ -22,6 +22,6 @@
 
     Function getPayment(paymentID As Integer) As IMemberPayment
     Function listPayments(member As IMember, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment)
-    Function listPayments(memberID As Integer, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment)
+    Function listPayments(Optional memberID As Integer? = Nothing, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment)
     Function updatePayment(payment As IMemberPayment) As Boolean
 End Interface

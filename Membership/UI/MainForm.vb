@@ -54,13 +54,13 @@ Public Class MainForm
 
         lblDataSource.Text = configuration.DataSourcePath
 
-        If ConfigManager.currentUser.accessLevel > 1 Then
+        If currentUser.accessLevel > 1 Then
             btnManageUsers.Visible = False
             btnManageUsers.Enabled = False
         End If
-        If ConfigManager.currentUser.accessLevel > 2 Then
-            menuReports.Visible = False
-            menuReports.Enabled = False
+        If currentUser.accessLevel > 2 Then
+            btnReports.Visible = False
+            btnReports.Enabled = False
             btnRemoveMembers.Enabled = False
         End If
 
@@ -182,6 +182,11 @@ Public Class MainForm
 
     Private Sub btnManageUsers_Click(sender As Object, e As EventArgs) Handles btnManageUsers.Click
         UserManagement.ShowDialog()
+    End Sub
+
+    Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
+        Dim form = New ReportView
+        form.Show()
     End Sub
 
     Private Sub reload()

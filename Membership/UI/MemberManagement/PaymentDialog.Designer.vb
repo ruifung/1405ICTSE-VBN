@@ -25,10 +25,6 @@ Partial Class PaymentDialog
         Me.components = New System.ComponentModel.Container()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.dgView = New System.Windows.Forms.DataGridView()
-        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TimestampDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WrappedChargeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnOK = New System.Windows.Forms.Button()
@@ -40,17 +36,21 @@ Partial Class PaymentDialog
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblSubtotal = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TimestampDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WrappedChargeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         CType(Me.dgView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WrappedChargeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer2.Panel1.SuspendLayout()
         Me.SplitContainer2.Panel2.SuspendLayout()
         Me.SplitContainer2.SuspendLayout()
         CType(Me.numAmount, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WrappedChargeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -85,33 +85,6 @@ Partial Class PaymentDialog
         Me.dgView.ReadOnly = True
         Me.dgView.Size = New System.Drawing.Size(514, 340)
         Me.dgView.TabIndex = 0
-        '
-        'DescriptionDataGridViewTextBoxColumn
-        '
-        Me.DescriptionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
-        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Description"
-        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
-        Me.DescriptionDataGridViewTextBoxColumn.ReadOnly = True
-        Me.DescriptionDataGridViewTextBoxColumn.Width = 166
-        '
-        'TimestampDataGridViewTextBoxColumn
-        '
-        Me.TimestampDataGridViewTextBoxColumn.DataPropertyName = "timestamp"
-        Me.TimestampDataGridViewTextBoxColumn.HeaderText = "Timestamp"
-        Me.TimestampDataGridViewTextBoxColumn.Name = "TimestampDataGridViewTextBoxColumn"
-        Me.TimestampDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'AmountDataGridViewTextBoxColumn
-        '
-        Me.AmountDataGridViewTextBoxColumn.DataPropertyName = "amount"
-        Me.AmountDataGridViewTextBoxColumn.HeaderText = "Amount"
-        Me.AmountDataGridViewTextBoxColumn.Name = "AmountDataGridViewTextBoxColumn"
-        Me.AmountDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'WrappedChargeBindingSource
-        '
-        Me.WrappedChargeBindingSource.DataSource = GetType(Membership.WrappedCharge)
         '
         'SplitContainer2
         '
@@ -241,6 +214,33 @@ Partial Class PaymentDialog
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Subtotal:"
         '
+        'DescriptionDataGridViewTextBoxColumn
+        '
+        Me.DescriptionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
+        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Description"
+        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
+        Me.DescriptionDataGridViewTextBoxColumn.ReadOnly = True
+        Me.DescriptionDataGridViewTextBoxColumn.Width = 166
+        '
+        'TimestampDataGridViewTextBoxColumn
+        '
+        Me.TimestampDataGridViewTextBoxColumn.DataPropertyName = "timestamp"
+        Me.TimestampDataGridViewTextBoxColumn.HeaderText = "Timestamp"
+        Me.TimestampDataGridViewTextBoxColumn.Name = "TimestampDataGridViewTextBoxColumn"
+        Me.TimestampDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'AmountDataGridViewTextBoxColumn
+        '
+        Me.AmountDataGridViewTextBoxColumn.DataPropertyName = "amount"
+        Me.AmountDataGridViewTextBoxColumn.HeaderText = "Amount"
+        Me.AmountDataGridViewTextBoxColumn.Name = "AmountDataGridViewTextBoxColumn"
+        Me.AmountDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'WrappedChargeBindingSource
+        '
+        Me.WrappedChargeBindingSource.DataSource = GetType(Membership.WrappedCharge)
+        '
         'PaymentDialog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -256,7 +256,6 @@ Partial Class PaymentDialog
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.dgView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WrappedChargeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.Panel1.ResumeLayout(False)
         Me.SplitContainer2.Panel1.PerformLayout()
         Me.SplitContainer2.Panel2.ResumeLayout(False)
@@ -264,6 +263,7 @@ Partial Class PaymentDialog
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.ResumeLayout(False)
         CType(Me.numAmount, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WrappedChargeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

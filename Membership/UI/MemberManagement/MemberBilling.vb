@@ -43,11 +43,6 @@ Public Class MemberBilling
         End With
     End Sub
 
-    Private Sub makePayment() Handles btnAddPayment.Click
-
-    End Sub
-
-
     Private Sub btnViewHistory_Click(sender As Object, e As EventArgs) Handles btnViewHistory.Click
         historyView = True
         updateView()
@@ -61,6 +56,7 @@ Public Class MemberBilling
     Private Sub btnAddPayment_Click(sender As Object, e As EventArgs) Handles btnAddPayment.Click
         Dim dialog = New PaymentDialog(member)
         Dim result = dialog.ShowDialog()
+        updateView()
     End Sub
 
     Private Sub btnAddCharge_Click(sender As Object, e As EventArgs) Handles btnAddCharge.Click
@@ -79,5 +75,17 @@ Public Class MemberBilling
             Next
             list.ForEach(Sub(x) dataManager.paymentManager.removeCharge(x))
         End If
+        updateView()
+    End Sub
+
+    Private Sub dgView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgView.CellContentDoubleClick
+        If Not historyView Then
+
+        Else
+            Dim item = DirectCast(dgView.Rows(e.RowIndex).DataBoundItem, IMemberPayment)
+            Dim dialog = New PaymentViewDialog(item)
+            dialog.ShowDialog()
+        End If
+        updateView()
     End Sub
 End Class

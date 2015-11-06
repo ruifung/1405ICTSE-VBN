@@ -20,6 +20,8 @@
         WrappedChargeBindingSource.DataSource = config.dataManager.paymentManager.getUnpaidCharges(member).Select(WrappedCharge.wrap).ToList
         dgView.Columns.Item(0).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         dgView.Columns.Item(1).AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        selectedChargeChanged()
+        dgView.ClearSelection()
         initialized = True
     End Sub
 
@@ -40,6 +42,10 @@
         Dim payment = config.dataManager.paymentManager.pay(invoice, numAmount.Value)
 
         DialogResult = DialogResult.OK
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        DialogResult = DialogResult.Cancel
     End Sub
 
     Private Sub selectedChargeChanged() Handles dgView.SelectionChanged

@@ -62,10 +62,10 @@ Namespace Database
         End Property
         Public Property membership As Integer Implements IMember.membershipTypeID
             Get
-                Return CInt(Me("membership"))
+                Return CInt(Me("mship"))
             End Get
             Set(value As Integer)
-                Me("membership") = value
+                Me("mship") = value
             End Set
         End Property
         Public Property contact As String Implements IMember.contactNumber

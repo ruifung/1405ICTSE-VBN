@@ -60,7 +60,7 @@ Public Class MemberBilling
 
     Private Sub btnAddPayment_Click(sender As Object, e As EventArgs) Handles btnAddPayment.Click
         Dim dialog = New PaymentDialog(member)
-        Dim result = dialog.ShowDialog
+        Dim result = dialog.ShowDialog()
     End Sub
 
     Private Sub btnAddCharge_Click(sender As Object, e As EventArgs) Handles btnAddCharge.Click

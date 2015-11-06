@@ -20,7 +20,7 @@ Namespace Database
             MembersTable.Fields("credit") = New Field(MDBType.Currency)
             MembersTable.Fields("addr") = New Field(MDBType.Text, 255)
             MembersTable.Fields("term") = New Field(MDBType.Number)
-            MembersTable.Fields("term_due") = New Field(MDBType.Number)
+            MembersTable.Fields("term_due") = New Field(MDBType.DateTime)
             MembersTable.Fields("activate") = New Field(MDBType.Byte)
             MembersTable.PrimaryKey = "id"
             MembersTable.Constraints.Add(New MDB.Constraint(MDB.Constraint.ConsType.PrimaryKey, "id"))

@@ -124,13 +124,36 @@ Public Class MainForm
     End Sub
 
     Private Sub onBtnRemoveMembers(sender As Object, e As EventArgs) Handles btnRemoveMembers.Click
+        Dim deleteBilling As Boolean? = Nothing
         Dim list = New List(Of IMember)
         For Each x As DataGridViewRow In dgMemberView.SelectedRows
             exec(TryCast(x.DataBoundItem, IMember), Sub(y) list.Add(y))
         Next
         Dim result = MsgBox(String.Format("Are you sure you want to delete {0} members?", list.Count), MsgBoxStyle.YesNo)
         If result = MsgBoxResult.Yes Then
-            list.ForEach(Sub(x) dataManager.memberManager.removeEntry(DirectCast(x, IMember)))
+            list.ForEach(Sub(x)
+                             Dim charges = dataManager.paymentManager.listCharges(x).ToList
+                             Dim payments = dataManager.paymentManager.listPayments(x).ToList
+                             If charges.Count > 0 OrElse payments.Count > 0 Then
+                                 If deleteBilling Is Nothing Then
+                                     Dim msgResult = MsgBox("Delete related billing information?", MsgBoxStyle.YesNo)
+                                     If msgResult = MsgBoxResult.Yes Then
+                                         deleteBilling = True
+                                     Else
+                                         deleteBilling = False
+                                     End If
+                                 End If
+
+                                 If deleteBilling Then
+                                     payments.ForEach(Sub(y) dataManager.paymentManager.removePayment(y))
+                                     charges.ForEach(Sub(y) dataManager.paymentManager.removeCharge(y))
+                                 Else
+                                     MsgBox("Unable to delete member(s) without deleting billing information.", MsgBoxStyle.Information)
+                                     Exit Sub
+                                 End If
+                             End If
+                             dataManager.memberManager.removeEntry(x)
+                         End Sub)
         End If
         reload()
     End Sub

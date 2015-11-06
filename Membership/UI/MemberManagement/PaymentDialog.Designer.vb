@@ -25,10 +25,6 @@ Partial Class PaymentDialog
         Me.components = New System.ComponentModel.Container()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.dgView = New System.Windows.Forms.DataGridView()
-        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TimestampDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.AmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WrappedChargeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.btnOK = New System.Windows.Forms.Button()
@@ -40,17 +36,21 @@ Partial Class PaymentDialog
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblSubtotal = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.DescriptionDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TimestampDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AmountDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WrappedChargeBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         CType(Me.dgView, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WrappedChargeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer2.Panel1.SuspendLayout()
         Me.SplitContainer2.Panel2.SuspendLayout()
         Me.SplitContainer2.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.WrappedChargeBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -67,7 +67,7 @@ Partial Class PaymentDialog
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(409, 464)
+        Me.SplitContainer1.Size = New System.Drawing.Size(514, 464)
         Me.SplitContainer1.SplitterDistance = 340
         Me.SplitContainer1.TabIndex = 0
         '
@@ -83,34 +83,8 @@ Partial Class PaymentDialog
         Me.dgView.Location = New System.Drawing.Point(0, 0)
         Me.dgView.Name = "dgView"
         Me.dgView.ReadOnly = True
-        Me.dgView.Size = New System.Drawing.Size(409, 340)
-        Me.dgView.TabIndex = 1
-        '
-        'DescriptionDataGridViewTextBoxColumn
-        '
-        Me.DescriptionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
-        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Description"
-        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
-        Me.DescriptionDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'TimestampDataGridViewTextBoxColumn
-        '
-        Me.TimestampDataGridViewTextBoxColumn.DataPropertyName = "timestamp"
-        Me.TimestampDataGridViewTextBoxColumn.HeaderText = "Timestamp"
-        Me.TimestampDataGridViewTextBoxColumn.Name = "TimestampDataGridViewTextBoxColumn"
-        Me.TimestampDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'AmountDataGridViewTextBoxColumn
-        '
-        Me.AmountDataGridViewTextBoxColumn.DataPropertyName = "amount"
-        Me.AmountDataGridViewTextBoxColumn.HeaderText = "Amount"
-        Me.AmountDataGridViewTextBoxColumn.Name = "AmountDataGridViewTextBoxColumn"
-        Me.AmountDataGridViewTextBoxColumn.ReadOnly = True
-        '
-        'WrappedChargeBindingSource
-        '
-        Me.WrappedChargeBindingSource.DataSource = GetType(Membership.WrappedCharge)
+        Me.dgView.Size = New System.Drawing.Size(514, 340)
+        Me.dgView.TabIndex = 0
         '
         'SplitContainer2
         '
@@ -133,8 +107,8 @@ Partial Class PaymentDialog
         Me.SplitContainer2.Panel2.Controls.Add(Me.Label3)
         Me.SplitContainer2.Panel2.Controls.Add(Me.lblSubtotal)
         Me.SplitContainer2.Panel2.Controls.Add(Me.Label1)
-        Me.SplitContainer2.Size = New System.Drawing.Size(409, 120)
-        Me.SplitContainer2.SplitterDistance = 200
+        Me.SplitContainer2.Size = New System.Drawing.Size(514, 120)
+        Me.SplitContainer2.SplitterDistance = 251
         Me.SplitContainer2.TabIndex = 0
         '
         'Label5
@@ -173,10 +147,10 @@ Partial Class PaymentDialog
         '
         'Label4
         '
-        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label4.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 25.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(11, 72)
+        Me.Label4.Location = New System.Drawing.Point(3, 72)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(70, 39)
         Me.Label4.TabIndex = 5
@@ -185,11 +159,11 @@ Partial Class PaymentDialog
         '
         'lblTotal
         '
-        Me.lblTotal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblTotal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblTotal.AutoEllipsis = True
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 25.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotal.Location = New System.Drawing.Point(81, 72)
+        Me.lblTotal.Location = New System.Drawing.Point(73, 72)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(83, 39)
         Me.lblTotal.TabIndex = 4
@@ -198,10 +172,10 @@ Partial Class PaymentDialog
         '
         'lblGST
         '
-        Me.lblGST.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblGST.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblGST.AutoSize = True
         Me.lblGST.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblGST.Location = New System.Drawing.Point(85, 55)
+        Me.lblGST.Location = New System.Drawing.Point(77, 55)
         Me.lblGST.Name = "lblGST"
         Me.lblGST.Size = New System.Drawing.Size(51, 17)
         Me.lblGST.TabIndex = 3
@@ -209,10 +183,10 @@ Partial Class PaymentDialog
         '
         'Label3
         '
-        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(14, 55)
+        Me.Label3.Location = New System.Drawing.Point(9, 55)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(65, 17)
         Me.Label3.TabIndex = 2
@@ -220,10 +194,10 @@ Partial Class PaymentDialog
         '
         'lblSubtotal
         '
-        Me.lblSubtotal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblSubtotal.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblSubtotal.AutoSize = True
         Me.lblSubtotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSubtotal.Location = New System.Drawing.Point(85, 38)
+        Me.lblSubtotal.Location = New System.Drawing.Point(77, 38)
         Me.lblSubtotal.Name = "lblSubtotal"
         Me.lblSubtotal.Size = New System.Drawing.Size(51, 17)
         Me.lblSubtotal.TabIndex = 1
@@ -231,20 +205,48 @@ Partial Class PaymentDialog
         '
         'Label1
         '
-        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(15, 38)
+        Me.Label1.Location = New System.Drawing.Point(9, 38)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(64, 17)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Subtotal:"
         '
+        'DescriptionDataGridViewTextBoxColumn
+        '
+        Me.DescriptionDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.DescriptionDataGridViewTextBoxColumn.DataPropertyName = "description"
+        Me.DescriptionDataGridViewTextBoxColumn.HeaderText = "Description"
+        Me.DescriptionDataGridViewTextBoxColumn.Name = "DescriptionDataGridViewTextBoxColumn"
+        Me.DescriptionDataGridViewTextBoxColumn.ReadOnly = True
+        Me.DescriptionDataGridViewTextBoxColumn.Width = 166
+        '
+        'TimestampDataGridViewTextBoxColumn
+        '
+        Me.TimestampDataGridViewTextBoxColumn.DataPropertyName = "timestamp"
+        Me.TimestampDataGridViewTextBoxColumn.HeaderText = "Timestamp"
+        Me.TimestampDataGridViewTextBoxColumn.Name = "TimestampDataGridViewTextBoxColumn"
+        Me.TimestampDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'AmountDataGridViewTextBoxColumn
+        '
+        Me.AmountDataGridViewTextBoxColumn.DataPropertyName = "amount"
+        Me.AmountDataGridViewTextBoxColumn.HeaderText = "Amount"
+        Me.AmountDataGridViewTextBoxColumn.Name = "AmountDataGridViewTextBoxColumn"
+        Me.AmountDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'WrappedChargeBindingSource
+        '
+        Me.WrappedChargeBindingSource.DataSource = GetType(Membership.WrappedCharge)
+        '
         'PaymentDialog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(409, 464)
+        Me.AutoSize = True
+        Me.ClientSize = New System.Drawing.Size(514, 464)
         Me.Controls.Add(Me.SplitContainer1)
         Me.MinimumSize = New System.Drawing.Size(425, 39)
         Me.Name = "PaymentDialog"
@@ -254,7 +256,6 @@ Partial Class PaymentDialog
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
         CType(Me.dgView, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WrappedChargeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.Panel1.ResumeLayout(False)
         Me.SplitContainer2.Panel1.PerformLayout()
         Me.SplitContainer2.Panel2.ResumeLayout(False)
@@ -262,12 +263,12 @@ Partial Class PaymentDialog
         CType(Me.SplitContainer2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer2.ResumeLayout(False)
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WrappedChargeBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents dgView As DataGridView
     Friend WithEvents WrappedChargeBindingSource As BindingSource
     Friend WithEvents SplitContainer2 As SplitContainer
     Friend WithEvents Label5 As Label
@@ -280,6 +281,7 @@ Partial Class PaymentDialog
     Friend WithEvents Label3 As Label
     Friend WithEvents lblSubtotal As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents dgView As DataGridView
     Friend WithEvents DescriptionDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents TimestampDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents AmountDataGridViewTextBoxColumn As DataGridViewTextBoxColumn

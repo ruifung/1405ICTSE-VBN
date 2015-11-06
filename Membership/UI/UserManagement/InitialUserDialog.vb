@@ -15,7 +15,7 @@ Public Class InitialUserDialog
         End Get
     End Property
 
-    Private Sub validateUsername(sender As Object, e As EventArgs) Handles txtUsername.TextChanged, txtUsername.LostFocus
+    Private Sub validateUsername(sender As Object, e As CancelEventArgs) Handles txtUsername.Validating
         With txtUsername
             unameCheck = False
             If .Text.Length <= 0 Then

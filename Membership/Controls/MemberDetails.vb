@@ -260,12 +260,10 @@ Public Class MemberDetails
         cbGender.DisplayMember = "display"
 
         cbMembershipType.DataSource = New BindingSource With {
-            .DataSource = MaybeOption.create(Util.exec(dataManager, Function(x) x.memberTypeManager)) _
-                .map(Function(x) x.list) _
-                .getOrAlt(New List(Of IMembershipType))
+            .DataSource = dataManager.memberTypeManager.list.Select(WrappedMembershipType.wrap).ToList
         }
         cbMembershipType.DisplayMember = "typeName"
-        cbMembershipType.ValueMember = "typeID"
+        cbMembershipType.ValueMember = "id"
 
         cbStatus.DataSource = New List(Of DisplayStatus) From {
             New DisplayStatus(True, "Active"),
@@ -355,8 +353,9 @@ Public Class MemberDetails
                                       Dim tID = CInt(e.Value)
                                       If tID >= 0 Then
                                           e.Value = CType(cbMembershipType.Items(tID), IMembershipType).id
+                                      Else
+                                          e.Value = -1
                                       End If
-                                      e.Value = -1
                                   End Sub
         cbMembershipType.DataBindings.Add(binding)
         binding = New Binding("Image", selfBind, "photo", True, DataSourceUpdateMode.OnPropertyChanged)

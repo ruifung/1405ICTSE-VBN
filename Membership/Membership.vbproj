@@ -228,6 +228,7 @@
     <Compile Include="UI\Reporting\ReportView.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\Reporting\StatusReport.vb" />
     <Compile Include="UI\UserManagement\ChangePasswordDialog.Designer.vb">
       <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
     </Compile>
@@ -299,6 +300,8 @@
       <DependentUpon>PaymentDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Reporting\Report1.rdlc" />
+    <EmbeddedResource Include="UI\Reporting\Report2.rdlc" />
+    <EmbeddedResource Include="UI\Reporting\Report3.rdlc" />
     <EmbeddedResource Include="UI\Reporting\ReportView.resx">
       <DependentUpon>ReportView.vb</DependentUpon>
     </EmbeddedResource>
@@ -320,6 +323,10 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\IMember.datasource" />
+    <None Include="My Project\DataSources\IMembershipType.datasource" />
+    <None Include="My Project\DataSources\PlainMember.datasource" />
+    <None Include="My Project\DataSources\ReportPayment.datasource" />
     <None Include="My Project\DataSources\WrappedCharge.datasource" />
     <None Include="My Project\DataSources\WrappedMember.datasource" />
     <None Include="My Project\DataSources\WrappedPayment.datasource" />

@@ -11,6 +11,12 @@ Namespace Database
         Public Sub init(manager As DataStoreManager, param As MaybeOption(Of Object)) Implements IDataStore.init
             Try
                 Dim csb As OleDbConnectionStringBuilder = TryCast(param.orNothing, OleDbConnectionStringBuilder)
+                If Not IO.Directory.Exists(IO.Path.GetDirectoryName(csb.DataSource)) Then
+                    Throw New Exceptions.DataSourceException(String.Format("Invalid File Path: {0}", csb.DataSource))
+                End If
+                If Not IO.File.Exists(csb.DataSource) Then
+                    MsgBox(String.Format("Database not found, creating new database at {0}", csb.DataSource), MsgBoxStyle.Information)
+                End If
                 If IsNothing(csb) Then Throw (New ArgumentException("Parameters is not a OleDbConnectionStringBuilder!"))
                 Tables.InitMembersTable()
                 Tables.InitMShipsTable()
@@ -48,7 +54,6 @@ Namespace Database
             Catch ex As Exception When TypeOf ex Is OleDbException OrElse TypeOf ex Is Runtime.InteropServices.COMException
                 Throw New Exceptions.DataSourceException(ex.Message, ex)
             End Try
-
         End Sub
 
         Public Sub load() Implements IDataStore.load

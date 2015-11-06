@@ -7,7 +7,7 @@ Imports System.Text
 
 Namespace config
     Public Module ConfigManager
-        Private configPath As String = String.Concat(Path.GetDirectoryName(GetType(Program).Assembly.Location), Path.DirectorySeparatorChar, "MembershipProgramConfig.json")
+        Private configPath As String = String.Concat(GetType(Program).Assembly.Location, ".config.json")
         Private config As ProgramConfig
         Private noneString As None(Of String) = New None(Of String)
         Public dataManager As DataStoreManager

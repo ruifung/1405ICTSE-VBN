@@ -38,21 +38,21 @@ Partial Class MainForm
         Me.btnClearFilters = New System.Windows.Forms.ToolStripButton()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtSearch = New Membership.TextBoxEx()
         Me.btnSearch = New System.Windows.Forms.Button()
         Me.rbSearchName = New System.Windows.Forms.RadioButton()
         Me.rbSearchEmail = New System.Windows.Forms.RadioButton()
         Me.rbSearchContact = New System.Windows.Forms.RadioButton()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.rbAllStates = New System.Windows.Forms.RadioButton()
         Me.lbTypes = New System.Windows.Forms.ListBox()
+        Me.lnkClearTypes = New System.Windows.Forms.LinkLabel()
+        Me.rbAllStates = New System.Windows.Forms.RadioButton()
         Me.rbInactive = New System.Windows.Forms.RadioButton()
         Me.rbActive = New System.Windows.Forms.RadioButton()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dgMemberView = New System.Windows.Forms.DataGridView()
-        Me.lnkClearTypes = New System.Windows.Forms.LinkLabel()
-        Me.txtSearch = New Membership.TextBoxEx()
         Me.StatusStrip1.SuspendLayout()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -211,6 +211,17 @@ Partial Class MainForm
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Search"
         '
+        'txtSearch
+        '
+        Me.txtSearch.CustomBorder = False
+        Me.txtSearch.CustomBorderColor = System.Drawing.Color.Red
+        Me.txtSearch.Location = New System.Drawing.Point(7, 19)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Placeholder = "Search"
+        Me.txtSearch.PlaceholderColor = System.Drawing.Color.Silver
+        Me.txtSearch.Size = New System.Drawing.Size(161, 20)
+        Me.txtSearch.TabIndex = 0
+        '
         'btnSearch
         '
         Me.btnSearch.Location = New System.Drawing.Point(108, 65)
@@ -281,6 +292,25 @@ Partial Class MainForm
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Filters"
         '
+        'lbTypes
+        '
+        Me.lbTypes.FormattingEnabled = True
+        Me.lbTypes.Location = New System.Drawing.Point(7, 36)
+        Me.lbTypes.Name = "lbTypes"
+        Me.lbTypes.Size = New System.Drawing.Size(158, 69)
+        Me.lbTypes.TabIndex = 5
+        '
+        'lnkClearTypes
+        '
+        Me.lnkClearTypes.AutoSize = True
+        Me.lnkClearTypes.BackColor = System.Drawing.Color.Transparent
+        Me.lnkClearTypes.Location = New System.Drawing.Point(129, 20)
+        Me.lnkClearTypes.Name = "lnkClearTypes"
+        Me.lnkClearTypes.Size = New System.Drawing.Size(31, 13)
+        Me.lnkClearTypes.TabIndex = 7
+        Me.lnkClearTypes.TabStop = True
+        Me.lnkClearTypes.Text = "Clear"
+        '
         'rbAllStates
         '
         Me.rbAllStates.AutoSize = True
@@ -292,14 +322,6 @@ Partial Class MainForm
         Me.rbAllStates.TabStop = True
         Me.rbAllStates.Text = "All"
         Me.rbAllStates.UseVisualStyleBackColor = True
-        '
-        'lbTypes
-        '
-        Me.lbTypes.FormattingEnabled = True
-        Me.lbTypes.Location = New System.Drawing.Point(7, 36)
-        Me.lbTypes.Name = "lbTypes"
-        Me.lbTypes.Size = New System.Drawing.Size(158, 69)
-        Me.lbTypes.TabIndex = 5
         '
         'rbInactive
         '
@@ -351,28 +373,6 @@ Partial Class MainForm
         Me.dgMemberView.ReadOnly = True
         Me.dgMemberView.Size = New System.Drawing.Size(634, 380)
         Me.dgMemberView.TabIndex = 0
-        '
-        'lnkClearTypes
-        '
-        Me.lnkClearTypes.AutoSize = True
-        Me.lnkClearTypes.BackColor = System.Drawing.Color.Transparent
-        Me.lnkClearTypes.Location = New System.Drawing.Point(129, 20)
-        Me.lnkClearTypes.Name = "lnkClearTypes"
-        Me.lnkClearTypes.Size = New System.Drawing.Size(31, 13)
-        Me.lnkClearTypes.TabIndex = 7
-        Me.lnkClearTypes.TabStop = True
-        Me.lnkClearTypes.Text = "Clear"
-        '
-        'txtSearch
-        '
-        Me.txtSearch.CustomBorder = False
-        Me.txtSearch.CustomBorderColor = System.Drawing.Color.Red
-        Me.txtSearch.Location = New System.Drawing.Point(7, 19)
-        Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Placeholder = "Search"
-        Me.txtSearch.PlaceholderColor = System.Drawing.Color.Silver
-        Me.txtSearch.Size = New System.Drawing.Size(161, 20)
-        Me.txtSearch.TabIndex = 0
         '
         'MainForm
         '

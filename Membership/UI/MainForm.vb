@@ -152,6 +152,10 @@ Public Class MainForm
         lbTypes.ClearSelected()
     End Sub
 
+    Private Sub btnManageUsers_Click(sender As Object, e As EventArgs) Handles btnManageUsers.Click
+        UserManagement.ShowDialog()
+    End Sub
+
     Private Sub reload()
         If hasSearch Then
             onSearch(Me, New EventArgs)

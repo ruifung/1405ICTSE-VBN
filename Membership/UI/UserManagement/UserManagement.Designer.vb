@@ -22,109 +22,200 @@ Partial Class UserManagement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UserManagement))
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Access_lvl = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripTextBox1 = New System.Windows.Forms.ToolStripTextBox()
-        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton()
-        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ToolStrip1.SuspendLayout()
+        Me.dataView = New System.Windows.Forms.DataGridView()
+        Me.cmDGV = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.btnEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRemove = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ts = New System.Windows.Forms.ToolStrip()
+        Me.btnShowAll = New System.Windows.Forms.ToolStripButton()
+        Me.btnSearch = New System.Windows.Forms.ToolStripButton()
+        Me.txtSearch = New System.Windows.Forms.ToolStripTextBox()
+        Me.btnAdd = New System.Windows.Forms.ToolStripButton()
+        Me.ddFilter = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.tsByID = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsByUsername = New System.Windows.Forms.ToolStripMenuItem()
+        Me.tsAccess = New System.Windows.Forms.ToolStripMenuItem()
+        Me.IdDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UserNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AccessLevelDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WrappedUserBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        CType(Me.dataView, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.cmDGV.SuspendLayout()
+        Me.ts.SuspendLayout()
+        CType(Me.WrappedUserBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'DataGridView1
+        'dataView
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AllowUserToDeleteRows = False
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Username, Me.Access_lvl})
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.ReadOnly = True
-        Me.DataGridView1.Size = New System.Drawing.Size(377, 265)
-        Me.DataGridView1.TabIndex = 4
+        Me.dataView.AllowUserToAddRows = False
+        Me.dataView.AllowUserToDeleteRows = False
+        Me.dataView.AutoGenerateColumns = False
+        Me.dataView.BackgroundColor = System.Drawing.Color.White
+        Me.dataView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdDataGridViewTextBoxColumn, Me.UserNameDataGridViewTextBoxColumn, Me.AccessLevelDataGridViewTextBoxColumn})
+        Me.dataView.ContextMenuStrip = Me.cmDGV
+        Me.dataView.DataSource = Me.WrappedUserBindingSource
+        Me.dataView.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.dataView.Location = New System.Drawing.Point(0, 25)
+        Me.dataView.Name = "dataView"
+        Me.dataView.ReadOnly = True
+        Me.dataView.Size = New System.Drawing.Size(351, 298)
+        Me.dataView.TabIndex = 4
         '
-        'Username
+        'cmDGV
         '
-        Me.Username.HeaderText = "Username"
-        Me.Username.Name = "Username"
-        Me.Username.ReadOnly = True
+        Me.cmDGV.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnEdit, Me.btnRemove})
+        Me.cmDGV.Name = "cmDGV"
+        Me.cmDGV.Size = New System.Drawing.Size(118, 48)
         '
-        'Access_lvl
+        'btnEdit
         '
-        Me.Access_lvl.HeaderText = "Access Level"
-        Me.Access_lvl.Name = "Access_lvl"
-        Me.Access_lvl.ReadOnly = True
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(117, 22)
+        Me.btnEdit.Text = "Edit"
         '
-        'ToolStrip1
+        'btnRemove
         '
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripTextBox1, Me.ToolStripButton2, Me.ToolStripButton3})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(377, 25)
-        Me.ToolStrip1.TabIndex = 5
-        Me.ToolStrip1.Text = "ToolStrip1"
+        Me.btnRemove.Name = "btnRemove"
+        Me.btnRemove.Size = New System.Drawing.Size(117, 22)
+        Me.btnRemove.Text = "Remove"
         '
-        'ToolStripButton1
+        'ts
         '
-        Me.ToolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton1.Image = CType(resources.GetObject("ToolStripButton1.Image"), System.Drawing.Image)
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(46, 22)
-        Me.ToolStripButton1.Text = "Search"
+        Me.ts.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnShowAll, Me.btnSearch, Me.txtSearch, Me.btnAdd, Me.ddFilter})
+        Me.ts.Location = New System.Drawing.Point(0, 0)
+        Me.ts.Name = "ts"
+        Me.ts.Size = New System.Drawing.Size(351, 25)
+        Me.ts.TabIndex = 5
+        Me.ts.Text = "ToolStrip1"
         '
-        'ToolStripTextBox1
+        'btnShowAll
         '
-        Me.ToolStripTextBox1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripTextBox1.Name = "ToolStripTextBox1"
-        Me.ToolStripTextBox1.Size = New System.Drawing.Size(100, 25)
+        Me.btnShowAll.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnShowAll.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnShowAll.Image = CType(resources.GetObject("btnShowAll.Image"), System.Drawing.Image)
+        Me.btnShowAll.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnShowAll.Name = "btnShowAll"
+        Me.btnShowAll.Size = New System.Drawing.Size(57, 22)
+        Me.btnShowAll.Text = "Show All"
         '
-        'ToolStripButton2
+        'btnSearch
         '
-        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
-        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton2.Name = "ToolStripButton2"
-        Me.ToolStripButton2.Size = New System.Drawing.Size(33, 22)
-        Me.ToolStripButton2.Text = "Add"
+        Me.btnSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.btnSearch.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"), System.Drawing.Image)
+        Me.btnSearch.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(46, 22)
+        Me.btnSearch.Text = "Search"
         '
-        'ToolStripButton3
+        'txtSearch
         '
-        Me.ToolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.ToolStripButton3.Image = CType(resources.GetObject("ToolStripButton3.Image"), System.Drawing.Image)
-        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton3.Name = "ToolStripButton3"
-        Me.ToolStripButton3.Size = New System.Drawing.Size(54, 22)
-        Me.ToolStripButton3.Text = "Remove"
+        Me.txtSearch.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(100, 25)
+        '
+        'btnAdd
+        '
+        Me.btnAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"), System.Drawing.Image)
+        Me.btnAdd.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(33, 22)
+        Me.btnAdd.Text = "Add"
+        '
+        'ddFilter
+        '
+        Me.ddFilter.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ddFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ddFilter.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsByID, Me.tsByUsername, Me.tsAccess})
+        Me.ddFilter.Image = CType(resources.GetObject("ddFilter.Image"), System.Drawing.Image)
+        Me.ddFilter.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ddFilter.Name = "ddFilter"
+        Me.ddFilter.Size = New System.Drawing.Size(34, 22)
+        Me.ddFilter.Text = "ID:"
+        '
+        'tsByID
+        '
+        Me.tsByID.Checked = True
+        Me.tsByID.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.tsByID.Name = "tsByID"
+        Me.tsByID.Size = New System.Drawing.Size(140, 22)
+        Me.tsByID.Text = "ID"
+        '
+        'tsByUsername
+        '
+        Me.tsByUsername.Name = "tsByUsername"
+        Me.tsByUsername.Size = New System.Drawing.Size(140, 22)
+        Me.tsByUsername.Text = "Username"
+        '
+        'tsAccess
+        '
+        Me.tsAccess.Name = "tsAccess"
+        Me.tsAccess.Size = New System.Drawing.Size(140, 22)
+        Me.tsAccess.Text = "Access Level"
+        '
+        'IdDataGridViewTextBoxColumn
+        '
+        Me.IdDataGridViewTextBoxColumn.DataPropertyName = "id"
+        Me.IdDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IdDataGridViewTextBoxColumn.Name = "IdDataGridViewTextBoxColumn"
+        Me.IdDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'UserNameDataGridViewTextBoxColumn
+        '
+        Me.UserNameDataGridViewTextBoxColumn.DataPropertyName = "userName"
+        Me.UserNameDataGridViewTextBoxColumn.HeaderText = "Username"
+        Me.UserNameDataGridViewTextBoxColumn.Name = "UserNameDataGridViewTextBoxColumn"
+        Me.UserNameDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'AccessLevelDataGridViewTextBoxColumn
+        '
+        Me.AccessLevelDataGridViewTextBoxColumn.DataPropertyName = "accessLevel"
+        Me.AccessLevelDataGridViewTextBoxColumn.HeaderText = "Access Level"
+        Me.AccessLevelDataGridViewTextBoxColumn.Name = "AccessLevelDataGridViewTextBoxColumn"
+        Me.AccessLevelDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'WrappedUserBindingSource
+        '
+        Me.WrappedUserBindingSource.DataSource = GetType(Membership.WrappedUser)
         '
         'UserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(377, 265)
-        Me.Controls.Add(Me.ToolStrip1)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.ClientSize = New System.Drawing.Size(351, 323)
+        Me.Controls.Add(Me.dataView)
+        Me.Controls.Add(Me.ts)
+        Me.MinimumSize = New System.Drawing.Size(367, 362)
         Me.Name = "UserManagement"
         Me.Text = "UserManagement"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ToolStrip1.ResumeLayout(False)
-        Me.ToolStrip1.PerformLayout()
+        CType(Me.dataView, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.cmDGV.ResumeLayout(False)
+        Me.ts.ResumeLayout(False)
+        Me.ts.PerformLayout()
+        CType(Me.WrappedUserBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Username As DataGridViewTextBoxColumn
-    Friend WithEvents Access_lvl As DataGridViewTextBoxColumn
-    Friend WithEvents ToolStrip1 As ToolStrip
-    Friend WithEvents ToolStripButton1 As ToolStripButton
-    Friend WithEvents ToolStripTextBox1 As ToolStripTextBox
-    Friend WithEvents ToolStripButton2 As ToolStripButton
-    Friend WithEvents ToolStripButton3 As ToolStripButton
+    Friend WithEvents dataView As DataGridView
+    Friend WithEvents ts As ToolStrip
+    Friend WithEvents btnSearch As ToolStripButton
+    Friend WithEvents txtSearch As ToolStripTextBox
+    Friend WithEvents btnAdd As ToolStripButton
+    Friend WithEvents ddFilter As ToolStripDropDownButton
+    Friend WithEvents tsByID As ToolStripMenuItem
+    Friend WithEvents tsByUsername As ToolStripMenuItem
+    Friend WithEvents tsAccess As ToolStripMenuItem
+    Friend WithEvents WrappedUserBindingSource As BindingSource
+    Friend WithEvents IdDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents UserNameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents AccessLevelDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents btnShowAll As ToolStripButton
+    Friend WithEvents cmDGV As ContextMenuStrip
+    Friend WithEvents btnEdit As ToolStripMenuItem
+    Friend WithEvents btnRemove As ToolStripMenuItem
 End Class

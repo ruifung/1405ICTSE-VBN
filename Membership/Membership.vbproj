@@ -294,6 +294,9 @@
     <EmbeddedResource Include="UI\MemberManagement\ModifyMemberDialog.resx">
       <DependentUpon>ModifyMemberDialog.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\MemberManagement\PaymentDialog.resx">
+      <DependentUpon>PaymentDialog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Reporting\ReportView.resx">
       <DependentUpon>ReportView.vb</DependentUpon>
     </EmbeddedResource>
@@ -315,6 +318,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\WrappedCharge.datasource" />
     <None Include="My Project\DataSources\WrappedMember.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

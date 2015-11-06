@@ -35,6 +35,8 @@ Partial Class ModifyMemberDialog
         Me.btnEdit = New System.Windows.Forms.ToolStripButton()
         Me.MemberDetails1 = New Membership.MemberDetails()
         Me.memberDetailsView = New Membership.MemberDetails()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lbPrivileges = New System.Windows.Forms.ListBox()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,7 +46,7 @@ Partial Class ModifyMemberDialog
         Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPhoto, Me.btnPhotoClear, Me.seperatorEdit, Me.btnCancel, Me.btnSave, Me.btnClose, Me.ToolStripSeparator1, Me.btnBilling, Me.btnEdit})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(469, 25)
+        Me.ToolStrip1.Size = New System.Drawing.Size(564, 25)
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
         '
@@ -66,11 +68,13 @@ Partial Class ModifyMemberDialog
         Me.btnPhotoClear.Name = "btnPhotoClear"
         Me.btnPhotoClear.Size = New System.Drawing.Size(73, 22)
         Me.btnPhotoClear.Text = "Clear Photo"
+        Me.btnPhotoClear.Visible = False
         '
         'seperatorEdit
         '
         Me.seperatorEdit.Name = "seperatorEdit"
         Me.seperatorEdit.Size = New System.Drawing.Size(6, 25)
+        Me.seperatorEdit.Visible = False
         '
         'btnCancel
         '
@@ -144,18 +148,39 @@ Partial Class ModifyMemberDialog
         Me.memberDetailsView.Size = New System.Drawing.Size(470, 313)
         Me.memberDetailsView.TabIndex = 3
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(476, 25)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(79, 17)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "Privileges"
+        '
+        'lbPrivileges
+        '
+        Me.lbPrivileges.Enabled = False
+        Me.lbPrivileges.FormattingEnabled = True
+        Me.lbPrivileges.Location = New System.Drawing.Point(476, 45)
+        Me.lbPrivileges.Name = "lbPrivileges"
+        Me.lbPrivileges.Size = New System.Drawing.Size(79, 290)
+        Me.lbPrivileges.TabIndex = 5
+        '
         'ModifyMemberDialog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.ClientSize = New System.Drawing.Size(469, 336)
+        Me.ClientSize = New System.Drawing.Size(564, 340)
+        Me.Controls.Add(Me.lbPrivileges)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.memberDetailsView)
         Me.Controls.Add(Me.ToolStrip1)
         Me.MaximizeBox = False
-        Me.MaximumSize = New System.Drawing.Size(485, 375)
-        Me.MinimumSize = New System.Drawing.Size(485, 375)
+        Me.MaximumSize = New System.Drawing.Size(580, 379)
+        Me.MinimumSize = New System.Drawing.Size(580, 379)
         Me.Name = "ModifyMemberDialog"
         Me.Text = "Member Profile"
         Me.ToolStrip1.ResumeLayout(False)
@@ -176,4 +201,6 @@ Partial Class ModifyMemberDialog
     Friend WithEvents seperatorEdit As ToolStripSeparator
     Friend WithEvents MemberDetails1 As MemberDetails
     Friend WithEvents memberDetailsView As MemberDetails
+    Friend WithEvents Label1 As Label
+    Friend WithEvents lbPrivileges As ListBox
 End Class

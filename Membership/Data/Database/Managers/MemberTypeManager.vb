@@ -40,7 +40,7 @@ Namespace Database
         End Function
 
         Public Function getEntry(id As Integer) As MaybeOption(Of IMembershipType) Implements IDataManager(Of IMembershipType).getEntry
-            Return MaybeOption.create(Of IMembershipType)(TryCast(Member.TryGet(id), IMembershipType))
+            Return create(Of IMembershipType)(Membership.TryGet(id))
         End Function
 
         Public Function list() As List(Of IMembershipType) Implements IDataManager(Of IMembershipType).list

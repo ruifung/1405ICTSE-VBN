@@ -49,8 +49,18 @@ Public Class ModifyMemberDialog
         memberDetailsView.Enabled = False
         memberDetailsView.BoundMember = _member
         btnEdit.Visible = editable
+
+        Dim type = config.dataManager.memberTypeManager.getEntry(member.membershipTypeID)
+        If type.isDefined Then
+            Dim list = type.getValue.privilges.Select(Function(x) x.ToString).ToList
+            If list.Count = 0 Then
+                list.Add("No Additional Privileges.")
+            End If
+        End If
+
         Text = String.Concat("Member Details for: ", If(IsNothing(member), String.Empty, String.Concat("#", member.id.ToString)))
     End Sub
+
 
     Private Sub onEnableEdit(sender As Object, e As EventArgs) Handles btnEdit.Click
         startEdit()

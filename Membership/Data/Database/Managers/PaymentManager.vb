@@ -93,7 +93,8 @@ Namespace Database
                 .chargesPaid = invoice.chargesPaid,
                 .memberID = invoice.memberID,
                 .totalPayable = invoice.totalPayable,
-                .amountPaid = amount
+                .amountPaid = amount,
+                .userID = currentUser.id
             }
             pm.memberID = m.id
 

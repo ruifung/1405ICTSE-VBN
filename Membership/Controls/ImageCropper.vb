@@ -145,17 +145,16 @@ Public Class ImageCropper
     End Sub
 
     Private Sub btnZoomIn_Click(sender As Object, e As EventArgs) Handles btnZoomIn.Click
-        If _imgscale < 300 Then _imgscale += 10
+        If _imgscale < 300 Then _imgscale += 2
         rescale()
     End Sub
 
     Private Sub btnPercent_Click(sender As Object, e As EventArgs) Handles btnPercent.Click
-        _imgscale = 100
-        rescale()
+        ImageToCrop = ImageToCrop
     End Sub
 
     Private Sub btnZoomOut_Click(sender As Object, e As EventArgs) Handles btnZoomOut.Click
-        If _imgscale > 20 Then _imgscale -= 10
+        If _imgscale > 10 Then _imgscale -= 2
         rescale()
     End Sub
 
@@ -166,7 +165,7 @@ Public Class ImageCropper
 
     Private Sub rescale()
         If _imgscale > 300 Then _imgscale = 300
-        If _imgscale < 20 Then _imgscale = 20
+        If _imgscale < 10 Then _imgscale = 10
         btnPercent.Text = String.Format("{0}%", _imgscale)
         If ImageToCrop Is Nothing Then Return
         Dim rect As Rectangle = New Rectangle
@@ -176,5 +175,21 @@ Public Class ImageCropper
         rect.Y = _imgrect.Y + CInt((_imgrect.Height - rect.Height) / 2)
         _imgrect = rect
         Me.Invalidate()
+    End Sub
+
+    Private Sub ImageCropper_DragDrop(sender As Object, e As DragEventArgs) Handles MyBase.DragDrop
+        Dim files() As String = CType(e.Data.GetData(DataFormats.FileDrop), String())
+        Try
+            Dim img As Image = Image.FromFile(files(0))
+            ImageToCrop = img
+        Catch ex As Exception
+            MessageBox.Show("You didn't drop a valid image file!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub ImageCropper_DragEnter(sender As Object, e As DragEventArgs) Handles MyBase.DragEnter
+        If e.Data.GetDataPresent(DataFormats.FileDrop) Then
+            e.Effect = DragDropEffects.Copy
+        End If
     End Sub
 End Class

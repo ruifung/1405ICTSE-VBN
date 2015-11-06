@@ -38,7 +38,6 @@ Public Class MainForm
                                               End If
                                           Next
                                           typeSelected = If(lbTypes.SelectedItems.Count = 0, True, typeSelected)
-                                          Return active AndAlso typeSelected
                                           Return (rbAllStates.Checked OrElse active) AndAlso typeSelected
                                       End Function)
         End Get
@@ -140,6 +139,11 @@ Public Class MainForm
         rbAllStates.Checked = True
         hasSearch = False
         reload()
+    End Sub
+
+    Private Sub onBtnChangePass(sender As Object, e As EventArgs) Handles btnChangePass.Click
+        Dim dialog = New ChangePasswordDialog(WrappedUser.wrap(currentUser))
+        dialog.ShowDialog()
     End Sub
 
     Private Sub reload()

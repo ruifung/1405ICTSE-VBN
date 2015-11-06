@@ -3,7 +3,7 @@
 Public Class WrappedUser
     Implements IUser
 
-    Private _backingUser As IUser
+    Public ReadOnly _backingUser As IUser
 
     Public Shared wrap As Func(Of IUser, WrappedUser) =
         Function(user As IUser) As WrappedUser

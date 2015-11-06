@@ -48,6 +48,10 @@ Namespace Database
         End Function
 
         Public Function updateEntry(entry As IUser) As Boolean Implements IDataManager(Of IUser).updateEntry
+            'Unwrap if wrapped for processing.
+            If TypeOf entry Is WrappedUser Then
+                entry = DirectCast(entry, WrappedUser)._backingUser
+            End If
             If TypeOf entry Is User Then
                 DirectCast(entry, User).Update()
                 Return True

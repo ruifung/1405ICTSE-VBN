@@ -190,6 +190,12 @@
     <Compile Include="UI\MainForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\MemberManagement\AddChargeDialog.Designer.vb">
+      <DependentUpon>AddChargeDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MemberManagement\AddChargeDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\MemberManagement\MemberBilling.Designer.vb">
       <DependentUpon>MemberBilling.vb</DependentUpon>
     </Compile>
@@ -200,6 +206,18 @@
       <DependentUpon>ModifyMemberDialog.vb</DependentUpon>
     </Compile>
     <Compile Include="UI\MemberManagement\ModifyMemberDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\MemberManagement\PaymentDialog.Designer.vb">
+      <DependentUpon>PaymentDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\MemberManagement\PaymentDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UserManagement\ChangePasswordDialog.Designer.vb">
+      <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UserManagement\ChangePasswordDialog.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UserManagement\InitialUserDialog.Designer.vb">
@@ -259,6 +277,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MemberManagement\ModifyMemberDialog.resx">
       <DependentUpon>ModifyMemberDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserManagement\ChangePasswordDialog.resx">
+      <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserManagement\InitialUserDialog.resx">
       <DependentUpon>InitialUserDialog.vb</DependentUpon>

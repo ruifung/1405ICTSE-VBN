@@ -14,7 +14,6 @@ Namespace Database
             t.PrimaryKey = "id"
             t.Constraints.Add(New Constraint(Constraint.ConsType.PrimaryKey, "id"))
             t.Constraints.Add(New Constraint(Constraint.ConsType.ForeignKey, "member", MembersTable.Name, "id"))
-            t.Constraints.Add(New Constraint(Constraint.ConsType.ForeignKey, "paid_in", PaymentsTable.Name, "id"))
             DB.RegisterTable(t)
             ChargesTable = t
         End Sub

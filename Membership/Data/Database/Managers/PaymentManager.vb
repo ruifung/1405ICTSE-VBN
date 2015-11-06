@@ -5,7 +5,6 @@ Imports Membership.config
 Namespace Database
     Public Class PaymentManager
         Implements IPaymentManager
-
         Public Function addCharge(member As IMember, timestamp As Date, desc As String, amount As Decimal) As IMemberCharge Implements IPaymentManager.addCharge
             Dim c As Charge = New Charge
             c.amount = amount
@@ -48,7 +47,7 @@ Namespace Database
             Return inv
         End Function
 
-        Public Function listCharges(memberID As Integer, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberCharge) Implements IPaymentManager.listCharges
+        Public Function listCharges(memberID As Integer, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberCharge) Implements IPaymentManager.listCharges
             Dim criteria As String = "member=?"
             Dim params As List(Of OleDbParameter) = New List(Of OleDbParameter)
             params.Add(MDBType.Number.asParam(memberID))
@@ -63,11 +62,11 @@ Namespace Database
             Return New HashSet(Of IMemberCharge)(DBList(Of Charge).Query(criteria, params.ToArray()))
         End Function
 
-        Public Function listCharges(member As IMember, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberCharge) Implements IPaymentManager.listCharges
+        Public Function listCharges(member As IMember, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberCharge) Implements IPaymentManager.listCharges
             Return listCharges(member.id, minDate, maxDate)
         End Function
 
-        Public Function listPayments(memberID As Integer, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberPayment) Implements IPaymentManager.listPayments
+        Public Function listPayments(memberID As Integer, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment) Implements IPaymentManager.listPayments
             Dim criteria As String = "member=?"
             Dim params As List(Of OleDbParameter) = New List(Of OleDbParameter)
             params.Add(MDBType.Number.asParam(memberID))
@@ -82,7 +81,7 @@ Namespace Database
             Return New HashSet(Of IMemberPayment)(DBList(Of Payment).Query(criteria, params.ToArray()))
         End Function
 
-        Public Function listPayments(member As IMember, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberPayment) Implements IPaymentManager.listPayments
+        Public Function listPayments(member As IMember, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment) Implements IPaymentManager.listPayments
             Return listPayments(member.id, minDate, maxDate)
         End Function
 

@@ -16,12 +16,12 @@
     Function removeCharge(charge As IMemberCharge) As Boolean
 
     Function getCharge(chargeID As Integer) As IMemberCharge
-    Function listCharges(member As IMember, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberCharge)
-    Function listCharges(memberID As Integer, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberCharge)
+    Function listCharges(member As IMember, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberCharge)
+    Function listCharges(memberID As Integer, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberCharge)
     Function updateCharge(charge As IMemberCharge) As Boolean
 
     Function getPayment(paymentID As Integer) As IMemberPayment
-    Function listPayments(member As IMember, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberPayment)
-    Function listPayments(memberID As Integer, Optional minDate As Date = Nothing, Optional maxDate As Date = Nothing) As HashSet(Of IMemberPayment)
+    Function listPayments(member As IMember, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment)
+    Function listPayments(memberID As Integer, Optional minDate As Date? = Nothing, Optional maxDate As Date? = Nothing) As HashSet(Of IMemberPayment)
     Function updatePayment(payment As IMemberPayment) As Boolean
 End Interface

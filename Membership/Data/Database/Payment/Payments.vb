@@ -13,6 +13,7 @@ Namespace Database
             t.Fields("paid") = New Field(MDBType.Currency)
             t.Fields("balance") = New Field(MDBType.Currency)
             t.Fields("addition") = New Field(MDBType.Memo)
+            t.Fields("userID") = New Field(MDBType.Number)
             t.PrimaryKey = "id"
             t.Constraints.Add(New Constraint(Constraint.ConsType.PrimaryKey, "id"))
             t.Constraints.Add(New Constraint(Constraint.ConsType.ForeignKey, "member", MembersTable.Name, "id"))
@@ -89,6 +90,15 @@ Namespace Database
             End Get
             Set(value As Decimal)
                 Me("total") = value
+            End Set
+        End Property
+
+        Public Property userID As Integer Implements IMemberPayment.userID
+            Get
+                Return CInt(Me("userID"))
+            End Get
+            Set(value As Integer)
+                Me("userID") = value
             End Set
         End Property
 

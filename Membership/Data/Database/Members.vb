@@ -168,7 +168,7 @@ Namespace Database
                 Return CType(Me("term"), PaymentTerm)
             End Get
             Set(value As PaymentTerm)
-                Me("term") = CInt(value)
+                Me("term") = value
             End Set
         End Property
 

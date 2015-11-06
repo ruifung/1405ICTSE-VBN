@@ -50,6 +50,8 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -64,6 +66,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -87,9 +90,11 @@
     <Compile Include="API\DataSourceConfig.vb" />
     <Compile Include="API\Data\IDataElement.vb" />
     <Compile Include="API\Data\IDataStore.vb" />
+    <Compile Include="API\Members\EnumGender.vb" />
     <Compile Include="API\Members\EnumMemberPrivileges.vb" />
     <Compile Include="API\Members\IMember.vb" />
     <Compile Include="API\Data\IDataManager.vb" />
+    <Compile Include="API\Members\Payments\EnumPaymentTerm.vb" />
     <Compile Include="API\Members\Payments\IMemberCharge.vb" />
     <Compile Include="API\Members\IMembershipType.vb" />
     <Compile Include="API\Members\Payments\IMemberPayment.vb" />
@@ -130,8 +135,10 @@
     <Compile Include="Data\Database\Users.vb" />
     <Compile Include="Data\PlainMember.vb" />
     <Compile Include="Data\PlainUser.vb" />
+    <Compile Include="Data\Wrapper\WrappedCharge.vb" />
     <Compile Include="Data\Wrapper\WrappedMember.vb" />
     <Compile Include="Data\Wrapper\WrappedMembershipType.vb" />
+    <Compile Include="Data\Wrapper\WrappedPayment.vb" />
     <Compile Include="Data\Wrapper\WrappedUser.vb" />
     <Compile Include="Exceptions\DataSourceException.vb" />
     <Compile Include="Exceptions\InvalidSettingException.vb" />
@@ -214,6 +221,12 @@
     <Compile Include="UI\MemberManagement\PaymentDialog.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\Reporting\ReportView.Designer.vb">
+      <DependentUpon>ReportView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Reporting\ReportView.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\UserManagement\ChangePasswordDialog.Designer.vb">
       <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
     </Compile>
@@ -272,11 +285,17 @@
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\MemberManagement\AddChargeDialog.resx">
+      <DependentUpon>AddChargeDialog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\MemberManagement\MemberBilling.resx">
       <DependentUpon>MemberBilling.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\MemberManagement\ModifyMemberDialog.resx">
       <DependentUpon>ModifyMemberDialog.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Reporting\ReportView.resx">
+      <DependentUpon>ReportView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UserManagement\ChangePasswordDialog.resx">
       <DependentUpon>ChangePasswordDialog.vb</DependentUpon>
@@ -296,6 +315,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\WrappedMember.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>

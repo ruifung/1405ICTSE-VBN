@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.Runtime.CompilerServices
-Imports Membership
 Imports Membership.config
 
 Public Class MemberDetails
@@ -234,6 +233,9 @@ Public Class MemberDetails
                     .Add(New Binding("photo", memberBinding, "photo", False, m))
                     .Add(New Binding("isActive", memberBinding, "isActive", False, m))
                     .Add(New Binding("membershipTypeID", memberBinding, "membershipTypeID", False, m))
+                    .Add(New Binding("paymentCredit", memberBinding, "paymentCredit", False, m))
+                    .Add(New Binding("paymentTerm", memberBinding, "paymentTerm", False, m))
+                    .Add(New Binding("paymentTermDue", memberBinding, "paymentTermDue", False, m))
                 End With
                 propBindings.ForEach(Sub(x) Me.DataBindings.Add(x))
             Else
@@ -317,6 +319,7 @@ Public Class MemberDetails
         dtDOB.DataBindings.Add("MinDate", selfBind, "MinDate", False, DataSourceUpdateMode.OnPropertyChanged)
         dtDOB.DataBindings.Add("MaxDate", selfBind, "MaxDate", False, DataSourceUpdateMode.OnPropertyChanged)
         dtDOB.DataBindings.Add("Value", selfBind, "dob", False, DataSourceUpdateMode.OnPropertyChanged)
+        cbPaymentTerm.DataBindings.Add("SelectedValue", selfBind, "paymentTerm", False, DataSourceUpdateMode.OnPropertyChanged)
         cbGender.DataBindings.Add("SelectedValue", selfBind, "gender", False, DataSourceUpdateMode.OnPropertyChanged)
         binding = New Binding("SelectedValue", selfBind, "isActive", True, DataSourceUpdateMode.OnPropertyChanged)
         AddHandler binding.Format, Sub(s As Object, e As ConvertEventArgs)
@@ -348,13 +351,15 @@ Public Class MemberDetails
                                        Dim tID = CInt(e.Value)
                                        If tID >= 0 Then
                                            For x = 0 To cbMembershipType.Items.Count - 1
-                                               If CType(cbMembershipType.Items(x), IMembershipType).id = tID Then
+                                               If DirectCast(cbMembershipType.Items(x), IMembershipType).id = tID Then
                                                    e.Value = x
                                                    Exit Sub
                                                End If
                                            Next
+
+                                       Else
+                                           e.Value = -1
                                        End If
-                                       e.Value = -1
                                    End Sub
         AddHandler binding.Parse, Sub(s As Object, e As ConvertEventArgs)
                                       If IsDBNull(e.Value) Then
@@ -446,8 +451,8 @@ Public Class MemberDetails
     End Class
 
     Private Class DisplayPaymentTerm
-        Property term As PaymentTerm
-        Property display As String
+        Public Property term As PaymentTerm
+        Public Property display As String
         Sub New(t As PaymentTerm, d As String)
             Me.term = t
             Me.display = d

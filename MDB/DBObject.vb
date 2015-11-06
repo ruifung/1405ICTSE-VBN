@@ -136,7 +136,7 @@ Public MustInherit Class DBObject
     Public Overridable Sub Delete()
         DB.conn.Open()
         Dim cmd As New OleDbCommand("", DB.conn)
-        cmd.CommandText = String.Format("DELETE FROM `{0}` SET WHERE `{1}`=?", table.Name, table.PrimaryKey)
+        cmd.CommandText = String.Format("DELETE FROM `{0}` WHERE `{1}`=?", table.Name, table.PrimaryKey)
         cmd.Parameters.Add(AsParam(table.PrimaryKey))
         cmd.ExecuteNonQuery()
         DB.conn.Close()

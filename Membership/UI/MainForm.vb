@@ -68,6 +68,7 @@ Public Class MainForm
 
         dgMemberView.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgMemberView.DataSource = dataSource
+        onClearFilters(Me, New EventArgs)
         reload()
     End Sub
 
@@ -129,8 +130,9 @@ Public Class MainForm
         Next
         Dim result = MsgBox(String.Format("Are you sure you want to delete {0} members?", list.Count), MsgBoxStyle.YesNo)
         If result = MsgBoxResult.Yes Then
-            list.ForEach(Sub(x) dataManager.userManager.removeEntry(DirectCast(x, IUser)))
+            list.ForEach(Sub(x) dataManager.memberManager.removeEntry(DirectCast(x, IMember)))
         End If
+        reload()
     End Sub
 
     Private Sub onClearFilters(sender As Object, e As EventArgs) Handles btnClearFilters.Click
@@ -146,6 +148,10 @@ Public Class MainForm
         dialog.ShowDialog()
     End Sub
 
+    Private Sub lnkClearTypes_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkClearTypes.LinkClicked
+        lbTypes.ClearSelected()
+    End Sub
+
     Private Sub reload()
         If hasSearch Then
             onSearch(Me, New EventArgs)
@@ -158,7 +164,18 @@ Public Class MainForm
         Dim dialog = New ModifyMemberDialog()
         Dim result = dialog.ShowDialog
         If result = DialogResult.OK Then
-            dataManager.memberManager.addEntry(dialog.member)
+            Dim m = dataManager.memberManager.addEntry(dialog.member)
+            If m.isDefined Then
+                Dim type = dataManager.memberTypeManager.getEntry(m.getValue.membershipTypeID)
+                If type.isDefined Then
+                    dataManager.paymentManager.addCharge(m.getValue, Date.Today, "Registration Fees", type.getValue.registrationFees)
+                    dataManager.paymentManager.addCharge(m.getValue, Date.Today,
+                                                         String.Format("Membership fees - {0}", m.getValue.paymentTerm.ToString),
+                                                         type.getValue.monthlyFees * m.getValue.paymentTerm)
+                    m.getValue.paymentTermDue = Date.Today
+                    dataManager.memberManager.updateEntry(m.getValue)
+                End If
+            End If
         End If
         onClearFilters(Me, New EventArgs)
     End Sub

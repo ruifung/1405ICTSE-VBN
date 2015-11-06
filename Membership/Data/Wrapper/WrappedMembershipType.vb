@@ -25,11 +25,11 @@ Public Class WrappedMembershipType
         End Get
     End Property
 
-    Public Property monthlyFees As Double Implements IMembershipType.monthlyFees
+    Public Property monthlyFees As Decimal Implements IMembershipType.monthlyFees
         Get
             Return _backingType.monthlyFees
         End Get
-        Set(value As Double)
+        Set(value As Decimal)
             _backingType.monthlyFees = value
         End Set
     End Property
@@ -43,20 +43,20 @@ Public Class WrappedMembershipType
         End Set
     End Property
 
-    Public Property registrationFees As Double Implements IMembershipType.registrationFees
+    Public Property registrationFees As Decimal Implements IMembershipType.registrationFees
         Get
             Return _backingType.registrationFees
         End Get
-        Set(value As Double)
+        Set(value As Decimal)
             _backingType.registrationFees = value
         End Set
     End Property
 
-    Public Property transferFees As Double Implements IMembershipType.transferFees
+    Public Property transferFees As Decimal Implements IMembershipType.transferFees
         Get
             Return _backingType.transferFees
         End Get
-        Set(value As Double)
+        Set(value As Decimal)
             _backingType.transferFees = value
         End Set
     End Property

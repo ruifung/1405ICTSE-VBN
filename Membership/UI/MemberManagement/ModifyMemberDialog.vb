@@ -88,6 +88,11 @@ Public Class ModifyMemberDialog
 
     Private Sub onSave(sender As Object, e As EventArgs) Handles btnSave.Click
         endEdit()
+        If Not (emailFilter.IsMatch(memberDetailsView.email) AndAlso contactFilter.IsMatch(memberDetailsView.contactNumber)) Then
+            MsgBox("Invalid email or contact info!")
+            Exit Sub
+        End If
+
         If newMode Then
             DialogResult = DialogResult.OK
         Else

@@ -24,20 +24,16 @@ Partial Class MemberBilling
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MemberBilling))
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.btnAddPayment = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripDropDownButton1 = New System.Windows.Forms.ToolStripDropDownButton()
+        Me.btnAddPayment = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnAddCharge = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnViewCharges = New System.Windows.Forms.ToolStripButton()
         Me.btnViewHistory = New System.Windows.Forms.ToolStripButton()
         Me.txtMemberCredit = New System.Windows.Forms.ToolStripTextBox()
         Me.ToolStripLabel1 = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.dgView = New System.Windows.Forms.DataGridView()
-        Me.checked = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.ID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Charges = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.Remarks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Payable = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Paid = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Balance = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnRemoveCharges = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStrip1.SuspendLayout()
         CType(Me.dgView, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -45,21 +41,34 @@ Partial Class MemberBilling
         'ToolStrip1
         '
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddPayment, Me.btnViewCharges, Me.btnViewHistory, Me.txtMemberCredit, Me.ToolStripLabel1, Me.ToolStripSeparator1})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripDropDownButton1, Me.btnViewCharges, Me.btnViewHistory, Me.txtMemberCredit, Me.ToolStripLabel1, Me.ToolStripSeparator1})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(506, 25)
         Me.ToolStrip1.TabIndex = 0
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        'ToolStripDropDownButton1
+        '
+        Me.ToolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.ToolStripDropDownButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAddPayment, Me.btnAddCharge, Me.btnRemoveCharges})
+        Me.ToolStripDropDownButton1.Image = CType(resources.GetObject("ToolStripDropDownButton1.Image"), System.Drawing.Image)
+        Me.ToolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripDropDownButton1.Name = "ToolStripDropDownButton1"
+        Me.ToolStripDropDownButton1.Size = New System.Drawing.Size(78, 22)
+        Me.ToolStripDropDownButton1.Text = "Operations"
+        '
         'btnAddPayment
         '
-        Me.btnAddPayment.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnAddPayment.Image = CType(resources.GetObject("btnAddPayment.Image"), System.Drawing.Image)
-        Me.btnAddPayment.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnAddPayment.Name = "btnAddPayment"
-        Me.btnAddPayment.Size = New System.Drawing.Size(83, 22)
+        Me.btnAddPayment.Size = New System.Drawing.Size(171, 22)
         Me.btnAddPayment.Text = "Add Payment"
+        '
+        'btnAddCharge
+        '
+        Me.btnAddCharge.Name = "btnAddCharge"
+        Me.btnAddCharge.Size = New System.Drawing.Size(171, 22)
+        Me.btnAddCharge.Text = "Add Charge"
         '
         'btnViewCharges
         '
@@ -107,7 +116,6 @@ Partial Class MemberBilling
         Me.dgView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
         Me.dgView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgView.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.checked, Me.ID, Me.Charges, Me.Remarks, Me.Payable, Me.Paid, Me.Balance})
         Me.dgView.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dgView.Location = New System.Drawing.Point(0, 25)
         Me.dgView.Name = "dgView"
@@ -115,56 +123,11 @@ Partial Class MemberBilling
         Me.dgView.Size = New System.Drawing.Size(506, 368)
         Me.dgView.TabIndex = 1
         '
-        'checked
+        'btnRemoveCharges
         '
-        Me.checked.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells
-        Me.checked.FillWeight = 17.7665!
-        Me.checked.HeaderText = ""
-        Me.checked.Name = "checked"
-        Me.checked.ReadOnly = True
-        Me.checked.Width = 5
-        '
-        'ID
-        '
-        Me.ID.FillWeight = 113.7056!
-        Me.ID.HeaderText = "ID"
-        Me.ID.Name = "ID"
-        Me.ID.ReadOnly = True
-        '
-        'Charges
-        '
-        Me.Charges.FillWeight = 113.7056!
-        Me.Charges.HeaderText = "Charges"
-        Me.Charges.Name = "Charges"
-        Me.Charges.ReadOnly = True
-        '
-        'Remarks
-        '
-        Me.Remarks.FillWeight = 113.7056!
-        Me.Remarks.HeaderText = "Remarks"
-        Me.Remarks.Name = "Remarks"
-        Me.Remarks.ReadOnly = True
-        '
-        'Payable
-        '
-        Me.Payable.FillWeight = 113.7056!
-        Me.Payable.HeaderText = "Total Payable"
-        Me.Payable.Name = "Payable"
-        Me.Payable.ReadOnly = True
-        '
-        'Paid
-        '
-        Me.Paid.FillWeight = 113.7056!
-        Me.Paid.HeaderText = "Total Paid"
-        Me.Paid.Name = "Paid"
-        Me.Paid.ReadOnly = True
-        '
-        'Balance
-        '
-        Me.Balance.FillWeight = 113.7056!
-        Me.Balance.HeaderText = "Balance"
-        Me.Balance.Name = "Balance"
-        Me.Balance.ReadOnly = True
+        Me.btnRemoveCharges.Name = "btnRemoveCharges"
+        Me.btnRemoveCharges.Size = New System.Drawing.Size(171, 22)
+        Me.btnRemoveCharges.Text = "Remove Charge(s)"
         '
         'MemberBilling
         '
@@ -185,18 +148,14 @@ Partial Class MemberBilling
     End Sub
 
     Friend WithEvents ToolStrip1 As ToolStrip
-    Friend WithEvents btnAddPayment As ToolStripButton
     Friend WithEvents btnViewCharges As ToolStripButton
     Friend WithEvents btnViewHistory As ToolStripButton
     Friend WithEvents dgView As DataGridView
-    Friend WithEvents checked As DataGridViewCheckBoxColumn
-    Friend WithEvents ID As DataGridViewTextBoxColumn
-    Friend WithEvents Charges As DataGridViewComboBoxColumn
-    Friend WithEvents Remarks As DataGridViewTextBoxColumn
-    Friend WithEvents Payable As DataGridViewTextBoxColumn
-    Friend WithEvents Paid As DataGridViewTextBoxColumn
-    Friend WithEvents Balance As DataGridViewTextBoxColumn
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents txtMemberCredit As ToolStripTextBox
     Friend WithEvents ToolStripLabel1 As ToolStripLabel
+    Friend WithEvents ToolStripDropDownButton1 As ToolStripDropDownButton
+    Friend WithEvents btnAddPayment As ToolStripMenuItem
+    Friend WithEvents btnAddCharge As ToolStripMenuItem
+    Friend WithEvents btnRemoveCharges As ToolStripMenuItem
 End Class

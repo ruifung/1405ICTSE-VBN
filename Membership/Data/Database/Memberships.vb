@@ -14,7 +14,7 @@ Namespace Database
             t.Fields("privileges") = New Field(MDBType.Number)
             t.PrimaryKey = "id"
             t.Constraints.Add(New Constraint(Constraint.ConsType.PrimaryKey, "id"))
-            DB.RegisterTable(t)
+            RegisterTable(t)
             MembershipsTable = t
         End Sub
     End Class
@@ -42,28 +42,28 @@ Namespace Database
                 Me("type") = value
             End Set
         End Property
-        Public Property RegistrationFee As Double Implements IMembershipType.registrationFees
+        Public Property RegistrationFee As Decimal Implements IMembershipType.registrationFees
             Get
-                Return CDbl(Me("reg_fee"))
+                Return CDec(Me("reg_fee"))
             End Get
-            Set(value As Double)
+            Set(value As Decimal)
                 Me("reg_fee") = value
             End Set
         End Property
-        Public Property MonthlyFee As Double Implements IMembershipType.monthlyFees
+        Public Property MonthlyFee As Decimal Implements IMembershipType.monthlyFees
             Get
-                Return CDbl(Me("month_fee"))
+                Return CDec(Me("month_fee"))
             End Get
-            Set(value As Double)
+            Set(value As Decimal)
                 Me("month_fee") = value
             End Set
         End Property
-        Public Property TransferFee As Double Implements IMembershipType.transferFees
+        Public Property TransferFee As Decimal Implements IMembershipType.transferFees
             Get
                 Dim result = Me("trans_fee")
-                Return If(IsNothing(result) OrElse IsDBNull(result), 0, CDbl(result))
+                Return If(IsNothing(result) OrElse IsDBNull(result), 0, CDec(result))
             End Get
-            Set(value As Double)
+            Set(value As Decimal)
                 Me("trans_fee") = value
             End Set
         End Property
